@@ -85,3 +85,45 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 COPYRIGHT
 Copyright 2026 Fontist Project (fontist.org).
+
+NOTICE — Composite licensing
+============================
+
+This font is a composite work combining glyphs from multiple donor
+fonts. While the assembled font is distributed under the SIL Open
+Font License, Version 1.1 (above), a portion of its glyphs derives
+from FSung (Full-Sung, Taiwan 全宋體), created and maintained by
+F.G. Wang (https://fgwang.blogspot.com/).
+
+F.G. Wang grants FSung for academic research, educational work,
+and personal reading. F.G. Wang prohibits commercial use of FSung
+glyphs ("請勿用做任何形式的商業營利行為" — "please do not use for
+any commercial profit-making activity").
+
+For FSung-derived glyphs in this font, in addition to the OFL
+terms above:
+
+  * Academic research, educational work, and personal reading
+    are permitted.
+  * Commercial use — any form of commercial profit-making
+    activity — is prohibited for FSung-derived glyphs.
+
+F.G. Wang's original statement (Chinese):
+
+  現將此成果無條件分享出來，樂見學術研究、教育工作、個人閱讀
+  這方面的運用，但請勿用做任何形式的商業營利行為。希望「全宋
+  體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化
+  的整理、研究上幫上一點小忙。
+
+For OFL-derived glyphs (everything not from FSung), the OFL above
+applies without additional restrictions.
+
+The full attribution record is in
+`references/input-fonts/ATTRIBUTIONS.md`. The list of FSung-derived
+codepoints (so downstream users can honor the restriction
+programmatically) is auto-generated per release as
+`LICENSE-SOURCES.md`, distributed alongside the TTF on GitHub
+Releases.
+
+To request commercial-use permission for FSung-derived glyphs,
+contact F.G. Wang at: https://fgwang.blogspot.com/

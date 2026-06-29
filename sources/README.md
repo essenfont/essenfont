@@ -11,7 +11,7 @@ sources/
 ├── fonts/                    # actual .ttf/.otf/.ttc files (gitignored — see below)
 │   ├── NotoSans-Regular.ttf
 │   ├── NotoSansCJK-Regular.ttc
-│   ├── FSung-1.ttf           # local-only (Taiwan MOE 全宋體)
+│   ├── FSung-1.ttf           # local-only (Taiwan 全宋體 by F.G. Wang, non-commercial)
 │   ├── Lentariso-Regular.otf
 │   ├── Kedebideri-Regular.ttf
 │   ├── NotoSerifTaiYo.ttf    # local-only (translationcommons.org pre-release)
@@ -28,7 +28,7 @@ sources/
 │   └── LastResortHE-Regular.ttf
 └── licenses/                 # each donor's OFL/license file (gitignored)
     ├── NotoSans-OFL.txt
-    ├── FSung-OFL.txt
+    ├── FSung-NC.txt
     └── ...
 ```
 
@@ -67,7 +67,7 @@ channels, pre-release, or academic sources):
 
 | Donor | Acquisition |
 |---|---|
-| `fsung-1` (Taiwan MOE 全宋體) | User must download from the Taiwan MOE website; place at `sources/fonts/FSung-1.ttf` |
+| `fsung-*` (FSung — Taiwan 全宋體 by F.G. Wang) | Download from F.G. Wang's Google Drive: https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing . Place at `sources/fonts/FSung-*.ttf`. **License is custom non-commercial share + use (NOT OFL).** |
 | `noto-serif-tai-yo` | Pre-release Noto variant; contact translationcommons.org maintainers; place at `sources/fonts/NotoSerifTaiYo.ttf` |
 
 The build script verifies sha256 against `manifest.yml` to ensure
@@ -81,8 +81,10 @@ declares:
 - `label` — stable identifier used in ucode's universal-set manifest
 - `file` — relative path under `sources/fonts/`
 - `family` + `style` + `version` — human-readable metadata
-- `license` — must be OFL, Apache, MIT, BSD, CC0, UFL, Bitstream,
-  GUST, or CC-BY. Proprietary fonts are rejected at build time.
+- `license` — see `ofl_compatible_licenses` in `manifest.yml` for
+  accepted values. Custom non-OFL licenses (e.g. FSung's
+  non-commercial grant) require an explicit entry in the allowed list
+  — the build will refuse them otherwise.
 - `sha256` — content hash for verification
 - `url` + `url_extract_member` (optional) — download URL + which
   file to extract from the downloaded archive
@@ -94,13 +96,33 @@ declares:
 
 ## License enforcement
 
-The build refuses to use any donor with a license not in the OFL-
-compatible allowlist. This ensures essenfont's output is
-redistributable under OFL.
+The build enforces the license policy declared at the top of
+`manifest.yml`:
 
-A `LICENSE-SOURCES.md` is auto-generated per release, listing every
-donor's license + attribution. Included alongside the final TTF in
-GitHub Releases.
+* **OFL-compatible donors** (`ofl_compatible_licenses`): glyphs are
+  embedded without additional restrictions. Downstream users may
+  use, modify, embed, and (re)sell under the standard OFL terms.
+
+* **Donors accepted with extra conditions**
+  (`accepted_with_conditions`): glyphs are embedded, but the
+  donor's terms (which may be more restrictive than OFL) survive
+  into the output font. The build propagates these extra terms to:
+  - The output font's `name` table (OpenType `nameID 0` copyright
+    notice and `nameID 13` license description)
+  - The auto-generated `LICENSE-SOURCES.md` (per-codepoint
+    licensing, so downstream users can filter / strip restricted
+    glyphs programmatically)
+  - The shipped README and `references/input-fonts/ATTRIBUTIONS.md`
+
+* **Anything else** (proprietary, ambiguous, or undeclared): the
+  build refuses to use the donor.
+
+`LICENSE-SOURCES.md` is auto-generated per release, listing every
+donor's license + attribution plus the per-cp licensing map. It is
+included alongside the final TTF in GitHub Releases.
+
+For all upstream policy rationale see the comment block at the top
+of `manifest.yml`.
 
 ## Adding a new donor
 

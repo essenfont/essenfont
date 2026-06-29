@@ -140,8 +140,11 @@ The Full-Sung family (Taiwan MOE 全宋體) is `path_local_only`:
 * `FSung-3.ttf` — TIP + Extension J (Unicode 17)
 * `FSung-X.ttf` — Plane 3
 
-Download manually from the Taiwan MOE website; place at
-`sources/fonts/`.
+Download the Full-Sung files directly from F.G. Wang's Google Drive
+folder and place at `references/input-fonts/`:
+
+* https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing[FSung Google Drive folder]
+* https://github.com/lxs602/FSung-font[lxs602 GitHub mirror] (alternative)
 
 Other `path_local_only` donors:
 
@@ -240,16 +243,29 @@ donor-version bump.
 == CJK donor choice: Full-Sung
 
 For CJK Unified Ideographs (and all extensions), essenfont uses the
-https://fonts.moedict.tw/[Taiwan MOE 全宋體] (Full-Sung) family
-instead of Noto Sans CJK. Reasons:
+Full-Sung (Taiwan 全宋體, FSung) family by F.G. Wang
+(https://fgwang.blogspot.com/[fgwang.blogspot.com]) instead of
+Noto Sans CJK. Initial style + glyph sources came from Taiwan MOE
+(教育部); F.G. Wang assembled and maintains the FSung files.
+First announced at
+http://fgwang.blogspot.com/2021/12/blog-post.html[fgwang.blogspot.com (2021-12)].
+
+Reasons:
 
 * *More comprehensive* — covers all extensions including Extension J
   (Unicode 17 additions, U+31350..U+323AF)
-* *Government-backed* — Taiwan MOE maintains the canonical Traditional
-  Chinese glyph set
-* *OFL* — freely redistributable
+* *Authoritative* — Taiwan MOE 全宋體 is the canonical Traditional
+  Chinese glyph reference; F.G. Wang's FSung is the most complete
+  public expansion of that source
 * *Higher fidelity for Traditional Chinese* — Noto Sans CJK ships
   Simplified-first by default; Full-Sung ships Traditional-first
+
+NOTE: *FSung's license is NOT OFL.* It is a custom non-commercial
+share + use grant from F.G. Wang — academic research, educational
+work, and personal reading are permitted; *commercial use is
+prohibited*. See `references/input-fonts/ATTRIBUTIONS.md` for the
+full Chinese statement. Downstream users of essenfont must respect
+the no-commercial-use restriction on the FSung-derived portion.
 
 The family is multi-file (each TTF covers a Unicode plane / extension):
 
@@ -309,7 +325,7 @@ donor manifest).
 essenfont is assembled from glyphs contributed by:
 
 * https://fonts.google.com/noto[Noto family] (Google + Monotype + Adobe) — Latin, Cyrillic, Greek, Math, Symbols, Music, Emoji, Tangut, Tolong Siki, Sharada, Tai Yo
-* https://fonts.moedict.tw/[Taiwan MOE 全宋體 (Full-Sung)] — CJK Unified Ideographs (all extensions incl. Unicode 17 Ext J)
+* https://fgwang.blogspot.com/[Full-Sung (Taiwan 全宋體) by F.G. Wang] — CJK Unified Ideographs (all extensions incl. Unicode 17 Ext J). Custom non-commercial license; NOT OFL — see `references/input-fonts/ATTRIBUTIONS.md`.
 * https://github.com/Bry10022/Lentariso[Lentariso by Bry10022] — Sidetic, Imperial Aramaic, Phoenician
 * https://software.sil.org/kedebideri[Kedebideri by SIL] — Beria Erfe
 * https://www.suignard.com/UniHieroglyphica[UniHieroglyphica by Michel Suignard] — Egyptian Hieroglyphs
@@ -327,15 +343,41 @@ texts are auto-generated as `LICENSE-SOURCES.md` on every release.
 
 == License
 
-SIL Open Font License 1.1. See link:LICENSE[LICENSE].
+The assembled font is distributed primarily under the
+https://openfontlicense.org[SIL Open Font License 1.1] (see
+link:LICENSE[LICENSE]). A portion of the font — glyphs derived
+from FSung — is *additionally* subject to F.G. Wang's
+non-commercial use grant (FSung-NC). The two together:
 
-This Font Software is licensed under the SIL Open Font License,
-Version 1.1. The license is also available with a FAQ at:
-https://openfontlicense.org
+[cols="1,3", options="header"]
+|===
+| Portion | License
 
-The assembled font contains glyphs from multiple OFL-licensed source
-fonts (see Acknowledgments above). Each source's OFL terms continue
-to apply to its contributed glyphs.
+| Most glyphs (Noto family, Lentariso, Kedebideri, UniHieroglyphica, Microsoft Egyptian Text, BabelStone, Symbola, Last Resort, …)
+| *SIL OFL 1.1* — standard terms apply, including commercial use. See link:LICENSE[LICENSE].
+
+| FSung-derived glyphs (CJK Ext F, Ext J, and other CJK regions covered by FSung)
+| *SIL OFL 1.1 + FSung-NC.* The OFL terms apply, AND in addition, the no-commercial-use restriction from F.G. Wang applies to these specific glyphs: academic research, educational work, and personal reading are permitted; commercial use is prohibited.
+
+| All other donors
+| See link:references/input-fonts/ATTRIBUTIONS.md[ATTRIBUTIONS.md] for the per-donor attribution + license record.
+|===
+
+The full Chinese statement from F.G. Wang is recorded under
+"License statement (zh)" in
+link:references/input-fonts/ATTRIBUTIONS.md[ATTRIBUTIONS.md].
+
+To make the per-codepoint licensing machine-checkable, the build
+emits a `LICENSE-SOURCES.md` per release listing every donor's
+covered codepoint ranges and their license. That file ships
+alongside the TTF on GitHub Releases so downstream users can
+filter or strip FSung-derived glyphs programmatically.
+
+To request commercial-use permission for FSung-derived glyphs,
+contact F.G. Wang at https://fgwang.blogspot.com/.
+
+The full text of the SIL OFL is available with a FAQ at
+https://openfontlicense.org.
 
 == Related projects
 

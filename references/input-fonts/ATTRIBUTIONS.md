@@ -4,22 +4,37 @@ Every glyph in essenfont is sourced from the donor fonts below. This
 file is the canonical attribution record. It is auto-referenced by
 `LICENSE-SOURCES.md` at release time.
 
-## FSung (Full-Sung) — Taiwan MOE 全宋體
+## FSung (Full-Sung) — Taiwan 全宋體
 
 | Field | Value |
 |---|---|
 | **Font family** | Full-Sung (FSung) |
-| **Author** | Taiwan Ministry of Education (教育部) |
-| **Maintainer** | github.com/lxs602/FSung-font |
-| **Source** | https://github.com/lxs602/FSung-font |
-| **Website** | https://fgwang.blogspot.com/2025/09/unicode-17.html |
-| **License** | OFL (SIL Open Font License 1.1) |
-| **Unicode version** | 17.0 |
+| **Author** | F.G. Wang (fgwang.blogspot.com) — expert CJK fontographer |
+| **Initial source** | Taiwan Ministry of Education (教育部) — provided the 全宋體 style + base glyph sources |
+| **First announced** | http://fgwang.blogspot.com/2021/12/blog-post.html (2021-12) |
+| **Latest news** | https://fgwang.blogspot.com/2025/09/unicode-17.html |
+| **Download** | https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing |
+| **Mirror** | https://github.com/lxs602/FSung-font (lxs602) |
+| **License** | **Custom NON-COMMERCIAL share + use.** NOT OFL. Commercial use prohibited by the author. See `License statement` row below. |
+| **License statement (zh)** | 現將此成果無條件分享出來，樂見學術研究、教育工作、個人閱讀這方面的運用，但請勿用做任何形式的商業營利行為。希望「全宋體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化的整理、研究上幫上一點小忙。 |
+| **Unicode version** | 17.0 (full coverage of CJK Unified Ideographs Ext A–J) |
 | **Files** | FSung-m.ttf (BMP), FSung-2.ttf (SIP), FSung-3.ttf (TIP+Ext J), FSung-X.ttf (Plane 3), FSung-1.ttf, FSung-F.ttf (PUA), FSung-p.ttf |
 | **Coverage** | CJK Unified Ideographs (all extensions A–J), CJK symbols, ~430 BMP ranges |
 
-Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) —
-Unicode 17 additions that no other OFL font covers.
+**License and redistribution note (important):**
+
+FSung's license is a custom non-commercial share + use grant from
+F.G. Wang — it is **NOT OFL**. The grant permits academic research,
+educational use, and personal reading; commercial use is prohibited.
+
+essenfont, which is publicly redistributed under SIL OFL 1.1, embeds
+FSung-derived glyphs. Downstream users must therefore respect F.G.
+Wang's no-commercial-use restriction on the FSung-derived portion of
+essenfont. The FSung-derived glyphs are NOT reusable in commercial
+products without F.G. Wang's separate permission.
+
+Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
+17 additions that no other freely-redistributable font covers.
 
 ## Noto Sans (universal fallback)
 

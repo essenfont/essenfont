@@ -2,8 +2,8 @@
 # essenfont donor font registry.
 #
 # Each entry declares a font whose glyphs essenfont may pull.
-# License must be OFL-compatible (see ofl_compatible_licenses below);
-# the build refuses to use anything else.
+# License is checked against the policy below. The build refuses to
+# use anything outside the policy.
 #
 # Per-cp mapping comes from ucode's universal-set manifest at
 # ../ucode/output/universal_glyph_set/manifest.json. This file only
@@ -13,6 +13,18 @@ ucd_version: "17.0.0"
 essenfont_version: "0.1.0"
 generated_at: "2026-06-29T00:00:00Z"
 
+# License policy — governs what the build will accept.
+#
+# ofl_compatible_licenses: donors whose license lets the assembled
+#   font be redistributed under OFL without additional restrictions.
+#
+# accepted_with_conditions: donors whose license permits
+#   redistribution but imposes extra terms (more restrictive than
+#   OFL) that survive into the output font. The build propagates
+#   these extra terms to the output font's `name` table
+#   (nameID 0 copyright + nameID 13 license description) and to the
+#   auto-generated LICENSE-SOURCES.md, so downstream users can
+#   honor them programmatically.
 ofl_compatible_licenses:
   - OFL
   - Apache
@@ -24,25 +36,51 @@ ofl_compatible_licenses:
   - GUST
   - CC-BY
 
+accepted_with_conditions:
+  - id: FSung-NC
+    donor: "F.G. Wang — FSung (Full-Sung, Taiwan 全宋體)"
+    restriction: no-commercial-use
+    restriction_summary: "Commercial use of FSung-derived glyphs is prohibited. Academic research, educational work, and personal reading are permitted."
+    statement: |
+      現將此成果無條件分享出來，樂見學術研究、教育工作、個人閱讀這方面的運用，但請勿用做任何形式的商業營利行為。希望「全宋體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化的整理、研究上幫上一點小忙。
+    applies_to: [fsung-m, fsung-2, fsung-3, fsung-x]
+
 donors:
 
   # ─────────── Full-Sung (CJK Unified Ideographs — ALL extensions) ───────────
-  # Taiwan MOE 全宋體 by lxs602
-  # Repo:  https://github.com/lxs602/FSung-font
-  # Web:   https://fgwang.blogspot.com/2025/09/unicode-17.html
-  # Covers CJK Ext A–J including Unicode 17 Ext J.
+  # Taiwan 全宋體 (FSung) by F.G. Wang — full Unicode 17 CJK coverage.
+  # Author:      F.G. Wang, fgwang.blogspot.com (CJK fontographer)
+  # Initial src: Taiwan Ministry of Education (教育部) — provided the 全宋體
+  #              style + base glyph sources; F.G. Wang assembled + maintains.
+  # First ann.:  http://fgwang.blogspot.com/2021/12/blog-post.html (2021-12)
+  # Latest:      https://fgwang.blogspot.com/2025/09/unicode-17.html
+  # Download:    https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing
+  # Mirror:      https://github.com/lxs602/FSung-font (lxs602 GitHub mirror)
+  # License:     Custom NON-COMMERCIAL share + use. NOT OFL.
+  #              Commercial use is prohibited by the author. Full Chinese
+  #              statement is in `license_text` on each FSung entry below.
+  #              The OFL allowlist at the top of this file does NOT include
+  #              this license; the build will refuse FSung donors until the
+  #              redistribution policy is updated.
+  # Covers:      CJK Unified Ideographs Ext A–J (incl. Unicode 17 Ext J)
+  #              + CJK-related BMP blocks.
 
   - label: fsung-m
     file: references/input-fonts/FSung-m.ttf
     family: Full-Sung
     style: Regular
     version: "1.0"
-    license: OFL
+    license: FSung-NC
+    license_text: |
+      現將此成果無條件分享出來，樂見學術研究、教育工作、個人閱讀這方面的運用，但請勿用做任何形式的商業營利行為。希望「全宋體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化的整理、研究上幫上一點小忙。
     sha256: "17f432a2cc07e38d9cea266c9cdb370c9021e7ca211e39801216daf1e355a271"
     path_local_only: true
-    url: https://github.com/lxs602/FSung-font
+    url: https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing
+    url_mirror: https://github.com/lxs602/FSung-font
     web: https://fgwang.blogspot.com/2025/09/unicode-17.html
-    author: "Taiwan Ministry of Education (教育部) — maintained by lxs602"
+    web_first_announced: http://fgwang.blogspot.com/2021/12/blog-post.html
+    author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
+    author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: [CJK_Unified_Ideographs, CJK_Symbols_and_Punctuation, CJK_Radicals_Supplement, CJK_Strokes, Enclosed_CJK_Letters_and_Months]
     notes: "BMP font. Primary CJK Unified Ideographs donor (Traditional-first). ~40k cps across ~435 ranges."
 
@@ -51,12 +89,17 @@ donors:
     family: Full-Sung
     style: Regular
     version: "1.0"
-    license: OFL
+    license: FSung-NC
+    license_text: |
+      現將此成果無條件分享出來，樂見學術研究、教育工作、個人閱讀這方面的運用，但請勿用做任何形式的商業營利行為。希望「全宋體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化的整理、研究上幫上一點小忙。
     sha256: "40296ae3899f17bf16976449fcbeadeb43e2c4d3e9f5ec6fd97438deb36d2ca4"
     path_local_only: true
-    url: https://github.com/lxs602/FSung-font
+    url: https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing
+    url_mirror: https://github.com/lxs602/FSung-font
     web: https://fgwang.blogspot.com/2025/09/unicode-17.html
-    author: "Taiwan Ministry of Education (教育部) — maintained by lxs602"
+    web_first_announced: http://fgwang.blogspot.com/2021/12/blog-post.html
+    author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
+    author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: [CJK_Unified_Ideographs_Extension_B, CJK_Unified_Ideographs_Extension_C, CJK_Unified_Ideographs_Extension_D, CJK_Unified_Ideographs_Extension_E]
     notes: "SIP font. Covers CJK Ext B/C/D/E (U+20000..U+2B81D)."
 
@@ -65,12 +108,17 @@ donors:
     family: Full-Sung
     style: Regular
     version: "1.0"
-    license: OFL
+    license: FSung-NC
+    license_text: |
+      現將此成果無條件分享出來，樂見學術研究、教育工作、個人閱讀這方面的運用，但請勿用做任何形式的商業營利行為。希望「全宋體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化的整理、研究上幫上一點小忙。
     sha256: "85d6acd77fecde10fd277d1ef9be64520464ca591da15e68a7999c83b3aed37e"
     path_local_only: true
-    url: https://github.com/lxs602/FSung-font
+    url: https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing
+    url_mirror: https://github.com/lxs602/FSung-font
     web: https://fgwang.blogspot.com/2025/09/unicode-17.html
-    author: "Taiwan Ministry of Education (教育部) — maintained by lxs602"
+    web_first_announced: http://fgwang.blogspot.com/2021/12/blog-post.html
+    author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
+    author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: [CJK_Unified_Ideographs_Extension_F, CJK_Unified_Ideographs_Extension_J]
     notes: "TIP font. Covers CJK Ext F + Ext J (Unicode 17 additions, U+31350..U+323AF)."
 
@@ -79,12 +127,17 @@ donors:
     family: Full-Sung
     style: Regular
     version: "1.0"
-    license: OFL
+    license: FSung-NC
+    license_text: |
+      現將此成果無條件分享出來，樂見學術研究、教育工作、個人閱讀這方面的運用，但請勿用做任何形式的商業營利行為。希望「全宋體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化的整理、研究上幫上一點小忙。
     sha256: "5617c1d5c1f249dae88afc06b7db3eda8eef064ae8b6207992ff8413303521f9"
     path_local_only: true
-    url: https://github.com/lxs602/FSung-font
+    url: https://drive.google.com/file/d/1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X/view?usp=sharing
+    url_mirror: https://github.com/lxs602/FSung-font
     web: https://fgwang.blogspot.com/2025/09/unicode-17.html
-    author: "Taiwan Ministry of Education (教育部) — maintained by lxs602"
+    web_first_announced: http://fgwang.blogspot.com/2021/12/blog-post.html
+    author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
+    author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: [CJK_Unified_Ideographs_Extension_G, CJK_Unified_Ideographs_Extension_H]
     notes: "Plane 3 font. Tertiary ideographic plane extensions."
 
