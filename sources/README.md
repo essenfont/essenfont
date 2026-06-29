@@ -124,6 +124,78 @@ included alongside the final TTF in GitHub Releases.
 For all upstream policy rationale see the comment block at the top
 of `manifest.yml`.
 
+### FSung-NC — concrete build behavior
+
+The current entry in `accepted_with_conditions` is `FSung-NC` (F.G.
+Wang's non-commercial share + use grant for Full-Sung). When the
+build encounters a donor with `license: FSung-NC`, it does the
+following:
+
+1. **Reads the policy entry** from `accepted_with_conditions` to
+   learn the `restriction`, `restriction_summary`, full `statement`,
+   and the donor list under `applies_to`.
+
+2. **Records the per-cp licensing** as it stitches. For each
+   codepoint whose donor is in `applies_to`, the record
+   `{ cp, donor, license: "FSung-NC", restriction: "no-commercial-use" }`
+   is written into the in-memory licensing map.
+
+3. **Writes the output font's `name` table**:
+   - `nameID 0` (copyright): standard OFL copyright notice, plus
+     "Portions Copyright 2026 F.G. Wang (FSung-derived glyphs).
+     Used under F.G. Wang's non-commercial share + use grant."
+   - `nameID 13` (license description): standard OFL text, plus the
+     FSung-NC addendum below (transcribed verbatim from the policy
+     entry's `statement` field — F.G. Wang's Chinese text).
+
+   Addendum text (transcribed into `nameID 13`):
+
+   > Composite license: portions of this font derived from Full-Sung
+   > (Taiwan 全宋體) by F.G. Wang (https://fgwang.blogspot.com/) are
+   > subject to additional restrictions. Academic research, educational
+   > work, and personal reading are permitted; commercial use
+   > (any form of commercial profit-making activity) is prohibited.
+   > Full statement: 現將此成果無條件分享出來，樂見學術研究、教育工作、
+   > 個人閱讀這方面的運用，但請勿用做任何形式的商業營利行為。希望「全
+   > 宋體」這個大型字庫以及「部件檢索」這個檢字工具，能在漢字文化的整
+   > 理、研究上幫上一點小忙。 To request commercial-use permission:
+   > https://fgwang.blogspot.com/
+
+4. **Writes `LICENSE-SOURCES.md`** alongside the TTF. Format:
+
+   ```markdown
+   ## FSung (Full-Sung) — Taiwan 全宋體 — by F.G. Wang
+
+   - Author: F.G. Wang — https://fgwang.blogspot.com/
+   - Initial style/sources: Taiwan MOE (教育部)
+   - License: FSung-NC (custom non-commercial share + use grant)
+   - Restriction: **no commercial use**
+   - Contact for commercial-use permission:
+     https://fgwang.blogspot.com/
+
+   ### Codepoints derived from FSung
+
+   | Codepoint | Block | Donor file | sha256 |
+   |---|---|---|---|
+   | U+4E00 | CJK Unified Ideographs | references/input-fonts/FSung-m.ttf | 17f432a2cc07e38d9cea266c9cdb370c9021e7ca211e39801216daf1e355a271 |
+   | U+20000 | CJK Unified Ideographs Extension B | references/input-fonts/FSung-2.ttf | 40296ae3899f17bf16976449fcbeadeb43e2c4d3e9f5ec6fd97438deb36d2ca4 |
+   | ... | ... | ... | ... |
+   ```
+
+   The list of codepoints comes from walking ucode's per-cp
+   manifest and filtering entries whose `source.label` is in
+   `accepted_with_conditions[FSung-NC].applies_to`.
+
+5. **Records the assignment in the build log** (stdout) for each
+   restricted codepoint, so an operator running the build can see
+   which glyphs will carry the FSung-NC restriction in the output.
+
+Build acceptance for FSung-NC is: the output TTF + the shipped
+`LICENSE-SOURCES.md` together carry enough information for a
+downstream consumer (e.g., a packaging tool or preprocessor) to
+identify and remove FSung-derived codepoints before commercial
+distribution — without losing the rest of the font.
+
 ## Adding a new donor
 
 1. Download the font to `sources/fonts/<filename>`
