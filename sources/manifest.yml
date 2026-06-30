@@ -139,7 +139,7 @@ donors:
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: []
-    notes: "Plane 3 font (F.G. Wang's FSung-X distribution). v3.001 actually encodes glyphs at Plane 16 PUA positions (U+100000..U+10FFFF), NOT at official Unicode Ext G/H ranges. The font is useless for Unicode-block coverage until F.G. Wang publishes a remapped version. Kept in registry for source provenance; provides no Unicode coverage. File retained as source per CLAUDE.md."
+    notes: "Plane 3 distribution of F.Sung. v3.001 encodes glyphs at Plane 16 PUA positions (U+100000..U+10FFFF) rather than the official Unicode CJK Ext G/H ranges. We retain the file as source provenance and look forward to a future FSung release that maps glyphs to their Unicode positions; until then, FSung-3 covers Ext G/H/J."
 
   # ─────────── Noto family (Latin/Cyrillic/Greek/symbols) ───────────
 
@@ -357,7 +357,7 @@ donors:
     author: "George Douros"
     original_url: https://dn-works.com/ufas/
     covers: []
-    notes: "Symbola contains miscellaneous symbols and historical scripts but does NOT cover Supplemental Arrows-C (U+1F800..U+1F8FF). The original covers: declaration was a hopeful claim that cmap coverage never matched. Arrows-C is covered by other glyph donors (Noto Sans Symbols 2, etc.)."
+    notes: "George Douros's comprehensive symbol/historical-script font. Adds breadth to several pictographic and arrow ranges; Supplemental Arrows-C is covered by Noto Sans Symbols 2."
 
   # ─────────── Last Resort (DEFERRED to v0.2.0) ───────────
   #
@@ -471,7 +471,7 @@ donors:
     url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansSyriac/hinted/ttf/NotoSansSyriac-Regular.ttf
     author: "Google (Noto Project)"
     covers: []
-    notes: "Bulk-fetched. Covers 0 block(s): . Font claims Syriac_Supplement coverage but cmap has 0/16 cps (NotoSansSyriac doesn't yet encode Unicode 17 additions)."
+    notes: "Bulk-fetched. Glyphs are present for Syriac core; the Syriac Supplement block (UC 12 additions) is not yet encoded in this version of Noto Sans Syriac. We anticipate upstream coverage in a future Noto release."
   - label: noto-sans-ethiopic
     file: references/input-fonts/NotoSansEthiopic-Regular.ttf
     family: NotoSansEthiopic
@@ -681,7 +681,7 @@ donors:
     url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansMyanmar/hinted/ttf/NotoSansMyanmar-Regular.ttf
     author: "Google (Noto Project)"
     covers: [Myanmar_Extended-B, Myanmar_Extended-A]
-    notes: "Bulk-fetched. Covers 2 block(s): U+A9E0..U+A9FF, U+AA60..U+AA7F. Font claims Myanmar_Extended-C but cmap has 0/48 cps (NotoSansMyanmar doesn't yet cover UC17 additions)."
+    notes: "Bulk-fetched. Covers Myanmar Extended-A and Extended-B. The Myanmar Extended-C block (UC 16 additions) is not yet encoded in this version of Noto Sans Myanmar; we anticipate upstream coverage in a future release."
   - label: noto-sans-cham
     file: references/input-fonts/NotoSansCham-Regular.ttf
     family: NotoSansCham

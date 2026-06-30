@@ -92,17 +92,27 @@ module EssenfontCoverage
     end
   end
 
+  def self.reserved_block?(row)
+    /Private.Use|Surrogates|Specials/i.match?(row[:id])
+  end
+
   def self.emit_text(rows, font_path, threshold)
-    total_assigned = rows.sum { |r| r[:total] }
-    total_covered = rows.sum { |r| r[:covered] }
+    assigned_rows = rows.reject { |r| reserved_block?(r) }
+    reserved_rows = rows.select { |r| reserved_block?(r) }
+
+    total_assigned = assigned_rows.sum { |r| r[:total] }
+    total_covered = assigned_rows.sum { |r| r[:covered] }
     overall_pct = total_assigned.positive? ? (100.0 * total_covered / total_assigned).round(2) : 0
-    empty = rows.count { |r| r[:covered].zero? }
-    complete = rows.count { |r| r[:covered] == r[:total] }
+    empty = assigned_rows.count { |r| r[:covered].zero? }
+    complete = assigned_rows.count { |r| r[:covered] == r[:total] }
 
     puts "=== Coverage report for #{font_path} ==="
     puts ""
-    puts "Overall: #{total_covered}/#{total_assigned} codepoints (#{overall_pct}%)"
-    puts "Blocks: #{rows.size} total — #{complete} complete, #{empty} empty"
+    puts "Assigned-block coverage: #{total_covered}/#{total_assigned} codepoints (#{overall_pct}%)"
+    puts "(Excludes #{reserved_rows.size} reserved blocks: PUA, Surrogates, Specials —"
+    puts " intentionally not coverable by Unicode design.)"
+    puts ""
+    puts "Blocks: #{assigned_rows.size} assigned (#{complete} complete, #{empty} empty); #{reserved_rows.size} reserved"
     puts ""
 
     # Column header
@@ -123,15 +133,21 @@ module EssenfontCoverage
   end
 
   def self.emit_json(rows)
+    assigned_rows = rows.reject { |r| reserved_block?(r) }
+    reserved_rows = rows.select { |r| reserved_block?(r) }
+
     out = {
       generated_at: Time.now.utc.iso8601,
       blocks: rows,
       totals: {
         blocks: rows.size,
-        empty: rows.count { |r| r[:covered].zero? },
-        complete: rows.count { |r| r[:covered] == r[:total] },
-        covered: rows.sum { |r| r[:covered] },
-        assigned: rows.sum { |r| r[:total] },
+        assigned_blocks: assigned_rows.size,
+        reserved_blocks: reserved_rows.size,
+        empty: assigned_rows.count { |r| r[:covered].zero? },
+        complete: assigned_rows.count { |r| r[:covered] == r[:total] },
+        # Meaningful coverage: assigned chars covered / assigned chars total
+        covered: assigned_rows.sum { |r| r[:covered] },
+        assigned: assigned_rows.sum { |r| r[:total] },
       },
     }
     puts JSON.pretty_generate(out)
