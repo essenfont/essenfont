@@ -243,17 +243,25 @@ donors:
     author: "Google (Noto Project)"
     covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing]
 
-  # ─────────── Emoji (DEFERRED to v0.2.0) ───────────
+  # ─────────── Emoji (Noto Color Emoji) ───────────
   #
-  # NotoColorEmoji.ttf uses CBDT/CBLC tables (per-glyph PNG bitmaps)
-  # and has no glyf table. fontisan's Stitcher works on glyf outlines
-  # only. Color emoji integration is blocked on fontisan CBDT/CBLC
-  # passthrough — see fontisan/REQ-cbdt-cblc-passthrough.md.
-  #
-  # The previous NotoEmoji-Regular.ttf entry was an HTML error page
-  # (failed download) and has been removed. Emoji coverage (Emoticons
-  # U+1F600..U+1F64F, Dingbats U+2700..U+27BF) is currently absent
-  # from essenfont and will be added in v0.2.0.
+  # Color bitmap emoji via CBDT/CBLC tables. fontisan 0.4+ added
+  # single-source CBDT passthrough (REQ-cbdt-cblc-passthrough.md is
+  # now implemented). The Stitcher propagates NotoColorEmoji's CBDT
+  # and CBLC tables byte-for-byte into the output font. Restricted to
+  # a single source — multi-source CBDT merging raises
+  # MultipleCbdtSourcesError in fontisan.
+
+  - label: noto-color-emoji
+    file: references/input-fonts/NotoColorEmoji.ttf
+    family: Noto Color Emoji
+    style: Regular
+    license: OFL
+    sha256: "72a635cb3d2f3524c51620cdde406b217204e8a6a06c6a096ff8ed4b5fd6e27b"
+    url: https://github.com/googlefonts/noto-emoji/raw/refs/heads/main/fonts/NotoColorEmoji.ttf
+    author: "Google (Noto Project)"
+    covers: [Emoticons]
+    notes: "Color bitmap emoji (CBDT/CBLC). fontisan 0.4+ required for Stitcher passthrough. Provides Emoticons (U+1F600..U+1F64F, 80/80)."
 
   # ─────────── UC17 specialists ───────────
 
