@@ -157,25 +157,40 @@ donors:
 
   # ─────────── Noto specialists ───────────
 
-  - label: noto-sans-tangut
-    file: references/input-fonts/NotoSansTangut-Regular.ttf
-    family: Noto Sans Tangut
+  - label: noto-serif-tangut
+    file: references/input-fonts/NotoSerifTangut-Regular.otf
+    family: Noto Serif Tangut
     style: Regular
     license: OFL
-    sha256: "5c656cb03b4f32718bb70e68533e2f3d121b0d2bbfc7cc6d76a9dca5ae476e9b"
-    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansTangut
+    sha256: "4aa621e035fc1aefbc5c44b8925ac37ca26d18c215dab87e6349ab24aada71f1"
+    url: https://notofonts.github.io/tangut/fonts/NotoSerifTangut/full/otf/NotoSerifTangut-Regular.otf
     author: "Google (Noto Project)"
     covers: [Tangut, Tangut_Components, Tangut_Supplement]
+    notes: "Serif variant (Noto never published a Sans Tangut). OTF (CFF outlines). Covers 6136/6144 Tangut, 768/768 Components, 9/128 Supplement."
 
-  - label: noto-sans-tolong-siki
-    file: references/input-fonts/NotoSansTolongSiki-Regular.ttf
-    family: Noto Sans Tolong Siki
+  # ─────────── Kelly Tolong 4 (Tolong Siki, keyboard-mapping font) ───────────
+  # Pre-Unicode keyboard-mapping font: glyphs are Tolong Siki letters
+  # but encoded at ASCII/Latin-1 codepoints (U+20..U+B7) so users can
+  # type Tolong Siki with a Latin keyboard. The build must remap via
+  # the YAML table at sources/remaps/kellytolong4.yml before scanning
+  # cmap. Remap derivation is in progress (visual-match against the
+  # Unicode Tolong Siki code chart, U+11DB0..U+11DEF). Until the remap
+  # is derived + the build supports codepoint_remap, this donor is
+  # disabled (enabled: false).
+
+  - label: kelly-tolong-4
+    file: references/input-fonts/kellytolong4.ttf
+    family: Kelly Tolong
     style: Regular
+    version: "4"
     license: OFL
-    sha256: "3f0d8919358d44082ea610a0dc0deec0f9e940f3c310a95abef739bce47f3a98"
-    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansTolongSiki
-    author: "Google (Noto Project)"
+    sha256: "3708d2fa03f801a435fa87a08a318981848e97e56ab67ad9a94a21359fa09c23"
+    url: https://www.tolongsiki.com/downloads/kellytolong4.ttf
+    author: "Tolong Siki community (tolongsiki.com)"
     covers: [Tolong_Siki]
+    codepoint_remap: sources/remaps/kellytolong4.yml
+    enabled: false
+    notes: "Keyboard-mapping font (105 cps all in U+20..U+B7). Requires codepoint_remap to map ASCII codepoints to Unicode Tolong Siki (U+11DB0..U+11DEF). Disabled until remap is derived."
 
   - label: noto-sans-sharada
     file: references/input-fonts/NotoSansSharada-Regular.ttf
@@ -227,16 +242,17 @@ donors:
     author: "Google (Noto Project)"
     covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing]
 
-  - label: noto-emoji
-    file: references/input-fonts/NotoEmoji-Regular.ttf
-    family: Noto Emoji
-    style: Regular
-    license: OFL
-    sha256: "dbd7f3c2fff013b2ea0294fbb16606700fd151cb9634ee99c7d2721fbe984ccc"
-    url: https://github.com/googlefonts/noto-emoji
-    author: "Google (Noto Project)"
-    covers: [Emoticons, Dingbats]
-    notes: "Monochrome variant only. Color emoji (CBDT/CBLC) not used."
+  # ─────────── Emoji (DEFERRED to v0.2.0) ───────────
+  #
+  # NotoColorEmoji.ttf uses CBDT/CBLC tables (per-glyph PNG bitmaps)
+  # and has no glyf table. fontisan's Stitcher works on glyf outlines
+  # only. Color emoji integration is blocked on fontisan CBDT/CBLC
+  # passthrough — see fontisan/REQ-cbdt-cblc-passthrough.md.
+  #
+  # The previous NotoEmoji-Regular.ttf entry was an HTML error page
+  # (failed download) and has been removed. Emoji coverage (Emoticons
+  # U+1F600..U+1F64F, Dingbats U+2700..U+27BF) is currently absent
+  # from essenfont and will be added in v0.2.0.
 
   # ─────────── UC17 specialists ───────────
 
@@ -247,9 +263,12 @@ donors:
     version: "3.001"
     license: OFL
     sha256: "f95907a8c39c68d557c2264fcf593a858eb4751cd5e0c3c7c53e1ef354444064"
-    url: https://software.sil.org/kedebideri/
+    url: https://software.sil.org/downloads/r/kedebideri/Kedebideri-3.001.zip
+    url_extract: https://software.sil.org/downloads/r/kedebideri/Kedebideri-3.001.zip
+    url_extract_member: Kedebideri-3.001/Kedebideri-Regular.ttf
     author: "SIL International"
-    covers: [Beria_Erfe]
+    covers: []
+    notes: "Beria script font. v3.001 (2025-09-12) does NOT encode Unicode 17 Beria Erfe (U+10940..U+1095F); glyphs are at PUA positions only. Kept in registry for completeness; provides no Unicode-block coverage in current version. Lentariso is the active Beria Erfe donor."
 
   # ─────────── Lentariso (extracted from repo TTFs/) ───────────
   # The repo has no releases; we vendor from the TTFs/ folder via ZIP download.
@@ -260,12 +279,13 @@ donors:
     style: Regular
     version: "1.033"
     license: OFL
-    sha256: "TBD"
+    sha256: "514ac442c9c5c361625da0755e84baaee36bbafe098138312f5285c3bd2fa0d3"
     url: https://github.com/Bry10022/Lentariso
     author: "Bryndan W. Meyerholt (Bry10022)"
     url_extract: https://codeload.github.com/Bry10022/Lentariso/zip/refs/heads/master
     url_extract_member: Lentariso-master/TTFs/Lentariso-Regular.ttf
-    covers: [Imperial_Aramaic, Phoenician, Sidetic]
+    covers: [Imperial_Aramaic, Phoenician, Beria_Erfe]
+    notes: "Covers Imperial Aramaic (31/32), Phoenician (29/32), and partial Beria Erfe (26/32 of U+10940..U+1095F). Does NOT cover Sidetic (0/32) — Sidetic has no OFL donor; defer to code-chart extraction in v0.2.0."
 
   # ─────────── Egyptian Text (Microsoft font-tools) ───────────
 
@@ -279,8 +299,43 @@ donors:
     author: "Microsoft Corporation"
     url_extract: https://codeload.github.com/microsoft/font-tools/zip/refs/heads/main
     url_extract_member: font-tools-main/EgyptianOpenType/EgyptianText-Regular.ttf
-    covers: [Egyptian_Hieroglyph_Format_Controls]
-    notes: "Repo is MIT-licensed; the font file itself is OFL."
+    covers: [Egyptian_Hieroglyphs, Egyptian_Hieroglyph_Format_Controls]
+    notes: "Repo is MIT-licensed; the font file itself is OFL. Covers Egyptian Hieroglyphs core (U+13000..U+1342F) 1072/1072, Format Controls (U+13430..U+1345F) 38/48, and a tail of Ext-A Extended (21/4000)."
+
+  # ─────────── Egyptian Hieroglyphs specialists ───────────
+
+  - label: uni-hieroglyphica
+    file: references/input-fonts/UniHieroglyphica.ttf
+    family: UniHieroglyphica
+    style: Regular
+    license: OFL
+    sha256: "ad60bb2f469697837b556388d47b500a21d866370a49a8be770b206108aaf664"
+    url: https://suignard.com/Ptolemaic/UniHieroglyphica.ttf
+    author: "Michel Suignard (suignard.com)"
+    covers: [Egyptian_Hieroglyphs_Extended_A]
+    notes: "Covers Egyptian Hieroglyphs Ext-A Extended (U+13460..U+143FF) 3995/4000 — primary Ext-A Extended donor. Also covers core 1072/1072 and Format Controls 38/48 (redundant with eot.ttf). Does NOT cover Ext-B (U+16A40..U+16A8F)."
+
+  - label: new-gardiner
+    file: references/input-fonts/NewGardiner.ttf
+    family: NewGardiner
+    style: Regular
+    license: OFL
+    sha256: "3dac59756a78811652c4e1fd1809acd1f0fe03be0221bc2083a9a635189035d3"
+    url: https://github.com/nederhof/newgardiner/raw/refs/heads/main/fonts/NewGardiner.ttf
+    author: "Mark Jan Nederhof"
+    covers: []
+    notes: "Defense-in-depth secondary for Egyptian Hieroglyphs core (1072/1072, redundant with eot.ttf) and Ext-A Extended (3427/4000, subsumed by uni-hieroglyphica). Listed for completeness; provides no unique Unicode-block coverage. covers: [] because no block is exclusively or best covered by this donor."
+
+  - label: new-gardiner-non-core
+    file: references/input-fonts/NewGardinerNonCore.ttf
+    family: NewGardiner
+    style: Regular
+    license: OFL
+    sha256: "3077fb7a32ee48b9c38ea6c3d1baf256c2025c67647107d2130f827ac9f9b307"
+    url: https://github.com/nederhof/newgardiner/raw/refs/heads/main/fonts/NewGardinerNonCore.ttf
+    author: "Mark Jan Nederhof"
+    covers: []
+    notes: "8 supplemental Ext-A Extended codepoints not in main NewGardiner. Subsumed by uni-hieroglyphica (3995/4000)."
 
   # ─────────── Symbola (mirror) ───────────
 
@@ -296,29 +351,37 @@ donors:
     covers: [Supplemental_Arrows-C]
     notes: "Original at dn-works.com (no longer publicly downloadable). Mirror at github.com/zhm/symbola."
 
-  # ─────────── Last Resort (fallback tofu) ───────────
+  # ─────────── Last Resort (DEFERRED to v0.2.0) ───────────
+  #
+  # LastResortHE v17.000 uses cmap format 13 (many-to-one range
+  # mappings). fontisan's `unicode_mappings` returns 0 entries for
+  # this format. The previous file in the repo was an HTML error page
+  # (failed download) and has been removed.
+  #
+  # Re-enable in v0.2.0 after fontisan gains cmap format 13 support.
+  # The fallback role (tofu-box glyphs for uncovered codepoints) is
+  # currently unfillable.
 
-  - label: last-resort
-    file: references/input-fonts/LastResortHE-Regular.ttf
-    family: Last Resort HE
-    style: Regular
-    license: OFL
-    sha256: "f6d85586f7d062b93e10fdfdf185f4712fc0287dfe34219377c9688d8f340b79"
-    url: https://github.com/unicode-org/last-resort-font
-    author: "Unicode, Inc."
-    covers: []
-    notes: "Fallback only. Produces tofu-box glyphs for codepoints no donor covered."
-
-  # ─────────── Still needed (path_local_only) ───────────
+  # ─────────── Tai Yo (PUA-encoded, needs remap) ───────────
+  #
+  # Pre-Unicode-17 font used to render the Tai Yo code chart. Glyphs
+  # are encoded at non-standard PUA-like positions (U+15250..U+1527F,
+  # U+1E600..U+1E7FF). The build must remap via
+  # sources/remaps/noto-serif-tai-yo.yml before scanning cmap. Remap
+  # derivation in progress (visual-match against the Unicode Tai Yo
+  # code chart, U+16E40..U+16E9F). Until remap is derived + build
+  # supports codepoint_remap, this donor is disabled (enabled: false).
 
   - label: noto-serif-tai-yo
-    file: references/input-fonts/NotoSerifTaiYo.ttf
+    file: references/input-fonts/NotoSerifTaiYo-Regular.ttf
     family: Noto Serif Tai Yo
     style: Regular
     version: "draft-2025-09"
     license: OFL
-    sha256: "TBD"
-    path_local_only: true
+    sha256: "980924d6e1935c8d82323692fdc0bb0f2a0d85ac09efa422aa27e9f9460ee860"
+    url: https://langtools2024.appspot.com/static/fonts/TaiYo/NotoSerifTaiYo-Regular.ttf
     author: "Google (Noto Project) / translationcommons.org"
     covers: [Tai_Yo]
-    notes: "Pre-release Noto variant. Contact translationcommons.org maintainers."
+    codepoint_remap: sources/remaps/noto-serif-tai-yo.yml
+    enabled: false
+    notes: "Pre-release Noto variant used to render the Unicode code chart. Glyphs at PUA positions (U+15250, U+1E600 ranges); 0/96 coverage of official Tai Yo block (U+16E40..U+16E9F). Disabled until remap is derived."

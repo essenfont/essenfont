@@ -1,0 +1,36 @@
+---
+# Remap table: kellytolong4.ttf → Unicode Tolong Siki (U+11DB0..U+11DEF)
+#
+# Kelly Tolong 4 is a KEYBOARD-MAPPING font: glyphs are Tolong Siki
+# letters but encoded at ASCII/Latin-1 codepoints (U+20..U+B7) so
+# users can type Tolong Siki with a Latin keyboard. This table maps
+# each ASCII codepoint to its corresponding Unicode Tolong Siki
+# codepoint.
+#
+# Derivation: visual-match each glyph in kellytolong4.ttf against the
+# Unicode Code Chart for Tolong Siki.
+# Chart: https://www.unicode.org/charts/PDF/U-11DB0.pdf
+#
+# STATUS: TODO — not yet derived. The donor entry in
+# sources/manifest.yml is `enabled: false` until this table is filled
+# in and the build supports `codepoint_remap:`.
+
+donor: kelly-tolong-4
+donor_file: references/input-fonts/kellytolong4.ttf
+donor_sha256: "3708d2fa03f801a435fa87a08a318981848e97e56ab67ad9a94a21359fa09c23"
+
+target_block: Tolong_Siki
+target_range: [0x11DB0, 0x11DEF]
+target_chart_url: https://www.unicode.org/charts/PDF/U-11DB0.pdf
+
+derivation: visual-match-against-code-chart
+derived_at: null
+derived_by: null
+
+# Each entry maps a source codepoint in the donor's cmap to a target
+# Unicode codepoint. Optional `note` records the glyph/character name
+# for review.
+mappings: []
+  # - {from: 0x61, to: 0x11DB0, note: "TOLONG_SIKI_LETTER_AA — visual match to glyph at ASCII 'a'"}
+  # - {from: 0x62, to: 0x11DB1, note: "TOLONG_SIKI_LETTER_BAA"}
+  # ... 64 entries total when complete

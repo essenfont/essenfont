@@ -1,0 +1,32 @@
+---
+# Remap table: NotoSerifTaiYo.ttf → Unicode Tai Yo (U+16E40..U+16E9F)
+#
+# NotoSerifTaiYo is the font used to render the Unicode Code Chart
+# for Tai Yo, but encodes glyphs at non-standard PUA-like positions
+# (U+15250..U+1527F and U+1E600..U+1E7FF) instead of the official
+# Unicode 17 Tai Yo block. This table maps each PUA codepoint to its
+# corresponding Unicode Tai Yo codepoint.
+#
+# Derivation: visual-match each glyph in NotoSerifTaiYo against the
+# Unicode Code Chart for Tai Yo.
+# Chart: https://www.unicode.org/charts/PDF/U-16E40.pdf
+#
+# STATUS: TODO — not yet derived. The donor entry in
+# sources/manifest.yml is `enabled: false` until this table is filled
+# in and the build supports `codepoint_remap:`.
+
+donor: noto-serif-tai-yo
+donor_file: references/input-fonts/NotoSerifTaiYo-Regular.ttf
+donor_sha256: "980924d6e1935c8d82323692fdc0bb0f2a0d85ac09efa422aa27e9f9460ee860"
+
+target_block: Tai_Yo
+target_range: [0x16E40, 0x16E9F]
+target_chart_url: https://www.unicode.org/charts/PDF/U-16E40.pdf
+
+derivation: visual-match-against-code-chart
+derived_at: null
+derived_by: null
+
+mappings: []
+  # - {from: 0x15250, to: 0x16E40, note: "TAI_YO_LETTER_KA — visual match to chart cell U+16E40"}
+  # ... 96 entries total when complete

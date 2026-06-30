@@ -61,7 +61,7 @@ Taiwan MOE 全宋體 (Full-Sung) family by lxs602:
 - Multi-file: FSung-m (BMP), FSung-2 (SIP), FSung-3 (TIP+Ext J), FSung-X (Plane 3)
 
 Noto Sans CJK is NOT used for CJK ideographs. Tangut (separate script)
-uses Noto Sans Tangut.
+uses Noto Serif Tangut.
 
 ## Dependencies
 
