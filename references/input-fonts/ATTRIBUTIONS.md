@@ -47,27 +47,29 @@ Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
 | **File** | NotoSans-Regular.ttf |
 | **Coverage** | Latin, Latin-1 Supplement, Latin Extended-A/B, IPA Extensions, Spacing Modifier Letters, Combining Diacritical Marks, Greek and Coptic, Cyrillic, + ~250 blocks |
 
-## Noto Sans Tangut
+## Noto Serif Tangut
 
 | Field | Value |
 |---|---|
-| **Font family** | Noto Sans Tangut |
+| **Font family** | Noto Serif Tangut |
 | **Author** | Google (Noto Project) |
-| **Source** | https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansTangut |
+| **Source** | https://notofonts.github.io/tangut/fonts/NotoSerifTangut/full/otf/NotoSerifTangut-Regular.otf |
 | **License** | OFL |
-| **File** | NotoSansTangut-Regular.ttf |
-| **Coverage** | Tangut, Tangut Components, Tangut Supplement |
+| **File** | NotoSerifTangut-Regular.otf |
+| **Coverage** | Tangut (U+17000..U+187FF, 6136/6144), Tangut Components (U+18800..U+18AFF, 768/768), Tangut Supplement (U+18D00..U+18D7F, 9/128) |
+| **Note** | Replaces Noto Sans Tangut (which was never published by Noto). OTF (CFF outlines). |
 
-## Noto Sans Tolong Siki
+## Kelly Tolong (Tolong Siki)
 
 | Field | Value |
 |---|---|
-| **Font family** | Noto Sans Tolong Siki |
-| **Author** | Google (Noto Project) |
-| **Source** | https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansTolongSiki |
+| **Font family** | Kelly Tolong |
+| **Author** | Tolong Siki community (tolongsiki.com) |
+| **Source** | https://www.tolongsiki.com/downloads/kellytolong4.ttf |
 | **License** | OFL |
-| **File** | NotoSansTolongSiki-Regular.ttf |
-| **Coverage** | Tolong Siki (U+11DB0..U+11DEF) |
+| **File** | kellytolong4.ttf |
+| **Coverage** | Tolong Siki (U+11DB0..U+11DEF) — planned; requires codepoint remap |
+| **Note** | Keyboard-mapping font: glyphs are encoded at ASCII codepoints (U+20..U+B7). Disabled in v0.1.0 until `sources/remaps/kellytolong4.yml` remap table is derived via visual-match against the Unicode code chart. |
 
 ## Noto Sans Sharada
 
@@ -145,7 +147,8 @@ Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
 | **Source** | https://github.com/Bry10022/Lentariso |
 | **License** | OFL |
 | **File** | Lentariso-Regular.ttf (extracted from repo TTFs/) |
-| **Coverage** | Imperial Aramaic, Phoenician, Sidetic (UC17) |
+| **Coverage** | Imperial Aramaic (U+10840..U+1085F, 31/32), Phoenician (U+10900..U+1091F, 29/32), Beria Erfe (U+10940..U+1095F, 26/32) |
+| **Note** | Does NOT cover Sidetic (U+10920..U+1093F) — no OFL donor exists for this Unicode 17 block; covered via code-chart extraction in v0.2.0. |
 
 ## Kedebideri
 
@@ -167,7 +170,30 @@ Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
 | **Source** | https://github.com/microsoft/font-tools (EgyptianOpenType/) |
 | **License** | OFL (font); MIT (repo) |
 | **Files** | egyptiantext-COLR.ttf, eot.ttf |
-| **Coverage** | Egyptian Hieroglyph Format Controls (U+13430..U+1345F) |
+| **Coverage** | Egyptian Hieroglyphs (U+13000..U+1342F, 1072/1072), Format Controls (U+13430..U+1345F, 38/48), partial Ext-A Extended (21/4000) |
+
+## UniHieroglyphica
+
+| Field | Value |
+|---|---|
+| **Font family** | UniHieroglyphica |
+| **Author** | Michel Suignard (suignard.com) |
+| **Source** | https://suignard.com/Ptolemaic/UniHieroglyphica.ttf |
+| **License** | OFL |
+| **File** | UniHieroglyphica.ttf |
+| **Coverage** | Egyptian Hieroglyphs Ext-A Extended (U+13460..U+143FF, 3995/4000) — primary Ext-A Extended donor. Also covers core (1072/1072) and Format Controls (38/48), redundant with eot.ttf. |
+| **Note** | Does NOT cover Egyptian Hieroglyphs Ext-B (U+16A40..U+16A8F) — Unicode 17 addition, no OFL donor exists; covered via code-chart extraction in v0.2.0. |
+
+## NewGardiner
+
+| Field | Value |
+|---|---|
+| **Font family** | NewGardiner |
+| **Author** | Mark Jan Nederhof |
+| **Source** | https://github.com/nederhof/newgardiner |
+| **License** | OFL |
+| **Files** | NewGardiner.ttf, NewGardinerNonCore.ttf |
+| **Coverage** | Defense-in-depth secondary for Egyptian Hieroglyphs core (1072/1072) and Ext-A Extended (3427/4000). Subsumed by eot.ttf + UniHieroglyphica. |
 
 ## Symbola
 
@@ -190,15 +216,20 @@ Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
 | **License** | OFL |
 | **File** | LastResortHE-Regular.ttf |
 | **Coverage** | Fallback only — tofu-box placeholder glyphs for codepoints no other donor covered |
+| **Note** | Deferred in v0.1.0: LastResortHE v17.000 uses cmap format 13; fontisan's `unicode_mappings` returns 0 entries. Re-enable after fontisan gains format 13 support. |
 
-## Still needed (not yet acquired)
+## Still needed (deferred to v0.2.0)
 
-These donors are declared in `sources/manifest.yml` but not yet present
-in `references/input-fonts/`:
+These donors are acquired but disabled in the manifest, or require
+new pipeline work before they can contribute coverage:
 
 | Donor | Status |
 |---|---|
-| NotoSerifTaiYo | Pre-release; contact translationcommons.org |
-| UniHieroglyphica | URL stale (suignard.com/UniHieroglyphica → 301); corrected path is suignard.com/Ptolemaic/ |
-| BabelStone Pseudographica | URL stale (babelstone.co.uk/Fonts/Download → 404); page is at babelstone.co.uk/Fonts/Pseudographica.html |
-| Noto per-script variants (Tibetan, Myanmar, Devanagari, Bengali, etc.) | Auto-downloadable from notofonts.github.io |
+| Kelly Tolong 4 | Acquired. Disabled: keyboard-mapping font needs codepoint_remap table. |
+| Noto Serif Tai Yo | Acquired. Disabled: PUA-encoded glyphs need codepoint_remap table. |
+| Noto Color Emoji | Deferred: fontisan Stitcher doesn't support CBDT/CBLC tables. Proposal: `fontisan/REQ-cbdt-cblc-passthrough.md`. |
+| LastResort HE v17 | Deferred: fontisan returns 0 entries from cmap format 13. |
+| Sidetic (U+10920..U+1093F) | No OFL donor. Cover via `ucode` code-chart extraction (proposal: `ucode/REQ-code-chart-svg-extraction.md`). |
+| Egyptian Hieroglyphs Ext-B (U+16A40..U+16A8F) | Same: cover via code-chart extraction. |
+| Beria Erfe tail (6 codepoints) | Same: code-chart extraction. |
+| Egyptian Ext-A Extended tail (~5 codepoints) | Same: code-chart extraction. |
