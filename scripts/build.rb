@@ -431,8 +431,69 @@ module EssenfontBuild
       output_path = File.join(OUTPUT_DIR, "Essenfont-Regular.#{ext}")
       puts "=== Writing #{output_path} ==="
       stitcher.write_to(output_path, format: fmt)
+      validate_and_repair_cmap(output_path)
       puts "  #{output_path} (#{File.size(output_path)} bytes)"
     end
+  end
+
+  # Validate that every cmap entry points to a valid gid. If not,
+  # rebuild the cmap with only valid entries and rewrite the font.
+  #
+  # This fixes the issue where the Stitcher's glyph ordering doesn't
+  # perfectly match the cmap's gid references, causing Safari to
+  # reject the font.
+  def self.validate_and_repair_cmap(path)
+    font = Fontisan::FontLoader.load(path)
+    maxp = font.table("maxp")
+    num_glyphs = maxp&.num_glyphs || 0
+
+    cmap = font.table("cmap")
+    mappings = cmap&.unicode_mappings || {}
+
+    valid = {}
+    invalid_count = 0
+    mappings.each do |cp, gid|
+      if gid < num_glyphs
+        valid[cp] = gid
+      else
+        invalid_count += 1
+      end
+    end
+
+    if invalid_count.positive?
+      puts "  repairing: #{invalid_count} cmap entries pointed to non-existent gids (max gid = #{num_glyphs - 1})"
+
+      # Read all table bytes
+      tables = {}
+      font.table_names.each do |tag|
+        raw = begin
+                font.table(tag)&.raw_data
+              rescue StandardError
+                nil
+              end
+        tables[tag] = raw if raw
+      end
+
+      # Build cleaned cmap from valid mappings only
+      glyphs_for_cmap = Array.new(num_glyphs) do |i|
+        Fontisan::Ufo::Glyph.new(name: i.zero? ? ".notdef" : "gid#{i}")
+      end
+      valid.each_value do |gid|
+        next if gid >= glyphs_for_cmap.size
+      end
+      valid.each do |cp, gid|
+        glyphs_for_cmap[gid]&.add_unicode(cp)
+      end
+      tables["cmap"] = Fontisan::Ufo::Compile::Cmap.build(nil, glyphs: glyphs_for_cmap)
+
+      sfnt = tables.key?("CFF ") ? 0x4F54544F : 0x00010000
+      Fontisan::FontWriter.write_to_file(tables, path, sfnt_version: sfnt)
+      puts "  repaired: #{valid.size} valid cmap entries retained"
+    else
+      puts "  cmap validation: all #{valid.size} entries valid"
+    end
+  rescue StandardError => e
+    warn "  WARNING: cmap validation failed: #{e.message}"
   end
 end
 
