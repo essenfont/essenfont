@@ -29,70 +29,43 @@ module EssenfontBuild
   REMAP_DIR = File.expand_path("../sources/remaps", __dir__)
   OUTPUT_DIR = File.expand_path("..", __dir__)
   UCODE_MANIFEST = ENV.fetch("UCODE_MANIFEST", nil)
+  UCODE_BLOCKS_PATH = "/Users/mulgogi/src/fontist/ucode/output/blocks/index.json"
 
-  # Unicode 17.0 block ranges for blocks declared in the manifest.
-  # Used by the coverage-validation gate to compute "% of declared
-  # block actually present in donor cmap". Temporary scaffolding
-  # until ucode exports a canonical block-range lookup.
-  UNICODE_BLOCKS = {
+  # Load all Unicode 17 block ranges from ucode's canonical blocks
+  # index. Falls back to an inline subset if ucode isn't available
+  # locally. Used by the coverage-validation gate to compute "% of
+  # declared block present in donor cmap" — must cover every block
+  # id referenced by manifest covers: declarations.
+  def self.load_unicode_blocks
+    if File.exist?(UCODE_BLOCKS_PATH)
+      data = JSON.parse(File.read(UCODE_BLOCKS_PATH))
+      data.each_with_object({}) do |b, h|
+        h[b["id"]] = [b["first_cp"], b["last_cp"]]
+      end
+    else
+      warn "WARN: ucode blocks/index.json not found at #{UCODE_BLOCKS_PATH}; using inline fallback"
+      INLINE_UNICODE_BLOCKS
+    end
+  end
+
+  INLINE_UNICODE_BLOCKS = {
     "Basic_Latin" => [0x0000, 0x007F],
-    "Latin-1_Supplement" => [0x0080, 0x00FF],
-    "Latin_Extended-A" => [0x0100, 0x017F],
-    "Latin_Extended-B" => [0x0180, 0x024F],
-    "IPA_Extensions" => [0x0250, 0x02AF],
-    "Spacing_Modifier_Letters" => [0x02B0, 0x02FF],
-    "Combining_Diacritical_Marks" => [0x0300, 0x036F],
-    "Greek_and_Coptic" => [0x0370, 0x03FF],
-    "Cyrillic" => [0x0400, 0x04FF],
     "CJK_Unified_Ideographs" => [0x4E00, 0x9FFF],
-    "CJK_Symbols_and_Punctuation" => [0x3000, 0x303F],
-    "CJK_Radicals_Supplement" => [0x2E80, 0x2EFF],
-    "CJK_Strokes" => [0x31C0, 0x31EF],
-    "Enclosed_CJK_Letters_and_Months" => [0x3200, 0x32FF],
-    "CJK_Unified_Ideographs_Extension_B" => [0x20000, 0x2A6DF],
-    "CJK_Unified_Ideographs_Extension_C" => [0x2A700, 0x2B73F],
-    "CJK_Unified_Ideographs_Extension_D" => [0x2B740, 0x2B81F],
-    "CJK_Unified_Ideographs_Extension_E" => [0x2B820, 0x2CEAF],
-    "CJK_Unified_Ideographs_Extension_F" => [0x2CEB0, 0x2EBEF],
-    "CJK_Unified_Ideographs_Extension_G" => [0x30000, 0x3134F],
-    "CJK_Unified_Ideographs_Extension_H" => [0x31350, 0x323AF],
-    "CJK_Unified_Ideographs_Extension_J" => [0x31350, 0x323AF],
     "Tangut" => [0x17000, 0x187FF],
-    "Tangut_Components" => [0x18800, 0x18AFF],
-    "Tangut_Supplement" => [0x18D00, 0x18D7F],
     "Tolong_Siki" => [0x11DB0, 0x11DEF],
-    "Sharada" => [0x11180, 0x111CD],
-    "Sharada_Supplement" => [0x11B60, 0x11B7F],
-    "Mathematical_Operators" => [0x2200, 0x22FF],
-    "Supplemental_Mathematical_Operators" => [0x2A00, 0x2AFF],
-    "Mathematical_Alphanumeric_Symbols" => [0x1D400, 0x1D7FF],
-    "Miscellaneous_Mathematical_Symbols-A" => [0x27C0, 0x27EF],
-    "Miscellaneous_Mathematical_Symbols-B" => [0x2980, 0x29FF],
-    "Musical_Symbols" => [0x1D100, 0x1D1FF],
-    "Miscellaneous_Symbols" => [0x2600, 0x26FF],
-    "Miscellaneous_Technical" => [0x2300, 0x23FF],
-    "Alchemical_Symbols" => [0x1F700, 0x1F77F],
-    "Miscellaneous_Symbols_and_Pictographs" => [0x1F300, 0x1F5FF],
-    "Supplemental_Symbols_and_Pictographs" => [0x1F900, 0x1F9FF],
-    "Transport_and_Map_Symbols" => [0x1F680, 0x1F6FF],
-    "Chess_Symbols" => [0x1FA00, 0x1FA0F],
-    "Symbols_and_Pictographs_Extended-A" => [0x1FA70, 0x1FAFF],
-    "Symbols_for_Legacy_Computing" => [0x1FB00, 0x1FBFF],
-    "Imperial_Aramaic" => [0x10840, 0x1085F],
-    "Phoenician" => [0x10900, 0x1091F],
-    "Lydian" => [0x10920, 0x1093F],
+    "Tai_Yo" => [0x1E6C0, 0x1E6FF],
     "Sidetic" => [0x10940, 0x1095F],
     "Beria_Erfe" => [0x16EA0, 0x16EDF],
     "Egyptian_Hieroglyphs" => [0x13000, 0x1342F],
-    "Egyptian_Hieroglyph_Format_Controls" => [0x13430, 0x1345F],
     "Egyptian_Hieroglyphs_Extended_A" => [0x13460, 0x143FF],
-    "Mro" => [0x16A40, 0x16A6F],
-    "Supplemental_Arrows-C" => [0x1F800, 0x1F8FF],
-    "Tai_Yo" => [0x1E6C0, 0x1E6FF],
-    "Medefaidrin" => [0x16E40, 0x16E9F],
     "Emoticons" => [0x1F600, 0x1F64F],
-    "Dingbats" => [0x2700, 0x27BF],
   }.freeze
+
+  # Unicode 17.0 block ranges for blocks declared in the manifest.
+  # Used by the coverage-validation gate to compute "% of declared
+  # block actually present in donor cmap". Loaded from ucode/output/
+  # blocks/index.json (canonical UCD data) at boot time.
+  UNICODE_BLOCKS = load_unicode_blocks.freeze
 
   # Parse the donor manifest and load each available donor.
   # @return [Hash<Symbol, {font:, label:, file:, coverage:}>]
