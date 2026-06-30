@@ -147,8 +147,8 @@ Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
 | **Source** | https://github.com/Bry10022/Lentariso |
 | **License** | OFL |
 | **File** | Lentariso-Regular.ttf (extracted from repo TTFs/) |
-| **Coverage** | Imperial Aramaic (U+10840..U+1085F, 31/32), Phoenician (U+10900..U+1091F, 29/32), Beria Erfe (U+10940..U+1095F, 26/32) |
-| **Note** | Does NOT cover Sidetic (U+10920..U+1093F) — no OFL donor exists for this Unicode 17 block; covered via code-chart extraction in v0.2.0. |
+| **Coverage** | Imperial Aramaic (U+10840..U+1085F, 31/32), Phoenician (U+10900..U+1091F, 29/32), Sidetic (U+10940..U+1095F, 26/32) |
+| **Note** | Does NOT cover Beria Erfe (U+16EA0..U+16EDF) — Kedebideri covers Beria Erfe 50/64. The 6 missing Sidetic codepoints need code-chart extraction in v0.2.0. |
 
 ## Kedebideri
 
@@ -159,7 +159,7 @@ Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
 | **Source** | https://software.sil.org/kedebideri/ |
 | **License** | OFL |
 | **File** | Kedebideri-Regular.ttf |
-| **Coverage** | Beria Erfe (U+16EA0..U+16EDF, UC17) |
+| **Coverage** | Beria Erfe (U+16EA0..U+16EDF, 50/64) — Unicode 17 addition |
 
 ## Egyptian Text (Microsoft font-tools)
 

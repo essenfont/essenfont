@@ -276,8 +276,8 @@ donors:
     url_extract: https://software.sil.org/downloads/r/kedebideri/Kedebideri-3.001.zip
     url_extract_member: Kedebideri-3.001/Kedebideri-Regular.ttf
     author: "SIL International"
-    covers: []
-    notes: "Beria script font. v3.001 (2025-09-12) does NOT encode Unicode 17 Beria Erfe (U+10940..U+1095F); glyphs are at PUA positions only. Kept in registry for completeness; provides no Unicode-block coverage in current version. Lentariso is the active Beria Erfe donor."
+    covers: [Beria_Erfe]
+    notes: "Beria script font. v3.001 (2025-09-12) covers Unicode 17 Beria Erfe (U+16EA0..U+16EDF) 50/64. Reclaim as primary Beria Erfe donor. Does NOT cover Sidetic (U+10940..U+1095F); Lentariso is the active Sidetic donor."
 
   # ─────────── Lentariso (extracted from repo TTFs/) ───────────
   # The repo has no releases; we vendor from the TTFs/ folder via ZIP download.
@@ -293,8 +293,8 @@ donors:
     author: "Bryndan W. Meyerholt (Bry10022)"
     url_extract: https://codeload.github.com/Bry10022/Lentariso/zip/refs/heads/master
     url_extract_member: Lentariso-master/TTFs/Lentariso-Regular.ttf
-    covers: [Imperial_Aramaic, Phoenician, Beria_Erfe]
-    notes: "Covers Imperial Aramaic (31/32), Phoenician (29/32), and partial Beria Erfe (26/32 of U+10940..U+1095F). Does NOT cover Sidetic (0/32) — Sidetic has no OFL donor; defer to code-chart extraction in v0.2.0."
+    covers: [Imperial_Aramaic, Phoenician, Sidetic]
+    notes: "Covers Imperial Aramaic (U+10840..U+1085F) 31/32, Phoenician (U+10900..U+1091F) 29/32, and partial Sidetic (U+10940..U+1095F) 26/32 — all Unicode 5.1/17 additions. Does NOT cover Beria Erfe (U+16EA0..U+16EDF; Unicode 17, 0/64 — no OFL donor exists). The 6 missing Sidetic codepoints need code-chart extraction in v0.2.0."
 
   # ─────────── Egyptian Text (Microsoft font-tools) ───────────
 
