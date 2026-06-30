@@ -1502,3 +1502,16 @@ donors:
     author: "Google (Noto Project)"
     covers: [Znamenny_Musical_Notation]
     notes: "Bulk-fetched. Covers 1 block(s): U+1CF00..U+1CFCF."
+
+  # ─────────── Noto Sans KR (Hangul Syllables) ───────────
+
+  - label: noto-sans-kr
+    file: references/input-fonts/NotoSansKR-Regular.ttf
+    family: Noto Sans KR
+    style: Regular
+    license: OFL
+    sha256: "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252"
+    url: https://github.com/google/fonts/raw/main/ofl/notosanskr/NotoSansKR%5Bwght%5D.ttf
+    author: "Google + Adobe (Noto Project)"
+    covers: [Hangul_Syllables, Hangul_Compatibility_Jamo]
+    notes: "Variable font. Covers Hangul Syllables (U+AC00..U+D7AF) 11172/11184 and Hangul Compatibility Jamo. Primary Korean donor."
