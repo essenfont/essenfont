@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "fontisan", "~> 0.3"
+gem "fontisan", "~> 0.4"
 gem "rake"
 
 group :development do
