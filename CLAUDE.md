@@ -37,7 +37,7 @@ scripts/verify.rb
 | Path | Purpose |
 |---|---|
 | `sources/manifest.yml` | Donor font registry (label, file, sha256, license, covers) |
-| `references/input-fonts/` | Actual donor TTF/OTF files (gitignored — 200MB+) |
+| `references/input-fonts/` | Actual donor TTF/OTF files (committed to git — ~227MB) |
 | `references/input-fonts/ATTRIBUTIONS.md` | Full attribution per donor (author, URL, license) |
 | `scripts/build.rb` | The build: donors → Essenfont-Regular.ttf |
 | `scripts/verify.rb` | Round-trip validation |
