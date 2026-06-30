@@ -119,8 +119,8 @@ donors:
     web_first_announced: http://fgwang.blogspot.com/2021/12/blog-post.html
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
-    covers: [CJK_Unified_Ideographs_Extension_F, CJK_Unified_Ideographs_Extension_J]
-    notes: "TIP font. Covers CJK Ext F + Ext J (Unicode 17 additions, U+31350..U+323AF)."
+    covers: [CJK_Unified_Ideographs_Extension_G, CJK_Unified_Ideographs_Extension_H, CJK_Unified_Ideographs_Extension_J]
+    notes: "TIP font. Covers CJK Ext G (U+30000..U+3134A), Ext H (U+31350..U+323AF), and Ext J (U+323B0..U+3347F). Ext F (U+2CEB0..U+2EBEF) is covered by fsung-2."
 
   - label: fsung-x
     file: references/input-fonts/FSung-X.ttf
@@ -138,8 +138,8 @@ donors:
     web_first_announced: http://fgwang.blogspot.com/2021/12/blog-post.html
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
-    covers: [CJK_Unified_Ideographs_Extension_G, CJK_Unified_Ideographs_Extension_H]
-    notes: "Plane 3 font. Tertiary ideographic plane extensions."
+    covers: []
+    notes: "Plane 3 font (F.G. Wang's FSung-X distribution). v3.001 actually encodes glyphs at Plane 16 PUA positions (U+100000..U+10FFFF), NOT at official Unicode Ext G/H ranges. The font is useless for Unicode-block coverage until F.G. Wang publishes a remapped version. Kept in registry for source provenance; provides no Unicode coverage. File retained as source per CLAUDE.md."
 
   # ─────────── Noto family (Latin/Cyrillic/Greek/symbols) ───────────
 
@@ -200,7 +200,8 @@ donors:
     sha256: "8350a4cf4b5bdc0707aa5077075b0885a4f3f0f08ed6b49b8e5d142aef4032da"
     url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansSharada
     author: "Google (Noto Project)"
-    covers: [Sharada_Supplement]
+    covers: [Sharada]
+    notes: "Covers main Sharada block (U+11180..U+111CD) 96/96. Does NOT cover Sharada Supplement (U+11B60..U+11B7F; Unicode 16.0+ — no Noto version includes it)."
 
   - label: noto-sans-math
     file: references/input-fonts/NotoSansMath-Regular.ttf
@@ -348,8 +349,8 @@ donors:
     url: https://raw.githubusercontent.com/zhm/symbola/master/fonts/Symbola.ttf
     author: "George Douros"
     original_url: https://dn-works.com/ufas/
-    covers: [Supplemental_Arrows-C]
-    notes: "Original at dn-works.com (no longer publicly downloadable). Mirror at github.com/zhm/symbola."
+    covers: []
+    notes: "Symbola contains miscellaneous symbols and historical scripts but does NOT cover Supplemental Arrows-C (U+1F800..U+1F8FF). The original covers: declaration was a hopeful claim that cmap coverage never matched. Arrows-C is covered by other glyph donors (Noto Sans Symbols 2, etc.)."
 
   # ─────────── Last Resort (DEFERRED to v0.2.0) ───────────
   #
