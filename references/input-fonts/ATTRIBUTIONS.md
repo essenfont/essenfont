@@ -126,17 +126,17 @@ Covers CJK Unified Ideographs Extension J (U+31350..U+323AF) — Unicode
 | **File** | NotoSansSymbols2-Regular.ttf |
 | **Coverage** | Miscellaneous Symbols and Pictographs, Supplemental Symbols and Pictographs, Transport and Map Symbols, Chess Symbols, Symbols and Pictographs Extended-A, Symbols for Legacy Computing |
 
-## Noto Emoji (monochrome)
+## Noto Color Emoji
 
 | Field | Value |
 |---|---|
-| **Font family** | Noto Emoji |
+| **Font family** | Noto Color Emoji |
 | **Author** | Google (Noto Project) |
 | **Source** | https://github.com/googlefonts/noto-emoji |
 | **License** | OFL |
-| **File** | NotoEmoji-Regular.ttf |
-| **Coverage** | Emoticons, Dingbats |
-| **Note** | Monochrome variant only. Color emoji (CBDT/CBLC) not used — essenfont ships vector outlines. |
+| **File** | NotoColorEmoji.ttf |
+| **Coverage** | Emoticons (U+1F600..U+1F64F, 80/80), many other emoji ranges |
+| **Note** | Color bitmap emoji (CBDT/CBLC tables). Requires fontisan 0.4+ for Stitcher passthrough (single-CBDT-source mode). |
 
 ## Lentariso
 
@@ -227,7 +227,7 @@ new pipeline work before they can contribute coverage:
 |---|---|
 | Kelly Tolong 4 | Acquired. Disabled: keyboard-mapping font needs codepoint_remap table. |
 | Noto Serif Tai Yo | Acquired. Disabled: PUA-encoded glyphs need codepoint_remap table. |
-| Noto Color Emoji | Deferred: fontisan Stitcher doesn't support CBDT/CBLC tables. Proposal: `fontisan/REQ-cbdt-cblc-passthrough.md`. |
+| Noto Color Emoji | Re-enabled: fontisan 0.4 added single-source CBDT/CBLC passthrough. |
 | LastResort HE v17 | Deferred: fontisan returns 0 entries from cmap format 13. |
 | Sidetic (U+10920..U+1093F) | No OFL donor. Cover via `ucode` code-chart extraction (proposal: `ucode/REQ-code-chart-svg-extraction.md`). |
 | Egyptian Hieroglyphs Ext-B (U+16A40..U+16A8F) | Same: cover via code-chart extraction. |
