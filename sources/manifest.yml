@@ -412,8 +412,9 @@ donors:
     covers: [Sidetic]
     notes: "No OFL donor for Unicode 17 Sidetic (U+10940..U+1095F, 32 cps). Lentariso covers 26/32; this donor covers the remaining 6 + provides authoritative glyphs for all 32. Glyphs from https://www.unicode.org/charts/PDF/U10940.pdf."
 
-  - label: egyptian-ext-b-chart
-    type: code_chart
-    block: Egyptian_Hieroglyphs_Extended-B
-    covers: [Egyptian_Hieroglyphs_Extended-B]
-    notes: "No OFL donor for Unicode 17 Egyptian Hieroglyphs Ext-B (U+16A40..U+16A8F, 80 cps). Glyphs from https://www.unicode.org/charts/PDF/U16A40.pdf."
+  # REMOVED: egyptian-ext-b-chart
+  # Earlier analysis incorrectly believed Unicode 17 added an
+  # "Egyptian Hieroglyphs Extended-B" block at U+16A40..U+16A8F.
+  # That range is actually Mro (Unicode 7.0). UC17 only adds:
+  #   - Egyptian_Hieroglyphs_Extended-A (already covered by UniHieroglyphica)
+  # There is no Egyptian Ext-B block.

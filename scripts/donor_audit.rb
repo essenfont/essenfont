@@ -143,6 +143,19 @@ module EssenfontAudit
       return result
     end
 
+    # code_chart donors are synthetic; report as deferred until the
+    # synthetic TTF exists.
+    if entry["type"] == "code_chart"
+      generated_dir = File.expand_path("../references/input-fonts/.generated", __dir__)
+      synthetic = File.join(generated_dir, "#{entry["block"].tr("-", "_")}.ttf")
+      if File.exist?(synthetic)
+        file = synthetic
+      else
+        result[:notes] = "type: code_chart — synthetic TTF not yet generated"
+        return result
+      end
+    end
+
     # 1. File exists
     path = resolve(file)
     if path.nil?

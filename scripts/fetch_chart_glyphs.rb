@@ -40,7 +40,7 @@ require "fontisan"
 module EssenfontChartFetch
   MANIFEST_PATH = File.expand_path("../sources/manifest.yml", __dir__)
   GENERATED_DIR = File.expand_path("../references/input-fonts/.generated", __dir__)
-  DEFAULT_BLOCKS = %w[Sidetic Egyptian_Hieroglyphs_Extended-B].freeze
+  DEFAULT_BLOCKS = %w[Sidetic].freeze
 
   def self.run(blocks: nil, dry_run: false)
     manifest = YAML.safe_load(File.read(MANIFEST_PATH))
@@ -135,7 +135,6 @@ module EssenfontChartFetch
   def self.block_start(block_id)
     {
       "Sidetic" => 0x10940,
-      "Egyptian_Hieroglyphs_Extended-B" => 0x16A40,
     }[block_id] || 0
   end
 end
