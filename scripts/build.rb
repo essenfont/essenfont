@@ -308,14 +308,38 @@ module EssenfontBuild
 
   # Build a per-codepoint donor selection map.
   # For each codepoint covered by ANY donor, pick the first donor
-  # (in manifest order) that covers it.
+  # (in manifest order) that covers it. Codepoints in PUA, Surrogate,
+  # or Specials ranges are excluded — they're not Unicode-assigned
+  # characters and would only bloat the output font with donor
+  # internal/PUA assignments (e.g., FSung-X's Plane 16 PUA bleed).
   # @param donors [Hash] loaded donors
   # @return [Hash<Integer, {label:, gid:}>]
   def self.build_codepoint_map(donors)
     all_cps = Set.new
     donors.each_value { |d| all_cps.merge(d[:coverage].keys) }
 
-    puts "  total codepoints across all donors: #{all_cps.size}"
+    # Filter: drop codepoints in PUA / Surrogate / Specials ranges.
+    # These are Unicode "non-character" zones — never assigned, never
+    # renderable as real characters. Donor cps in these ranges are
+    # either the donor's internal encoding (PUA) or encoding artifacts.
+    reserved_ranges = [
+      (0xE000..0xF8FF),     # Private Use Area
+      (0xF0000..0xFFFFD),   # Supplementary Private Use Area-A
+      (0x100000..0x10FFFD), # Supplementary Private Use Area-B
+      (0xD800..0xDFFF),     # Surrogates
+      (0xFFF0..0xFFFF),     # Specials (U+FFF0..U+FFFF — half of Specials block)
+      (0xFFFE..0xFFFF),     # (the other half; non-characters)
+      (0x1FFFE..0x1FFFF), (0x2FFFE..0x2FFFF), (0x3FFFE..0x3FFFF),
+      (0x4FFFE..0x4FFFF), (0x5FFFE..0x5FFFF), (0x6FFFE..0x6FFFF),
+      (0x7FFFE..0x7FFFF), (0x8FFFE..0x8FFFF), (0x9FFFE..0x9FFFF),
+      (0xAFFFE..0xAFFFF), (0xBFFFE..0xBFFFF), (0xCFFFE..0xCFFFF),
+      (0xDFFFE..0xDFFFF), (0xEFFFE..0xEFFFF), (0xFFFFE..0xFFFFF),
+      (0x10FFFE..0x10FFFF),
+    ]
+    original_size = all_cps.size
+    all_cps = all_cps.reject { |cp| reserved_ranges.any? { |r| r.cover?(cp) } }
+    puts "  total codepoints across all donors: #{original_size}"
+    puts "  after filtering PUA/Surrogate/Specials: #{all_cps.size} (dropped #{original_size - all_cps.size})"
 
     cp_map = {}
     all_cps.sort.each do |cp|
