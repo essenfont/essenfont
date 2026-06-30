@@ -157,7 +157,9 @@ module EssenfontCoverage
     "Egyptian_Hieroglyphs_Extended_A" => [0x13460, 0x143FF],
     "Imperial_Aramaic" => [0x10840, 0x1085F],
     "Phoenician" => [0x10900, 0x1091F],
-    "Beria_Erfe" => [0x10940, 0x1095F],
+    "Lydian" => [0x10920, 0x1093F],
+    "Sidetic" => [0x10940, 0x1095F],
+    "Beria_Erfe" => [0x16EA0, 0x16EDF],
     "Tolong_Siki" => [0x11DB0, 0x11DEF],
     "Tai_Yo" => [0x16E40, 0x16E9F],
   }.freeze
