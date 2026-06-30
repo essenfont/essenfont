@@ -86,7 +86,7 @@ module EssenfontBuild
     "Egyptian_Hieroglyphs" => [0x13000, 0x1342F],
     "Egyptian_Hieroglyph_Format_Controls" => [0x13430, 0x1345F],
     "Egyptian_Hieroglyphs_Extended_A" => [0x13460, 0x143FF],
-    "Egyptian_Hieroglyphs_Extended-B" => [0x16A40, 0x16A8F],
+    "Mro" => [0x16A40, 0x16A6F],
     "Supplemental_Arrows-C" => [0x1F800, 0x1F8FF],
     "Tai_Yo" => [0x1E6C0, 0x1E6FF],
     "Medefaidrin" => [0x16E40, 0x16E9F],
