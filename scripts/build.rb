@@ -45,6 +45,11 @@ module EssenfontBuild
         next
       end
 
+      unless verify_font_file(path)
+        warn "skip: donor #{label} is not a valid font file (likely a failed download)"
+        next
+      end
+
       print "  loading #{label} (#{File.basename(path)})... "
       font_index = entry["font_index"] || 0
       begin
@@ -64,6 +69,33 @@ module EssenfontBuild
     end
 
     loaded
+  end
+
+  # Verify that a file is actually a font (not an HTML error page).
+  # @return [Boolean]
+  def self.verify_font_file(path)
+    return false unless File.exist?(path) && File.size(path) > 16
+
+    magic = File.binread(path, 4)
+    valid = [
+      "\x00\x01\x00\x00", # TTF
+      "OTTO",              # OTF (CFF)
+      "true",              # TrueType (Apple variant)
+      "ttcf",              # TTC
+      "wOFF",              # WOFF
+      "wOF2",              # WOFF2
+      "\x00\x01\x00\x00".b # TTF (binary)
+    ]
+    return true if valid.include?(magic)
+
+    # Check for Type 1 fonts
+    first_byte = magic.getbyte(0)
+    return true if first_byte == 0x80 # PFB
+
+    warn "    first 4 bytes: #{magic.inspect} — not a font magic"
+    false
+  rescue StandardError
+    false
   end
 
   # Resolve a donor file path relative to the donor directory.
