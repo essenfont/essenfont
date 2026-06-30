@@ -88,7 +88,8 @@ module EssenfontBuild
     "Egyptian_Hieroglyphs_Extended_A" => [0x13460, 0x143FF],
     "Egyptian_Hieroglyphs_Extended-B" => [0x16A40, 0x16A8F],
     "Supplemental_Arrows-C" => [0x1F800, 0x1F8FF],
-    "Tai_Yo" => [0x16E40, 0x16E9F],
+    "Tai_Yo" => [0x1E6C0, 0x1E6FF],
+    "Medefaidrin" => [0x16E40, 0x16E9F],
     "Emoticons" => [0x1F600, 0x1F64F],
     "Dingbats" => [0x2700, 0x27BF],
   }.freeze
@@ -106,6 +107,21 @@ module EssenfontBuild
       if entry["enabled"] == false
         warn "skip: donor #{label} is disabled (enabled: false in manifest)"
         next
+      end
+
+      # code_chart donors are synthetic; they don't have a real file
+      # until fetch_chart_glyphs.rb runs. If the synthetic TTF is
+      # missing, skip with a helpful pointer rather than failing.
+      if entry["type"] == "code_chart"
+        generated_dir = File.expand_path("../references/input-fonts/.generated", __dir__)
+        synthetic = File.join(generated_dir, "#{entry["block"].tr("-", "_")}.ttf")
+        if File.exist?(synthetic)
+          entry = entry.merge("file" => synthetic)
+        else
+          warn "skip: code_chart donor #{label} — synthetic TTF not yet generated"
+          warn "       run `bundle exec ruby scripts/fetch_chart_glyphs.rb` first"
+          next
+        end
       end
 
       file = entry["file"]
@@ -132,15 +148,15 @@ module EssenfontBuild
           warn "skip: donor #{label} declares codepoint_remap at #{entry["codepoint_remap"]} but file not found"
           next
         end
-        remap = YAML.safe_load(File.read(remap_path))
-        if (remap["mappings"] || []).empty?
-          warn "skip: donor #{label} codepoint_remap has no mappings yet (TODO)"
+        remap_data = YAML.safe_load(File.read(remap_path))
+        mappings = remap_data["mappings"] || []
+        if mappings.empty?
+          warn "skip: donor #{label} codepoint_remap has no mappings yet (TODO.full/02 or 03)"
           next
         end
-        # TODO: apply remap when scanning cmap (deferred until a donor
-        # actually has a non-empty remap; see issue #3 tasks #6 + #13).
-        warn "skip: donor #{label} codepoint_remap loaded but remap application not yet implemented"
-        next
+        remap = mappings.each_with_object({}) do |m, h|
+          h[m["from"]] = m["to"]
+        end
       end
 
       print "  loading #{label} (#{File.basename(path)})... "
@@ -151,7 +167,23 @@ module EssenfontBuild
         warn "skip: #{e.message}"
         next
       end
-      coverage = scan_cmap(font)
+      raw_coverage = scan_cmap(font)
+      if remap
+        original_size = raw_coverage.size
+        # Compute remapped coverage first (raw_coverage is a reference
+        # to the cmap's hash; once we mutate it below, we can't read
+        # the original cps anymore).
+        coverage = apply_remap(raw_coverage, remap)
+        # Now mutate the donor's cmap in-memory so the Stitcher sees
+        # target Unicode codepoints when looking up glyphs. The
+        # unicode_mappings hash is cached on the cmap table object,
+        # so this mutation persists across the Stitcher's later reads.
+        mutate_cmap_with_remap!(font, remap)
+        puts "#{original_size} → #{coverage.size} codepoints (remapped)"
+      else
+        coverage = raw_coverage
+        puts "#{coverage.size} codepoints"
+      end
       loaded[label] = {
         font: font,
         label: label,
@@ -159,10 +191,43 @@ module EssenfontBuild
         coverage: coverage,
         covers: entry["covers"] || [],
       }
-      puts "#{coverage.size} codepoints"
     end
 
     loaded
+  end
+
+  # Mutate the donor's cmap in-memory: for each (source_cp → target_cp)
+  # in the remap, move the gid from source_cp to target_cp. cps not in
+  # the remap are removed (we only want the donor's remapped coverage
+  # in the output font, not its original ASCII/PUA positions).
+  def self.mutate_cmap_with_remap!(font, remap)
+    cmap = font.table("cmap")
+    return unless cmap
+
+    maps = cmap.unicode_mappings
+    return unless maps
+
+    new_maps = {}
+    remap.each do |src, target|
+      gid = maps[src]
+      new_maps[target] = gid if gid
+    end
+    maps.replace(new_maps)
+  end
+
+  # Rewrite a cmap's codepoints using a remap table.
+  # The donor's cmap is at "source" codepoints (e.g., ASCII for Kelly
+  # Tolong, PUA for NotoSerifTaiYo); this maps each entry to its
+  # target Unicode codepoint. Source cps without a remap entry are
+  # dropped (the donor's other coverage isn't useful for essenfont).
+  # @param cmap [Hash<Integer, Integer>] {source_cp → gid}
+  # @param remap [Hash<Integer, Integer>] {source_cp → target_cp}
+  # @return [Hash<Integer, Integer>] {target_cp → gid}
+  def self.apply_remap(cmap, remap)
+    remap.each_with_object({}) do |(src, target), h|
+      gid = cmap[src]
+      h[target] = gid if gid
+    end
   end
 
   # Compute SHA256 of file and compare to expected.

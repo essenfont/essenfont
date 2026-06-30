@@ -86,7 +86,8 @@ module EssenfontAudit
     "Egyptian_Hieroglyphs" => [0x13000, 0x1342F],
     "Egyptian_Hieroglyph_Format_Controls" => [0x13430, 0x1345F],
     "Egyptian_Hieroglyphs_Extended_A" => [0x13460, 0x143FF],
-    "Tai_Yo" => [0x16E40, 0x16E9F],
+    "Tai_Yo" => [0x1E6C0, 0x1E6FF],
+    "Medefaidrin" => [0x16E40, 0x16E9F],
     "Emoticons" => [0x1F600, 0x1F64F],
     "Dingbats" => [0x2700, 0x27BF],
     "Supplemental_Arrows-C" => [0x1F800, 0x1F8FF],
@@ -184,6 +185,20 @@ module EssenfontAudit
       return result
     end
 
+    # 4b. Apply codepoint_remap if declared (rewrites cmap cps before
+    # coverage gate so the gate sees the *target* Unicode block).
+    remap = load_remap(entry["codepoint_remap"])
+    if remap
+      original_size = cmap_info[:cps].size
+      cmap_info[:cps] = cmap_info[:cps].each_with_object({}) do |cp, h|
+        target = remap[cp]
+        h[target] = true if target
+      end.keys
+      result[:remapped_from] = original_size
+      result[:remapped_to] = cmap_info[:cps].size
+      result[:cmap_size] = cmap_info[:cps].size
+    end
+
     # 5. Coverage of declared covers: blocks
     result[:covers] = declared_covers.map do |block|
       range = UNICODE_BLOCKS[block]
@@ -237,6 +252,25 @@ module EssenfontAudit
     candidate = File.join(DONOR_DIR, File.basename(file))
     return candidate if File.exist?(candidate)
     nil
+  end
+
+  # Load a codepoint_remap YAML. Returns Hash<Integer, Integer>
+  # mapping source codepoint → target Unicode codepoint.
+  # @param specified [String, nil] path from manifest field
+  # @return [Hash<Integer, Integer>, nil] nil if no remap declared
+  def self.load_remap(specified)
+    return nil unless specified
+    path = File.exist?(specified) ? specified :
+           File.join(DONOR_DIR, "..", "..", specified)
+    return nil unless path && File.exist?(path)
+
+    data = YAML.safe_load(File.read(path))
+    entries = data["mappings"] || []
+    return nil if entries.empty?
+
+    entries.each_with_object({}) do |e, h|
+      h[e["from"]] = e["to"]
+    end
   end
 
   def self.valid_font_magic?(path)

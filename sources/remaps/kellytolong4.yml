@@ -2,18 +2,27 @@
 # Remap table: kellytolong4.ttf → Unicode Tolong Siki (U+11DB0..U+11DEF)
 #
 # Kelly Tolong 4 is a KEYBOARD-MAPPING font: glyphs are Tolong Siki
-# letters but encoded at ASCII/Latin-1 codepoints (U+20..U+B7) so
-# users can type Tolong Siki with a Latin keyboard. This table maps
-# each ASCII codepoint to its corresponding Unicode Tolong Siki
-# codepoint.
+# letters but encoded at ASCII codepoints (U+20..U+B7) so users can
+# type Tolong Siki with a Latin keyboard.
 #
-# Derivation: visual-match each glyph in kellytolong4.ttf against the
-# Unicode Code Chart for Tolong Siki.
-# Chart: https://www.unicode.org/charts/PDF/U-11DB0.pdf
+# Derivation: published keyboard layout in
+#   kurukhtimes.com/wp-content/uploads/2020/12/
+#     Tolong-Siki-_Script-of-Kurux-Language-1-23may17.pdf
+# (Hindi-language documentation of the Tolong Siki script).
+# Cross-referenced against the Unicode 17 code chart at
+#   https://www.unicode.org/charts/PDF/U11DB0.pdf
+# and the official Unicode 17 UCD DerivedName.txt.
 #
-# STATUS: TODO — not yet derived. The donor entry in
-# sources/manifest.yml is `enabled: false` until this table is filled
-# in and the build supports `codepoint_remap:`.
+# STATUS: 51/54 assigned codepoints mapped (94.4%). The 3 unmapped
+# signs (SELA, HECAKA, UNGGA — Unicode 17 additions) do not appear
+# in Kelly Tolong 4's documented keyboard layout; they may be
+# absent from the font entirely (added in Unicode after Kelly Tolong
+# was last updated). For 100% coverage of Tolong Siki, these 3
+# glyphs need to come from another source (chart extraction or a
+# newer font).
+#
+# Source font: references/input-fonts/kellytolong4.ttf
+# Source font sha256: 3708d2fa03f801a435fa87a08a318981848e97e56ab67ad9a94a21359fa09c23
 
 donor: kelly-tolong-4
 donor_file: references/input-fonts/kellytolong4.ttf
@@ -21,16 +30,79 @@ donor_sha256: "3708d2fa03f801a435fa87a08a318981848e97e56ab67ad9a94a21359fa09c23"
 
 target_block: Tolong_Siki
 target_range: [0x11DB0, 0x11DEF]
-target_chart_url: https://www.unicode.org/charts/PDF/U-11DB0.pdf
+target_chart_url: https://www.unicode.org/charts/PDF/U11DB0.pdf
 
-derivation: visual-match-against-code-chart
-derived_at: null
-derived_by: null
+derivation: published-keyboard-layout
+derived_at: "2026-06-30"
+derived_by: "essenfont issue #3 close-out (keyboard layout from kurukhtimes.com PDF; cross-referenced with Unicode 17 UCD)"
 
-# Each entry maps a source codepoint in the donor's cmap to a target
-# Unicode codepoint. Optional `note` records the glyph/character name
-# for review.
-mappings: []
-  # - {from: 0x61, to: 0x11DB0, note: "TOLONG_SIKI_LETTER_AA — visual match to glyph at ASCII 'a'"}
-  # - {from: 0x62, to: 0x11DB1, note: "TOLONG_SIKI_LETTER_BAA"}
-  # ... 64 entries total when complete
+# 51 entries: 6 vowels + 35 consonants + 10 digits = 51 of 54
+# assigned Unicode 17 codepoints. The 3 signs (SELA, HECAKA, UNGGA)
+# are TODO.
+mappings:
+  # Vowels (6) — U+11DB0..U+11DB5
+  - {from: 0x69, to: 0x11DB0, note: "ASCII 'i' → TOLONG_SIKI_LETTER_I"}
+  - {from: 0x65, to: 0x11DB1, note: "ASCII 'e' → TOLONG_SIKI_LETTER_E"}
+  - {from: 0x75, to: 0x11DB2, note: "ASCII 'u' → TOLONG_SIKI_LETTER_U"}
+  - {from: 0x6F, to: 0x11DB3, note: "ASCII 'o' → TOLONG_SIKI_LETTER_O"}
+  - {from: 0x61, to: 0x11DB4, note: "ASCII 'a' → TOLONG_SIKI_LETTER_A"}
+  - {from: 0x41, to: 0x11DB5, note: "ASCII 'A' → TOLONG_SIKI_LETTER_AA"}
+
+  # Consonants (35) — U+11DB6..U+11DD8
+  - {from: 0x70, to: 0x11DB6, note: "ASCII 'p' → TOLONG_SIKI_LETTER_P"}
+  - {from: 0x50, to: 0x11DB7, note: "ASCII 'P' → TOLONG_SIKI_LETTER_PH"}
+  - {from: 0x62, to: 0x11DB8, note: "ASCII 'b' → TOLONG_SIKI_LETTER_B"}
+  - {from: 0x42, to: 0x11DB9, note: "ASCII 'B' → TOLONG_SIKI_LETTER_BH"}
+  - {from: 0x6D, to: 0x11DBA, note: "ASCII 'm' → TOLONG_SIKI_LETTER_M"}
+  - {from: 0x71, to: 0x11DBB, note: "ASCII 'q' → TOLONG_SIKI_LETTER_T (retroflex: 'q' types T, not 't')"}
+  - {from: 0x51, to: 0x11DBC, note: "ASCII 'Q' → TOLONG_SIKI_LETTER_TH"}
+  - {from: 0x77, to: 0x11DBD, note: "ASCII 'w' → TOLONG_SIKI_LETTER_D (retroflex: 'w' types D)"}
+  - {from: 0x57, to: 0x11DBE, note: "ASCII 'W' → TOLONG_SIKI_LETTER_DH"}
+  - {from: 0x6E, to: 0x11DBF, note: "ASCII 'n' → TOLONG_SIKI_LETTER_N"}
+  - {from: 0x74, to: 0x11DC0, note: "ASCII 't' → TOLONG_SIKI_LETTER_TT (retroflex: 't' types TT)"}
+  - {from: 0x54, to: 0x11DC1, note: "ASCII 'T' → TOLONG_SIKI_LETTER_TTH"}
+  - {from: 0x64, to: 0x11DC2, note: "ASCII 'd' → TOLONG_SIKI_LETTER_DD (retroflex: 'd' types DD)"}
+  - {from: 0x44, to: 0x11DC3, note: "ASCII 'D' → TOLONG_SIKI_LETTER_DDH"}
+  - {from: 0x4E, to: 0x11DC4, note: "ASCII 'N' → TOLONG_SIKI_LETTER_NN"}
+  - {from: 0x63, to: 0x11DC5, note: "ASCII 'c' → TOLONG_SIKI_LETTER_C"}
+  - {from: 0x43, to: 0x11DC6, note: "ASCII 'C' → TOLONG_SIKI_LETTER_CH"}
+  - {from: 0x6A, to: 0x11DC7, note: "ASCII 'j' → TOLONG_SIKI_LETTER_J"}
+  - {from: 0x4A, to: 0x11DC8, note: "ASCII 'J' → TOLONG_SIKI_LETTER_JH"}
+  - {from: 0x59, to: 0x11DC9, note: "ASCII 'Y' → TOLONG_SIKI_LETTER_NY"}
+  - {from: 0x6B, to: 0x11DCA, note: "ASCII 'k' → TOLONG_SIKI_LETTER_K"}
+  - {from: 0x4B, to: 0x11DCB, note: "ASCII 'K' → TOLONG_SIKI_LETTER_KH"}
+  - {from: 0x67, to: 0x11DCC, note: "ASCII 'g' → TOLONG_SIKI_LETTER_G"}
+  - {from: 0x47, to: 0x11DCD, note: "ASCII 'G' → TOLONG_SIKI_LETTER_GH"}
+  - {from: 0x58, to: 0x11DCE, note: "ASCII 'X' → TOLONG_SIKI_LETTER_NG"}
+  - {from: 0x79, to: 0x11DCF, note: "ASCII 'y' → TOLONG_SIKI_LETTER_Y"}
+  - {from: 0x72, to: 0x11DD0, note: "ASCII 'r' → TOLONG_SIKI_LETTER_R"}
+  - {from: 0x6C, to: 0x11DD1, note: "ASCII 'l' → TOLONG_SIKI_LETTER_L"}
+  - {from: 0x76, to: 0x11DD2, note: "ASCII 'v' → TOLONG_SIKI_LETTER_V"}
+  - {from: 0x56, to: 0x11DD3, note: "ASCII 'V' → TOLONG_SIKI_LETTER_NNY"}
+  - {from: 0x73, to: 0x11DD4, note: "ASCII 's' → TOLONG_SIKI_LETTER_S"}
+  - {from: 0x68, to: 0x11DD5, note: "ASCII 'h' → TOLONG_SIKI_LETTER_H"}
+  - {from: 0x78, to: 0x11DD6, note: "ASCII 'x' → TOLONG_SIKI_LETTER_X"}
+  - {from: 0x7A, to: 0x11DD7, note: "ASCII 'z' → TOLONG_SIKI_LETTER_RR"}
+  - {from: 0x5A, to: 0x11DD8, note: "ASCII 'Z' → TOLONG_SIKI_LETTER_RRH"}
+
+  # Signs (3) — U+11DD9..U+11DDB — TODO
+  # The published Kelly Tolong keyboard layout does not document
+  # ASCII mappings for these signs. They were added in Unicode 17
+  # and may not exist in Kelly Tolong 4's glyph set.
+  # Candidates to investigate: ASCII '.', ',', '!', '?', or
+  # uppercase unused letters (F, I, L, O, R, S, U).
+  # - {from: ???, to: 0x11DD9, note: "ASCII ??? → TOLONG_SIKI_SIGN_SELA"}
+  # - {from: ???, to: 0x11DDA, note: "ASCII ??? → TOLONG_SIKI_SIGN_HECAKA"}
+  # - {from: ???, to: 0x11DDB, note: "ASCII ??? → TOLONG_SIKI_UNGGA"}
+
+  # Digits (10) — U+11DE0..U+11DE9
+  - {from: 0x30, to: 0x11DE0, note: "ASCII '0' → TOLONG_SIKI_DIGIT_ZERO"}
+  - {from: 0x31, to: 0x11DE1, note: "ASCII '1' → TOLONG_SIKI_DIGIT_ONE"}
+  - {from: 0x32, to: 0x11DE2, note: "ASCII '2' → TOLONG_SIKI_DIGIT_TWO"}
+  - {from: 0x33, to: 0x11DE3, note: "ASCII '3' → TOLONG_SIKI_DIGIT_THREE"}
+  - {from: 0x34, to: 0x11DE4, note: "ASCII '4' → TOLONG_SIKI_DIGIT_FOUR"}
+  - {from: 0x35, to: 0x11DE5, note: "ASCII '5' → TOLONG_SIKI_DIGIT_FIVE"}
+  - {from: 0x36, to: 0x11DE6, note: "ASCII '6' → TOLONG_SIKI_DIGIT_SIX"}
+  - {from: 0x37, to: 0x11DE7, note: "ASCII '7' → TOLONG_SIKI_DIGIT_SEVEN"}
+  - {from: 0x38, to: 0x11DE8, note: "ASCII '8' → TOLONG_SIKI_DIGIT_EIGHT"}
+  - {from: 0x39, to: 0x11DE9, note: "ASCII '9' → TOLONG_SIKI_DIGIT_NINE"}

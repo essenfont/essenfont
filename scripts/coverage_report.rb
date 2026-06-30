@@ -161,7 +161,8 @@ module EssenfontCoverage
     "Sidetic" => [0x10940, 0x1095F],
     "Beria_Erfe" => [0x16EA0, 0x16EDF],
     "Tolong_Siki" => [0x11DB0, 0x11DEF],
-    "Tai_Yo" => [0x16E40, 0x16E9F],
+    "Tai_Yo" => [0x1E6C0, 0x1E6FF],
+    "Medefaidrin" => [0x16E40, 0x16E9F],
   }.freeze
 end
 

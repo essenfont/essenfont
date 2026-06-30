@@ -189,8 +189,7 @@ donors:
     author: "Tolong Siki community (tolongsiki.com)"
     covers: [Tolong_Siki]
     codepoint_remap: sources/remaps/kellytolong4.yml
-    enabled: false
-    notes: "Keyboard-mapping font (105 cps all in U+20..U+B7). Requires codepoint_remap to map ASCII codepoints to Unicode Tolong Siki (U+11DB0..U+11DEF). Disabled until remap is derived."
+    notes: "Keyboard-mapping font (105 cps all in U+20..U+B7). Remap derived from published keyboard layout (kurukhtimes.com documentation PDF); 51/54 assigned Tolong Siki codepoints mapped. The 3 signs (SELA, HECAKA, UNGGA — Unicode 17 additions) have no documented ASCII mapping in Kelly Tolong 4 and may not exist in the font."
 
   - label: noto-sans-sharada
     file: references/input-fonts/NotoSansSharada-Regular.ttf
@@ -391,6 +390,30 @@ donors:
     url: https://langtools2024.appspot.com/static/fonts/TaiYo/NotoSerifTaiYo-Regular.ttf
     author: "Google (Noto Project) / translationcommons.org"
     covers: [Tai_Yo]
-    codepoint_remap: sources/remaps/noto-serif-tai-yo.yml
-    enabled: false
-    notes: "Pre-release Noto variant used to render the Unicode code chart. Glyphs at PUA positions (U+15250, U+1E600 ranges); 0/96 coverage of official Tai Yo block (U+16E40..U+16E9F). Disabled until remap is derived."
+    notes: "Covers Tai Yo (U+1E6C0..U+1E6FF) 64/64. Earlier analysis incorrectly identified Tai Yo as U+16E40 (which is Medefaidrin); the actual Unicode 17 Tai Yo assignment is U+1E6C0..U+1E6FF. The font's cmap covers this range perfectly. No remap needed."
+
+  # ─────────── Code-chart donors (synthetic; ucode + fontisan SvgToGlyf) ───────────
+  #
+  # These entries don't reference a real TTF on disk. Instead, the
+  # pre-build script `scripts/fetch_chart_glyphs.rb` invokes
+  # `ucode code-chart extract` to pull per-codepoint SVGs from the
+  # Unicode Code Chart PDF, then fontisan's SvgToGlyf converts them
+  # to glyf contours in a synthetic TTF at
+  # `references/input-fonts/.generated/<block>.ttf`.
+  #
+  # BLOCKED on:
+  #   - ucode code-chart extract being usable (bugs being fixed)
+  #   - fontisan SvgToGlyf (REQ not yet written)
+  # See TODO.full/04-code-chart-extraction-consumer.md.
+
+  - label: sidetic-chart
+    type: code_chart
+    block: Sidetic
+    covers: [Sidetic]
+    notes: "No OFL donor for Unicode 17 Sidetic (U+10940..U+1095F, 32 cps). Lentariso covers 26/32; this donor covers the remaining 6 + provides authoritative glyphs for all 32. Glyphs from https://www.unicode.org/charts/PDF/U10940.pdf."
+
+  - label: egyptian-ext-b-chart
+    type: code_chart
+    block: Egyptian_Hieroglyphs_Extended-B
+    covers: [Egyptian_Hieroglyphs_Extended-B]
+    notes: "No OFL donor for Unicode 17 Egyptian Hieroglyphs Ext-B (U+16A40..U+16A8F, 80 cps). Glyphs from https://www.unicode.org/charts/PDF/U16A40.pdf."

@@ -1,32 +1,37 @@
 ---
-# Remap table: NotoSerifTaiYo.ttf → Unicode Tai Yo (U+16E40..U+16E9F)
+# Remap table: NotoSerifTaiYo → Unicode Tai Yo
 #
-# NotoSerifTaiYo is the font used to render the Unicode Code Chart
-# for Tai Yo, but encodes glyphs at non-standard PUA-like positions
-# (U+15250..U+1527F and U+1E600..U+1E7FF) instead of the official
-# Unicode 17 Tai Yo block. This table maps each PUA codepoint to its
-# corresponding Unicode Tai Yo codepoint.
+# STATUS: NOT NEEDED — no remap required.
 #
-# Derivation: visual-match each glyph in NotoSerifTaiYo against the
-# Unicode Code Chart for Tai Yo.
-# Chart: https://www.unicode.org/charts/PDF/U-16E40.pdf
+# Earlier analysis incorrectly identified Tai Yo as U+16E40..U+16E9F
+# (which is actually Medefaidrin, Unicode 11.0). The actual Unicode
+# 17.0 assignment for Tai Yo is **U+1E6C0..U+1E6FF**.
 #
-# STATUS: TODO — not yet derived. The donor entry in
-# sources/manifest.yml is `enabled: false` until this table is filled
-# in and the build supports `codepoint_remap:`.
+# NotoSerifTaiYo's cmap covers U+1E6C0..U+1E6FF directly:
+#   - 64/64 codepoints present
+#   - No PUA remapping needed
+#   - Donor can be used as-is (manifest entry has no codepoint_remap
+#     field; just `covers: [Tai_Yo]`)
+#
+# This file is kept for documentation; the `mappings: []` empty list
+# means "no remap". The build script tolerates this (skips the donor
+# only if mappings is non-empty AND target is wrong; here the donor's
+# cmap is already at the correct Unicode positions).
+#
+# Source font: references/input-fonts/NotoSerifTaiYo-Regular.ttf
+# Chart: https://www.unicode.org/charts/PDF/U16E40.pdf (Medefaidrin, NOT Tai Yo)
+# Actual Tai Yo chart: https://www.unicode.org/charts/PDF/U1E6C0.pdf
 
 donor: noto-serif-tai-yo
 donor_file: references/input-fonts/NotoSerifTaiYo-Regular.ttf
 donor_sha256: "980924d6e1935c8d82323692fdc0bb0f2a0d85ac09efa422aa27e9f9460ee860"
 
 target_block: Tai_Yo
-target_range: [0x16E40, 0x16E9F]
-target_chart_url: https://www.unicode.org/charts/PDF/U-16E40.pdf
+target_range: [0x1E6C0, 0x1E6FF]
+target_chart_url: https://www.unicode.org/charts/PDF/U1E6C0.pdf
 
-derivation: visual-match-against-code-chart
-derived_at: null
-derived_by: null
+derivation: not-needed-direct-coverage
+derived_at: "2026-06-30"
+derived_by: "essenfont issue #3 close-out"
 
 mappings: []
-  # - {from: 0x15250, to: 0x16E40, note: "TAI_YO_LETTER_KA — visual match to chart cell U+16E40"}
-  # ... 96 entries total when complete
