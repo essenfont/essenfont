@@ -301,6 +301,56 @@ correct glyph for each CJK codepoint.
 Tangut (separate script from CJK ideographs) is covered by
 Noto Sans Tangut, not Full-Sung.
 
+== Known coverage gaps (TODO)
+
+Current coverage: **96.67%** of all assigned Unicode 17 characters
+(154,550 / 159,866). The remaining ~5,300 characters fall into
+these categories:
+
+=== Awaiting upstream fontisan fixes
+
+* **CJK Extension I** (622 chars) + **CJK Compatibility Ideographs
+  Supplement** (542 chars) — FSung-2's cmap covers these but
+  fontisan's Stitcher silently drops Plane 2 codepoints from
+  large CJK donors. Bug report: `fontisan/BUG-stitcher-drops-isolated-cps.md`.
+* **C0/C1 control characters** (~60 chars) — build backfills these
+  as .notdef entries but fontisan's Stitcher doesn't create cmap
+  entries for gid 0.
+
+=== Awaiting upstream Noto font updates
+
+These Unicode 16-17 blocks are assigned but no Noto release covers
+them yet. We look forward to upstream support:
+
+* *Myanmar Extended-C* (U+116D0..U+116FF, 20 chars, UC 16)
+* *Syriac Supplement* (U+0860..U+086F, 11 chars, UC 17)
+* *Mongolian Supplement* (U+11660..U+1167F, 13 chars, UC 9)
+
+=== Awaiting fontisan SvgToGlyf
+
+Code-chart SVGs extracted for 9 blocks (942 chars) via
+`ucode code-chart extract`. Need `fontisan/REQ-svgtoglyf.md`:
+
+* Khitan Small Script (471), Tangut Components Supplement (115),
+  Tulu-Tigalari (78), Nyiakeng Puachue Hmong (71),
+  Ottoman Siyaq Numbers (60), Gurung Khema (57),
+  Kirat Rai (57), Sharada Supplement (7), Sidetic tail (26)
+
+=== Awaiting ucode CID font extraction
+
+Garay (69 chars) + Ol Onal (44 chars) have code-chart PDFs with
+embedded CID-keyed fonts that ucode's extractor can't resolve.
+Bug report: `ucode/BUG-code-chart-cid-font-extraction.md`.
+
+=== No donor candidate identified
+
+* *Kana Supplement* (256 chars) — not in NotoSansKR or NotoSansSC.
+  May need Noto Sans CJK (TTC format) or a specialist Japanese font.
+* *Kana Extended-A/B* + *Small Kana Extension* (57 chars) — same.
+* *Variation Selectors Supplement* (240 chars) — invisible format
+  characters (Cf); need build-level .notdef backfill once fontisan
+  supports it.
+
 == Contributing
 
 essenfont welcomes contributions:
