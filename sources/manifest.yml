@@ -1515,3 +1515,146 @@ donors:
     author: "Google + Adobe (Noto Project)"
     covers: [Hangul_Syllables, Hangul_Compatibility_Jamo]
     notes: "Variable font. Covers Hangul Syllables (U+AC00..U+D7AF) 11172/11184 and Hangul Compatibility Jamo. Primary Korean donor."
+  - label: noto-sans-coptic
+    file: references/input-fonts/NotoSansCoptic-Regular.ttf
+    family: NotoSansCoptic
+    style: Regular
+    license: OFL
+    sha256: "e70bd535d7e6cdf2346eab36ea76441059b18ee14d3243e85240b5e65eb0ad45"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansCoptic/hinted/ttf/NotoSansCoptic-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Coptic]
+    notes: "Covers Coptic block."
+
+  - label: noto-sans-kayah-li
+    file: references/input-fonts/NotoSansKayahLi-Regular.ttf
+    family: NotoSansKayahLi
+    style: Regular
+    license: OFL
+    sha256: "71235e4d51c4e591b20717c525997c72ee906a9d39ce55f8f8bb8c60e96ab807"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansKayahLi/hinted/ttf/NotoSansKayahLi-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Kayah_Li]
+    notes: "Covers Kayah Li block."
+
+  - label: noto-sans-malayalam
+    file: references/input-fonts/NotoSansMalayalam-Regular.ttf
+    family: NotoSansMalayalam
+    style: Regular
+    license: OFL
+    sha256: "c08de7fa8d032a5d6a4d120fb82c78cec60b362a4e73fa26360d89759ff2a7f9"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansMalayalam/hinted/ttf/NotoSansMalayalam-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Malayalam]
+    notes: "Covers Malayalam block."
+
+  - label: noto-sans-nushu
+    file: references/input-fonts/NotoSansNushu-Regular.ttf
+    family: NotoSansNushu
+    style: Regular
+    license: OFL
+    sha256: "12f749af9fdd185ac807d325499f7c9e04896c4f8ee7ca3c96e96ed8c130b181"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansNushu/hinted/ttf/NotoSansNushu-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Nushu]
+    notes: "Covers Nushu block."
+
+  - label: noto-sans-lao
+    file: references/input-fonts/NotoSansLao-Regular.ttf
+    family: NotoSansLao
+    style: Regular
+    license: OFL
+    sha256: "0a86e5e1ccfe34ca78c43fac6829dc751b42bcc469272a9a55325aae587bfbe7"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansLao/hinted/ttf/NotoSansLao-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Lao]
+    notes: "Covers Lao block."
+
+  - label: noto-sans-telugu
+    file: references/input-fonts/NotoSansTelugu-Regular.ttf
+    family: NotoSansTelugu
+    style: Regular
+    license: OFL
+    sha256: "b274780b69d1d23fe84b55e809a152cb2ac5306d33864b1f87622f6971871aae"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansTelugu/hinted/ttf/NotoSansTelugu-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Telugu]
+    notes: "Covers Telugu block."
+
+  - label: noto-sans-kannada
+    file: references/input-fonts/NotoSansKannada-Regular.ttf
+    family: NotoSansKannada
+    style: Regular
+    license: OFL
+    sha256: "9ad74dc64838c6855b96f671fc08e425a58921b9d0c71712ea79c328a27e6e38"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansKannada/hinted/ttf/NotoSansKannada-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Kannada]
+    notes: "Covers Kannada block."
+
+  - label: noto-sans-gujarati
+    file: references/input-fonts/NotoSansGujarati-Regular.ttf
+    family: NotoSansGujarati
+    style: Regular
+    license: OFL
+    sha256: "9b5a7aaeeb649a2e75a49d8b006a1f87db1b61c0df3b001609f4e0725d88dbf6"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansGujarati/hinted/ttf/NotoSansGujarati-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Gujarati]
+    notes: "Covers Gujarati block."
+
+  - label: noto-sans-bengali
+    file: references/input-fonts/NotoSansBengali-Regular.ttf
+    family: NotoSansBengali
+    style: Regular
+    license: OFL
+    sha256: "b55c62ee531e3214da6c0701daecea89a52ba42db7d8206b92e6b51f397a3193"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansBengali/hinted/ttf/NotoSansBengali-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Bengali]
+    notes: "Covers Bengali block."
+
+  - label: noto-sans-oriya
+    file: references/input-fonts/NotoSansOriya-Regular.ttf
+    family: NotoSansOriya
+    style: Regular
+    license: OFL
+    sha256: "a16645d056017927406546aa78e4ce15e782fd8783467267b75450453d007415"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansOriya/hinted/ttf/NotoSansOriya-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Oriya]
+    notes: "Covers Oriya block."
+
+  - label: noto-sans-tagalog
+    file: references/input-fonts/NotoSansTagalog-Regular.ttf
+    family: NotoSansTagalog
+    style: Regular
+    license: OFL
+    sha256: "8fdf54f14d3869e5bfabb7c552e32ac39a2f7609cc6e857a2e8480da2ad9031f"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansTagalog/hinted/ttf/NotoSansTagalog-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Tagalog]
+    notes: "Covers Tagalog block."
+
+  - label: noto-sans-runic
+    file: references/input-fonts/NotoSansRunic-Regular.ttf
+    family: NotoSansRunic
+    style: Regular
+    license: OFL
+    sha256: "c43f941ef6c8a4f8217e7ffb332fce74f760140a7fd5919f86347e5e2a10b5c9"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansRunic/hinted/ttf/NotoSansRunic-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Runic]
+    notes: "Covers Runic block."
+
+  - label: noto-serif-tibetan
+    file: references/input-fonts/NotoSerifTibetan-Regular.ttf
+    family: NotoSerifTibetan
+    style: Regular
+    license: OFL
+    sha256: "ee97bf3dc56e813651db734c9f35f8f1d41e7e31acf5f7d893e64ad22b292446"
+    url: https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSerifTibetan/hinted/ttf/NotoSerifTibetan-Regular.ttf
+    author: "Google (Noto Project)"
+    covers: [Tibetan]
+    notes: "Covers Tibetan block."
+
