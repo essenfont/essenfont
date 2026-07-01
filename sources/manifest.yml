@@ -100,8 +100,8 @@ donors:
     web_first_announced: http://fgwang.blogspot.com/2021/12/blog-post.html
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
-    covers: [CJK_Unified_Ideographs_Extension_B, CJK_Unified_Ideographs_Extension_C, CJK_Unified_Ideographs_Extension_D, CJK_Unified_Ideographs_Extension_E]
-    notes: "SIP font. Covers CJK Ext B/C/D/E (U+20000..U+2B81D)."
+    covers: [CJK_Unified_Ideographs_Extension_B, CJK_Unified_Ideographs_Extension_C, CJK_Unified_Ideographs_Extension_D, CJK_Unified_Ideographs_Extension_E, CJK_Unified_Ideographs_Extension_F, CJK_Unified_Ideographs_Extension_I, CJK_Compatibility_Ideographs_Supplement]
+    notes: "SIP font. Covers CJK Ext B/C/D/E/F/I + CJK Compat Ideographs Supplement (U+20000..U+2FA1F)."
 
   - label: fsung-3
     file: references/input-fonts/FSung-3.ttf

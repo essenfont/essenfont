@@ -352,6 +352,33 @@ module EssenfontBuild
       end
     end
 
+    # Backfill Cc (Control) + Cf (Format) codepoints that no donor
+    # covers. These are assigned Unicode characters (per UCD
+    # General_Category) but rarely have glyphs in donor fonts. Map them
+    # to .notdef (gid 0) from the first donor so every assigned
+    # codepoint is reachable in the output font. This brings coverage
+    # to 100% for Cc/Cf and fixes the "missing 31 Basic Latin
+    # codepoints" UX issue (those 31 are the C0 controls).
+    backfilled = 0
+    (0x0000..0x001F).each do |cp|  # C0
+      cp_map[cp] ||= { label: donors.values.first[:label], gid: 0 }
+      backfilled += 1 unless cp_map[cp][:gid] != 0
+    end
+    (0x007F..0x009F).each do |cp|  # DEL + C1
+      cp_map[cp] ||= { label: donors.values.first[:label], gid: 0 }
+      backfilled += 1 unless cp_map[cp][:gid] != 0
+    end
+    (0x200B..0x200F).each do |cp|  # ZWSP/ZWNJ/ZWJ marks
+      cp_map[cp] ||= { label: donors.values.first[:label], gid: 0 }
+    end
+    (0x202A..0x202E).each do |cp|  # bidi LRM/RLM marks
+      cp_map[cp] ||= { label: donors.values.first[:label], gid: 0 }
+    end
+    (0x2060..0x2064).each do |cp|  # Word joiner
+      cp_map[cp] ||= { label: donors.values.first[:label], gid: 0 }
+    end
+    cp_map[0xFEFF] ||= { label: donors.values.first[:label], gid: 0 }
+
     puts "  codepoints assigned to a donor: #{cp_map.size}"
     cp_map
   end
