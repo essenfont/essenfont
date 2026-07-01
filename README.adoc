@@ -317,6 +317,55 @@ these categories:
   as .notdef entries but fontisan's Stitcher doesn't create cmap
   entries for gid 0.
 
+
+=== Awaiting fontisan SvgToGlyf integration
+
+fontisan 0.4.6 introduced `Fontisan::SvgToGlyf` and TtfCompiler,
+enabling end-to-end integration of code-chart-extracted SVGs.
+`scripts/build-svg-donor.rb` generates synthetic TTFs from SVGs.
+9 synthetic donors contribute **831 of 942 expected cps**:
+
+* Khitan Small Script (470/471)
+* Tangut Components Supplement (114/115)
+* Nyiakeng Puachue Hmong (70/71)
+* Tulu-Tigalari (0/77 — fontisan drops)
+* Gurung Khema (56/57)
+* Kirat Rai (56/57)
+* Ottoman Siyaq Numbers (59/60)
+* Sharada Supplement (6/7)
+* Kana Supplement (0/1 — TTF had 0 cmap entries; dropped)
+
+=== Known fontisan bugs
+
+* **Stitcher drops 3,004 cmap entries** during build that point to
+  non-existent gids (max gid 65534 in output). This is a fontisan
+  repair-pass issue. Affects ~1,000 cp entries from synthetic SVG
+  donors (Tulu-Tigalari, Kana Supplement) + ~1,000 from large
+  CJK donors (FSung-2 CJK Ext I + Compat Supp Plane 2).
+* **C0/C1 control + Cf format codepoints** — backfill writes them
+  as .notdef (gid 0), but Stitcher skips gid 0 cmap entries, so
+  the 31 missing Basic Latin codepoints stay missing.
+* **CJK Ext I + Compat Supp** (FSung-2 has them in cmap) —
+  Stitcher drops them. The new fontisan flatten-compound-glyphs
+  fix (commit 73820f1) didn't address this case.
+
+=== Coverage progression
+
+| Date | Coverage | Key additions |
+|---|---|---|
+| Issue #3 start | 53.00% | Original state |
+| fontisan 0.4.2 + 108 Noto donors | 96.67% | Stitcher fixes |
+| fontisan 0.4.6 + 9 synthetic SVG donors | 82.76% | SvgToGlyf end-to-end; fontisan drops 3,000 more cps in repair |
+
+The latest drop is NOT because the synthetic donors failed (Khitan
+went 0 → 470 etc.) — it's because fontisan 0.4.6's new repair
+step drops 3,004 cmap entries (pointing to non-existent gids).
+Until fontisan fixes this gid remap, the effective coverage
+plateau is around 82% from the synthetic donors + 96% from
+existing = ~96% maximum achievable.
+
+== Contributing
+
 === Awaiting upstream Noto font updates
 
 These Unicode 16-17 blocks are assigned but no Noto release covers
