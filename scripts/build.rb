@@ -86,7 +86,7 @@ module EssenfontBuild
       # until fetch_chart_glyphs.rb runs. If the synthetic TTF is
       # missing, skip with a helpful pointer rather than failing.
       if entry["type"] == "code_chart"
-        generated_dir = File.expand_path("../references/input-fonts/.generated", __dir__)
+        generated_dir = File.expand_path("../references/input-fonts/.generated/svg-donors", __dir__)
         synthetic = File.join(generated_dir, "#{entry["block"].tr("-", "_")}.ttf")
         if File.exist?(synthetic)
           entry = entry.merge("file" => synthetic)
