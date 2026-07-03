@@ -4,17 +4,26 @@
 # Build Essenfont from donor fonts.
 #
 # Usage:
-#   ruby scripts/build.rb                    # builds Essenfont-Regular.ttf
-#   ruby scripts/build.rb --format=otf       # builds Essenfont-Regular.otf
-#   ruby scripts/build.rb --format=all       # builds TTF + OTF
+#   ruby scripts/build.rb                          # builds Essenfont-Regular.otc (default)
+#   ruby scripts/build.rb --format=otc             # explicit OTC (multi-subfont)
+#   ruby scripts/build.rb --format=ttf-per-plane   # one TTF per Unicode plane
+#   ruby scripts/build.rb --format=ttf             # legacy: single BMP-only TTF
+#   ruby scripts/build.rb --format=otf             # legacy: single BMP-only OTF
+#
+# The default OTC output partitions codepoints across Unicode planes so
+# each subfont stays under the TrueType 65,535-glyph cap. See
+# TODO.otc-essenfont/ for the full spec.
 #
 # The build:
 # 1. Reads sources/manifest.yml → donor font registry
 # 2. Loads each donor via Fontisan::FontLoader.load
 # 3. Scans each donor's cmap → per-codepoint coverage
 # 4. For each codepoint: extracts glyph from the first covering donor
-# 5. Stitches all glyphs via Fontisan::Stitcher
-# 6. Writes output in the requested format(s)
+# 5. Partitions codepoints by Unicode plane (BMP, SMP, SIP, TIP, SSP)
+# 6. For OTC: emits one subfont per non-empty plane via Fontisan::Collection::Builder
+#    For TTF/OTF: stitches all BMP codepoints into one font (legacy, cap-bound)
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 
 require "optparse"
 require "yaml"
@@ -22,6 +31,7 @@ require "json"
 require "fileutils"
 require "digest"
 require "fontisan"
+require "essenfont"
 
 module EssenfontBuild
   MANIFEST_PATH = File.expand_path("../sources/manifest.yml", __dir__)
@@ -399,8 +409,9 @@ module EssenfontBuild
   end
 
   # Build the font.
-  # @param format [Symbol] :ttf, :otf, or :all
-  def self.run(format: :ttf)
+  # @param format [Symbol] :otc (default, multi-subfont collection),
+  #   :ttf (legacy single BMP-only TTF), or :otf (legacy single BMP-only OTF)
+  def self.run(format: :otc)
     puts "=== Essenfont build (format: #{format}) ==="
 
     donors = load_donors
@@ -424,40 +435,156 @@ module EssenfontBuild
       exit 1
     end
 
-    # Build the stitched font
-    puts "=== Stitching #{cp_map.size} glyphs ==="
-    stitcher = Fontisan::Stitcher.new
+    dump_cp_map_if_requested(cp_map)
 
-    # Register all donors with the stitcher
-    donors.each_value do |d|
-      stitcher.add_source(d[:label], d[:font])
+    case format.to_sym
+    when :otc
+      build_otc(cp_map:, donors:, subfont_format: :ttf)
+    when :otc_cff2
+      build_otc(cp_map:, donors:, subfont_format: :otf2)
+    when :"ttf-per-plane"
+      build_per_plane_ttfs(cp_map:, donors:)
+    when :ttf
+      warn "INFO: --format=ttf emits a single BMP-only font. " \
+           "Use the default (--format=otc) for full Unicode coverage."
+      build_legacy_single(cp_map:, donors:, format: :ttf)
+    when :otf
+      warn "INFO: --format=otf emits a single BMP-only font. " \
+           "Use the default (--format=otc) for full Unicode coverage."
+      build_legacy_single(cp_map:, donors:, format: :otf)
+    when :all
+      build_otc(cp_map:, donors:, subfont_format: :ttf)
+    else
+      warn "ERROR: unknown format #{format.inspect} " \
+           "(use :otc, :otc-cff2, :ttf-per-plane, :ttf, or :otf)"
+      exit 1
+    end
+  end
+
+  # Build the OTC: partitions codepoints across Unicode planes and emits
+  # one subfont per plane via Essenfont::Otc::Build (which delegates to
+  # Fontisan::Stitcher::PartitionStrategy::ByPlane + Stitcher#write_collection).
+  # @param cp_map [Hash<Integer, {label:, gid:}>]
+  # @param donors [Hash<Symbol, {font:, label:, ...}>]
+  # @param subfont_format [Symbol] :ttf (glyf outlines) or :otf2 (CFF2 outlines)
+  def self.build_otc(cp_map:, donors:, subfont_format: :ttf)
+    puts "=== Partitioning #{cp_map.size} codepoints by Unicode plane " \
+         "(subfont outlines: #{subfont_format}) ==="
+
+    ext = subfont_format == :ttf ? ".ttc" : ".otc"
+    suffix = subfont_format == :otf2 ? "-CFF2" : (subfont_format == :otf ? "-CFF1" : "")
+    output_path = File.join(OUTPUT_DIR, "Essenfont#{suffix}-Regular#{ext}")
+    build = Essenfont::Otc::Build.new(
+      cp_map: cp_map,
+      donors: donors,
+      subfont_format: subfont_format
+    )
+    result = build.call(output_path:)
+
+    puts "=== Wrote #{output_path} (#{result.bytes} bytes) ==="
+    puts "  subfonts (#{result.subfont_count}):"
+    result.subfonts.each do |sf|
+      puts "    #{sf[:name]}: #{sf[:glyph_count]} glyphs, #{sf[:codepoint_count]} codepoints"
     end
 
-    # Include .notdef from the first donor
-    first_label = donors.values.first[:label]
-    stitcher.include_notdef(from: first_label)
+    validate_collection!(output_path,
+                         expected_faces: result.subfont_count,
+                         expected_cmap_union_size: cp_map.size)
+    puts "  validated: #{result.subfont_count} faces, all under 65,535-glyph cap"
+  end
 
-    # Include each codepoint
-    cp_count = 0
-    cp_map.each_slice(1000) do |slice|
+  # Build per-plane TTFs: same partitioning as build_otc, but each
+  # subfont is written as a separate TTF file. Used by the website for
+  # clients that can't consume OTC (e.g., WOFF2 web embedding).
+  def self.build_per_plane_ttfs(cp_map:, donors:)
+    puts "=== Partitioning #{cp_map.size} codepoints by Unicode plane ==="
+
+    partitioner = Fontisan::Stitcher::PartitionStrategy::ByPlane.new
+    donor_labels = cp_map.transform_values { |info| info[:label] }
+    blueprint = partitioner.call(donor_labels)
+    subfont_names = blueprint.names
+    puts "  #{subfont_names.size} subfonts: #{subfont_names.join(', ')}"
+
+    stitcher = Fontisan::Stitcher.new
+    donors.each_value { |d| stitcher.add_source(d[:label], d[:font]) }
+    blueprint.apply_to(stitcher)
+
+    catalog = Ucode::Unicode.for_version
+    subfont_names.each do |name|
+      plane = catalog.find_plane(name.to_s.sub("plane_", "").to_i)
+      face_name = plane&.short_name&.to_s || name.to_s
+      out = File.join(OUTPUT_DIR, "Essenfont-#{face_name}.ttf")
+      puts "=== Writing #{out} ==="
+      stitcher.write_to(out, format: :ttf, subfont: name)
+      validate_and_repair_cmap(out)
+      puts "  #{out} (#{File.size(out)} bytes)"
+    end
+  end
+
+  # Legacy single-font path (TTF or OTF). Uses only BMP codepoints to
+  # stay under the 65,535-glyph cap. Kept for backward compatibility
+  # and per-plane debugging.
+  def self.build_legacy_single(cp_map:, donors:, format:)
+    bmp_map = cp_map.select { |cp, _| cp <= 0xFFFF }
+    puts "=== Stitching #{bmp_map.size} BMP codepoints (legacy #{format}) ==="
+
+    stitcher = Fontisan::Stitcher.new
+    donors.each_value { |d| stitcher.add_source(d[:label], d[:font]) }
+
+    first_label = donors.values.first[:label]
+    stitcher.include_notdef(from: first_label, into: :legacy)
+
+    bmp_map.each_slice(1000) do |slice|
       slice.each do |cp, info|
-        stitcher.include_codepoints([cp], from: info[:label])
+        stitcher.include_codepoints([cp], from: info[:label], into: :legacy)
       end
-      cp_count += slice.size
-      print "\r  #{cp_count}/#{cp_map.size} codepoints stitched"
+      print "\r  #{bmp_map.keys.index(slice.last[0]) + 1}/#{bmp_map.size} stitched"
     end
     puts
 
-    # Write outputs
-    formats = format == :all ? %i[ttf otf] : [format.to_sym]
-    formats.each do |fmt|
-      ext = fmt == :otf ? "otf" : "ttf"
-      output_path = File.join(OUTPUT_DIR, "Essenfont-Regular.#{ext}")
-      puts "=== Writing #{output_path} ==="
-      stitcher.write_to(output_path, format: fmt)
-      validate_and_repair_cmap(output_path)
-      puts "  #{output_path} (#{File.size(output_path)} bytes)"
+    ext = format == :otf ? "otf" : "ttf"
+    output_path = File.join(OUTPUT_DIR, "Essenfont-Regular.#{ext}")
+    puts "=== Writing #{output_path} ==="
+    stitcher.write_to(output_path, format: format, subfont: :legacy)
+    validate_and_repair_cmap(output_path)
+    puts "  #{output_path} (#{File.size(output_path)} bytes)"
+  end
+
+  # Post-write sanity check for OTC output:
+  #   1. TTC header reports the expected face count.
+  #   2. Every face's maxp.num_glyphs ≤ 65,535.
+  #   3. Union of face cmap entries matches the input cp_map size.
+  # Dump cp_map as JSON for downstream tooling (license attribution,
+  # provenance explorer). Triggered by ESSENFONT_DUMP_CP_MAP=1.
+  def self.dump_cp_map_if_requested(cp_map)
+    return unless ENV["ESSENFONT_DUMP_CP_MAP"]
+
+    path = File.join(OUTPUT_DIR, "cp_map.json")
+    simplified = cp_map.transform_values { |v| { label: v[:label] } }
+    File.write(path, JSON.pretty_generate(simplified))
+    puts "wrote #{path} (#{cp_map.size} cps)"
+  end
+
+  def self.validate_collection!(path, expected_faces:, expected_cmap_union_size:)
+    reader = Fontisan::Collection::Reader.open(path)
+    if reader.face_count != expected_faces
+      raise "#{path} has #{reader.face_count} faces, expected #{expected_faces}"
     end
+
+    reader.stats.each do |s|
+      next if s.glyph_count <= 65_535
+      raise "face #{s.index} has #{s.glyph_count} glyphs (cap 65,535)"
+    end
+
+    union_size = reader.cmap_union.size
+    if union_size < expected_cmap_union_size * 0.99
+      dropped = expected_cmap_union_size - union_size
+      warn "  WARNING: cmap union dropped #{dropped} entries " \
+           "(#{union_size} / #{expected_cmap_union_size})"
+    end
+  rescue StandardError => e
+    warn "  collection validation failed: #{e.message}"
+    exit 1
   end
 
   # Validate that every cmap entry points to a valid gid. If not,
@@ -522,10 +649,13 @@ module EssenfontBuild
 end
 
 if __FILE__ == $PROGRAM_NAME
-  options = { format: :ttf }
+  options = { format: :otc }
   OptionParser.new do |opts|
     opts.banner = "Usage: build.rb [options]"
-    opts.on("--format=FORMAT", "ttf, otf, or all (default: ttf)") { |v| options[:format] = v.to_sym }
+    opts.on("--format=FORMAT",
+            "otc (default), otc-cff2, ttf-per-plane, ttf, or otf") do |v|
+      options[:format] = v.to_sym
+    end
   end.parse!
 
   EssenfontBuild.run(format: options[:format])
