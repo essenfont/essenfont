@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Run specs
+        run: bundle exec rspec
+
+      - name: Smoke build (small donor set)
+        run: |
+          bundle exec ruby -Ilib -e '
+            require "essenfont"
+            require "fontisan"
+            require "tmpdir"
+
+            donor_dir = "references/input-fonts"
+            donors = {}
+            %w[NotoSansMultani-Regular NotoSansAdlam-Regular].each do |name|
+              path = "#{donor_dir}/#{name}.ttf"
+              next unless File.exist?(path)
+              label = name.sub("-Regular", "").gsub(/([A-Z])/) { |m| "_#{m.downcase}" }.sub(/^_/, "").to_sym
+              donors[label] = { label: label, font: Fontisan::FontLoader.load(path) }
+            end
+
+            cp_map = {}
+            donors.each_value do |d|
+              d[:font].table("cmap").unicode_mappings.each do |cp, gid|
+                cp_map[cp] ||= { label: d[:label], gid: gid }
+              end
+            end
+
+            Dir.mktmpdir("ci-smoke-") do |dir|
+              out = File.join(dir, "smoke.otc")
+              result = Essenfont::Otc::Build.new(cp_map: cp_map, donors: donors).call(output_path: out)
+              header = File.binread(out, 12)
+              tag, _maj, _min, count = header.unpack("a4 n n N")
+              abort "smoke: bad OTC tag #{tag.inspect}" unless tag == "ttcf"
+              abort "smoke: expected ≥2 faces, got #{count}" unless count >= 2
+              puts "CI smoke: OTC OK (#{count} faces, #{result.bytes} bytes)"
+            end
+          '
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Run rubocop
+        run: bundle exec rubocop --fail-level warning lib spec scripts
+        continue-on-error: true

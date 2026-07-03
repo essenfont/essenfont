@@ -1,0 +1,188 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      skip_donors:
+        description: 'Skip donor acquisition (use cached references/input-fonts)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Install ucode CLI
+        run: |
+          gem install specific_install
+          gem specific_install https://github.com/fontist/ucode.git main || true
+
+      - name: Cache donor fonts
+        id: donor-cache
+        uses: actions/cache@v4
+        with:
+          path: references/input-fonts
+          key: donors-${{ hashFiles('sources/manifest.yml') }}
+
+      - name: Acquire donor fonts
+        if: ${{ !inputs.skip_donors && steps.donor-cache.outputs.cache-hit != 'true' }}
+        run: |
+          # Most donors are fetched via ucode
+          ucode fetch fonts || true
+          if [ -d ~/.ucode/fonts ]; then
+            cp ~/.ucode/fonts/*.{ttf,otf,ttc} references/input-fonts/ 2>/dev/null || true
+          fi
+
+      - name: Build OTC (canonical, glyf outlines) + dump cp_map
+        env:
+          ESSENFONT_DUMP_CP_MAP: "1"
+        run: |
+          bundle exec ruby scripts/build.rb --format=otc
+
+      - name: Build per-plane TTFs
+        env:
+          ESSENFONT_DUMP_CP_MAP: "1"
+        run: |
+          bundle exec ruby scripts/build.rb --format=ttf-per-plane
+
+      - name: Encode per-plane WOFF/WOFF2 (fontisan convert --to woff,woff2)
+        run: |
+          for plane in BMP SMP SIP TIP SSP; do
+            ttf="Essenfont-${plane}.ttf"
+            if [ -f "$ttf" ]; then
+              bundle exec fontisan convert "$ttf" --to woff,woff2 --output "Essenfont-${plane}"
+            fi
+          done
+
+      - name: Emit coverage manifest
+        run: |
+          bundle exec ruby scripts/emit_coverage_manifest.rb > coverage.json || \
+            echo '{"version":"${{ github.ref_name }}"}' > coverage.json
+
+      - name: Emit donor provenance manifest
+        run: |
+          bundle exec ruby scripts/emit_provenance.rb
+          ls -lh provenance.json provenance.json.gz
+
+      - name: Emit license attribution pack
+        run: |
+          bundle exec ruby scripts/emit_license_pack.rb
+          ls -lh license-pack/ license-pack.zip
+
+      - name: Emit per-codepoint SVG exports
+        run: |
+          DONOR_MAP=cp_map.json bundle exec ruby scripts/emit_svg_exports.rb \
+            Essenfont-Regular.otc svg-exports
+          # Zip for distribution; individual files are also uploaded
+          cd svg-exports && zip -qr ../svg-exports.zip . && cd ..
+          ls -lh svg-exports.zip
+
+      - name: Build npm package
+        run: |
+          bundle exec ruby scripts/build_npm_package.rb
+          cd npm && npm pack && cd ..
+          ls -lh npm/essenfont-*.tgz
+
+      - name: Generate SRI hashes
+        run: |
+          : > sri.txt
+          for f in Essenfont-BMP.woff2 Essenfont-SMP.woff2 Essenfont-SIP.woff2 \
+                   Essenfont-TIP.woff2 Essenfont-SSP.woff2 \
+                   Essenfont-BMP.woff Essenfont-SMP.woff Essenfont-SIP.woff \
+                   Essenfont-TIP.woff Essenfont-SSP.woff; do
+            if [ -f "$f" ]; then
+              hash=$(openssl dgst -sha384 -binary "$f" | openssl base64 -A)
+              echo "$f=sha384-$hash" >> sri.txt
+            fi
+          done
+          cat sri.txt
+
+      - name: Publish to npm
+        if: ${{ env.NPM_TOKEN != '' }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd npm
+          npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm publish --access public
+
+      - name: Generate release notes
+        id: notes
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          {
+            echo "## Essenfont ${{ github.ref_name }}"
+            echo
+            if [ -n "$PREV_TAG" ]; then
+              echo "### Changes since $PREV_TAG"
+              echo
+              git log --pretty=format:'- %s' "$PREV_TAG..HEAD" | head -50
+              echo
+            fi
+            echo
+            echo "### Downloads"
+            echo
+            echo '| Format | File | Use |'
+            echo '|--------|------|-----|'
+            echo '| OTC | `Essenfont-Regular.otc` | Desktop install (canonical) |'
+            echo '| Per-plane TTF | `Essenfont-{BMP,SMP,SIP,TIP,SSP}.ttf` | Legacy clients |'
+            echo '| Per-plane WOFF2 | `Essenfont-{BMP,SMP,SIP,TIP,SSP}.woff2` | @font-face web embed |'
+            echo
+            echo 'See TODO.otc-essenfont/ for the full architecture.'
+          } > release-notes.md
+
+      - name: Verify artifacts
+        run: |
+          set -e
+          test -f Essenfont-Regular.otc
+          ls -lh Essenfont-*.ttf Essenfont-*.woff2 Essenfont-*.woff coverage.json
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: release-notes.md
+          files: |
+            Essenfont-Regular.otc
+            Essenfont-BMP.ttf
+            Essenfont-SMP.ttf
+            Essenfont-SIP.ttf
+            Essenfont-TIP.ttf
+            Essenfont-SSP.ttf
+            Essenfont-BMP.woff
+            Essenfont-SMP.woff
+            Essenfont-SIP.woff
+            Essenfont-TIP.woff
+            Essenfont-SSP.woff
+            Essenfont-BMP.woff2
+            Essenfont-SMP.woff2
+            Essenfont-SIP.woff2
+            Essenfont-TIP.woff2
+            Essenfont-SSP.woff2
+            coverage.json
+            provenance.json.gz
+            license-pack.zip
+            license-pack/LICENSE-SOURCES.md
+            license-pack/license-overview.csv
+            license-pack/fsung-nc-filter.txt
+            svg-exports.zip
+            svg-exports/index.json
+            npm/essenfont-*.tgz
+            sri.txt
+            release-notes.md
