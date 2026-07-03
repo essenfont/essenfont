@@ -8,7 +8,7 @@ The Fontist universal Unicode 17 font — one font, every assigned codepoint.
 
 image:https://img.shields.io/badge/Unicode-17.0.0-blue.svg[Unicode 17]
 image:https://img.shields.io/badge/license-OFL-success.svg[OFL]
-image:https://img.shields.io/badge/format-TTF-informational[TTF]
+image:https://img.shields.io/badge/format-OTC-informational[OTC]
 image:https://img.shields.io/badge/build-Ruby%20%2B%20fontisan-red[Ruby + fontisan]
 
 '''
@@ -17,9 +17,10 @@ toc::[]
 
 == What essenfont is
 
-essenfont is a single redistributable OpenType font that covers every
-assigned Unicode 17 codepoint (~299,382 glyphs across ~346 blocks).
-Think of it as the spiritual successor to the
+essenfont is a single redistributable OpenType Collection (OTC) that
+covers every assigned Unicode 17 codepoint (~131,000 unique glyphs
+across ~346 blocks, partitioned across the 5 planes that carry
+assigned characters). Think of it as the spiritual successor to the
 https://github.com/unicode-org/last-resort-font[Unicode Last Resort Font] —
 except essenfont ships *real outlines* (vector-extracted from canonical
 donor fonts) instead of placeholder tofu boxes.
@@ -27,7 +28,7 @@ donor fonts) instead of placeholder tofu boxes.
 essenfont is **100% donor-derived** — there is no hand-designed UFO
 source. Every glyph is extracted from a canonical Tier 1 donor font
 (Noto family + Full-Sung + Lentariso + Kedebideri + UniHieroglyphica +
-NotoSerifTaiYo + Symbola + BabelStone + ~17 total). The build script
+NotoSerifTaiYo + Symbola + BabelStone + ~138 total). The build script
 reads each donor via `fontisan` and copies the relevant glyphs into
 essenfont's glyph set.
 
@@ -38,20 +39,46 @@ essenfont's glyph set.
   Hieroglyphs Extended-B) render correctly instead of boxes
 * *Vector outlines* — real glyphs, not bitmap placeholders
 * *OFL license* — embed in PDFs, bundle with software, redistribute freely
-* *Single file* — replaces the need to install 10+ script-specific fonts
-* *Browser-friendly* — use as `font-display: swap` last-resort fallback
+* *OTC distribution* — one `.otc` file with 5 plane subfonts, each
+  under the 65,535-glyph TrueType cap. Per-plane TTFs and WOFF2s
+  available for clients that don't enumerate OTC faces.
 
 == Installation
 
 === Download a release
 
-Grab the latest TTF from the
-link:../../releases/latest[GitHub Releases page]. Install it on your
-operating system:
+Grab the latest artifacts from the
+link:../../releases/latest[GitHub Releases page]:
 
-* *macOS*: Double-click `Essenfont-Regular.ttf` → "Install Font"
-* *Windows*: Right-click → "Install for all users"
-* *Linux*: Copy to `~/.local/share/fonts/` and run `fc-cache -fv`
+[cols="1,4,2", options="header"]
+|===
+|Format |Description |Use
+
+|`Essenfont-Regular.otc`
+|OpenType Collection, glyf outlines, 5 plane subfonts (canonical)
+|Desktop install — macOS Font Book, Windows Font Settings, Linux fontconfig
+
+|`Essenfont-CFF2-Regular.otc`
+|OpenType Collection, CFF2 outlines, 5 plane subfonts (~35% smaller)
+|Modern desktop install — same coverage, smaller file
+
+|`Essenfont-{BMP,SMP,SIP,TIP,SSP}.ttf`
+|Per-plane TTFs (5 files)
+|Legacy clients that don't enumerate OTC faces
+
+|`Essenfont-{BMP,SMP,SIP,TIP,SSP}.woff2`
+|Per-plane WOFF2s (5 files)
+|`@font-face` web embed with `unicode-range`
+|===
+
+Install the OTC on your operating system:
+
+* *macOS*: Double-click `Essenfont-Regular.otc` → Font Book shows 5
+  faces → "Install All". Each face appears individually in app font
+  menus.
+* *Windows*: Right-click → "Install for all users". Faces appear
+  individually in app font menus.
+* *Linux*: `cp Essenfont-Regular.otc ~/.local/share/fonts/ && fc-cache -fv`
 
 Once installed, configure your browser or OS to use essenfont as the
 last-resort fallback font. Any codepoint not covered by your active
@@ -59,24 +86,66 @@ font will render via essenfont.
 
 === Use in web pages
 
+For full-plane coverage via `@font-face`:
+
 [source,css]
 ----
 @font-face {
   font-family: 'essenfont';
-  src: url('https://cdn.fontist.org/essenfont/v0.1/Essenfont-Regular.woff2') format('woff2');
+  src: url('https://github.com/essenfont/essenfont/releases/latest/download/Essenfont-BMP.woff2') format('woff2');
   font-display: swap;
-  unicode-range: U+1E6C0-1E6FF, U+10940-1095F, U+16EA0-16EDF, /* ... rare scripts ... */;
+  unicode-range: U+0000-FFFF;
 }
+/* repeat for SMP (U+10000-1FFFF), SIP (U+20000-2FFFF),
+   TIP (U+30000-3FFFF), SSP (U+E0000-EFFFF) */
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'essenfont';
 }
 ----
 
-== Unicode coverage
+OTC is not browser-embeddable — `@font-face` rejects collection
+containers. Web users consume the per-plane WOFF2s.
 
-essenfont covers every assigned Unicode 17 codepoint. Per-block
-coverage falls into three tiers:
+== Unicode coverage — partitioned across 5 planes
+
+[cols="1,2,1,1", options="header"]
+|===
+|Subfont |Plane range |Codepoints (approx.) |Glyph cap headroom
+
+|`plane_0` (BMP)
+|U+0000..U+FFFF
+|~62,000
+|~3,400 under 65,535
+
+|`plane_1` (SMP)
+|U+10000..U+1FFFF
+|~9,000
+|~56,000 under 65,535
+
+|`plane_2` (SIP)
+|U+20000..U+2FFFF
+|~60,000
+|~5,400 under 65,535
+
+|`plane_3` (TIP)
+|U+30000..U+3FFFF
+|~6,000
+|~59,000 under 65,535
+
+|`plane_14` (SSP)
+|U+E0000..U+EFFFF
+|~100
+|~65,300 under 65,535
+|===
+
+If a future Unicode version balloons a single plane past the cap, the
+partitioner sub-splits by Unicode block (`plane_0_a`, `plane_0_b`,
+...). No block is ever split across two subfonts. See
+`TODO.otc-essenfont/02-plane-partition-strategy.md` for the full
+algorithm.
+
+Per-block coverage falls into three tiers:
 
 [cols="1,4,1", options="header"]
 |===
@@ -100,24 +169,29 @@ donor font registry and which blocks each donor covers.
 
 == Build from source
 
-The font is built by stitching glyphs from donor fonts via a Ruby
-build script that uses
+The font is built by partitioning glyphs from donor fonts across the
+5 Unicode planes, then assembling each plane as a subfont in an OTC
+via a Ruby build script that uses
 link:../../fontisan[fontisan] (not AFDKO, not fonttools).
 
 There is no UFO source. Every glyph comes from a donor font. The
 build is purely an assembly pipeline:
 
 ----
-donor fonts → fontisan reads → per-cp glyph extraction → fontisan writes → Essenfont-Regular.ttf
+donor fonts → fontisan reads → per-cp glyph extraction → plane partition
+            → fontisan Stitcher (5 subfonts) → Collection::Builder
+            → Essenfont-Regular.otc
 ----
 
 === Prerequisites
 
 * Ruby 3.2+
 * `bundler`
-* `fontisan` gem (latest main)
-* `ucode` gem (for the universal-set manifest — drives the per-cp donor map)
-* Donor font files in `sources/fonts/` (see below)
+* `fontisan` ≥ 0.4.7 (provides `Stitcher#include_codepoints_map`,
+  `PartitionStrategy::ByPlane`, `Collection::Reader`, `Ufo::Info.for_subfont`,
+  `fontisan convert --to woff,woff2`, `fontisan validate collection`)
+* `ucode` ≥ 0.3.0 (provides `Ucode::Unicode` Ruby API + `ucode fetch fonts` CLI)
+* Donor font files in `references/input-fonts/` (see below)
 
 === Acquire donor fonts
 
@@ -130,7 +204,7 @@ cd /path/to/ucode
 bundle exec ucode fetch fonts
 
 # Then copy the donor files to essenfont:
-cp data/fonts/*.{ttf,otf,ttc} /path/to/essenfont/sources/fonts/
+cp data/fonts/*.{ttf,otf,ttc} /path/to/essenfont/references/input-fonts/
 ----
 
 The Full-Sung family (Taiwan MOE 全宋體) is `path_local_only`:
@@ -153,18 +227,31 @@ Other `path_local_only` donors:
 See link:sources/README.md[sources/README.md] for full donor
 acquisition instructions.
 
-=== Build the TTF
+=== Build the OTC
 
 [source,bash]
 ----
-# Build (the ONLY path — every glyph comes from donors)
+# Default: OTC with glyf outlines (canonical)
 ruby scripts/build.rb
 
+# Alternative: OTC with CFF2 outlines (~35% smaller, modern)
+ruby scripts/build.rb --format=otc-cff2
+
+# Per-plane TTFs (for legacy clients + WOFF2 encoding)
+ruby scripts/build.rb --format=ttf-per-plane
+
+# Encode per-plane WOFF/WOFF2 from the per-plane TTFs
+# (fontisan convert --to woff,woff2 does both in one call now)
+for plane in BMP SMP SIP TIP SSP; do
+  fontisan convert Essenfont-${plane}.ttf --to woff,woff2 --output Essenfont-${plane}
+done
+
 # Verify the output
-ruby scripts/verify.rb Essenfont-Regular.ttf
+ruby scripts/verify.rb Essenfont-Regular.otc
 ----
 
-The build produces `Essenfont-Regular.ttf` in the repo root.
+The build produces `Essenfont-Regular.otc` (default) or
+`Essenfont-CFF2-Regular.otc` (CFF2 variant) in the repo root.
 
 == Project structure
 
@@ -172,18 +259,50 @@ The build produces `Essenfont-Regular.ttf` in the repo root.
 essenfont/
 ├── README.adoc                # this file
 ├── LICENSE                    # OFL (the assembled font)
-├── scripts/                   # Ruby build scripts (use fontisan)
-│   ├── build.rb               # donors → Essenfont-Regular.ttf
-│   ├── build_he.rb            # high-efficiency variant (cmap format 13)
+├── lib/                       # Essenfont::Otc Ruby subsystem (thin glue)
+│   ├── essenfont.rb           # autoload root
+│   └── essenfont/otc/         # Build, Naming, Errors, Version (~126 LOC total)
+├── scripts/                   # Ruby build scripts (use fontisan + ucode)
+│   ├── build.rb               # donors → Essenfont-Regular.{otc,ttc}
+│   ├── emit_coverage_manifest.rb  # build → coverage.json (uses Ucode::Unicode + Collection::Reader)
 │   └── verify.rb              # round-trip validation
+├── spec/                      # RSpec specs (~11 examples — partitioning logic now in fontisan)
 ├── sources/
 │   ├── manifest.yml           # donor font registry (label, file, license, sha256)
 │   ├── README.md              # donor acquisition instructions
-│   ├── fonts/                 # actual .ttf/.otf/.ttc files (gitignored)
-│   └── licenses/              # each donor's OFL/license file (gitignored)
-├── images/                    # screenshots for this README
-└── TODO.essenfont/            # build phases + design decisions
+│   └── remaps/                # codepoint remaps for keyboard-mapped donors
+├── references/input-fonts/    # donor TTFs/OTFs (gitignored binaries)
+├── .github/workflows/
+│   ├── ci.yml                 # specs + smoke-build on push/PR
+│   └── release.yml            # tag v* → build → GH Release
+├── TODO.otc-essenfont/        # 9 spec docs (OTC pipeline + website + GHA)
+└── TODO.full/                 # earlier work phases
 ----
+
+== Release process
+
+Releases are tag-triggered:
+
+[source,bash]
+----
+# Maintainer bumps version + pushes tag
+echo "0.2.0" > VERSION
+git commit -am "chore: bump version to 0.2.0"
+git tag v0.2.0
+git push origin main v0.2.0
+----
+
+The `v*` tag push triggers `.github/workflows/release.yml`, which:
+
+1. Builds `Essenfont-Regular.otc` (glyf) + per-plane TTFs + per-plane WOFF2
+2. Optionally builds `Essenfont-CFF2-Regular.otc` (CFF2 variant)
+3. Emits `coverage.json` for the website
+4. Uploads all artifacts to a GitHub Release
+5. The website repo (`essenfont/essenfont.github.io`) polls every 6h
+   for new releases and redeploys automatically.
+
+See `TODO.otc-essenfont/09-release-pipeline.md` for the full
+architecture.
 
 === Why no UFO source?
 
