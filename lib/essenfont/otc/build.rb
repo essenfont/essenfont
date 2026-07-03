@@ -8,22 +8,21 @@ module Essenfont
 
       DEFAULT_SUBFONT_FORMAT = :ttf
       DEFAULT_FAMILY = Naming::FAMILY
-      DEFAULT_VERSION = Naming::VERSION
 
       attr_reader :cp_map, :donors, :subfont_format, :partitioner, :family,
                   :version
 
       def initialize(cp_map:, donors:, subfont_format: DEFAULT_SUBFONT_FORMAT,
                      partitioner: default_partitioner,
-                     family: DEFAULT_FAMILY, version: DEFAULT_VERSION)
-        unless cp_map.is_a?(Hash)
-          raise ArgumentError, "cp_map must be a Hash, got #{cp_map.class}"
+                     family: DEFAULT_FAMILY, version: Naming.version_string)
+        unless cp_map.is_a?(Hash) || cp_map.is_a?(Essenfont::CpMap)
+          raise ArgumentError, "cp_map must be a Hash or CpMap, got #{cp_map.class}"
         end
         unless donors.is_a?(Hash)
           raise ArgumentError, "donors must be a Hash, got #{donors.class}"
         end
 
-        @cp_map = cp_map
+        @cp_map = coerce_cp_map(cp_map)
         @donors = donors
         @subfont_format = subfont_format
         @partitioner = partitioner
@@ -32,12 +31,7 @@ module Essenfont
       end
 
       def call(output_path:)
-        # Essenfont's cp_map is {cp => {label:, gid:}} (preserves the donor
-        # gid for the Stitcher). fontisan's PartitionStrategy expects
-        # {cp => donor_label} — collapse to the donor label here.
-        donor_labels = cp_map.transform_values { |info| info[:label] }
-
-        blueprint = partitioner.call(donor_labels)
+        blueprint = partitioner.call(cp_map.donor_labels)
         stitcher = Fontisan::Stitcher.new
         donors.each_value { |d| stitcher.add_source(d[:label], d[:font]) }
         stitcher.set_info(base_info_values)
@@ -55,6 +49,12 @@ module Essenfont
       end
 
       private
+
+      def coerce_cp_map(cp_map)
+        return cp_map if cp_map.is_a?(Essenfont::CpMap)
+
+        Essenfont::CpMap.new(cp_map)
+      end
 
       def default_partitioner
         Fontisan::Stitcher::PartitionStrategy::ByPlane.new

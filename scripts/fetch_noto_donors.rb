@@ -28,10 +28,10 @@ require "fileutils"
 require "open-uri"
 require "optparse"
 require "fontisan"
+require "essenfont"
 
 module EssenfontNotoFetch
   DONOR_DIR = File.expand_path("../references/input-fonts", __dir__)
-  UCODE_BLOCKS = "/Users/mulgogi/src/fontist/ucode/output/blocks/index.json"
 
   # block_id → Noto font name (without "-Regular.ttf" suffix).
   # Sourced from TODO.full/06-donor-search.md.
@@ -246,10 +246,8 @@ module EssenfontNotoFetch
   end
 
   def self.load_blocks_index
-    return {} unless File.exist?(UCODE_BLOCKS)
-    data = JSON.parse(File.read(UCODE_BLOCKS))
-    data.each_with_object({}) do |b, h|
-      h[b["id"]] = (b["first_cp"]..b["last_cp"])
+    Essenfont::UcodeRef.catalog.all_blocks.each_with_object({}) do |b, h|
+      h[b.id] = (b.first_cp..b.last_cp)
     end
   end
 
