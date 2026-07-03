@@ -3,8 +3,9 @@
 require "spec_helper"
 
 RSpec.describe Essenfont::Otc do
-  it "exposes a VERSION constant" do
-    expect(described_class::Version::STRING).to eq("0.1.0")
+  it "exposes a VERSION constant matching the VERSION file" do
+    expected = File.read(File.expand_path("../../VERSION", __dir__)).strip
+    expect(described_class::Version::STRING).to eq(expected)
   end
 
   it "autoloads Build, Naming, Errors" do

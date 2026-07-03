@@ -4,7 +4,6 @@ module Essenfont
   module Otc
     module Naming
       FAMILY = "essenfont"
-      VERSION = "0.1"
       SUBFAMILY = "Regular"
       COPYRIGHT = "OFL 1.1 + FSung-NC (CJK glyphs)"
 
@@ -15,17 +14,15 @@ module Essenfont
       end
 
       def version_string
-        VERSION
+        Version::STRING
       end
 
       def version_major
-        major, _minor = VERSION.split(".").map(&:to_i)
-        major || 0
+        Version::STRING.split(".").map(&:to_i).fetch(0, 0)
       end
 
       def version_minor
-        _major, minor = VERSION.split(".").map(&:to_i)
-        minor || 0
+        Version::STRING.split(".").map(&:to_i).fetch(1, 0)
       end
     end
   end

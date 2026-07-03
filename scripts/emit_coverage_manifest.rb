@@ -3,27 +3,17 @@
 
 # Emit a coverage manifest for the website.
 #
-# Reads the latest built OTC + per-plane TTFs, computes per-subfont
-# glyph/cp counts via Fontisan::Collection::Reader, and writes a JSON
-# manifest the website consumes to drive its Download and Subfonts pages.
-# Plane metadata + assigned-codepoint count come from the ucode gem.
-#
-# Usage:
-#   ruby scripts/emit_coverage_manifest.rb > coverage.json
+# Uses Essenfont::Manifest + Essenfont::UcodeRef for all metadata.
 
 $LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 
 require "json"
 require "time"
-require "fileutils"
-require "fontisan"
-require "ucode"
 require "essenfont"
 
 module EmitCoverage
   ROOT = File.expand_path("..", __dir__)
 
-  # Map Unicode plane short names (from ucode) to the per-plane TTF filename.
   PLANE_FILES = {
     BMP: "Essenfont-BMP.ttf",
     SMP: "Essenfont-SMP.ttf",
@@ -32,17 +22,19 @@ module EmitCoverage
     SSP: "Essenfont-SSP.ttf"
   }.freeze
 
-  def self.emit
-    catalog = Ucode::Unicode.for_version
-    assigned_total = catalog.assigned_count
+  module_function
+
+  def emit
+    catalog = Essenfont::UcodeRef.catalog
+    assigned_total = Essenfont::UcodeRef.assigned_count
 
     subfonts = []
     total_cps = 0
 
     catalog.all_planes.each do |plane|
-      next unless plane.short_name && PLANE_FILES.key?(plane.short_name)
+      next unless plane.short_name && PLANE_FILES.key?(plane.short_name.to_sym)
 
-      path = File.join(ROOT, PLANE_FILES.fetch(plane.short_name))
+      path = File.join(ROOT, PLANE_FILES.fetch(plane.short_name.to_sym))
       next unless File.exist?(path)
 
       face = Fontisan::FontLoader.load(path)
@@ -57,9 +49,9 @@ module EmitCoverage
         range: "U+#{plane.range.begin.to_s(16).upcase}..U+#{plane.range.end.to_s(16).upcase}",
         glyph_count: glyph_count,
         codepoint_count: cp_count,
-        ttf_url: PLANE_FILES.fetch(plane.short_name),
-        woff2_url: PLANE_FILES.fetch(plane.short_name).sub(/\.ttf$/, ".woff2"),
-        woff_url: PLANE_FILES.fetch(plane.short_name).sub(/\.ttf$/, ".woff")
+        ttf_url: PLANE_FILES.fetch(plane.short_name.to_sym),
+        woff2_url: PLANE_FILES.fetch(plane.short_name.to_sym).sub(/\.ttf$/, ".woff2"),
+        woff_url: PLANE_FILES.fetch(plane.short_name.to_sym).sub(/\.ttf$/, ".woff")
       }
     end
 
@@ -67,7 +59,7 @@ module EmitCoverage
     coverage_pct = (total_cps.to_f / assigned_total * 100).round(2)
 
     manifest = {
-      unicode_version: catalog.version,
+      unicode_version: Essenfont::UcodeRef.unicode_version,
       essenfont_version: Essenfont::Otc::Version::STRING,
       released_at: Time.now.utc.iso8601,
       otc_url: "Essenfont-Regular.otc",
@@ -81,5 +73,7 @@ module EmitCoverage
     puts JSON.pretty_generate(manifest)
   end
 end
+
+require "fontisan"
 
 EmitCoverage.emit

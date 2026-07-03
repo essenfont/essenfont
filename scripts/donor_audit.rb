@@ -26,38 +26,16 @@ require "digest"
 require "json"
 require "optparse"
 require "fontisan"
+require "essenfont"
 
 module EssenfontAudit
   MANIFEST_PATH = File.expand_path("../sources/manifest.yml", __dir__)
   DONOR_DIR = File.expand_path("../references/input-fonts", __dir__)
-  UCODE_BLOCKS_PATH = "/Users/mulgogi/src/fontist/ucode/output/blocks/index.json"
 
-  # Load Unicode 17 block ranges from ucode's canonical blocks index.
-  # Falls back to inline subset if ucode isn't available locally.
+  # Load Unicode 17 block ranges from the ucode gem (no path concerns).
   def self.load_unicode_blocks
-    if File.exist?(UCODE_BLOCKS_PATH)
-      data = JSON.parse(File.read(UCODE_BLOCKS_PATH))
-      data.each_with_object({}) do |b, h|
-        h[b["id"]] = [b["first_cp"], b["last_cp"]]
-      end
-    else
-      warn "WARN: ucode blocks/index.json not found; using inline fallback"
-      INLINE_UNICODE_BLOCKS
-    end
+    Essenfont::UcodeRef.block_ranges
   end
-
-  INLINE_UNICODE_BLOCKS = {
-    "Basic_Latin" => [0x0000, 0x007F],
-    "CJK_Unified_Ideographs" => [0x4E00, 0x9FFF],
-    "Tangut" => [0x17000, 0x187FF],
-    "Tolong_Siki" => [0x11DB0, 0x11DEF],
-    "Tai_Yo" => [0x1E6C0, 0x1E6FF],
-    "Sidetic" => [0x10940, 0x1095F],
-    "Beria_Erfe" => [0x16EA0, 0x16EDF],
-    "Egyptian_Hieroglyphs" => [0x13000, 0x1342F],
-    "Egyptian_Hieroglyphs_Extended_A" => [0x13460, 0x143FF],
-    "Emoticons" => [0x1F600, 0x1F64F],
-  }.freeze
 
   UNICODE_BLOCKS = load_unicode_blocks.freeze
 

@@ -3,7 +3,7 @@
 module Essenfont
   module Otc
     module Version
-      STRING = "0.1.0"
+      STRING = File.read(File.expand_path("../../../VERSION", __dir__)).strip.freeze
     end
   end
 end

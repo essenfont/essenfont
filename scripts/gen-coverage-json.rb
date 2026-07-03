@@ -5,12 +5,17 @@
 # Counts only ASSIGNED character codepoints (Cc, Cf, L*, M*, N*,
 # P*, S*, Z* per DerivedGeneralCategory.txt) — excludes Cs, Co, Cn.
 
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+
 require "json"
 require "fontisan"
+require "essenfont"
 
 GEN_CAT_FILE = "/tmp/gen-cat.txt"
 FONT_FILE = ARGV[0] || "Essenfont-Regular.ttf"
-UCODE_BLOCKS = "/Users/mulgogi/src/fontist/ucode/output/blocks/index.json"
+
+# Block ranges via the ucode gem (no hardcoded paths).
+UCODE_BLOCKS = Essenfont::UcodeRef.block_ranges.transform_values { |r| (r[0]..r[1]) }
 
 # Parse general categories
 cat_ranges = Hash.new { |h, k| h[k] = [] }
@@ -30,8 +35,11 @@ character_ranges = CHARACTER_CATS.flat_map { |c| cat_ranges[c] || [] }
 font = Fontisan::FontLoader.load(FONT_FILE)
 cmap = font.table("cmap").unicode_mappings&.keys || []
 
-# Load block metadata from ucode
-blocks = JSON.parse(File.read(UCODE_BLOCKS))
+# Block metadata via UcodeRef (already loaded above as UCODE_BLOCKS,
+# but for clarity we re-read the catalog here in array form).
+blocks = Essenfont::UcodeRef.catalog.all_blocks.map do |b|
+  { "id" => b.id, "first_cp" => b.first_cp, "last_cp" => b.last_cp }
+end
 
 # For each block, compute:
 # - total_assigned = count of codepoints in block that are character cats

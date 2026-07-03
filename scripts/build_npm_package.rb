@@ -3,27 +3,12 @@
 
 # Build the essenfont npm package: stages per-plane WOFF2s into npm/
 # and emits ready-to-import CSS files.
-#
-# Usage:
-#   bundle exec ruby scripts/build_npm_package.rb [--publish]
-#
-# Outputs:
-#   npm/package.json
-#   npm/css/all.css
-#   npm/css/essenfont-bmp.css (and -smp, -sip, -tip, -ssp)
-#   npm/fonts/Essenfont-BMP.woff2 (etc.)
-#   npm/README.md
-#
-# Publish:
-#   cd npm && npm publish --access public
-# (CI does this automatically on tag push; the --publish flag is for
-# manual releases from a maintainer machine.)
 
 $LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 
 require "json"
 require "fileutils"
-require "pathname"
+require "essenfont"
 
 module BuildNpmPackage
   ROOT = File.expand_path("..", __dir__)
@@ -37,27 +22,22 @@ module BuildNpmPackage
     { key: :SSP, label: "Supplementary Special-purpose Plane", range: "U+E0000-EFFFF", file: "Essenfont-SSP.woff2" }
   ].freeze
 
-  def self.build(version: nil, publish: false)
-    version ||= detect_version
+  module_function
+
+  def build(publish: false)
+    version = Essenfont::Otc::Version::STRING
     stage_fonts
     emit_css_files
-    emit_package_json(version:)
-    emit_readme(version:)
+    emit_package_json(version: version)
+    emit_readme(version: version)
 
     if publish
-      publish!
+      Dir.chdir(NPM_DIR) do
+        warn "→ npm publish --access public"
+        system("npm publish --access public") || raise("npm publish failed")
+      end
     else
       puts "npm package staged in npm/ (run `cd npm && npm publish` to publish)"
-    end
-  end
-
-  def self.detect_version
-    path = File.join(ROOT, "VERSION")
-    if File.exist?(path)
-      File.read(path).strip
-    else
-      warn "warn: no VERSION file; using 0.0.0-dev. Create a VERSION file for releases."
-      "0.0.0-dev"
     end
   end
 
@@ -76,6 +56,7 @@ module BuildNpmPackage
       puts "  staged #{p[:file]} (#{File.size(dst)} bytes)"
     end
   end
+  private_class_method :stage_fonts
 
   def self.emit_css_files
     css_dir = File.join(NPM_DIR, "css")
@@ -92,20 +73,18 @@ module BuildNpmPackage
           font-weight: 100 900;
           font-style: normal;
           font-display: swap;
-          unicode-range: #{p[:range].sub('U+', '').sub('-', '-')};
+          unicode-range: #{p[:range]};
         }
       CSS
-      # Fix unicode-range format: input is "U+0000-FFFF" → keep as-is but normalize
-      css.gsub!(/unicode-range: ([^;]+);/) { "unicode-range: U+#{p[:range].sub('U+', '')};" }
       File.write(File.join(css_dir, "essenfont-#{p[:key].to_s.downcase}.css"), css)
     end
 
-    # all.css imports every plane
     imports = PLANES.map { |p| "@import url('./essenfont-#{p[:key].to_s.downcase}.css');" }.join("\n")
     File.write(File.join(css_dir, "all.css"),
                "/* essenfont all.css — imports all 5 plane subfonts. */\n#{imports}\n")
     puts "  wrote css/ (5 plane files + all.css)"
   end
+  private_class_method :emit_css_files
 
   def self.emit_package_json(version:)
     spec = {
@@ -115,24 +94,17 @@ module BuildNpmPackage
       main: "css/all.css",
       style: "css/all.css",
       files: %w[css fonts README.md].freeze,
-      keywords: %w[font unicode unicode-17 fallback otc noto cjk tofu
-                   web-font woff2 multi-script].freeze,
+      keywords: %w[font unicode unicode-17 fallback otc noto cjk tofu web-font woff2 multi-script].freeze,
       license: "OFL-1.1",
       homepage: "https://essenfont.github.io",
-      repository: {
-        type: "git",
-        url: "https://github.com/essenfont/essenfont.git"
-      },
-      bugs: {
-        url: "https://github.com/essenfont/essenfont/issues"
-      },
-      publishConfig: {
-        access: "public"
-      }
+      repository: { type: "git", url: "https://github.com/essenfont/essenfont.git" },
+      bugs: { url: "https://github.com/essenfont/essenfont/issues" },
+      publishConfig: { access: "public" }
     }
     File.write(File.join(NPM_DIR, "package.json"), JSON.pretty_generate(spec))
     puts "  wrote package.json (v#{version})"
   end
+  private_class_method :emit_package_json
 
   def self.emit_readme(version:)
     readme = <<~README
@@ -160,8 +132,8 @@ module BuildNpmPackage
       Or import a single plane (smaller bundle if you only need one):
 
       ```js
-      import 'essenfont/css/essenfont-bmp.css'  // Latin, Greek, CJK Unified, common scripts
-      import 'essenfont/css/essenfont-sip.css'  // CJK Extensions B/C/D/E/F
+      import 'essenfont/css/essenfont-bmp.css'
+      import 'essenfont/css/essenfont-sip.css'
       ```
 
       Add essenfont as the last entry in your font stack so any codepoint not
@@ -173,11 +145,7 @@ module BuildNpmPackage
       }
       ```
 
-      ## What's in the box
-
-      Five WOFF2 files (one per Unicode plane) + auto-generated `@font-face`
-      CSS with `unicode-range` so the browser only fetches the planes a
-      visitor actually needs.
+      ## Planes
 
       | Plane | Range | Use case |
       |-------|-------|----------|
@@ -186,11 +154,6 @@ module BuildNpmPackage
       | SIP   | U+20000–2FFFF  | CJK Extensions B/C/D/E/F |
       | TIP   | U+30000–3FFFF  | CJK Ext C+J, Tangut, Khitan |
       | SSP   | U+E0000–EFFFF  | Language tags (rarely needed) |
-
-      ## Coverage
-
-      Covers every assigned Unicode 17 codepoint (~131,000 unique glyphs).
-      Real vector outlines — no tofu, no bitmap placeholders.
 
       ## License
 
@@ -201,18 +164,11 @@ module BuildNpmPackage
 
       ## Version
 
-      This package is v#{version}, built from
-      [essenfont @ GitHub](https://github.com/essenfont/essenfont).
+      v#{version}, built from [essenfont @ GitHub](https://github.com/essenfont/essenfont).
     README
     File.write(File.join(NPM_DIR, "README.md"), readme)
   end
-
-  def self.publish!
-    Dir.chdir(NPM_DIR) do
-      warn "→ npm publish --access public"
-      system("npm publish --access public") || raise("npm publish failed")
-    end
-  end
+  private_class_method :emit_readme
 end
 
 publish = ARGV.delete("--publish")
