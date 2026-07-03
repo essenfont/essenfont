@@ -3,9 +3,28 @@
 /Essenfont*.otf
 /Essenfont*.woff
 /Essenfont*.woff2
+/Essenfont*.ttc
+/Essenfont*.otc
 
-# Temp / planning
-TODO*/
+# Generated artifacts from release-emitting scripts
+/license-pack/
+/license-pack.zip
+/npm/
+/svg-exports/
+/svg-exports.zip
+/cp_map.json
+/provenance.json
+/provenance.json.gz
+/coverage.json
+/sri.txt
+
+# Temp planning — but allow the spec-doc dirs (TODO.otc-essenfont, TODO.enhancements)
+TODO.*/
+!TODO.otc-essenfont/
+!TODO.enhancements/
+
+# Legacy artifacts
+/*.b4-dedup
 
 # Ruby
 /.bundle/
