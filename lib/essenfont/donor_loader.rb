@@ -6,11 +6,14 @@ module Essenfont
   # DonorLoader: turns Manifest entries into loaded donor fonts.
   #
   # Owns the boundary between "manifest entry" (data) and "loaded donor
-  # font" (a Fontisan::TrueTypeFont + its scanned cmap). Encapsulates
-  # the four-step load dance: resolve path → verify magic bytes → verify
-  # sha256 → load via Fontisan → return {font:, label:, coverage:, ...}.
+  # font" (a Fontisan::TrueTypeFont + its scanned cmap). Encapsulates the
+  # load dance: resolve path → verify magic bytes → verify sha256 → load
+  # via Fontisan → return {font:, label:, coverage:, remap:, ...}.
   #
-  # Replaces EssenfontBuild.load_donors in scripts/build.rb.
+  # Remap handling: returns the remap hash alongside the font instead of
+  # mutating the font's cmap in-memory. Callers pass the remap to
+  # Fontisan::Stitcher#add_source(label, font, remap:) which has been a
+  # first-class kwarg since fontisan 0.4.9.
   class DonorLoader
     MAGIC_BYTES = [
       "\x00\x01\x00\x00",  # TTF
@@ -43,6 +46,7 @@ module Essenfont
     end
 
     # Load a single entry, returning nil (with a warning) if anything fails.
+    # The returned hash carries +remap:+ for callers to forward to the Stitcher.
     def load_one(entry)
       resolved = resolve_path(entry)
       return warn_skip(entry, "file not resolved") unless resolved
@@ -55,11 +59,11 @@ module Essenfont
       return warn_skip(entry, "font loader raised") unless font
 
       coverage = scan_coverage(font)
-      coverage = apply_remap_to_coverage(coverage, entry, font) if entry.remap?
+      remap = entry.remap? ? load_remap(entry.codepoint_remap) : nil
 
-      report_load(entry, coverage)
+      report_load(entry, coverage, remap)
       { label: entry.label, font: font, file: resolved, coverage: coverage,
-        entry: entry }
+        remap: remap, entry: entry }
     rescue StandardError => e
       warn_skip(entry, "exception: #{e.message}")
     end
@@ -76,7 +80,7 @@ module Essenfont
 
     def resolve_path(entry)
       return entry.file if entry.file && File.exist?(entry.file)
-      return entry.file if entry.code_chart? && (synthetic = resolve_synthetic(entry))
+      return resolve_synthetic(entry) if entry.code_chart? && entry.block
 
       candidate = File.join(@donor_dir, File.basename(entry.file.to_s))
       return candidate if File.exist?(candidate)
@@ -85,13 +89,9 @@ module Essenfont
     end
 
     def resolve_synthetic(entry)
-      return nil unless entry.block
-
       synthetic = File.join(@donor_dir, ".generated", "svg-donors",
                             "#{entry.block.tr('-', '_')}.ttf")
-      return synthetic if File.exist?(synthetic)
-
-      nil
+      File.exist?(synthetic) ? synthetic : nil
     end
 
     def valid_magic?(path)
@@ -99,7 +99,6 @@ module Essenfont
 
       magic = File.binread(path, 4)
       return true if MAGIC_BYTES.include?(magic)
-
       return true if File.binread(path, 1).getbyte(0) == 0x80 # PFB
 
       warn "    first 4 bytes: #{magic.inspect} — not a font magic"
@@ -133,20 +132,6 @@ module Essenfont
       {}
     end
 
-    def apply_remap_to_coverage(coverage, entry, font)
-      remap = load_remap(entry.codepoint_remap)
-      return coverage unless remap && !remap.empty?
-
-      original_size = coverage.size
-      remapped = coverage.each_with_object({}) do |(src, gid), h|
-        target = remap[src]
-        h[target] = gid if target
-      end
-      mutate_cmap_with_remap!(font, remap)
-      warn "    remapped: #{original_size} → #{remapped.size} codepoints"
-      remapped
-    end
-
     def load_remap(spec)
       path = resolve_remap_path(spec)
       return nil unless path && File.exist?(path)
@@ -164,28 +149,12 @@ module Essenfont
       return spec if File.exist?(spec)
 
       candidate = File.join(@remap_dir, File.basename(spec))
-      candidate if File.exist?(candidate)
+      File.exist?(candidate) ? candidate : nil
     end
 
-    # Apply a remap to the font's cmap in-memory. The unicode_mappings
-    # hash is cached on the cmap table object; this mutation persists
-    # across the Stitcher's later reads.
-    def mutate_cmap_with_remap!(font, remap)
-      cmap = font.table("cmap")
-      return unless cmap
-
-      maps = cmap.unicode_mappings
-      return unless maps
-
-      new_maps = remap.each_with_object({}) do |(src, target), h|
-        gid = maps[src]
-        h[target] = gid if gid
-      end
-      maps.replace(new_maps)
-    end
-
-    def report_load(entry, coverage)
-      puts "  loaded #{entry.label}: #{coverage.size} codepoints#{' (remapped)' if entry.remap?}"
+    def report_load(entry, coverage, remap)
+      suffix = remap&.any? ? " (remapped: #{remap.size} cps)" : ""
+      puts "  loaded #{entry.label}: #{coverage.size} codepoints#{suffix}"
     end
 
     def warn_skip(entry, reason)

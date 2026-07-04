@@ -140,7 +140,9 @@ module EssenfontBuild
     puts "  #{subfont_names.size} subfonts: #{subfont_names.join(', ')}"
 
     stitcher = Fontisan::Stitcher.new
-    donors.each_value { |d| stitcher.add_source(d[:label], d[:font]) }
+    donors.each_value do |d|
+      stitcher.add_source(d[:label], d[:font], remap: d[:remap])
+    end
     blueprint.apply_to(stitcher)
 
     catalog = Essenfont::UcodeRef.catalog
@@ -161,7 +163,9 @@ module EssenfontBuild
     puts "=== Stitching #{bmp_map.size} BMP codepoints (legacy #{format}) ==="
 
     stitcher = Fontisan::Stitcher.new
-    donors.each_value { |d| stitcher.add_source(d[:label], d[:font]) }
+    donors.each_value do |d|
+      stitcher.add_source(d[:label], d[:font], remap: d[:remap])
+    end
 
     first_label = donors.values.first[:label]
     stitcher.include_notdef(from: first_label, into: :legacy)
