@@ -15,6 +15,17 @@
 
 $LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 
+$stdout.sync = true
+$stderr.sync = true
+at_exit do |e|
+  if e && !e.is_a?(SystemExit)
+    warn "FATAL: #{e.class}: #{e.message}"
+    warn e.backtrace.first(10).join("\n") if e.backtrace
+  elsif e && e.is_a?(SystemExit) && !e.success?
+    warn "FATAL: SystemExit code=#{e.status}"
+  end
+end
+
 require "optparse"
 require "fileutils"
 require "digest"
@@ -68,9 +79,9 @@ module ReleasePipeline
     load File.expand_path("build.rb", __dir__)
     puts "→ EssenfontBuild.run(format: #{format})"
     EssenfontBuild.run(format: format)
-  rescue => e
+  rescue Exception => e
     warn "BUILD FAILED: #{e.class}: #{e.message}"
-    warn e.backtrace.first(15).join("\n")
+    warn e.backtrace.first(15).join("\n") if e.backtrace
     raise
   end
   private_class_method :run_build
