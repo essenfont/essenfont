@@ -64,6 +64,8 @@ What used to live here but is now upstream:
 | Per-subfont name helper | `Fontisan::Ufo::Info.for_subfont` (fontisan 0.4.7+) |
 | Multi-format WOFF encoding | `fontisan convert INPUT.ttf --to woff,woff2` CLI (fontisan 0.4.7+) |
 | Collection validation CLI | `fontisan validate collection PATH` (fontisan 0.4.7+) |
+| First-class donor remap | `Fontisan::Stitcher#add_source(label, font, remap:)` (fontisan 0.4.9+) — replaces cmap cache mutation |
+| Per-glyph SVG `unicode=` + `glyph-name=` | `Fontisan::Converters::SvgGenerator` (fontisan 0.4.9+) — no external reverse-cmap needed |
 | Assigned Unicode codepoint count | `Ucode::Unicode.assigned_count` (ucode 0.3.0+) |
 
 The subsystem uses **autoload only** — no `require_relative`, no
@@ -111,10 +113,11 @@ uses Noto Serif Tangut.
 
 ## Dependencies
 
-- **fontisan** (≥ 0.4.7) — Stitcher (with `include_codepoints_map`),
-  `PartitionStrategy::ByPlane`, `Collection::Reader`, `Collection::Builder`,
-  `Ufo::Info.for_subfont`, `Converters::Woff*Encoder`, `Ufo::Compile::Otf2Compiler`,
-  and the `fontisan convert --to woff,woff2` / `fontisan validate collection` CLIs
+- **fontisan** (≥ 0.4.9) — Stitcher (with `include_codepoints_map`,
+  `PartitionStrategy::ByPlane`, `Collection::Reader`, `Ufo::Info.for_subfont`,
+  `Converters::Woff*Encoder`, `Ufo::Compile::Otf2Compiler`,
+  `Stitcher#add_source(remap:)`, `SvgGenerator` with per-glyph `unicode=`,
+  and the `fontisan convert --to woff,woff2` / `fontisan validate collection` CLIs)
 - **ucode** (≥ 0.3.0) — `Ucode::Unicode` Ruby API (Plane, Block,
   Catalog, assigned_count) + `ucode fetch fonts` CLI for donor acquisition
 - Ruby 3.2+

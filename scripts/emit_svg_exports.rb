@@ -3,8 +3,12 @@
 
 # Extract per-codepoint SVG files from an SFNT font (TTF or OTF).
 #
-# Uses Essenfont::Otc::Version for the metadata stamp. Donor attribution
-# comes from cp_map.json (optional).
+# fontisan 0.4.9+ SvgGenerator emits per-glyph `unicode=` + `glyph-name=`
+# attributes (issue fontisan#80), so we no longer need to rebuild a
+# gid → codepoints reverse map. Just parse the XML and emit one file
+# per codepoint in each glyph's `unicode=` attribute.
+#
+# Donor attribution is optional; pass cp_map.json via $DONOR_MAP.
 
 $LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 
@@ -28,36 +32,38 @@ module EmitSvgExports
     font = Fontisan::FontLoader.load(input_path)
     units_per_em = font.table("head")&.units_per_em || 1000
 
-    puts "→ generating SVG-font XML via fontisan"
+    puts "→ generating SVG-font XML (fontisan emits unicode= + glyph-name=)"
     svg_xml = Fontisan::Converters::SvgGenerator.new.convert(font)[:svg_xml]
-
-    puts "→ indexing cmap (gid → codepoints)"
-    gid_to_cps = build_gid_to_cps(font)
 
     puts "→ parsing and emitting per-codepoint SVGs"
     doc = Nokogiri::XML(svg_xml)
-    glyphs = doc.css("glyph")
-    puts "  #{glyphs.size} glyph elements; #{gid_to_cps.size} gids in cmap"
+    glyphs = doc.css("glyph").select { |g| g["unicode"] }
+    puts "  #{glyphs.size} glyphs with unicode mappings"
 
     index = {}
     counts = Hash.new(0)
 
-    glyphs.each_with_index do |glyph, gid|
+    glyphs.each do |glyph|
       path_d = glyph["d"]
-      cps = gid_to_cps[gid] || []
-      counts[:skipped_no_unicode] += 1 if cps.empty?
-      next if cps.empty?
+      if path_d.nil? || path_d.strip.empty?
+        counts[:skipped_no_path] += 1
+        next
+      end
 
-      counts[:skipped_no_path] += 1 if path_d.nil? || path_d.strip.empty?
-      next if path_d.nil? || path_d.strip.empty?
+      cps = parse_unicode_attribute(glyph["unicode"])
+      if cps.empty?
+        counts[:skipped_no_unicode] += 1
+        next
+      end
 
       cps.each do |cp|
         hex = cp.to_s(16).upcase
         filename = "U+#{hex}.svg"
         File.write(File.join(out_dir, filename),
-                   render_svg(cp, path_d, units_per_em, donor_map[cp]))
+                   render_svg(cp, glyph["glyph-name"] || "", path_d, units_per_em, donor_map[cp]))
         index[filename] = {
           cp: "0x#{hex}",
+          name: glyph["glyph-name"] || "",
           donor: donor_map[cp] && donor_map[cp][:label]
         }.compact
         counts[:emitted] += 1
@@ -77,26 +83,29 @@ module EmitSvgExports
     puts "  (#{counts[:skipped_no_path]} had no outline, #{counts[:skipped_no_unicode]} had no unicode)"
   end
 
-  def self.detect_input
+  def detect_input
     %w[Essenfont-Regular.otc Essenfont-Regular.ttc Essenfont-BMP.ttf].each do |p|
       return p if File.exist?(p)
     end
     raise ArgumentError, "no input font found — pass INPUT.ttf as the first argument"
   end
 
-  def self.build_gid_to_cps(font)
-    cmap = font.table("cmap")
-    return {} unless cmap
+  # The SVG-font `unicode="..."` attribute can be a single character,
+  # an XML numeric entity (&#x1F600;), or a multi-character sequence.
+  def parse_unicode_attribute(text)
+    return [] unless text
 
-    mappings = cmap.unicode_mappings || {}
-    mappings.each_with_object({}) do |(cp, gid), h|
-      (h[gid] ||= []) << cp
-    end
+    decoded = text.gsub(/&#x([0-9A-Fa-f]+);/) { [$1.to_i(16)].pack("U") }
+                  .gsub(/&#(\d+);/) { [$1.to_i].pack("U") }
+
+    decoded.codepoints.to_a
+  rescue StandardError
+    []
   end
-  private_class_method :build_gid_to_cps
 
-  def self.render_svg(cp, path_d, units_per_em, donor_info)
+  def render_svg(cp, name, path_d, units_per_em, donor_info)
     hex = cp.to_s(16).upcase
+    name_meta = name.empty? ? "" : "<name>#{escape_xml(name)}</name>\n          "
     donor_meta = donor_info ? <<-META : ""
       <donor>#{escape_xml(donor_info[:label].to_s)}</donor>
       <license>#{escape_xml(donor_info[:license].to_s)}</license>
@@ -107,7 +116,7 @@ module EmitSvgExports
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 #{units_per_em} #{units_per_em}" width="#{units_per_em}" height="#{units_per_em}">
         <metadata>
           <codepoint>U+#{hex}</codepoint>
-          #{donor_meta}<essenfont-version>#{Essenfont::Otc::Version::STRING}</essenfont-version>
+          #{name_meta}#{donor_meta}<essenfont-version>#{Essenfont::Otc::Version::STRING}</essenfont-version>
           <generated-at>#{Time.now.utc.iso8601}</generated-at>
         </metadata>
         <g transform="translate(0, #{units_per_em}) scale(1, -1)">
@@ -116,12 +125,10 @@ module EmitSvgExports
       </svg>
     SVG
   end
-  private_class_method :render_svg
 
-  def self.escape_xml(str)
+  def escape_xml(str)
     str.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;").gsub('"', "&quot;")
   end
-  private_class_method :escape_xml
 end
 
 require "time"
