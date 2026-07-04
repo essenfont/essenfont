@@ -654,7 +654,7 @@ if __FILE__ == $PROGRAM_NAME
     opts.banner = "Usage: build.rb [options]"
     opts.on("--format=FORMAT",
             "otc (default), otc-cff2, ttf-per-plane, ttf, or otf") do |v|
-      options[:format] = v.to_sym
+      options[:format] = v.tr("-", "_").to_sym
     end
   end.parse!
 
