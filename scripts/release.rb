@@ -63,6 +63,15 @@ module ReleasePipeline
   end
   private_class_method :parse_options
 
+  def self.run_build(format:)
+    # Call build.rb's module directly (no subprocess) so errors show
+    # in the same traceback and stdout/stderr flow naturally.
+    ENV["ESSENFONT_DUMP_CP_MAP"] = "1"
+    load File.expand_path("build.rb", __dir__)
+    EssenfontBuild.run(format: format)
+  end
+  private_class_method :run_build
+
   def self.setup_output_dir(out_dir)
     FileUtils.rm_rf(out_dir)
     FileUtils.mkdir_p(out_dir)
@@ -73,8 +82,7 @@ module ReleasePipeline
     return if skip
 
     puts "→ building OTC (glyf) → TTC container"
-    system({ "ESSENFONT_DUMP_CP_MAP" => "1" }, "bundle exec ruby scripts/build.rb --format=otc") ||
-      raise(Essenfont::Otc::Errors::BuildError, "OTC build failed")
+    run_build(format: :otc)
     FileUtils.mv("Essenfont-Regular.ttc", File.join(out_dir, "Essenfont-Regular.ttc"))
     FileUtils.cp("cp_map.json", File.join(out_dir, "cp_map.json")) if File.exist?("cp_map.json")
   end
@@ -84,8 +92,7 @@ module ReleasePipeline
     return if skip
 
     puts "→ building per-plane TTFs"
-    system("bundle exec ruby scripts/build.rb --format=ttf-per-plane") ||
-      raise(Essenfont::Otc::Errors::BuildError, "per-plane TTF build failed")
+    run_build(format: :"ttf-per-plane")
     PLANES.each do |p|
       src = "Essenfont-#{p}.ttf"
       FileUtils.mv(src, File.join(out_dir, src)) if File.exist?(src)
