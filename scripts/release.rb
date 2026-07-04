@@ -64,11 +64,14 @@ module ReleasePipeline
   private_class_method :parse_options
 
   def self.run_build(format:)
-    # Call build.rb's module directly (no subprocess) so errors show
-    # in the same traceback and stdout/stderr flow naturally.
     ENV["ESSENFONT_DUMP_CP_MAP"] = "1"
     load File.expand_path("build.rb", __dir__)
+    puts "→ EssenfontBuild.run(format: #{format})"
     EssenfontBuild.run(format: format)
+  rescue => e
+    warn "BUILD FAILED: #{e.class}: #{e.message}"
+    warn e.backtrace.first(15).join("\n")
+    raise
   end
   private_class_method :run_build
 
