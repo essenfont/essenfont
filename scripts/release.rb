@@ -73,7 +73,7 @@ module ReleasePipeline
     return if skip
 
     puts "→ building OTC (glyf) → TTC container"
-    system("bundle exec ruby scripts/build.rb --format=otc", env: { "ESSENFONT_DUMP_CP_MAP" => "1" }) ||
+    system({ "ESSENFONT_DUMP_CP_MAP" => "1" }, "bundle exec ruby scripts/build.rb --format=otc") ||
       raise(Essenfont::Otc::Errors::BuildError, "OTC build failed")
     FileUtils.mv("Essenfont-Regular.ttc", File.join(out_dir, "Essenfont-Regular.ttc"))
     FileUtils.cp("cp_map.json", File.join(out_dir, "cp_map.json")) if File.exist?("cp_map.json")
