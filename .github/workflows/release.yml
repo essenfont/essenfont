@@ -39,9 +39,9 @@ jobs:
       - name: Acquire donor fonts
         if: ${{ !inputs.skip_donors && steps.donor-cache.outputs.cache-hit != 'true' }}
         run: |
-          gem install specific_install
-          gem specific_install https://github.com/fontist/ucode.git main || true
-          ucode fetch fonts || true
+          # ucode is now a regular gem dependency (via Gemfile); its CLI
+          # is on PATH after `bundle install`. No more specific_install.
+          bundle exec ucode fetch fonts || true
           if [ -d ~/.ucode/fonts ]; then
             cp ~/.ucode/fonts/*.{ttf,otf,ttc} references/input-fonts/ 2>/dev/null || true
           fi
