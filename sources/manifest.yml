@@ -242,6 +242,74 @@ donors:
     author: "Google (Noto Project)"
     covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing]
 
+  # ─────────── Historic Near-Eastern / Indic specialists ───────────
+
+  - label: noto-sans-old-persian
+    file: references/input-fonts/NotoSansOldPersian-Regular.ttf
+    family: Noto Sans Old Persian
+    style: Regular
+    license: OFL
+    sha256: "2c360d14a079590fd34d2989e26bbda7edd237701d0c22fed8350a2d8fffdb12"
+    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansOldPersian
+    author: "Google (Noto Project)"
+    covers: [Old_Persian]
+    notes: "Covers Old Persian block (U+103A0..U+103DF) 50/64 — missing 14 codepoints are unassigned/reserved."
+
+  - label: noto-sans-ugaritic
+    file: references/input-fonts/NotoSansUgaritic-Regular.ttf
+    family: Noto Sans Ugaritic
+    style: Regular
+    license: OFL
+    sha256: "cd372bfa7aaa1d008786ee8097a1e7c47ae8e5c2e23c5dd3343568409c5a7e5c"
+    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansUgaritic
+    author: "Google (Noto Project)"
+    covers: [Ugaritic]
+    notes: "Covers Ugaritic block (U+10380..U+1039F) 31/32 — U+1039F is the only gap."
+
+  - label: noto-sans-avestan
+    file: references/input-fonts/NotoSansAvestan-Regular.ttf
+    family: Noto Sans Avestan
+    style: Regular
+    license: OFL
+    sha256: "8d10bb90dafaefe8d1258880b9ebf955edf62e48066e96be923dcc695a56d82d"
+    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansAvestan
+    author: "Google (Noto Project)"
+    covers: [Avestan]
+    notes: "Covers Avestan block (U+10B00..U+10B3F) 61/64 — 3 unassigned codepoints absent."
+
+  - label: noto-sans-brahmi
+    file: references/input-fonts/NotoSansBrahmi-Regular.ttf
+    family: Noto Sans Brahmi
+    style: Regular
+    license: OFL
+    sha256: "5607e874c4793381e22ba7800b748de43f801829e6b9b49f7b7b2cc3973027f6"
+    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansBrahmi
+    author: "Google (Noto Project)"
+    covers: [Brahmi]
+    notes: "Covers Brahmi block (U+11000..U+1107F) 115/128 — 13 codepoints (mostly combining marks) absent."
+
+  - label: noto-sans-modi
+    file: references/input-fonts/NotoSansModi-Regular.ttf
+    family: Noto Sans Modi
+    style: Regular
+    license: OFL
+    sha256: "7bebf7f16e7f98695e1003adaa3b1438ef977803aa166fa7d5e6b18c9dfa69b8"
+    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansModi
+    author: "Google (Noto Project)"
+    covers: [Modi]
+    notes: "Covers Modi block (U+11600..U+1165F) 79/96 — 17 codepoints (digits + punct) absent."
+
+  - label: noto-sans-cuneiform
+    file: references/input-fonts/NotoSansCuneiform-Regular.ttf
+    family: Noto Sans Cuneiform
+    style: Regular
+    license: OFL
+    sha256: "aad6f345a2f3150aeb51706ecf1d6f62eec299ee215cb77e76f0c33e1419bba2"
+    url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansCuneiform
+    author: "Google (Noto Project)"
+    covers: [Cuneiform, Cuneiform_Numbers_and_Punctuation, Early_Dynastic_Cuneiform]
+    notes: "Covers all 3 cuneiform blocks (U+12000..U+1254F) — 1234/1238. 4 absent codepoints are newly-assigned in Unicode 17 and not yet in Noto's release."
+
   # ─────────── Emoji (Noto Color Emoji) ───────────
   #
   # Color bitmap emoji via CBDT/CBLC tables. fontisan 0.4+ added
