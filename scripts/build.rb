@@ -82,8 +82,13 @@ module EssenfontBuild
   end
 
   # ── Coverage gate ──
+  # Validates that declared covers: blocks actually have cmap coverage.
+  # Skips donors that weren't loaded (e.g., FSung is path_local_only
+  # and may not be available in CI — we build with what we have).
   def validate_coverage_gates(manifest:, donors:)
     failures = manifest.active.flat_map do |entry|
+      next [] unless donors[entry.label] # skip donors that weren't loaded
+
       covers = entry.covers || []
       covers.map do |block|
         range = Essenfont::UcodeRef.block_range(block)
