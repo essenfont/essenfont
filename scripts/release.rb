@@ -161,12 +161,10 @@ module ReleasePipeline
     return unless File.exist?(cp_map_path)
 
     cp_map = JSON.parse(File.read(cp_map_path))
-    # cp_map.json values are plain strings (the donor label) — not hashes.
-    # normalize to {label: Symbol} for downstream use.
-    cp_map = cp_map.transform_values do |v|
-      label = v.is_a?(Hash) ? v["label"] : v
-      { label: label.to_sym }
-    end
+    # JSON keys are decimal strings ("65", "19968"); values are donor labels.
+    # Convert keys to Integers and values to {label: Symbol}.
+    cp_map = cp_map.transform_keys { |k| k.to_i }
+                 .transform_values { |v| { label: (v.is_a?(Hash) ? v["label"] : v).to_sym } }
 
     manifest_entries = Essenfont::Manifest.load
     donors_meta = manifest_entries.each_with_object({}) do |e, h|
