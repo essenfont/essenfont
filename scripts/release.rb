@@ -206,7 +206,8 @@ module ReleasePipeline
     if File.exist?(cp_map_path)
       JSON.parse(File.read(cp_map_path))
           .each_with_object(Hash.new { |h, k| h[k] = [] }) { |(cp, info), h|
-            h[info["label"].to_sym] << cp.to_i(16)
+            label = info.is_a?(Hash) ? info["label"] : info
+            h[label.to_sym] << cp.to_i
           }
           .each { |k, v| cps_by_donor[k] = v }
     end
