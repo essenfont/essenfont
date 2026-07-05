@@ -121,8 +121,12 @@ module ReleasePipeline
       next unless File.exist?(ttf)
 
       base = File.join(out_dir, "Essenfont-#{p}")
-      ok = system("bundle exec fontisan convert #{ttf} --to woff,woff2 --output #{base}")
-      raise(Essenfont::Otc::Errors::BuildError, "WOFF encode failed for #{p}") unless ok
+      # Call fontisan convert twice (published 0.4.10 CLI doesn't accept
+      # comma-list --to woff,woff2; only the local main branch does).
+      %w[woff woff2].each do |fmt|
+        ok = system("bundle exec fontisan convert #{ttf} --to #{fmt} --output #{base}")
+        raise(Essenfont::Otc::Errors::BuildError, "WOFF encode failed for #{p}/#{fmt}") unless ok
+      end
     end
   end
   private_class_method :encode_woffs
