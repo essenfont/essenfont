@@ -584,22 +584,22 @@ donors:
     family: Ideographic Symbols and Punctuation (synthetic)
     style: Regular
     license: OFL
-    sha256: "1db065b222270bcc7ced1c879ccd3740d92c71693ee7b488e82fa509da8f8eda"
+    sha256: "8111e1c42a9ce7af0375551b54a88efd586734624ffec61bccb3b20131d615e3"
     author: "Unicode Consortium (synthetic from code charts)"
     covers: [Ideographic_Symbols_and_Punctuation]
     block: Ideographic_Symbols_and_Punctuation
     type: code_chart
-    notes: "Synthetic donor from ucode code-chart extracted SVGs. 11/11 cps (U+16FE0..U+16FFA). 3292 bytes. See scripts/build-svg-donor.rb."
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 12/12 cps (U+16FE0..U+16FFB). 3296 bytes. See scripts/build-svg-donor.rb."
 
   - label: enclosed--ideographic-supplement
     file: references/input-fonts/.generated/svg-donors/Enclosed_Ideographic_Supplement.ttf
     family: Enclosed Ideographic Supplement (synthetic)
     style: Regular
     license: OFL
-    sha256: "8f650d508a6cab3622cb034f3d8e6c0e41c19ed6c5f1e3297016ffde6e0dcccd"
+    sha256: "d2105f7008c17d23f7500b22ead3303c34dd9b8bc1c19db2b4917d4ce139c51e"
     author: "Unicode Consortium (synthetic from code charts)"
     covers: [Enclosed_Ideographic_Supplement]
     block: Enclosed_Ideographic_Supplement
     type: code_chart
-    notes: "Synthetic donor from ucode code-chart extracted SVGs. 63/64 cps (U+1F201..U+1F251). 28336 bytes. See scripts/build-svg-donor.rb."
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 64/64 cps (U+1F200..U+1F2FF). 28340 bytes. See scripts/build-svg-donor.rb."
 
