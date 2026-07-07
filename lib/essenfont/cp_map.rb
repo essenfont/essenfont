@@ -55,6 +55,18 @@ module Essenfont
     end
 
     # Build a CpMap by scanning donor fonts' cmaps.
+    #
+    # CBDT-only donors (color bitmap emoji fonts without a glyf table)
+    # are deliberately excluded from the outline cp_map. Their cmap
+    # entries point at bitmap glyphs that have no outline representation;
+    # including them here causes the Stitcher's add_all_cbdt_glyphs path
+    # to allocate empty glyf slots for those codepoints in every face.
+    # The resulting cmap entries resolve to .notdef and produce
+    # degenerate WOFF2 subsets that Chrome's OTS rejects.
+    #
+    # CBDT glyph data propagates separately via the Stitcher's
+    # propagate_cbdt_tables mechanism; the outline cp_map should reflect
+    # only codepoints whose donors can actually supply glyf outlines.
     def self.from_donors(donors)
       new_from_scan(donors)
     end
@@ -62,6 +74,8 @@ module Essenfont
     def self.new_from_scan(donors)
       map = {}
       donors.each_value do |d|
+        next if cbdt_only?(d[:font])
+
         mappings = scan_cmap(d[:font])
         mappings.each do |cp, gid|
           map[cp] ||= { label: d[:label], gid: gid }
@@ -69,6 +83,18 @@ module Essenfont
       end
       new(map)
     end
+
+    # True if the donor font carries color bitmaps (CBDT/CBLC) but no
+    # glyf or CFF table — i.e. it cannot contribute outline data.
+    def self.cbdt_only?(font)
+      return false unless font
+
+      font.table("CBDT") && font.table("CBLC") &&
+        font.table("glyf").nil? &&
+        font.table("CFF ").nil? &&
+        font.table("CFF2").nil?
+    end
+    private_class_method :cbdt_only?
 
     def self.scan_cmap(font)
       return {} unless font
