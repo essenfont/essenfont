@@ -318,6 +318,14 @@ donors:
   # and CBLC tables byte-for-byte into the output font. Restricted to
   # a single source — multi-source CBDT merging raises
   # MultipleCbdtSourcesError in fontisan.
+  #
+  # NOTE: CpMap.from_donors deliberately skips this donor when building
+  # the outline cp_map (see lib/essenfont/cp_map.rb). CBDT cmap entries
+  # cannot supply glyf outlines, so including them pollutes every face
+  # with empty .notdef slots. The TTC fallback uses noto-emoji
+  # (monochrome glyf outlines) below for its Emoticons coverage; this
+  # donor only contributes color bitmaps to the OTC via the Stitcher's
+  # propagate_cbdt_tables mechanism.
 
   - label: noto-color-emoji
     file: references/input-fonts/NotoColorEmoji.ttf
@@ -329,6 +337,21 @@ donors:
     author: "Google (Noto Project)"
     covers: [Emoticons]
     notes: "Color bitmap emoji (CBDT/CBLC). fontisan 0.4+ required for Stitcher passthrough. Provides Emoticons (U+1F600..U+1F64F, 80/80)."
+
+  # Monochrome sibling of Noto Color Emoji. Same Emoticons coverage
+  # (U+1F600..U+1F64F, 80/80) but as glyf outlines — fits Essenfont's
+  # glyf-only TTC fallback model. The OTC (canonical, CFF2) keeps the
+  # color variant via noto-color-emoji above; the TTC uses this.
+  - label: noto-emoji
+    file: references/input-fonts/NotoEmoji-Regular.ttf
+    family: Noto Emoji
+    style: Regular
+    license: OFL
+    sha256: "3c4aea565060fa91575a851e2718a5b14b9fe8856ead696b374c5a7e672179cb"
+    url: https://fonts.gstatic.com/s/notoemoji/v62/bMrnmSyK7YY-MEu6aWjPDs-ar6uWaGWuob-r0jwv.ttf
+    author: "Google (Noto Project)"
+    covers: [Emoticons]
+    notes: "Monochrome glyf outlines for Emoticons (U+1F600..U+1F64F, 80/80). TTC fallback for the website's WOFF2 subsets; Chrome's OTS rejects all-empty-glyph subsets that the CBDT-only color variant would produce."
 
   # ─────────── UC17 specialists ───────────
 
@@ -555,4 +578,16 @@ donors:
     block: Tulu-Tigalari
     type: code_chart
     notes: "Synthetic donor from ucode code-chart extracted SVGs. 31996 bytes. See scripts/build-svg-donor.rb."
+
+  - label: ideographic--symbols-and-punctuation
+    file: references/input-fonts/.generated/svg-donors/Ideographic_Symbols_and_Punctuation.ttf
+    family: Ideographic Symbols and Punctuation (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "1db065b222270bcc7ced1c879ccd3740d92c71693ee7b488e82fa509da8f8eda"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Ideographic_Symbols_and_Punctuation]
+    block: Ideographic_Symbols_and_Punctuation
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 11/11 cps (U+16FE0..U+16FFA). 3292 bytes. See scripts/build-svg-donor.rb."
 
