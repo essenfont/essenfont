@@ -591,3 +591,15 @@ donors:
     type: code_chart
     notes: "Synthetic donor from ucode code-chart extracted SVGs. 11/11 cps (U+16FE0..U+16FFA). 3292 bytes. See scripts/build-svg-donor.rb."
 
+  - label: enclosed--ideographic-supplement
+    file: references/input-fonts/.generated/svg-donors/Enclosed_Ideographic_Supplement.ttf
+    family: Enclosed Ideographic Supplement (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "8f650d508a6cab3622cb034f3d8e6c0e41c19ed6c5f1e3297016ffde6e0dcccd"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Enclosed_Ideographic_Supplement]
+    block: Enclosed_Ideographic_Supplement
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 63/64 cps (U+1F201..U+1F251). 28336 bytes. See scripts/build-svg-donor.rb."
+
