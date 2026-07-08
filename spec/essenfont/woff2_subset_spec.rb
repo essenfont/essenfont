@@ -14,7 +14,13 @@ require "tmpdir"
 # build time.
 
 RSpec.describe "WOFF2 subsets (essenfont.github.io/public/fonts)", :integration do
-  WEBSITE_PUBLIC_FONTS = "/Users/mulgogi/src/essenfont/essenfont.github.io/public/fonts"
+  # Path to the sibling website's built WOFF2 slices. Override locally
+  # via ESSENFONT_WEBSITE_FONTS; defaults to a sibling-repo relative
+  # path so the spec is portable across dev machines and CI runners.
+  WEBSITE_PUBLIC_FONTS = ENV.fetch(
+    "ESSENFONT_WEBSITE_FONTS",
+    File.expand_path("../../../essenfont.github.io/public/fonts", __dir__)
+  ).freeze
 
   # Each entry: [codepoint, slug, donor_block_name]
   # These are the chars the user reported as tofu or blank.
