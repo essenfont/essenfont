@@ -58,16 +58,29 @@ module Essenfont
       plane.short_name
     end
 
-    # Whether a codepoint is in a Unicode-reserved range we exclude
-    # from the build (PUA, Surrogates, Specials).
-    def reserved?(cp)
-      plane_number = cp >> 16
-      return true if plane_number == 15 || plane_number == 16 # SPUA-A/B
-      return true if (0xD800..0xDFFF).cover?(cp)              # Surrogates
-      return true if (0xFFF0..0xFFFF).cover?(cp)              # Specials
-      return true if (0xE000..0xF8FF).cover?(cp)              # BMP PUA
+    # Codepoint ranges Unicode reserves for non-character use and that
+    # essenfont excludes from the build: PUA (user-defined), Supplementary
+    # PUA-A/B, Surrogates, Specials, and the last two codepoints of every
+    # plane (the XFFFE/XFFFF non-characters). Single source of truth —
+    # CpMap and any other consumer delegates here.
+    RESERVED_RANGES = [
+      (0xE000..0xF8FF),     # Private Use Area
+      (0xF0000..0xFFFFD),   # Supplementary Private Use Area-A
+      (0x100000..0x10FFFD), # Supplementary Private Use Area-B
+      (0xD800..0xDFFF),     # Surrogates
+      (0xFFF0..0xFFFF),     # Specials
+      (0x1FFFE..0x1FFFF), (0x2FFFE..0x2FFFF), (0x3FFFE..0x3FFFF),
+      (0x4FFFE..0x4FFFF), (0x5FFFE..0x5FFFF), (0x6FFFE..0x6FFFF),
+      (0x7FFFE..0x7FFFF), (0x8FFFE..0x8FFFF), (0x9FFFE..0x9FFFF),
+      (0xAFFFE..0xAFFFF), (0xBFFFE..0xBFFFF), (0xCFFFE..0xCFFFF),
+      (0xDFFFE..0xDFFFF), (0xEFFFE..0xEFFFF), (0xFFFFE..0xFFFFF),
+      (0x10FFFE..0x10FFFF)
+    ].freeze
 
-      false
+    # Whether a codepoint lives in a Unicode-reserved range we exclude
+    # from the build (PUA, Surrogates, Specials, per-plane noncharacters).
+    def reserved?(cp)
+      RESERVED_RANGES.any? { |r| r.cover?(cp) }
     end
 
     # The 5 Unicode planes that carry assigned characters (BMP/SMP/SIP/TIP/SSP).
