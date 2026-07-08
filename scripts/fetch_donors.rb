@@ -37,7 +37,7 @@ module EssenfontFetch
   DONOR_DIR = File.expand_path("../references/input-fonts", __dir__)
 
   def self.run(labels: nil, force: false, dry_run: false)
-    manifest = YAML.safe_load(File.read(MANIFEST_PATH))
+    manifest = YAML.safe_load_file(MANIFEST_PATH)
     donors = manifest["donors"] || []
 
     results = donors.filter_map do |entry|

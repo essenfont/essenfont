@@ -39,7 +39,7 @@ blocks.each do |block|
   block_dir = File.join(input_dir, block)
   next unless File.directory?(block_dir)
 
-  svgs = Dir.glob(File.join(block_dir, "U+*.svg")).sort
+  svgs = Dir.glob(File.join(block_dir, "U+*.svg"))
   if svgs.empty?
     warn "No SVGs found for block #{block}"
     next

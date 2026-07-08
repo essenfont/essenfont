@@ -8,14 +8,14 @@ source "https://rubygems.org"
 # Override locally via:
 #   export FONTISAN_PATH=/path/to/fontisan
 #   export UCODE_PATH=/path/to/ucode
-fontisan_path = ENV["FONTISAN_PATH"]
+fontisan_path = ENV.fetch("FONTISAN_PATH", nil)
 if fontisan_path && Dir.exist?(fontisan_path)
   gem "fontisan", path: fontisan_path
 else
   gem "fontisan", "~> 0.4", ">= 0.4.10"
 end
 
-ucode_path = ENV["UCODE_PATH"]
+ucode_path = ENV.fetch("UCODE_PATH", nil)
 if ucode_path && Dir.exist?(ucode_path)
   gem "ucode", path: ucode_path
 else

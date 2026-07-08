@@ -44,8 +44,8 @@ module Essenfont
 
       attr_reader :entries
 
-      def each(&block)
-        @entries.each(&block)
+      def each(&)
+        @entries.each(&)
       end
 
       def size

@@ -49,7 +49,7 @@ module EssenfontBuild
       build_otc(cp_map:, donors:, subfont_format: :ttf)
     when :otc_cff2
       build_otc(cp_map:, donors:, subfont_format: :otf2)
-    when :"ttf-per-plane"
+    when :'ttf-per-plane'
       build_per_plane_ttfs(cp_map:, donors:)
     when :ttf
       warn "INFO: --format=ttf emits a single BMP-only font. " \
@@ -59,8 +59,6 @@ module EssenfontBuild
       warn "INFO: --format=otf emits a single BMP-only font. " \
            "Use the default (--format=otc) for full Unicode coverage."
       build_legacy_single(cp_map:, donors:, format: :otf)
-    when :all
-      build_otc(cp_map:, donors:, subfont_format: :ttf)
     else
       raise_build_error "unknown format #{format.inspect} " \
                         "(use :otc, :otc-cff2, :ttf-per-plane, :ttf, or :otf)"
@@ -98,7 +96,7 @@ module EssenfontBuild
           warn "  warn: unknown block '#{block}' in #{entry.label} covers:"
           next nil
         end
-        count = donors[entry.label][:coverage].keys.count { |cp| cp >= range[0] && cp <= range[1] }
+        count = donors[entry.label][:coverage].keys.count { |cp| cp.between?(range[0], range[1]) }
         next nil if count.positive?
 
         "#{entry.label}: declares covers:#{block} but cmap has 0 codepoints in #{format_range(range)}"

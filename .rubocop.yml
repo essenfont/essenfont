@@ -1,0 +1,12 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2
+  SuggestExtensions: false
+
+# RSpec describe blocks are commonly long; the unit of testing is the
+# example, not the file.
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
