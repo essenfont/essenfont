@@ -27,18 +27,49 @@ RSpec.describe Essenfont::UcodeRef do
   end
 
   describe ".reserved?" do
-    it "flags PUA codepoints" do
-      expect(described_class.reserved?(0xE000)).to be true  # BMP PUA
-      expect(described_class.reserved?(0xF0000)).to be true # SPUA-A
+    it "flags BMP PUA codepoints" do
+      expect(described_class.reserved?(0xE000)).to be true
+      expect(described_class.reserved?(0xF8FF)).to be true
+    end
+
+    it "flags Supplementary PUA-A and PUA-B" do
+      expect(described_class.reserved?(0xF0000)).to be true
+      expect(described_class.reserved?(0xFFFFD)).to be true
+      expect(described_class.reserved?(0x100000)).to be true
+      expect(described_class.reserved?(0x10FFFD)).to be true
     end
 
     it "flags surrogates" do
       expect(described_class.reserved?(0xD800)).to be true
+      expect(described_class.reserved?(0xDFFF)).to be true
+    end
+
+    it "flags BMP specials" do
+      expect(described_class.reserved?(0xFFF0)).to be true
+      expect(described_class.reserved?(0xFFFF)).to be true
+    end
+
+    it "flags the last two codepoints of every plane (XFFFE/XFFFF noncharacters)" do
+      expect(described_class.reserved?(0xFFFE)).to be true
+      expect(described_class.reserved?(0x1FFFE)).to be true
+      expect(described_class.reserved?(0x1FFFF)).to be true
+      expect(described_class.reserved?(0x2FFFE)).to be true
+      expect(described_class.reserved?(0xEFFFE)).to be true
+      expect(described_class.reserved?(0xEFFFF)).to be true
+      expect(described_class.reserved?(0x10FFFE)).to be true
+      expect(described_class.reserved?(0x10FFFF)).to be true
     end
 
     it "allows assigned plane codepoints" do
-      expect(described_class.reserved?(0x41)).to be false
-      expect(described_class.reserved?(0x4E00)).to be false
+      expect(described_class.reserved?(0x41)).to be false   # ASCII 'A'
+      expect(described_class.reserved?(0x4E00)).to be false # CJK 一
+      expect(described_class.reserved?(0x1F600)).to be false # 😀
+    end
+
+    it "is exposed as a module function (single source of truth for CpMap)" do
+      expect(described_class).to respond_to(:reserved?)
+      expect(defined?(Essenfont::CpMap::RESERVED_RANGES)).to be_nil,
+                                                             "CpMap should not duplicate RESERVED_RANGES — delegate to UcodeRef"
     end
   end
 

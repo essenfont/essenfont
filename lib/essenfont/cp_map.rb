@@ -13,24 +13,6 @@ module Essenfont
   # Replaces the inline transform_values calls scattered across
   # lib/essenfont/otc/build.rb and scripts/build.rb.
   class CpMap
-    # Reserved ranges excluded by .filter_reserved (matches Unicode
-    # "non-character" zones — PUA, Surrogates, Specials). Sourced from
-    # the UCD; intentionally inline so the cap on `non-commercial
-    # glyph` filtering is local.
-    RESERVED_RANGES = [
-      (0xE000..0xF8FF),     # Private Use Area
-      (0xF0000..0xFFFFD),   # Supplementary Private Use Area-A
-      (0x100000..0x10FFFD), # Supplementary Private Use Area-B
-      (0xD800..0xDFFF),     # Surrogates
-      (0xFFF0..0xFFFF),     # Specials
-      (0x1FFFE..0x1FFFF), (0x2FFFE..0x2FFFF), (0x3FFFE..0x3FFFF),
-      (0x4FFFE..0x4FFFF), (0x5FFFE..0x5FFFF), (0x6FFFE..0x6FFFF),
-      (0x7FFFE..0x7FFFF), (0x8FFFE..0x8FFFF), (0x9FFFE..0x9FFFF),
-      (0xAFFFE..0xAFFFF), (0xBFFFE..0xBFFFF), (0xCFFFE..0xCFFFF),
-      (0xDFFFE..0xDFFFF), (0xEFFFE..0xEFFFF), (0xFFFFE..0xFFFFF),
-      (0x10FFFE..0x10FFFF)
-    ].freeze
-
     # C0/C1/Cf codepoints that no donor covers; .backfill_cc_cf maps
     # them to gid 0 (the .notdef glyph) of the first donor.
     BACKFILL_CC_CF = (
@@ -156,7 +138,7 @@ module Essenfont
     private
 
     def reserved?(cp)
-      RESERVED_RANGES.any? { |r| r.cover?(cp) }
+      UcodeRef.reserved?(cp)
     end
   end
 end
