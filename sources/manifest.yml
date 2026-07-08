@@ -319,13 +319,9 @@ donors:
   # a single source — multi-source CBDT merging raises
   # MultipleCbdtSourcesError in fontisan.
   #
-  # NOTE: CpMap.from_donors deliberately skips this donor when building
-  # the outline cp_map (see lib/essenfont/cp_map.rb). CBDT cmap entries
-  # cannot supply glyf outlines, so including them pollutes every face
-  # with empty .notdef slots. The TTC fallback uses noto-emoji
-  # (monochrome glyf outlines) below for its Emoticons coverage; this
-  # donor only contributes color bitmaps to the OTC via the Stitcher's
-  # propagate_cbdt_tables mechanism.
+  # Excluded from the outline cp_map by OutlinePolicy (see
+  # lib/essenfont/outline_policy.rb). The TTC fallback uses noto-emoji
+  # below for Emoticons coverage.
 
   - label: noto-color-emoji
     file: references/input-fonts/NotoColorEmoji.ttf
