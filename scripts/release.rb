@@ -405,11 +405,10 @@ module ReleasePipeline
   end
 
   def parse_options(argv)
-    options = { out_dir: "release", dry_run: false, skip_build: false }
+    options = { out_dir: "release", skip_build: false }
     OptionParser.new do |opts|
       opts.banner = "Usage: release.rb [options]"
       opts.on("--out-dir=PATH") { |v| options[:out_dir] = v }
-      opts.on("--dry-run") { options[:dry_run] = true }
       opts.on("--skip-build") { options[:skip_build] = true }
     end.parse!(argv)
     options
