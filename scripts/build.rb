@@ -81,31 +81,10 @@ module EssenfontBuild
 
   # ── Coverage gate ──
   # Validates that declared covers: blocks actually have cmap coverage.
-  # Skips donors that weren't loaded (e.g., FSung is path_local_only)
-  # and donors with remaps (their raw cmap is at non-canonical cps;
-  # the remap happens at stitch time via add_source(remap:)).
+  # Delegates to Essenfont::CoverageGate — single source of truth
+  # shared with scripts/release.rb.
   def validate_coverage_gates(manifest:, donors:)
-    failures = manifest.active.flat_map do |entry|
-      next [] unless donors[entry.label]         # skip not-loaded
-      next [] if donors[entry.label][:remap]     # skip remapped (raw cmap ≠ target)
-
-      covers = entry.covers || []
-      covers.map do |block|
-        range = Essenfont::UcodeRef.block_range(block)
-        unless range
-          warn "  warn: unknown block '#{block}' in #{entry.label} covers:"
-          next nil
-        end
-        count = donors[entry.label][:coverage].keys.count { |cp| cp.between?(range[0], range[1]) }
-        next nil if count.positive?
-
-        "#{entry.label}: declares covers:#{block} but cmap has 0 codepoints in #{format_range(range)}"
-      end.compact
-    end.compact
-
-    return if failures.empty?
-
-    raise_coverage_gate_failed failures
+    Essenfont::CoverageGate.new(manifest:, donors:).validate!
   end
 
   # ── OTC (canonical) ──
@@ -223,18 +202,8 @@ module EssenfontBuild
     raise Essenfont::Otc::Errors::BuildError, message
   end
 
-  def raise_coverage_gate_failed(failures)
-    raise Essenfont::Otc::Errors::CoverageGateFailed,
-          "declared covers: blocks have 0 cmap coverage:\n#{failures.map { |f| '  - ' + f }.join("\n")}"
-  end
-
   def raise_collection_validation(message)
     raise Essenfont::Otc::Errors::CollectionValidation, message
-  end
-
-  # ── Helpers ──
-  def format_range(range)
-    "U+#{range[0].to_s(16).upcase}..U+#{range[1].to_s(16).upcase}"
   end
 end
 
