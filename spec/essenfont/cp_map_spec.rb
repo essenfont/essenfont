@@ -89,67 +89,73 @@ RSpec.describe Essenfont::CpMap do
   end
 
   describe ".from_donors" do
-    # Lightweight duck-type for the font API CpMap.from_donors touches.
-    # Responds to #table(name) returning either a truthy table object or
-    # nil. Real Fontisan::TrueTypeFont has the same shape; we use a
-    # Struct here so the spec stays a fast unit test that doesn't need
-    # to load real font binaries from disk.
-    # Plain class (not Struct) — Struct's initializer requires positional
-    # args for each member, but we want to pass the table map as a single
-    # hash keyword.
-    class FakeFont
-      def initialize(tables:)
-        @tables = tables
-      end
-
-      def table(name)
-        @tables[name]
+    # Structs stand in for Fontisan::TrueTypeFont at the table-lookup
+    # boundary CpMap.from_donors touches. Using keyword_init lets us
+    # pass the table map by name — same shape as a real font's #table.
+    let(:font_class) do
+      Struct.new(:tables, keyword_init: true) do
+        def table(name)
+          tables[name]
+        end
       end
     end
 
-    class FakeCmap
-      def initialize(mappings:)
-        @mappings = mappings
-      end
-
-      def unicode_mappings
-        @mappings
+    let(:cmap_class) do
+      Struct.new(:mappings, keyword_init: true) do
+        def unicode_mappings
+          mappings
+        end
       end
     end
 
-    it "skips CBDT-only donors that cannot supply glyf outlines" do
-      # CBDT-only donor: has CBDT/CBLC but no glyf/CFF/CFF2. Including
-      # its cmap in the outline cp_map pollutes every face with empty
-      # glyph slots (see Stitcher#add_all_cbdt_glyphs) and produces
-      # degenerate WOFF2 subsets that Chrome's OTS rejects.
-      cbdt_font = FakeFont.new(
-        tables: {
-          "glyf" => nil, "CFF " => nil, "CFF2" => nil,
-          "CBDT" => Object.new, "CBLC" => Object.new,
-          "cmap" => FakeCmap.new(mappings: { 0x1F600 => 1, 0x1F601 => 2 }),
-        },
-      )
+    let(:outline_font) do
+      font_class.new(tables: {
+        "glyf" => Object.new, "CFF " => nil, "CFF2" => nil,
+        "CBDT" => nil, "CBLC" => nil,
+        "cmap" => cmap_class.new(mappings: { 0x41 => 1 }),
+      })
+    end
 
-      # Outline donor: has glyf. Its cmap entries should be in cp_map.
-      outline_font = FakeFont.new(
-        tables: {
-          "glyf" => Object.new, "CFF " => nil, "CFF2" => nil,
-          "CBDT" => nil, "CBLC" => nil,
-          "cmap" => FakeCmap.new(mappings: { 0x41 => 1 }),
-        },
-      )
-      donors = {
-        emoji: { label: :emoji, font: cbdt_font, coverage: [0x1F600, 0x1F601].to_set, remap: nil },
-        outline: { label: :outline, font: outline_font, coverage: [0x41].to_set, remap: nil },
+    let(:cbdt_only_font) do
+      font_class.new(tables: {
+        "glyf" => nil, "CFF " => nil, "CFF2" => nil,
+        "CBDT" => Object.new, "CBLC" => Object.new,
+        "cmap" => cmap_class.new(mappings: { 0x1F600 => 1, 0x1F601 => 2 }),
+      })
+    end
+
+    let(:donors) do
+      {
+        emoji: { label: :emoji, font: cbdt_only_font, coverage: [].to_set, remap: nil },
+        outline: { label: :outline, font: outline_font, coverage: [0x41].to_set, remap: nil }
       }
+    end
+
+    it "scans outline-eligible donors into the cp_map" do
+      cp_map = described_class.from_donors(donors)
+      expect(cp_map.keys).to include(0x41)
+    end
+
+    it "skips CBDT-only donors (delegates to OutlinePolicy)" do
+      cp_map = described_class.from_donors(donors)
+      expect(cp_map.keys).not_to include(0x1F600, 0x1F601)
+    end
+
+    it "records the donor label and gid for each codepoint" do
+      cp_map = described_class.from_donors(donors)
+      expect(cp_map[0x41]).to eq(label: :outline, gid: 1)
+    end
+
+    it "keeps the first donor's assignment when several cover the same cp" do
+      second_outline = font_class.new(tables: {
+        "glyf" => Object.new, "CFF " => nil, "CFF2" => nil,
+        "CBDT" => nil, "CBLC" => nil,
+        "cmap" => cmap_class.new(mappings: { 0x41 => 9 }),
+      })
+      donors[:second] = { label: :second, font: second_outline, coverage: [0x41].to_set, remap: nil }
 
       cp_map = described_class.from_donors(donors)
-
-      # Outline donor's codepoint is included
-      expect(cp_map.keys).to include(0x41)
-      # CBDT-only donor's codepoints are NOT included — they propagate
-      # via Stitcher#propagate_cbdt_tables instead
-      expect(cp_map.keys).not_to include(0x1F600, 0x1F601)
+      expect(cp_map[0x41]).to eq(label: :outline, gid: 1)
     end
   end
 
