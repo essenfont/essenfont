@@ -6,6 +6,9 @@
 /Essenfont*.ttc
 /Essenfont*.otc
 
+# Release pipeline output (scripts/release.rb writes here)
+/release/
+
 # Generated artifacts from release-emitting scripts
 /license-pack/
 /license-pack.zip

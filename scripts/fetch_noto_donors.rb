@@ -246,8 +246,8 @@ module EssenfontNotoFetch
   end
 
   def self.load_blocks_index
-    Essenfont::UcodeRef.catalog.all_blocks.each_with_object({}) do |b, h|
-      h[b.id] = (b.first_cp..b.last_cp)
+    Essenfont::UcodeRef.catalog.all_blocks.to_h do |b|
+      [b.id, (b.first_cp..b.last_cp)]
     end
   end
 

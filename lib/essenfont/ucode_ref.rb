@@ -35,8 +35,8 @@ module Essenfont
     # Keyed by the canonical ucode block id (e.g., "CJK_Unified_Ideographs").
     # @return [Hash<String, Array<Integer, Integer>>]
     def block_ranges
-      @block_ranges ||= catalog.all_blocks.each_with_object({}) do |b, h|
-        h[b.id] = [b.first_cp, b.last_cp]
+      @block_ranges ||= catalog.all_blocks.to_h do |b|
+        [b.id, [b.first_cp, b.last_cp]]
       end.freeze
     end
 

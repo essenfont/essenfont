@@ -21,7 +21,6 @@ $LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 
 require "json"
 require "optparse"
-require "set"
 require "fontisan"
 require "essenfont"
 
@@ -90,8 +89,7 @@ module EssenfontCoverage
   end
 
   def self.emit_text(rows, font_path, threshold)
-    assigned_rows = rows.reject { |r| reserved_block?(r) }
-    reserved_rows = rows.select { |r| reserved_block?(r) }
+    reserved_rows, assigned_rows = rows.partition { |r| reserved_block?(r) }
 
     total_assigned = assigned_rows.sum { |r| r[:total] }
     total_covered = assigned_rows.sum { |r| r[:covered] }
@@ -126,8 +124,7 @@ module EssenfontCoverage
   end
 
   def self.emit_json(rows)
-    assigned_rows = rows.reject { |r| reserved_block?(r) }
-    reserved_rows = rows.select { |r| reserved_block?(r) }
+    reserved_rows, assigned_rows = rows.partition { |r| reserved_block?(r) }
 
     out = {
       generated_at: Time.now.utc.iso8601,

@@ -43,14 +43,14 @@ module EssenfontChartFetch
   DEFAULT_BLOCKS = %w[Sidetic].freeze
 
   def self.run(blocks: nil, dry_run: false)
-    manifest = YAML.safe_load(File.read(MANIFEST_PATH))
+    manifest = YAML.safe_load_file(MANIFEST_PATH)
     chart_donors = (manifest["donors"] || []).select do |d|
       d["type"] == "code_chart" &&
         (blocks.nil? || blocks.include?(d["block"]))
     end
 
     if chart_donors.empty?
-      warn "no code_chart donors in manifest#{blocks ? " matching #{blocks.inspect}" : ""}"
+      warn "no code_chart donors in manifest#{" matching #{blocks.inspect}" if blocks}"
       return
     end
 
@@ -102,7 +102,7 @@ module EssenfontChartFetch
   # Blocked on fontisan SvgToGlyf REQ being implemented.
   def self.synthetize_ttf(staging, output_path, block)
     svg_dir = File.join(staging, block.tr("-", "_"))
-    svgs = Dir.glob("#{svg_dir}/U+*.svg").sort
+    svgs = Dir.glob("#{svg_dir}/U+*.svg")
 
     unless defined?(Fontisan::SvgToGlyf)
       raise "Fontisan::SvgToGlyf not defined — install fontisan with the SvgToGlyf feature"

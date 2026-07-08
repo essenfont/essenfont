@@ -136,12 +136,12 @@ module Essenfont
       path = resolve_remap_path(spec)
       return nil unless path && File.exist?(path)
 
-      data = YAML.safe_load(File.read(path))
+      data = YAML.safe_load_file(path)
       mappings = data.fetch("mappings", [])
       return nil if mappings.empty?
 
-      mappings.each_with_object({}) do |m, h|
-        h[m.fetch("from")] = m.fetch("to")
+      mappings.to_h do |m|
+        [m.fetch("from"), m.fetch("to")]
       end
     end
 

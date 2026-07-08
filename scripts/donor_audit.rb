@@ -52,7 +52,7 @@ module EssenfontAudit
   # @param format [Symbol] :text or :json
   # @return [Integer] exit code (0 = all donors OK; 1 = any failures)
   def self.run(format: :text)
-    manifest = YAML.safe_load(File.read(MANIFEST_PATH))
+    manifest = YAML.safe_load_file(MANIFEST_PATH)
     donors = manifest["donors"] || []
 
     results = donors.map { |entry| audit_donor(entry) }
@@ -168,7 +168,7 @@ module EssenfontAudit
           note: "not in UNICODE_BLOCKS; add it (and verify the range)",
         }
       else
-        covered = cmap_info[:cps].count { |cp| cp >= range[0] && cp <= range[1] }
+        covered = cmap_info[:cps].count { |cp| cp.between?(range[0], range[1]) }
         total = range[1] - range[0] + 1
         {
           block: block,
@@ -223,12 +223,12 @@ module EssenfontAudit
            File.join(DONOR_DIR, "..", "..", specified)
     return nil unless path && File.exist?(path)
 
-    data = YAML.safe_load(File.read(path))
+    data = YAML.safe_load_file(path)
     entries = data["mappings"] || []
     return nil if entries.empty?
 
-    entries.each_with_object({}) do |e, h|
-      h[e["from"]] = e["to"]
+    entries.to_h do |e|
+      [e["from"], e["to"]]
     end
   end
 

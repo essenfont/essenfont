@@ -167,13 +167,13 @@ module ReleasePipeline
                  .transform_values { |v| { label: (v.is_a?(Hash) ? v["label"] : v).to_sym } }
 
     manifest_entries = Essenfont::Manifest.load
-    donors_meta = manifest_entries.each_with_object({}) do |e, h|
-      h[e.label] = { family: e.family, license: e.license, url: e.url, sha256: e.sha256 }
+    donors_meta = manifest_entries.to_h do |e|
+      [e.label, { family: e.family, license: e.license, url: e.url, sha256: e.sha256 }]
     end
 
     catalog = Essenfont::UcodeRef.catalog
     blocks_meta = catalog.all_blocks.each_with_object({}) do |b, h|
-      cps = cp_map.keys.select { |cp| cp >= b.first_cp && cp <= b.last_cp }
+      cps = cp_map.keys.grep(b.first_cp..b.last_cp)
       counts = cps.each_with_object(Hash.new(0)) { |cp, c| c[cp_map[cp][:label]] += 1 }
       h[b.id] = { first_cp: sprintf("0x%X", b.first_cp), last_cp: sprintf("0x%X", b.last_cp),
                   primary_donor: counts.max_by { |_, v| v }&.first,
@@ -400,7 +400,7 @@ module ReleasePipeline
       (entry.covers || []).each do |block|
         range = Essenfont::UcodeRef.block_range(block)
         next unless range
-        count = donors[entry.label][:coverage].keys.count { |cp| cp >= range[0] && cp <= range[1] }
+        count = donors[entry.label][:coverage].keys.count { |cp| cp.between?(range[0], range[1]) }
         next if count.positive?
 
         warn "  warn: #{entry.label} covers:#{block} has 0 cps (skipped)"

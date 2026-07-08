@@ -60,21 +60,21 @@ module EmitProvenance
   private_class_method :load_cp_map
 
   def self.build_donor_metadata(manifest)
-    manifest.each_with_object({}) do |entry, h|
-      h[entry.label] = {
+    manifest.to_h do |entry|
+      [entry.label, {
         family: entry.family,
         license: entry.license,
         version: entry.raw["version"],
         url: entry.url,
         sha256: entry.sha256
-      }
+      }]
     end
   end
   private_class_method :build_donor_metadata
 
   def self.compute_block_donors(catalog, cp_map)
     catalog.all_blocks.each_with_object({}) do |b, h|
-      cps_in_block = cp_map.keys.select { |cp| cp >= b.first_cp && cp <= b.last_cp }
+      cps_in_block = cp_map.keys.grep(b.first_cp..b.last_cp)
 
       donor_counts = cps_in_block.each_with_object(Hash.new(0)) do |cp, counts|
         counts[cp_map[cp][:label]] += 1

@@ -67,12 +67,12 @@ puts "Cell size: #{cell_w}x#{cell_h}"
 count = 0
 rows_needed.times do |row|
   16.times do |col|
-    cp = first_cp + row * 16 + col
+    cp = first_cp + (row * 16) + col
     break if cp > last_cp
 
     # Crop the glyph area (top 2/3 of the cell, centered)
-    x = margin_left + col * cell_w + 10
-    y = margin_top + row * cell_h
+    x = margin_left + (col * cell_w) + 10
+    y = margin_top + (row * cell_h)
     w = cell_w - 20
     h = cell_h * 2 / 3  # glyph area (above the codepoint label)
 
