@@ -4,7 +4,13 @@ require "spec_helper"
 require "tmpdir"
 
 RSpec.describe Essenfont::Otc::Build, :integration do
-  let(:donor_dir) { "/Users/mulgogi/src/essenfont/essenfont/references/input-fonts" }
+  # Default to the repo's own references/input-fonts, computed relative
+  # to the spec file so the path is portable. Override via ENV when
+  # running elsewhere.
+  let(:donor_dir) do
+    ENV.fetch("ESSENFONT_DONOR_DIR",
+              File.expand_path("../../../references/input-fonts", __dir__))
+  end
   let(:multani_path) { File.join(donor_dir, "NotoSansMultani-Regular.ttf") }
   let(:adlam_path)   { File.join(donor_dir, "NotoSansAdlam-Regular.ttf") }
 
