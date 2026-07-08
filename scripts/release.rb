@@ -390,22 +390,10 @@ module ReleasePipeline
     File.write(File.join(out_dir, "release-manifest.json"), JSON.pretty_generate(data))
   end
 
-  # ── Coverage gate (inline — same logic as build.rb) ──
+  # ── Coverage gate (shared with scripts/build.rb) ──
 
   def validate_coverage_gates(manifest:, donors:)
-    manifest.active.each do |entry|
-      next unless donors[entry.label]
-      next if donors[entry.label][:remap]
-
-      (entry.covers || []).each do |block|
-        range = Essenfont::UcodeRef.block_range(block)
-        next unless range
-        count = donors[entry.label][:coverage].keys.count { |cp| cp.between?(range[0], range[1]) }
-        next if count.positive?
-
-        warn "  warn: #{entry.label} covers:#{block} has 0 cps (skipped)"
-      end
-    end
+    Essenfont::CoverageGate.new(manifest:, donors:).validate!
   end
 
   # ── Helpers ──
