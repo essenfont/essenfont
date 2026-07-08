@@ -37,11 +37,11 @@ module ReleasePipeline
 
     puts "=== Essenfont release pipeline v#{Essenfont::Otc::Version::STRING} ==="
 
-    build_fonts(out_dir: options[:out_dir], skip: options[:skip_build])
+    cp_map = build_fonts(out_dir: options[:out_dir], skip: options[:skip_build])
     encode_woffs(out_dir: options[:out_dir])
     emit_coverage_manifest(out_dir: options[:out_dir])
-    emit_provenance(out_dir: options[:out_dir])
-    emit_license_pack(out_dir: options[:out_dir])
+    emit_provenance(out_dir: options[:out_dir], cp_map: cp_map)
+    emit_license_pack(out_dir: options[:out_dir], cp_map: cp_map)
     emit_svg_exports(out_dir: options[:out_dir])
     build_npm_package(out_dir: options[:out_dir])
     emit_sri_hashes(out_dir: options[:out_dir])
@@ -54,7 +54,7 @@ module ReleasePipeline
   # ── Build: OTC + per-plane TTFs (both in-process) ──
 
   def build_fonts(out_dir:, skip:)
-    return if skip
+    return nil if skip
 
     ENV["ESSENFONT_DUMP_CP_MAP"] = "1"
 
@@ -94,6 +94,8 @@ module ReleasePipeline
       stitcher.write_to(path, format: :ttf, subfont: name)
       puts "  #{face}: #{File.size(path)} bytes"
     end
+
+    cp_map
   end
 
   def dump_cp_map(out_dir:, cp_map:)
@@ -155,16 +157,16 @@ module ReleasePipeline
 
   # ── Provenance manifest (in-process) ──
 
-  def emit_provenance(out_dir:)
+  def emit_provenance(out_dir:, cp_map:)
+    unless cp_map
+      warn "  skip: no cp_map (built with --skip-build?)"
+      return
+    end
     puts "→ emitting provenance manifest"
-    cp_map_path = File.join(out_dir, "cp_map.json")
-    return unless File.exist?(cp_map_path)
 
-    cp_map = JSON.parse(File.read(cp_map_path))
-    # JSON keys are decimal strings ("65", "19968"); values are donor labels.
-    # Convert keys to Integers and values to {label: Symbol}.
-    cp_map = cp_map.transform_keys { |k| k.to_i }
-                 .transform_values { |v| { label: (v.is_a?(Hash) ? v["label"] : v).to_sym } }
+    # donor_labels → {cp => label} (already Symbol, already Integer keys).
+    # No JSON roundtrip, no transform_keys dance.
+    labels = cp_map.donor_labels
 
     manifest_entries = Essenfont::Manifest.load
     donors_meta = manifest_entries.to_h do |e|
@@ -173,8 +175,8 @@ module ReleasePipeline
 
     catalog = Essenfont::UcodeRef.catalog
     blocks_meta = catalog.all_blocks.each_with_object({}) do |b, h|
-      cps = cp_map.keys.grep(b.first_cp..b.last_cp)
-      counts = cps.each_with_object(Hash.new(0)) { |cp, c| c[cp_map[cp][:label]] += 1 }
+      cps = labels.keys.grep(b.first_cp..b.last_cp)
+      counts = cps.each_with_object(Hash.new(0)) { |cp, c| c[labels[cp]] += 1 }
       h[b.id] = { first_cp: sprintf("0x%X", b.first_cp), last_cp: sprintf("0x%X", b.last_cp),
                   primary_donor: counts.max_by { |_, v| v }&.first,
                   donors: counts.keys, codepoint_count: cps.size }
@@ -183,34 +185,25 @@ module ReleasePipeline
     data = {
       essenfont_version: Essenfont::Otc::Version::STRING,
       ucd_version: catalog.version, generated_at: Time.now.utc.iso8601,
-      donor_count: donors_meta.size, codepoint_count: cp_map.size,
+      donor_count: donors_meta.size, codepoint_count: labels.size,
       donors: donors_meta, blocks: blocks_meta,
-      codepoints: cp_map.transform_values { |v| { donor: v[:label] } }
+      codepoints: labels.transform_values { |label| { donor: label } }
     }
     json = JSON.generate(data)
     File.write(File.join(out_dir, "provenance.json"), json)
     Zlib::GzipWriter.open(File.join(out_dir, "provenance.json.gz")) { |gz| gz.write(json) }
-    puts "  provenance: #{cp_map.size} cps, #{blocks_meta.size} blocks"
+    puts "  provenance: #{labels.size} cps, #{blocks_meta.size} blocks"
   end
 
   # ── License attribution pack (in-process) ──
 
-  def emit_license_pack(out_dir:)
+  def emit_license_pack(out_dir:, cp_map:)
     puts "→ emitting license attribution pack"
     pack_dir = File.join(out_dir, "license-pack")
     FileUtils.mkdir_p(pack_dir)
 
     manifest = Essenfont::Manifest.load
-    cp_map_path = File.join(out_dir, "cp_map.json")
-    cps_by_donor = {}
-    if File.exist?(cp_map_path)
-      JSON.parse(File.read(cp_map_path))
-          .each_with_object(Hash.new { |h, k| h[k] = [] }) { |(cp, info), h|
-            label = info.is_a?(Hash) ? info["label"] : info
-            h[label.to_sym] << cp.to_i
-          }
-          .each { |k, v| cps_by_donor[k] = v }
-    end
+    cps_by_donor = group_codepoints_by_donor(cp_map)
 
     # LICENSE-SOURCES.md
     out = ["# Essenfont license sources", "", "Assembled from #{manifest.size} donor fonts.", ""]
@@ -248,6 +241,14 @@ module ReleasePipeline
       Dir.children(pack_dir).each { |f| zip.add(f, File.join(pack_dir, f)) }
     end
     puts "  license-pack: #{manifest.size} donors, #{nc_cps.size} NC cps"
+  end
+
+  def group_codepoints_by_donor(cp_map)
+    return {} unless cp_map
+
+    cp_map.donor_labels.each_with_object(Hash.new { |h, k| h[k] = [] }) do |(cp, label), h|
+      h[label] << cp
+    end
   end
 
   # ── Per-codepoint SVG exports (in-process) ──
