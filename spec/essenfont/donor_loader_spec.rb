@@ -165,4 +165,49 @@ RSpec.describe Essenfont::DonorLoader, :integration do
       expect(loader.send(:valid_sha256?, multani, "0" * 64, :x)).to be false
     end
   end
+
+  describe "restrict_to_covers filtering" do
+    # Real Noto Multani only covers the Multani block (U+11280–U+112AF).
+    # The font itself has no Latin codepoints, so to simulate contamination
+    # we'd need a second donor fixture — but the FILTERING LOGIC is
+    # tested below with the helper directly. End-to-end coverage of the
+    # contaminated-donor scenario is exercised by the real FSung entry in
+    # lib/essenfont/donor_loader.rb (see sources/manifest.yml).
+    def build_restricted_entry(overrides = {})
+      Essenfont::Manifest::Entry.new({
+        "label" => :cjk_only,
+        "family" => "CJK-only donor",
+        "file" => File.join(donor_dir, "NotoSansMultani-Regular.ttf"),
+        "license" => "OFL",
+        "sha256" => Digest::SHA256.file(File.join(donor_dir, "NotoSansMultani-Regular.ttf")).hexdigest,
+        "covers" => ["Multani"],
+        "restrict_to_covers" => true
+      }.merge(overrides.transform_keys(&:to_s)))
+    end
+
+    it "keeps codepoints inside declared blocks and drops the rest" do
+      entry = build_restricted_entry
+      donor = loader.load_one(entry)
+      cps = donor[:coverage].keys
+      multani_range = Essenfont::UcodeRef.block_range("Multani")
+      expect(cps).not_to be_empty
+      cps.each do |cp|
+        expect(cp).to be >= multani_range[0]
+        expect(cp).to be <= multani_range[1]
+      end
+    end
+
+    it "returns an empty coverage when covers: is empty (all cmap filtered out)" do
+      entry = build_restricted_entry("covers" => [])
+      donor = loader.load_one(entry)
+      expect(donor[:coverage]).to be_empty
+    end
+
+    it "leaves coverage unfiltered when restrict_to_covers is false" do
+      entry = build_restricted_entry("restrict_to_covers" => false)
+      donor = loader.load_one(entry)
+      # Noto Multani's cmap should pass through unchanged.
+      expect(donor[:coverage].keys).to all(be_between(0x11280, 0x112AF).inclusive)
+    end
+  end
 end

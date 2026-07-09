@@ -58,7 +58,7 @@ module Essenfont
       font = load_font(resolved, entry)
       return warn_skip(entry, "font loader raised") unless font
 
-      coverage = scan_coverage(font)
+      coverage = scan_coverage(font, entry: entry)
       remap = entry.remap? ? load_remap(entry.codepoint_remap) : nil
 
       report_load(entry, coverage, remap)
@@ -123,11 +123,17 @@ module Essenfont
       Fontisan::FontLoader.load(path, font_index: entry.font_index)
     end
 
-    def scan_coverage(font)
+    def scan_coverage(font, entry: nil)
       cmap = font.table("cmap")
       return {} unless cmap
 
-      cmap.unicode_mappings || {}
+      mappings = cmap.unicode_mappings || {}
+      return mappings unless entry&.restrict_to_covers?
+
+      ranges = (entry.covers || []).filter_map { |b| Essenfont::UcodeRef.block_range(b) }
+      return {} if ranges.empty?
+
+      mappings.select { |cp, _| ranges.any? { |from, to| cp.between?(from, to) } }
     rescue StandardError
       {}
     end

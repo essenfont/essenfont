@@ -82,6 +82,7 @@ donors:
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: [CJK_Unified_Ideographs, CJK_Symbols_and_Punctuation, CJK_Radicals_Supplement, CJK_Strokes, Enclosed_CJK_Letters_and_Months]
+    restrict_to_covers: true
     notes: "BMP font. Primary CJK Unified Ideographs donor (Traditional-first). ~40k cps across ~435 ranges."
 
   - label: fsung-2
@@ -101,6 +102,7 @@ donors:
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: [CJK_Unified_Ideographs_Extension_B, CJK_Unified_Ideographs_Extension_C, CJK_Unified_Ideographs_Extension_D, CJK_Unified_Ideographs_Extension_E, CJK_Unified_Ideographs_Extension_F, CJK_Unified_Ideographs_Extension_I, CJK_Compatibility_Ideographs_Supplement]
+    restrict_to_covers: true
     notes: "SIP font. Covers CJK Ext B/C/D/E/F/I + CJK Compat Ideographs Supplement (U+20000..U+2FA1F)."
 
   - label: fsung-3
@@ -120,6 +122,7 @@ donors:
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: [CJK_Unified_Ideographs_Extension_G, CJK_Unified_Ideographs_Extension_H, CJK_Unified_Ideographs_Extension_J]
+    restrict_to_covers: true
     notes: "TIP font. Covers CJK Ext G (U+30000..U+3134A), Ext H (U+31350..U+323AF), and Ext J (U+323B0..U+3347F). Ext F (U+2CEB0..U+2EBEF) is covered by fsung-2."
 
   - label: fsung-x
@@ -139,6 +142,7 @@ donors:
     author: "F.G. Wang (fgwang.blogspot.com) — initial style + sources from Taiwan MOE 教育部"
     author_note: "FSung was assembled + is maintained by F.G. Wang; Taiwan Ministry of Education (教育部) provided the original 全宋體 style + glyph sources. lxs602 maintains the GitHub mirror."
     covers: []
+    restrict_to_covers: true
     notes: "Plane 3 distribution of F.Sung. v3.001 encodes glyphs at Plane 16 PUA positions (U+100000..U+10FFFF) rather than the official Unicode CJK Ext G/H ranges. We retain the file as source provenance and look forward to a future FSung release that maps glyphs to their Unicode positions; until then, FSung-3 covers Ext G/H/J."
 
   # ─────────── Noto family (Latin/Cyrillic/Greek/symbols) ───────────
