@@ -18,6 +18,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    env:
+      # Set at job level so step-level `if:` conditions can read it
+      # (step-level env is not visible to its own if:).
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,9 +54,7 @@ jobs:
         run: bundle exec ruby scripts/release.rb
 
       - name: Publish to npm (if NPM_TOKEN set)
-        if: ${{ secrets.NPM_TOKEN != '' }}
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: ${{ env.NPM_TOKEN != '' }}
         run: bundle exec ruby scripts/release.rb publish --token "$NPM_TOKEN"
 
       - name: Generate release notes
