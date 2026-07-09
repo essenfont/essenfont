@@ -26,6 +26,7 @@ module Essenfont
         @type = (hash["type"] || hash[:type] || :font).to_sym
         @block = hash["block"] || hash[:block]
         @enabled = hash.fetch("enabled", hash.fetch(:enabled, true))
+        @restrict_to_covers = !hash["restrict_to_covers"].nil?
         freeze
       end
 
@@ -35,6 +36,15 @@ module Essenfont
 
       def remap?
         !@codepoint_remap.nil?
+      end
+
+      # When true, the donor's cmap is filtered at scan time to only
+      # include codepoints that fall inside its declared `covers:` blocks.
+      # Used for fonts whose cmap entries extend far beyond their intended
+      # scope (e.g. FullSung's BMP ASCII glyphs contaminating non-CJK
+      # assignments, or FSung-X whose cmap is in unofficial PUA positions).
+      def restrict_to_covers?
+        @restrict_to_covers
       end
 
       def to_h_for_json
