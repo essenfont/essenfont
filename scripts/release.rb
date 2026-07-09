@@ -428,11 +428,8 @@ require "time"
 
 if ARGV.first == "publish"
   ARGV.shift
-  token = ARGV.find { |a| a.start_with?("--token=") }&.split("=", 2)&.last
-  ENV["NPM_TOKEN"] = token if token
   Dir.chdir("release/npm") do
-    `npm config set //registry.npmjs.org/:_authToken #{ENV.fetch("NPM_TOKEN", "")}`
-    system("npm publish --access public") || raise("npm publish failed")
+    system("npm publish --provenance --access public") || raise("npm publish failed")
   end
 else
   ReleasePipeline.run(ARGV)
