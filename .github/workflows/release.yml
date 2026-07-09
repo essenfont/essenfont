@@ -55,9 +55,6 @@ jobs:
       - name: Run full release pipeline
         run: bundle exec ruby scripts/release.rb
 
-      - name: Publish to npm (trusted publishing — no token)
-        run: bundle exec ruby scripts/release.rb publish
-
       - name: Generate release notes
         run: |
           {
@@ -77,3 +74,7 @@ jobs:
           files: |
             release/*
             release/npm/*.tgz
+
+      - name: Publish to npm (trusted publishing — best-effort after GH Release ships)
+        continue-on-error: true
+        run: bundle exec ruby scripts/release.rb publish
