@@ -11,4 +11,5 @@ module Essenfont
   autoload :OutlinePolicy, "essenfont/outline_policy"
   autoload :UcodeRef,      "essenfont/ucode_ref"
   autoload :Otc,           "essenfont/otc"
+  autoload :Ufo,           "essenfont/ufo"
 end
