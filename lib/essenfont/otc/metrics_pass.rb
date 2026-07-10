@@ -131,7 +131,8 @@ module Essenfont
       def call
         return Extents.empty if tables["glyf"].nil? || tables["loca"].nil?
 
-        scan_glyf_extents
+        extents = scan_glyf_extents
+        extents.empty? ? Extents.zero : extents
       end
 
       private
@@ -292,6 +293,10 @@ module Essenfont
       def self.empty
         new(x_min: Float::INFINITY, y_min: Float::INFINITY,
             x_max: -Float::INFINITY, y_max: -Float::INFINITY)
+      end
+
+      def self.zero
+        new(x_min: 0, y_min: 0, x_max: 0, y_max: 0)
       end
 
       def empty?
