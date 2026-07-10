@@ -47,13 +47,28 @@ module Essenfont
     def self.new_from_scan(donors)
       map = {}
       donors.each_value do |d|
-        mappings = d[:coverage] || scan_cmap(d[:font])
+        mappings = resolve_coverage(d)
         mappings.each do |cp, gid|
           map[cp] ||= { label: d[:label], gid: gid }
         end
       end
       new(map)
     end
+
+    # Resolve a donor's codepoint→gid mappings from its :coverage field.
+    # Handles three shapes:
+    # - nil → fall back to the raw font's cmap (no filter)
+    # - Hash {cp => gid} → use directly (production path from DonorLoader)
+    # - Set/Array of cps → filter the font's cmap to only those cps
+    def self.resolve_coverage(donor)
+      coverage = donor[:coverage]
+      return scan_cmap(donor[:font]) if coverage.nil?
+      return coverage if coverage.is_a?(Hash)
+
+      cmap = scan_cmap(donor[:font])
+      coverage.each_with_object({}) { |cp, h| h[cp] = cmap[cp] if cmap.key?(cp) }
+    end
+    private_class_method :resolve_coverage
 
     def self.scan_cmap(font)
       return {} unless font
