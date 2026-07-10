@@ -13,7 +13,7 @@ require "spec_helper"
 RSpec.describe Essenfont::Otc::MetricsPass do
   describe "Extents" do
     it "starts empty and absorbs glyph bboxes" do
-      extents = Essenfont::Otc::Extents.send(:new,
+      extents = Essenfont::Otc::Extents.new(
         x_min: Float::INFINITY, y_min: Float::INFINITY,
         x_max: -Float::INFINITY, y_max: -Float::INFINITY)
       extents.absorb!(-100, -50, 500, 800)
@@ -26,7 +26,7 @@ RSpec.describe Essenfont::Otc::MetricsPass do
     end
 
     it "detects empty state" do
-      extents = Essenfont::Otc::Extents.send(:new,
+      extents = Essenfont::Otc::Extents.new(
         x_min: Float::INFINITY, y_min: Float::INFINITY,
         x_max: -Float::INFINITY, y_max: -Float::INFINITY)
       expect(extents.empty?).to be true

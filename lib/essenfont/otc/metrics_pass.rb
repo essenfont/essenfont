@@ -112,7 +112,7 @@ module Essenfont
         Array.new(num_fonts) { |i| data.unpack1("x#{12 + i * 4}N") }
       end
     end
-    private_constant :FaceTableLocator
+
 
     # Walks a face's glyf/loca tables to compute the actual bbox union
     # of all glyphs. Returns a Extents value object.
@@ -191,7 +191,7 @@ module Essenfont
         end
       end
     end
-    private_constant :GlyphExtentsScanner
+
 
     # Patches head.bbox + hhea + OS/2 fields in-place on the binary
     # data string for one face.
@@ -274,7 +274,7 @@ module Essenfont
         ].pack("S2")
       end
     end
-    private_constant :FaceMetricsPatcher
+
 
     # Mutable accumulator: the bbox union of a face's glyphs.
     # During scanning, absorb! grows the bbox per glyph. After scanning
@@ -311,6 +311,6 @@ module Essenfont
         self
       end
     end
-    private_constant :Extents
+
   end
 end
