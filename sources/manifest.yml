@@ -399,6 +399,7 @@ donors:
     url_extract: https://codeload.github.com/microsoft/font-tools/zip/refs/heads/main
     url_extract_member: font-tools-main/EgyptianOpenType/EgyptianText-Regular.ttf
     covers: []
+    restrict_to_covers: true
     notes: "Defense-in-depth secondary for Egyptian Hieroglyphs. Microsoft font-tools reference, OFL. Core block (1072/1072), Format Controls (38/48), Ext-A tail (21/4000) all redundant with uni-hieroglyphica. upm=2048 — would require scaling; demoted to avoid the glyph-bounds class of bugs. Kept for source provenance."
 
   # ─────────── Egyptian Hieroglyphs specialists ───────────
@@ -423,6 +424,7 @@ donors:
     url: https://github.com/nederhof/newgardiner/raw/refs/heads/main/fonts/NewGardiner.ttf
     author: "Mark Jan Nederhof"
     covers: []
+    restrict_to_covers: true
     notes: "Defense-in-depth secondary for Egyptian Hieroglyphs core (1072/1072, redundant with eot.ttf) and Ext-A Extended (3427/4000, subsumed by uni-hieroglyphica). Listed for completeness; provides no unique Unicode-block coverage. covers: [] because no block is exclusively or best covered by this donor."
 
   - label: new-gardiner-non-core
@@ -434,6 +436,7 @@ donors:
     url: https://github.com/nederhof/newgardiner/raw/refs/heads/main/fonts/NewGardinerNonCore.ttf
     author: "Mark Jan Nederhof"
     covers: []
+    restrict_to_covers: true
     notes: "8 supplemental Ext-A Extended codepoints not in main NewGardiner. Subsumed by uni-hieroglyphica (3995/4000)."
 
   # ─────────── Symbola (mirror) ───────────
@@ -448,6 +451,7 @@ donors:
     author: "George Douros"
     original_url: https://dn-works.com/ufas/
     covers: []
+    restrict_to_covers: true
     notes: "George Douros's comprehensive symbol/historical-script font. Adds breadth to several pictographic and arrow ranges; Supplemental Arrows-C is covered by Noto Sans Symbols 2."
 
   # ─────────── Last Resort (DEFERRED to v0.2.0) ───────────
