@@ -27,7 +27,7 @@ RSpec.describe Essenfont::Ufo::Normalization do
     it "returns ~0.4167 for a 2400-upm UFO" do
       ufo = build_ufo(units_per_em: 2400)
       norm = described_class.new(ufo, target_upm: target_upm)
-      expect(norm.scale_factor).to be_within(0.0001).of(0.41666666666667)
+      expect(norm.scale_factor).to be_within(0.0001).of(0.416666666666667)
     end
   end
 
@@ -58,17 +58,17 @@ RSpec.describe Essenfont::Ufo::Normalization do
       described_class.apply!(ufo, target_upm: 1000)
 
       point = ufo.glyphs["test"].contours.first.points.first
-      expect(point.x).to eq(500)  # 1024 * 0.4883 ≈ 500
-      expect(point.y).to eq(250)  # 512 * 0.4883 ≈ 250
+      expect(point.x).to eq(500)
+      expect(point.y).to eq(250)
     end
 
     it "scales advance width" do
       ufo = build_ufo(units_per_em: 2048)
-      glyph = add_glyph(ufo, "test", width: 2048)
+      add_glyph(ufo, "test", width: 2048)
 
       described_class.apply!(ufo, target_upm: 1000)
 
-      expect(ufo.glyphs["test"].width).to eq(1000) # 2048 * 0.4883 ≈ 1000
+      expect(ufo.glyphs["test"].width).to eq(1000)
     end
 
     it "scales open_type_hhea_ascender when present" do
@@ -77,16 +77,18 @@ RSpec.describe Essenfont::Ufo::Normalization do
 
       described_class.apply!(ufo, target_upm: 1000)
 
-      expect(ufo.info.open_type_hhea_ascender).to eq(800) # 1638 * 0.4883 ≈ 800
+      expect(ufo.info.open_type_hhea_ascender).to eq(800)
     end
 
     it "does not mutate the UFO when identity?" do
       ufo = build_ufo(units_per_em: 1000)
       glyph = add_glyph(ufo, "test", width: 500)
       add_point(glyph, x: 100, y: 200)
+      original_x = ufo.glyphs["test"].contours.first.points.first.x
 
-      expect { described_class.apply!(ufo, target_upm: 1000) }
-        .not_to change { ufo.glyphs["test"].contours.first.points.first.x }
+      described_class.apply!(ufo, target_upm: 1000)
+
+      expect(ufo.glyphs["test"].contours.first.points.first.x).to eq(original_x)
     end
 
     it "preserves point type and smooth flag" do
@@ -114,7 +116,6 @@ RSpec.describe Essenfont::Ufo::Normalization do
 
   def build_ufo(units_per_em:)
     ufo = Fontisan::Ufo::Font.new
-    ufo.info = Fontisan::Ufo::Info.new
     ufo.info.units_per_em = units_per_em
     ufo
   end
@@ -122,7 +123,7 @@ RSpec.describe Essenfont::Ufo::Normalization do
   def add_glyph(ufo, name, width:)
     glyph = Fontisan::Ufo::Glyph.new(name: name)
     glyph.width = width
-    ufo.layers.default_layer.add_glyph(glyph)
+    ufo.layers.default_layer.add(glyph)
     glyph
   end
 
