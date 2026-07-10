@@ -311,7 +311,7 @@ module ReleasePipeline
                                     total_svgs: index.size, files: index))
 
     # Zip via rubyzip
-    Zip::File.open(File.join(out_dir, "svg-exports.zip"), Zip::File::CREATE) do |zip|
+    Zip::File.open("#{svg_dir}.zip", Zip::File::CREATE) do |zip|
       Dir.children(svg_dir).each { |f| zip.add(f, File.join(svg_dir, f)) }
     end
     puts "  SVG exports: #{index.size} glyphs"
