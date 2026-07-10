@@ -115,7 +115,7 @@ module Essenfont
                   native_upm: native_upm,
                   scale_factor: normalization.scale_factor)
 
-      { label: entry.label, ufo: ufo, file: resolved, coverage: coverage,
+      { label: entry.label, font: font, ufo: ufo, file: resolved, coverage: coverage,
         remap: remap, entry: entry,
         native_upm: native_upm,
         scale_factor: normalization.scale_factor }
