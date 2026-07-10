@@ -72,17 +72,17 @@ module ReleasePipeline
 
     dump_cp_map(out_dir:, cp_map:)
 
-    puts "→ building OTC (glyf → TTC)"
+    puts "→ building OTC (CFF2 outlines)"
     result = Essenfont::Otc::Build.new(
-      cp_map: cp_map, donors: donors, subfont_format: :ttf
-    ).call(output_path: File.join(out_dir, "Essenfont-Regular.ttc"))
-    puts "  TTC: #{result.bytes} bytes, #{result.subfont_count} faces"
+      cp_map: cp_map, donors: donors, subfont_format: :otf2
+    ).call(output_path: File.join(out_dir, "Essenfont-Regular.otc"))
+    puts "  OTC: #{result.bytes} bytes, #{result.subfont_count} faces"
 
     puts "→ building per-plane TTFs"
     partitioner = Fontisan::Stitcher::PartitionStrategy::ByPlane.new
     blueprint = partitioner.call(cp_map.donor_labels)
     stitcher = Fontisan::Stitcher.new
-    donors.each_value { |d| stitcher.add_source(d[:label], d[:font], remap: d[:remap]) }
+    donors.each_value { |d| stitcher.add_source(d[:label], d[:ufo] || d[:font], remap: d[:remap]) }
     blueprint.apply_to(stitcher)
 
     catalog = Essenfont::UcodeRef.catalog
@@ -255,7 +255,7 @@ module ReleasePipeline
 
   def emit_svg_exports(out_dir:)
     puts "→ emitting per-codepoint SVG exports"
-    otc_path = File.join(out_dir, "Essenfont-Regular.ttc")
+    otc_path = File.join(out_dir, "Essenfont-Regular.otc")
     svg_dir = File.join(out_dir, "svg-exports")
     return unless File.exist?(otc_path)
 

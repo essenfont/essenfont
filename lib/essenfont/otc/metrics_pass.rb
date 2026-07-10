@@ -211,6 +211,12 @@ module Essenfont
       end
 
       def patch!
+        # CFF/CFF2 faces (OTC) don't have glyf/loca tables. The CFF2
+        # compiler already computes head/hhea/OS-2 from the UFO's
+        # fontinfo + actual glyph data. MetricsPass is only needed for
+        # the glyf (TTC) path where the Stitcher inherits donor metrics.
+        return if extents.empty?
+
         patch_head!
         patch_hhea!
         patch_os2!
