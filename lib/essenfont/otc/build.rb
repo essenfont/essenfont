@@ -34,13 +34,16 @@ module Essenfont
         blueprint = partitioner.call(cp_map.donor_labels)
         stitcher = Fontisan::Stitcher.new
         donors.each_value do |d|
-          stitcher.add_source(d[:label], d[:font], remap: d[:remap])
+          source = d[:ufo] || d[:font]
+          stitcher.add_source(d[:label], source, remap: d[:remap])
         end
         stitcher.set_info(base_info_values)
 
         blueprint.apply_to(stitcher)
 
         collection = stitcher.write_collection(output_path, format: subfont_format)
+
+        MetricsPass.recompute!(collection.path)
 
         Result.new(
           output_path: collection.path,

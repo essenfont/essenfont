@@ -47,7 +47,7 @@ module Essenfont
     def self.new_from_scan(donors)
       map = {}
       donors.each_value do |d|
-        mappings = scan_cmap(d[:font])
+        mappings = d[:coverage] || scan_cmap(d[:font])
         mappings.each do |cp, gid|
           map[cp] ||= { label: d[:label], gid: gid }
         end

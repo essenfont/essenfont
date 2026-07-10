@@ -398,8 +398,8 @@ donors:
     author: "Microsoft Corporation"
     url_extract: https://codeload.github.com/microsoft/font-tools/zip/refs/heads/main
     url_extract_member: font-tools-main/EgyptianOpenType/EgyptianText-Regular.ttf
-    covers: [Egyptian_Hieroglyphs, Egyptian_Hieroglyph_Format_Controls]
-    notes: "Repo is MIT-licensed; the font file itself is OFL. Covers Egyptian Hieroglyphs core (U+13000..U+1342F) 1072/1072, Format Controls (U+13430..U+1345F) 38/48, and a tail of Ext-A Extended (21/4000)."
+    covers: []
+    notes: "Defense-in-depth secondary for Egyptian Hieroglyphs. Microsoft font-tools reference, OFL. Core block (1072/1072), Format Controls (38/48), Ext-A tail (21/4000) all redundant with uni-hieroglyphica. upm=2048 — would require scaling; demoted to avoid the glyph-bounds class of bugs. Kept for source provenance."
 
   # ─────────── Egyptian Hieroglyphs specialists ───────────
 
@@ -411,8 +411,8 @@ donors:
     sha256: "ad60bb2f469697837b556388d47b500a21d866370a49a8be770b206108aaf664"
     url: https://suignard.com/Ptolemaic/UniHieroglyphica.ttf
     author: "Michel Suignard (suignard.com)"
-    covers: [Egyptian_Hieroglyphs_Extended-A]
-    notes: "Covers Egyptian Hieroglyphs Ext-A Extended (U+13460..U+143FF) 3995/4000 — primary Ext-A Extended donor. Also covers core 1072/1072 and Format Controls 38/48 (redundant with eot.ttf). Does NOT cover Ext-B (U+16A40..U+16A8F)."
+    covers: [Egyptian_Hieroglyphs, Egyptian_Hieroglyph_Format_Controls, Egyptian_Hieroglyphs_Extended-A]
+    notes: "Primary donor for all Egyptian Hieroglyphs blocks. By Michel Suignard (Unicode Egyptian Hieroglyphs co-editor). upm=1000 — matches Essenfont target, no scaling required. Covers core (1072/1072), Format Controls (38/48), Ext-A Extended (3995/4000)."
 
   - label: new-gardiner
     file: references/input-fonts/NewGardiner.ttf
