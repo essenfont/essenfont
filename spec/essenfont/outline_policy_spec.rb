@@ -68,9 +68,9 @@ RSpec.describe Essenfont::OutlinePolicy do
   describe ".outline_eligible" do
     let(:donors) do
       {
-        emoji: { label: :emoji, font: cbdt_only_font },
-        outline: { label: :outline, font: outline_font },
-        cff: { label: :cff, font: cff_font }
+        emoji: Essenfont::Donor::Info.new(label: :emoji, font: cbdt_only_font),
+        outline: Essenfont::Donor::Info.new(label: :outline, font: outline_font),
+        cff: Essenfont::Donor::Info.new(label: :cff, font: cff_font)
       }
     end
 
@@ -84,7 +84,7 @@ RSpec.describe Essenfont::OutlinePolicy do
       expect(filtered.keys).not_to include(:emoji)
     end
 
-    it "preserves the donor-hash shape (label => donor_hash)" do
+    it "preserves the donor-hash shape (label => donor)" do
       filtered = described_class.outline_eligible(donors)
       expect(filtered[:outline]).to eq donors[:outline]
     end

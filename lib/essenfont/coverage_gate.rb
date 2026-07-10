@@ -52,13 +52,13 @@ module Essenfont
     def entry_failures(entry)
       donor = donors[entry.label]
       return [] unless donor
-      return [] if donor[:remap]
+      return [] if donor.remap
 
       (entry.covers || []).filter_map do |block|
         range = UcodeRef.block_range(block)
         next nil unless range
 
-        count = donor[:coverage].keys.count { |cp| cp.between?(range[0], range[1]) }
+        count = donor.coverage.keys.count { |cp| cp.between?(range[0], range[1]) }
         next nil if count.positive?
 
         Failure.new(label: entry.label, block: block, range: range)

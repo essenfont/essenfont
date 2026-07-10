@@ -65,18 +65,12 @@ module EssenfontBuild
     end
   end
 
-  # ── CpMap assembly: scan → filter → backfill ──
+  # ── CpMap assembly (scan → filter → backfill in one call) ──
   def build_cp_map(donors)
-    raw = Essenfont::CpMap.from_donors(donors)
-    puts "  total codepoints across donors: #{raw.size}"
-
-    filtered = raw.filter_reserved
-    puts "  after filtering PUA/Surrogate/Specials: #{filtered.size}"
-
-    first_label = donors.values.first[:label]
-    backfilled = filtered.backfill_cc_cf(first_label)
-    puts "  after Cc/Cf backfill: #{backfilled.size}"
-    backfilled
+    cp_map = Essenfont::CpMap.build_from(donors)
+    puts "  total codepoints across donors: #{cp_map.size}"
+    puts "  (after filtering PUA/Surrogate/Specials + Cc/Cf backfill)"
+    cp_map
   end
 
   # ── Coverage gate ──
@@ -118,74 +112,38 @@ module EssenfontBuild
   def build_per_plane_ttfs(cp_map:, donors:)
     puts "=== Partitioning #{cp_map.size} codepoints by Unicode plane ==="
 
-    partitioner = Fontisan::Stitcher::PartitionStrategy::ByPlane.new
-    blueprint = partitioner.call(cp_map.donor_labels)
-    subfont_names = blueprint.names
-    puts "  #{subfont_names.size} subfonts: #{subfont_names.join(', ')}"
+    build = Essenfont::Otc::Build.new(cp_map: cp_map, donors: donors, subfont_format: :ttf)
+    results = build.write_per_plane_ttfs(out_dir: OUTPUT_DIR)
 
-    stitcher = Fontisan::Stitcher.new
-    donors.each_value do |d|
-      stitcher.add_source(d[:label], d[:font], remap: d[:remap])
-    end
-    blueprint.apply_to(stitcher)
-
-    catalog = Essenfont::UcodeRef.catalog
-    subfont_names.each do |name|
-      plane_num = name.to_s.sub("plane_", "").to_i
-      plane = catalog.find_plane(plane_num)
-      face_name = plane&.short_name&.to_s || name.to_s
-      out = File.join(OUTPUT_DIR, "Essenfont-#{face_name}.ttf")
-      puts "=== Writing #{out} ==="
-      stitcher.write_to(out, format: :ttf, subfont: name)
-      puts "  #{out} (#{File.size(out)} bytes)"
+    puts "  #{results.size} subfonts: #{results.map { |r| r[:name] }.join(', ')}"
+    results.each do |r|
+      puts "=== Writing #{r[:path]} ==="
+      puts "  #{r[:path]} (#{r[:bytes]} bytes)"
     end
   end
 
   # ── Legacy single-font (TTF or OTF, BMP only) ──
   def build_legacy_single(cp_map:, donors:, format:)
-    bmp_map = cp_map.map.select { |cp, _| cp <= 0xFFFF }
-    puts "=== Stitching #{bmp_map.size} BMP codepoints (legacy #{format}) ==="
-
-    stitcher = Fontisan::Stitcher.new
-    donors.each_value do |d|
-      stitcher.add_source(d[:label], d[:font], remap: d[:remap])
-    end
-
-    first_label = donors.values.first[:label]
-    stitcher.include_notdef(from: first_label, into: :legacy)
-
-    bmp_map.each_slice(1000) do |slice|
-      slice.each do |cp, info|
-        stitcher.include_codepoints([cp], from: info[:label], into: :legacy)
-      end
-    end
-
     ext = format == :otf ? "otf" : "ttf"
     output_path = File.join(OUTPUT_DIR, "Essenfont-Regular.#{ext}")
+
+    build = Essenfont::Otc::Build.new(cp_map: cp_map, donors: donors, subfont_format: format)
+    build.call_single_face(output_path:, format:)
+
     puts "=== Writing #{output_path} ==="
-    stitcher.write_to(output_path, format: format, subfont: :legacy)
     puts "  #{output_path} (#{File.size(output_path)} bytes)"
   end
 
-  # ── Post-write validation via Fontisan::Collection::Reader ──
+  # ── Post-write validation via Essenfont::Otc::Validator ──
   def validate_collection!(path, expected_faces:, expected_cmap_union_size:)
-    reader = Fontisan::Collection::Reader.open(path)
-    unless reader.face_count == expected_faces
-      raise_collection_validation "#{path} has #{reader.face_count} faces, expected #{expected_faces}"
-    end
+    failures = Essenfont::Otc::Validator.check(
+      path, expected_faces: expected_faces,
+            expected_cmap_union_size: expected_cmap_union_size
+    )
+    return if failures.empty?
 
-    reader.stats.each do |s|
-      next if s.glyph_count <= 65_535
-
-      raise_collection_validation "face #{s.index} has #{s.glyph_count} glyphs (cap 65,535)"
-    end
-
-    union_size = reader.cmap_union.size
-    return unless union_size < expected_cmap_union_size * 0.99
-
-    dropped = expected_cmap_union_size - union_size
-    warn "  WARNING: cmap union dropped #{dropped} entries " \
-         "(#{union_size} / #{expected_cmap_union_size})"
+    msg = failures.map { |f| "  - #{f.message}" }.join("\n")
+    raise Essenfont::Otc::Errors::CollectionValidation, msg
   end
 
   # ── cp_map.json dump for downstream attribution ──

@@ -14,37 +14,24 @@ module Essenfont
   # lives in CBDT/CBLC tables that the Stitcher propagates as raw
   # bytes.
   #
-  # The returned donor hash carries either +:font+ (CBDT path) or
-  # +:ufo+ (outline path). Callers (CpMap, Otc::Build) handle both
-  # via `donor[:ufo] || donor[:font]`.
+  # The returned Donor::Info carries either +font+ (CBDT path) or
+  # +ufo+ (outline path). Callers (CpMap, Otc::Build) access the
+  # stitcher source via `donor.outline_source` (ufo || font).
   class DonorLoader
-    MAGIC_BYTES = [
-      "\x00\x01\x00\x00",  # TTF
-      "OTTO",              # OTF (CFF)
-      "true",              # TrueType (Apple variant)
-      "ttcf",              # TTC
-      "wOFF",              # WOFF
-      "wOF2",              # WOFF2
-      "\x00\x01\x00\x00".b # TTF (binary)
-    ].freeze
-
-    attr_reader :manifest, :donor_dir, :remap_dir, :target_upm, :build_cache
+    attr_reader :manifest, :donor_dir, :remap_dir, :target_upm
 
     # @param manifest [Essenfont::Manifest::Collection]
     # @param donor_dir [String] path to donor font files
     # @param remap_dir [String] path to remap files
     # @param target_upm [Integer] desired unitsPerEm for UFO normalization
-    # @param build_cache [Essenfont::BuildCache, nil] optional cache for UFO conversions
     def initialize(manifest:,
                    donor_dir: DonorLoader.default_donor_dir,
                    remap_dir: DonorLoader.default_remap_dir,
-                   target_upm: Essenfont::Ufo::Normalization::DEFAULT_TARGET_UPM,
-                   build_cache: nil)
+                   target_upm: Essenfont::Ufo::Normalization::DEFAULT_TARGET_UPM)
       @manifest = manifest
       @donor_dir = donor_dir
       @remap_dir = remap_dir
       @target_upm = target_upm.to_i
-      @build_cache = build_cache
     end
 
     # Load every active donor entry. Returns {label => donor_hash}.
@@ -65,7 +52,7 @@ module Essenfont
       return warn_skip(entry, "file not resolved") unless resolved
 
       return warn_skip(entry, "missing on disk: #{resolved}") unless File.exist?(resolved)
-      return warn_skip(entry, "not a valid font (magic bytes mismatch)") unless valid_magic?(resolved)
+      return warn_skip(entry, "not a valid font (magic bytes mismatch)") unless Essenfont::FontMagic.valid?(resolved)
       return warn_skip(entry, "sha256 mismatch") unless valid_sha256?(resolved, entry.sha256, entry.label)
 
       font = load_font(resolved, entry)
@@ -99,14 +86,16 @@ module Essenfont
     def load_cbdt_donor(entry, font, resolved, remap)
       coverage = scan_font_coverage(font, entry: entry)
       report_load(entry, coverage, remap, mode: :cbdt)
-      { label: entry.label, font: font, file: resolved, coverage: coverage,
-        remap: remap, entry: entry }
+      Essenfont::Donor::Info.new(
+        label: entry.label, font: font, file: resolved,
+        coverage: coverage, remap: remap, entry: entry
+      )
     end
 
     # -- Outline (UFO) path ------------------------------------------------
 
     def load_outline_donor(entry, font, resolved, remap)
-      ufo, native_upm, scale_factor = load_or_cache_ufo(entry, font, resolved)
+      ufo, native_upm, scale_factor = convert_and_measure(font)
 
       coverage = scan_ufo_coverage(ufo, entry: entry)
       report_load(entry, coverage, remap,
@@ -114,22 +103,11 @@ module Essenfont
                   native_upm: native_upm,
                   scale_factor: scale_factor)
 
-      { label: entry.label, font: font, ufo: ufo, file: resolved, coverage: coverage,
-        remap: remap, entry: entry,
-        native_upm: native_upm,
-        scale_factor: scale_factor }
-    end
-
-    # Returns [ufo, native_upm, scale_factor].
-    #
-    # Disk-based UFO cache (fontisan Writer/Reader) is INTENDED here but
-    # fontisan::Ufo::Reader only decodes Phase 1 .glif data (name, advance,
-    # unicodes) — NOT contours/components/anchors. Loading from cache
-    # produces UFOs with empty glyphs. Until the Reader is complete, we
-    # always do fresh conversion. The SVG and WOFF2 caches in release.rb
-    # (which cache raw binary files, not UFO objects) are unaffected.
-    def load_or_cache_ufo(entry, font, resolved)
-      convert_and_measure(font)
+      Essenfont::Donor::Info.new(
+        label: entry.label, font: font, ufo: ufo, file: resolved,
+        coverage: coverage, remap: remap, entry: entry,
+        native_upm: native_upm, scale_factor: scale_factor
+      )
     end
 
     # Convert font → UFO, normalize, measure UPM + scale factor.
@@ -142,12 +120,6 @@ module Essenfont
       normalization.apply! unless normalization.identity?
 
       [ufo, native_upm, normalization.scale_factor]
-    end
-
-    def ufo_cache_key(entry)
-      sha = entry.sha256 || "unknown"
-      fontisan_ver = Gem.loaded_specs["fontisan"]&.version&.to_s || "dev"
-      "#{sha}-upm#{target_upm}-fontisan#{fontisan_ver}-norm1"
     end
 
     def convert_to_ufo(font)
@@ -181,19 +153,6 @@ module Essenfont
     end
 
     # -- Validation --------------------------------------------------------
-
-    def valid_magic?(path)
-      return false unless File.exist?(path) && File.size(path) > 16
-
-      magic = File.binread(path, 4)
-      return true if MAGIC_BYTES.include?(magic)
-      return true if File.binread(path, 1).getbyte(0) == 0x80 # PFB
-
-      warn "    first 4 bytes: #{magic.inspect} — not a font magic"
-      false
-    rescue StandardError
-      false
-    end
 
     def valid_sha256?(path, expected, label)
       return true if expected.nil? || expected == "TBD"

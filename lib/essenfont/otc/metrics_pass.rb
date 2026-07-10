@@ -75,6 +75,36 @@ module Essenfont
       end
     end
 
+    # Parses an sfnt table directory once. Provides [tag] → [offset, length].
+    # Shared by GlyphExtentsScanner and FaceMetricsPatcher — previously
+    # each class had a byte-for-byte identical parse_table_directory method.
+    class SfntTableDirectory
+      attr_reader :tables
+
+      def initialize(data, face_offset)
+        @tables = parse(data, face_offset)
+      end
+
+      def [](tag)
+        @tables[tag]
+      end
+
+      private
+
+      def parse(data, face_offset)
+        num_tables = data.unpack1("@#{face_offset + 4}n")
+        dir = {}
+        num_tables.times do |i|
+          rec_offset = face_offset + 12 + i * 16
+          tag = data.byteslice(rec_offset, 4)
+          offset = data.unpack1("@#{rec_offset + 8}N")
+          length = data.unpack1("@#{rec_offset + 12}N")
+          dir[tag] = [offset, length]
+        end
+        dir
+      end
+    end
+
     # Locates each face's sfnt offset within a TTC (or treats a bare
     # TTF as a single-face collection). Yields each face's sfnt base
     # offset to the caller.
@@ -124,7 +154,7 @@ module Essenfont
       def initialize(data, face_offset)
         @data = data
         @face_offset = face_offset
-        @tables = parse_table_directory
+        @tables = SfntTableDirectory.new(data, face_offset)
       end
 
       # @return [Extents] bbox union across all glyphs in this face
@@ -136,21 +166,6 @@ module Essenfont
       end
 
       private
-
-      def parse_table_directory
-        num_tables = data.unpack1("@#{face_offset + 4}n")
-        dir = {}
-
-        num_tables.times do |i|
-          rec_offset = face_offset + 12 + i * 16
-          tag = data.byteslice(rec_offset, 4)
-          offset = data.unpack1("@#{rec_offset + 8}N")
-          length = data.unpack1("@#{rec_offset + 12}N")
-          dir[tag] = [offset, length]
-        end
-
-        dir
-      end
 
       def scan_glyf_extents
         glyf_off, _ = tables["glyf"]
@@ -207,7 +222,7 @@ module Essenfont
         @data = data
         @face_offset = face_offset
         @extents = extents
-        @tables = parse_table_directory
+        @tables = SfntTableDirectory.new(data, face_offset)
       end
 
       def patch!
@@ -223,21 +238,6 @@ module Essenfont
       end
 
       private
-
-      def parse_table_directory
-        num_tables = data.unpack1("@#{face_offset + 4}n")
-        dir = {}
-
-        num_tables.times do |i|
-          rec_offset = face_offset + 12 + i * 16
-          tag = data.byteslice(rec_offset, 4)
-          offset = data.unpack1("@#{rec_offset + 8}N")
-          length = data.unpack1("@#{rec_offset + 12}N")
-          dir[tag] = [offset, length]
-        end
-
-        dir
-      end
 
       def patch_head!
         return unless tables["head"]

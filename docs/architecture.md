@@ -22,6 +22,7 @@ stitching.
 ```
 lib/essenfont/             Ruby library — build logic
   essenfont.rb             Root namespace (autoload registry)
+  donor.rb                 Donor::Info — typed loaded-donor value object
   cp_map.rb                Codepoint → donor mapping
   donor_loader.rb          Font loading + UFO conversion + normalization
   outline_policy.rb        CBDT detection (bypasses UFO path)
@@ -30,7 +31,7 @@ lib/essenfont/             Ruby library — build logic
   manifest.rb              manifest.yml parser
   manifest/entry.rb        Single donor entry
   otc.rb                   Otc namespace (autoload)
-  otc/build.rb             Build orchestrator
+  otc/build.rb             Build orchestrator (collection, per-plane, single-face)
   otc/metrics_pass.rb      Per-face vertical-metric recompute
   otc/naming.rb            Name table strings
   otc/errors.rb            Typed errors
@@ -106,11 +107,19 @@ manifest.yml
 - `Collection` — enumerable of entries, loaded from YAML
 - `Entry` — one donor declaration (label, file, sha256, license, covers, etc.)
 
+### Essenfont::Donor
+- `Info` — typed value object (Struct) for a loaded donor. Replaces the
+  shapeless hash DonorLoader previously returned. Carries `label`, `font`,
+  `ufo`, `coverage`, `remap`, `entry`, `native_upm`, `scale_factor`.
+- `Info#outline_source` — returns `ufo || font`. The single place the
+  UFO-or-font fallback lives; callers no longer repeat `d[:ufo] || d[:font]`.
+- `Info#cbdt?` — true when the donor was loaded via the CBDT bitmap path.
+
 ### Essenfont::DonorLoader
-- `load_all` → `{label => donor_hash}`
-- `load_one(entry)` → donor_hash with `{ufo: or font:, coverage:, remap:, entry:}`
-- CBDT donors: returns `font:` (bitmap path bypasses UFO)
-- Outline donors: returns `ufo:` (normalized to target UPM)
+- `load_all` → `{label => Donor::Info}`
+- `load_one(entry)` → `Donor::Info` (or nil on skip)
+- CBDT donors: `font` set, `ufo` nil (bitmap path bypasses UFO)
+- Outline donors: `ufo` set (normalized to target UPM), `font` also retained
 
 ### Essenfont::Ufo::Normalization
 - `apply!(ufo, target_upm: 1000)` — per-donor uniform UPM scaling
@@ -119,7 +128,8 @@ manifest.yml
 - `identity?` — true when source UPM == target (no-op optimization)
 
 ### Essenfont::CpMap
-- `from_donors(donors)` → CpMap (reads `donor[:coverage]`, first-wins)
+- `build_from(donors)` → CpMap (primary interface: scan → filter → backfill in one call)
+- `from_donors(donors)` → CpMap (scan only; reads `donor.coverage` Hash directly)
 - `filter_reserved` → drops PUA/surrogate/specials
 - `backfill_cc_cf` → C0/C1/Cf codepoints → .notdef
 - `donor_labels` → `{cp => label}` view (for Stitcher PartitionStrategy)
@@ -130,12 +140,17 @@ manifest.yml
 
 ### Essenfont::Otc::Build
 - Orchestrates: partition → add sources → stitch → write → MetricsPass
-- `call(output_path:)` → Result with output_path, bytes, subfonts
+- `call(output_path:)` → Result with output_path, bytes, subfonts (collection path)
+- `write_per_plane_ttfs(out_dir:)` → Array of {name:, path:, bytes:} (per-plane TTFs)
+- `call_single_face(output_path:, format:)` → path (legacy BMP-only TTF/OTF)
+- All three use `donor.outline_source` (ufo || font) — no caller can mistype the fallback
 
 ### Essenfont::Otc::MetricsPass
 - `recompute!(ttc_path)` — patches head/hhea/OS-2 per face from glyph extents
 - Binary-level surgery (fontisan tables are read-only in 0.4.23)
 - Per-face: Latin floor (asc=800, desc=-200), grows for tall scripts
+- Internal classes: `SfntTableDirectory` (shared table-directory parser),
+  `FaceTableLocator`, `GlyphExtentsScanner`, `FaceMetricsPatcher`, `Extents`
 
 ### Essenfont::Otc::Naming
 - `FAMILY`, `SUBFAMILY`, `COPYRIGHT` constants
