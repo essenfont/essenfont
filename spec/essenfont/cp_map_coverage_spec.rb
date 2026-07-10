@@ -2,16 +2,22 @@
 
 require "spec_helper"
 
-RSpec.describe Essenfont::CpMap, "restrict_to_covers enforcement" do
-  # Minimal font-like struct. Not a double — a real data container
-  # that answers the same protocol CpMap's fallback scan_cmap uses.
+# Minimal font-like struct for testing CpMap's fallback scan path.
+# Not a double — a real data container that answers the same protocol
+# CpMap's scan_cmap uses.
+module CpMapTestHelpers
   FontStub = Struct.new(:cmap) do
     def table(name)
       return nil unless name == "cmap"
+
       Struct.new(:unicode_mappings).new(cmap)
     end
   end
   private_constant :FontStub
+end
+
+RSpec.describe Essenfont::CpMap, "restrict_to_covers enforcement" do
+  include CpMapTestHelpers
 
   it "uses d[:coverage] instead of rescanning d[:font]" do
     # leaky donor has Basic Latin in its RAW cmap, but :coverage (filtered)
@@ -23,7 +29,7 @@ RSpec.describe Essenfont::CpMap, "restrict_to_covers enforcement" do
       "leaky" => {
         label: "leaky",
         font: FontStub.new(leaky_raw_cmap),
-        coverage: { 0x4E00 => 3 },  # filtered: only CJK
+        coverage: { 0x4E00 => 3 },
         remap: nil
       },
       "clean" => {
@@ -48,7 +54,6 @@ RSpec.describe Essenfont::CpMap, "restrict_to_covers enforcement" do
         label: "raw",
         font: FontStub.new({ 0x41 => 1 }),
         remap: nil
-        # no :coverage key → CpMap falls back to scan_cmap(d[:font])
       }
     }
 
