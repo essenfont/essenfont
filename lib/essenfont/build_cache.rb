@@ -48,8 +48,15 @@ module Essenfont
         Marshal.load(File.binread(art_path))
       else
         result = yield
-        File.binwrite(art_path, Marshal.dump(result))
-        File.write(key_path, key)
+        begin
+          File.binwrite(art_path, Marshal.dump(result))
+          File.write(key_path, key)
+        rescue TypeError, RuntimeError => e
+          # Object graph contains non-Marshal-able state (procs, Nokogiri
+          # docs, circular refs). Skip caching — the build still works,
+          # just without the cache benefit for this artifact.
+          warn "  build-cache: skip #{artifact} (not serializable: #{e.message})"
+        end
         result
       end
     end
