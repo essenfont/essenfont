@@ -284,6 +284,7 @@ module ReleasePipeline
   end
 
   def _emit_svg_exports_from_otc(otc_path, svg_dir)
+    font = Fontisan::FontLoader.load(otc_path)
     units_per_em = font.table("head")&.units_per_em || 1000
     svg_xml = Fontisan::Converters::SvgGenerator.new.convert(font)[:svg_xml]
 
