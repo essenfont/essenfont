@@ -12,4 +12,5 @@ module Essenfont
   autoload :UcodeRef,      "essenfont/ucode_ref"
   autoload :Otc,           "essenfont/otc"
   autoload :Ufo,           "essenfont/ufo"
+  autoload :BuildCache,    "essenfont/build_cache"
 end

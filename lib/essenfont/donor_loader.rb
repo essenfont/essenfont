@@ -28,20 +28,23 @@ module Essenfont
       "\x00\x01\x00\x00".b # TTF (binary)
     ].freeze
 
-    attr_reader :manifest, :donor_dir, :remap_dir, :target_upm
+    attr_reader :manifest, :donor_dir, :remap_dir, :target_upm, :build_cache
 
     # @param manifest [Essenfont::Manifest::Collection]
     # @param donor_dir [String] path to donor font files
     # @param remap_dir [String] path to remap files
     # @param target_upm [Integer] desired unitsPerEm for UFO normalization
+    # @param build_cache [Essenfont::BuildCache, nil] optional cache for UFO conversions
     def initialize(manifest:,
                    donor_dir: DonorLoader.default_donor_dir,
                    remap_dir: DonorLoader.default_remap_dir,
-                   target_upm: Essenfont::Ufo::Normalization::DEFAULT_TARGET_UPM)
+                   target_upm: Essenfont::Ufo::Normalization::DEFAULT_TARGET_UPM,
+                   build_cache: nil)
       @manifest = manifest
       @donor_dir = donor_dir
       @remap_dir = remap_dir
       @target_upm = target_upm.to_i
+      @build_cache = build_cache
     end
 
     # Load every active donor entry. Returns {label => donor_hash}.
@@ -103,22 +106,49 @@ module Essenfont
     # -- Outline (UFO) path ------------------------------------------------
 
     def load_outline_donor(entry, font, resolved, remap)
+      ufo, native_upm, scale_factor = load_or_cache_ufo(entry, font, resolved)
+
+      coverage = scan_ufo_coverage(ufo, entry: entry)
+      report_load(entry, coverage, remap,
+                  mode: :ufo,
+                  native_upm: native_upm,
+                  scale_factor: scale_factor)
+
+      { label: entry.label, font: font, ufo: ufo, file: resolved, coverage: coverage,
+        remap: remap, entry: entry,
+        native_upm: native_upm,
+        scale_factor: scale_factor }
+    end
+
+    # Returns [ufo, native_upm, scale_factor]. Uses build_cache if available.
+    def load_or_cache_ufo(entry, font, resolved)
+      if build_cache
+        cache_key = ufo_cache_key(entry)
+        ufo, native_upm, scale_factor = build_cache.fetch_or_build(cache_key, "#{entry.label}.ufo-marshal") do
+          convert_and_measure(font)
+        end
+        [ufo, native_upm, scale_factor]
+      else
+        convert_and_measure(font)
+      end
+    end
+
+    # Convert font → UFO, normalize, measure UPM + scale factor.
+    # Returns [ufo, native_upm, scale_factor].
+    def convert_and_measure(font)
       ufo = convert_to_ufo(font)
       native_upm = read_ufo_upm(ufo)
 
       normalization = Essenfont::Ufo::Normalization.new(ufo, target_upm: target_upm)
       normalization.apply! unless normalization.identity?
 
-      coverage = scan_ufo_coverage(ufo, entry: entry)
-      report_load(entry, coverage, remap,
-                  mode: :ufo,
-                  native_upm: native_upm,
-                  scale_factor: normalization.scale_factor)
+      [ufo, native_upm, normalization.scale_factor]
+    end
 
-      { label: entry.label, font: font, ufo: ufo, file: resolved, coverage: coverage,
-        remap: remap, entry: entry,
-        native_upm: native_upm,
-        scale_factor: normalization.scale_factor }
+    def ufo_cache_key(entry)
+      sha = entry.sha256 || "unknown"
+      fontisan_ver = Gem.loaded_specs["fontisan"]&.version&.to_s || "dev"
+      "#{sha}-upm#{target_upm}-fontisan#{fontisan_ver}-norm1"
     end
 
     def convert_to_ufo(font)

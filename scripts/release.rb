@@ -60,7 +60,8 @@ module ReleasePipeline
 
     puts "→ loading manifest + donors"
     manifest = Essenfont::Manifest.load
-    donors = Essenfont::DonorLoader.new(manifest: manifest).load_all
+    cache = Essenfont::BuildCache.new
+    donors = Essenfont::DonorLoader.new(manifest: manifest, build_cache: cache).load_all
     raise "no donors loaded" if donors.empty?
 
     validate_coverage_gates(manifest:, donors:)

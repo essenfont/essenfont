@@ -42,6 +42,14 @@ jobs:
           path: references/input-fonts
           key: donors-${{ hashFiles('sources/manifest.yml') }}
 
+      - name: Cache UFO conversions
+        uses: actions/cache@v4
+        with:
+          path: references/build-cache
+          key: ufo-cache-v1-${{ hashFiles('sources/manifest.yml', 'Gemfile.lock') }}
+          restore-keys: |
+            ufo-cache-v1-
+
       - name: Acquire donor fonts
         if: ${{ !inputs.skip_donors && steps.donor-cache.outputs.cache-hit != 'true' }}
         run: |
