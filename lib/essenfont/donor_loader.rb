@@ -121,38 +121,15 @@ module Essenfont
     end
 
     # Returns [ufo, native_upm, scale_factor].
-    # Uses disk-based UFO cache (fontisan Writer/Reader) if build_cache is set.
-    # Marshal doesn't work (fontisan UFOs contain Nokogiri docs); disk I/O
-    # via UFO3 XML format is the correct serialization.
+    #
+    # Disk-based UFO cache (fontisan Writer/Reader) is INTENDED here but
+    # fontisan::Ufo::Reader only decodes Phase 1 .glif data (name, advance,
+    # unicodes) — NOT contours/components/anchors. Loading from cache
+    # produces UFOs with empty glyphs. Until the Reader is complete, we
+    # always do fresh conversion. The SVG and WOFF2 caches in release.rb
+    # (which cache raw binary files, not UFO objects) are unaffected.
     def load_or_cache_ufo(entry, font, resolved)
-      return convert_and_measure(font) unless build_cache
-
-      cache_key = ufo_cache_key(entry)
-      artifact = "#{entry.label}.ufo"
-      ufo_dir = File.join(build_cache.cache_dir, artifact)
-
-      if build_cache.cached?(cache_key, artifact) && Dir.exist?(ufo_dir)
-        puts "    ufo-cache: hit #{entry.label}"
-        ufo = Fontisan::Ufo::Font.new
-        ufo.path = ufo_dir
-        Fontisan::Ufo::Reader.new(ufo).read
-        [ufo, ufo.info.units_per_em.to_i, 1.0]
-      else
-        result = convert_and_measure(font)
-        ufo, = result
-
-        begin
-          FileUtils.rm_rf(ufo_dir)
-          Fontisan::Ufo::Writer.new(ufo).write(ufo_dir)
-          key_path = File.join(build_cache.cache_dir, "#{artifact}.key")
-          File.write(key_path, cache_key)
-          puts "    ufo-cache: wrote #{entry.label}"
-        rescue StandardError => e
-          warn "    ufo-cache: skip #{entry.label} (#{e.message})"
-        end
-
-        result
-      end
+      convert_and_measure(font)
     end
 
     # Convert font → UFO, normalize, measure UPM + scale factor.
