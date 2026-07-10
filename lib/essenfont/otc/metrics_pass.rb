@@ -168,10 +168,11 @@ module Essenfont
           next if raw_off == raw_offset_for(gid + 1, loca_off, index_format) # empty glyph
 
           glyph_start = glyf_off + raw_off
-          next if glyph_start >= data.bytesize
+          next if glyph_start + 10 > data.bytesize  # need at least 10 bytes for bbox
 
           # Glyph header: int16 numberOfContours, then 4 × int16 bbox
           x_min, y_min, x_max, y_max = data.unpack("@#{glyph_start + 2}s4")
+          next if x_min.nil?
           extents.absorb!(x_min, y_min, x_max, y_max)
         end
 
@@ -238,8 +239,8 @@ module Essenfont
         off, _ = tables["head"]
         # head.xMin/yMin/xMax/yMax at offsets 36, 38, 40, 42 (int16 each)
         data[off + 36, 8] = [
-          extents.x_min, extents.y_min,
-          extents.x_max, extents.y_max
+          safe_metric(extents.x_min), safe_metric(extents.y_min),
+          safe_metric(extents.x_max), safe_metric(extents.y_max)
         ].pack("s4")
 
         # head.modified at offset 28 (LONGDATETIME = int64, seconds since 1904)
@@ -251,8 +252,8 @@ module Essenfont
         return unless tables["hhea"]
 
         off, _ = tables["hhea"]
-        ascent = [extents.y_max, MetricsPass::ASCENT_FLOOR].max
-        descent = [extents.y_min, MetricsPass::DESCENT_CEILING].min
+        ascent = [safe_metric(extents.y_max), MetricsPass::ASCENT_FLOOR].max
+        descent = [safe_metric(extents.y_min), MetricsPass::DESCENT_CEILING].min
 
         # hhea.ascent/descent/lineGap at offsets 4, 6, 8 (int16 each)
         data[off + 4, 6] = [ascent, descent, MetricsPass::DEFAULT_LINE_GAP].pack("s3")
@@ -262,8 +263,8 @@ module Essenfont
         return unless tables["OS/2"]
 
         off, _ = tables["OS/2"]
-        ascent = [extents.y_max, MetricsPass::ASCENT_FLOOR].max
-        descent = [extents.y_min, MetricsPass::DESCENT_CEILING].min
+        ascent = [safe_metric(extents.y_max), MetricsPass::ASCENT_FLOOR].max
+        descent = [safe_metric(extents.y_min), MetricsPass::DESCENT_CEILING].min
 
         # OS/2.sTypoAscender/Descender/LineGap at 68, 70, 72 (int16)
         data[off + 68, 6] = [ascent, descent, MetricsPass::DEFAULT_LINE_GAP].pack("s3")
@@ -274,10 +275,14 @@ module Essenfont
           [descent.abs, MetricsPass::WIN_METRIC_CAP].min
         ].pack("S2")
       end
+
+      private
+
+      def safe_metric(value)
+        return 0 if value.is_a?(Float) && (value.infinite? || value.nan?)
+        value.to_i
+      end
     end
-
-
-    # Mutable accumulator: the bbox union of a face's glyphs.
     # During scanning, absorb! grows the bbox per glyph. After scanning
     # completes, the caller reads the final values via attr_reader.
     class Extents
