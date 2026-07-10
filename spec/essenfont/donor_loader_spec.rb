@@ -51,12 +51,12 @@ RSpec.describe Essenfont::DonorLoader, :integration do
 
     it "each donor carries the load_one shape (label, font, file, coverage, remap, entry)" do
       donor = loader.load_all[:noto_multani]
-      expect(donor[:label]).to eq(:noto_multani)
-      expect(donor[:font]).to respond_to(:table)
-      expect(donor[:file]).to match(/NotoSansMultani-Regular\.ttf\z/)
-      expect(donor[:coverage]).to be_a(Hash)
-      expect(donor[:coverage]).not_to be_empty
-      expect(donor[:entry]).to be_a(Essenfont::Manifest::Entry)
+      expect(donor.label).to eq(:noto_multani)
+      expect(donor.font).to respond_to(:table)
+      expect(donor.file).to match(/NotoSansMultani-Regular\.ttf\z/)
+      expect(donor.coverage).to be_a(Hash)
+      expect(donor.coverage).not_to be_empty
+      expect(donor.entry).to be_a(Essenfont::Manifest::Entry)
     end
 
     it "skips entries whose files are missing (rather than raising)" do
@@ -87,8 +87,8 @@ RSpec.describe Essenfont::DonorLoader, :integration do
     it "loads successfully for a valid entry" do
       entry = build_entry
       donor = loader.load_one(entry)
-      expect(donor[:label]).to eq(:test_donor)
-      expect(donor[:coverage]).not_to be_empty
+      expect(donor.label).to eq(:test_donor)
+      expect(donor.coverage).not_to be_empty
     end
 
     it "returns nil when the file is missing" do
@@ -121,26 +121,6 @@ RSpec.describe Essenfont::DonorLoader, :integration do
     it "loads successfully when sha256 is nil" do
       entry = build_entry("sha256" => nil)
       expect(loader.load_one(entry)).not_to be_nil
-    end
-  end
-
-  describe ".valid_magic?" do
-    let(:multani) { File.join(donor_dir, "NotoSansMultani-Regular.ttf") }
-
-    it "accepts a real TTF" do
-      expect(loader.send(:valid_magic?, multani)).to be true
-    end
-
-    it "rejects a non-existent file" do
-      expect(loader.send(:valid_magic?, "/tmp/nonexistent.ttf")).to be false
-    end
-
-    it "rejects a non-font file" do
-      Dir.mktmpdir do |dir|
-        fake = File.join(dir, "fake")
-        File.write(fake, "x" * 100)
-        expect(loader.send(:valid_magic?, fake)).to be false
-      end
     end
   end
 
@@ -188,7 +168,7 @@ RSpec.describe Essenfont::DonorLoader, :integration do
     it "keeps codepoints inside declared blocks and drops the rest" do
       entry = build_restricted_entry
       donor = loader.load_one(entry)
-      cps = donor[:coverage].keys
+      cps = donor.coverage.keys
       multani_range = Essenfont::UcodeRef.block_range("Multani")
       expect(cps).not_to be_empty
       cps.each do |cp|
@@ -200,14 +180,14 @@ RSpec.describe Essenfont::DonorLoader, :integration do
     it "returns an empty coverage when covers: is empty (all cmap filtered out)" do
       entry = build_restricted_entry("covers" => [])
       donor = loader.load_one(entry)
-      expect(donor[:coverage]).to be_empty
+      expect(donor.coverage).to be_empty
     end
 
     it "leaves coverage unfiltered when restrict_to_covers is false" do
       entry = build_restricted_entry("restrict_to_covers" => false)
       donor = loader.load_one(entry)
       # Noto Multani's cmap should pass through unchanged.
-      expect(donor[:coverage].keys).to all(be_between(0x11280, 0x112AF).inclusive)
+      expect(donor.coverage.keys).to all(be_between(0x11280, 0x112AF).inclusive)
     end
   end
 end

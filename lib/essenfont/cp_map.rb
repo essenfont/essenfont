@@ -44,43 +44,24 @@ module Essenfont
       new_from_scan(OutlinePolicy.outline_eligible(donors))
     end
 
+    # Full assembly pipeline: scan → filter_reserved → backfill_cc_cf.
+    # The primary interface for producing a build-ready CpMap from
+    # loaded donors. Replaces the 3-step chain duplicated across
+    # scripts/build.rb and scripts/release.rb.
+    def self.build_from(donors)
+      first_label = donors.values.first.label
+      from_donors(donors).filter_reserved.backfill_cc_cf(first_label)
+    end
+
     def self.new_from_scan(donors)
       map = {}
       donors.each_value do |d|
-        mappings = resolve_coverage(d)
-        mappings.each do |cp, gid|
-          map[cp] ||= { label: d[:label], gid: gid }
+        d.coverage.each do |cp, gid|
+          map[cp] ||= { label: d.label, gid: gid }
         end
       end
       new(map)
     end
-
-    # Resolve a donor's codepoint→gid mappings from its :coverage field.
-    # Handles three shapes:
-    # - nil → fall back to the raw font's cmap (no filter)
-    # - Hash {cp => gid} → use directly (production path from DonorLoader)
-    # - Set/Array of cps → filter the font's cmap to only those cps
-    def self.resolve_coverage(donor)
-      coverage = donor[:coverage]
-      return scan_cmap(donor[:font]) if coverage.nil?
-      return coverage if coverage.is_a?(Hash)
-
-      cmap = scan_cmap(donor[:font])
-      coverage.each_with_object({}) { |cp, h| h[cp] = cmap[cp] if cmap.key?(cp) }
-    end
-    private_class_method :resolve_coverage
-
-    def self.scan_cmap(font)
-      return {} unless font
-
-      cmap = font.table("cmap")
-      return {} unless cmap
-
-      cmap.unicode_mappings || {}
-    rescue StandardError
-      {}
-    end
-    private_class_method :scan_cmap
 
     # {cp => donor_label} view, for fontisan PartitionStrategy::ByPlane
     # which expects the simpler shape.

@@ -16,14 +16,14 @@ RSpec.describe Essenfont::Otc::Build, :integration do
 
   let(:donors) do
     {
-      noto_multani: { label: :noto_multani, font: Fontisan::FontLoader.load(multani_path) },
-      noto_adlam:   { label: :noto_adlam,   font: Fontisan::FontLoader.load(adlam_path) }
+      noto_multani: Essenfont::Donor::Info.new(label: :noto_multani, font: Fontisan::FontLoader.load(multani_path)),
+      noto_adlam:   Essenfont::Donor::Info.new(label: :noto_adlam,   font: Fontisan::FontLoader.load(adlam_path))
     }
   end
 
   let(:cp_map) do
-    multani = donors[:noto_multani][:font].table("cmap").unicode_mappings
-    adlam = donors[:noto_adlam][:font].table("cmap").unicode_mappings.reject { |cp, _| cp < 0x10000 }
+    multani = donors[:noto_multani].font.table("cmap").unicode_mappings
+    adlam = donors[:noto_adlam].font.table("cmap").unicode_mappings.reject { |cp, _| cp < 0x10000 }
 
     map = {}
     multani.each { |cp, gid| map[cp] = { label: :noto_multani, gid: gid } }

@@ -126,8 +126,8 @@ RSpec.describe Essenfont::CpMap do
 
     let(:donors) do
       {
-        emoji: { label: :emoji, font: cbdt_only_font, coverage: [].to_set, remap: nil },
-        outline: { label: :outline, font: outline_font, coverage: [0x41].to_set, remap: nil }
+        emoji: Essenfont::Donor::Info.new(label: :emoji, font: cbdt_only_font, coverage: {}.to_set, remap: nil),
+        outline: Essenfont::Donor::Info.new(label: :outline, font: outline_font, coverage: { 0x41 => 1 }, remap: nil)
       }
     end
 
@@ -152,7 +152,7 @@ RSpec.describe Essenfont::CpMap do
         "CBDT" => nil, "CBLC" => nil,
         "cmap" => cmap_class.new(mappings: { 0x41 => 9 }),
       })
-      donors[:second] = { label: :second, font: second_outline, coverage: [0x41].to_set, remap: nil }
+      donors[:second] = Essenfont::Donor::Info.new(label: :second, font: second_outline, coverage: { 0x41 => 9 }, remap: nil)
 
       cp_map = described_class.from_donors(donors)
       expect(cp_map[0x41]).to eq(label: :outline, gid: 1)

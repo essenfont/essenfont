@@ -25,21 +25,21 @@ RSpec.describe Essenfont::CoverageGate do
   # coverage. Matches the shape DonorLoader returns in production.
   let(:donors) do
     {
-      real_donor: {
+      real_donor: Essenfont::Donor::Info.new(
         label: :real_donor,
-        coverage: (0x41..0x7A).to_h { |cp| [cp, 1] }, # ASCII covers Basic Latin
+        coverage: (0x41..0x7A).to_h { |cp| [cp, 1] },
         remap: nil
-      },
-      lying_donor: {
+      ),
+      lying_donor: Essenfont::Donor::Info.new(
         label: :lying_donor,
-        coverage: {}, # claims Phags_Pa but cmap has 0 cps there
+        coverage: {},
         remap: nil
-      },
-      remapped_donor: {
+      ),
+      remapped_donor: Essenfont::Donor::Info.new(
         label: :remapped_donor,
         coverage: {},
-        remap: { 0x41 => 0x1000 } # raw cmap ≠ target; gate must skip
-      }
+        remap: { 0x41 => 0x1000 }
+      )
       # unloaded_donor intentionally absent from this hash
     }
   end
@@ -97,7 +97,7 @@ RSpec.describe Essenfont::CoverageGate do
       end
 
       let(:donors) do
-        { real_donor: { label: :real_donor, coverage: (0x41..0x7A).to_h { |cp| [cp, 1] }, remap: nil } }
+        { real_donor: Essenfont::Donor::Info.new(label: :real_donor, coverage: (0x41..0x7A).to_h { |cp| [cp, 1] }, remap: nil) }
       end
 
       it "returns true without raising" do

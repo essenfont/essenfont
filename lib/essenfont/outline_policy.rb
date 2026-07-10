@@ -20,7 +20,7 @@ module Essenfont
     # Filter a donors hash to those whose fonts can supply outlines.
     # Preserves the input shape ({label => donor_hash}).
     def outline_eligible(donors)
-      donors.select { |_, d| contributes_outlines?(d[:font]) }
+      donors.select { |_, d| contributes_outlines?(d.font) }
     end
 
     # True if the font has at least one outline table and is not in a

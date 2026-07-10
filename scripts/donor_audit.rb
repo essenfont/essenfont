@@ -39,15 +39,6 @@ module EssenfontAudit
 
   UNICODE_BLOCKS = load_unicode_blocks.freeze
 
-  VALID_MAGIC = [
-    "\x00\x01\x00\x00", # TTF
-    "OTTO",              # OTF (CFF)
-    "true",              # TrueType (Apple variant)
-    "ttcf",              # TTC
-    "wOFF",              # WOFF
-    "wOF2",              # WOFF2
-  ].freeze
-
   # Run the audit.
   # @param format [Symbol] :text or :json
   # @return [Integer] exit code (0 = all donors OK; 1 = any failures)
@@ -112,7 +103,7 @@ module EssenfontAudit
     result[:file_resolved] = path
 
     # 2. Valid magic
-    magic_ok = valid_font_magic?(path)
+    magic_ok = Essenfont::FontMagic.valid?(path)
     result[:magic_ok] = magic_ok
     unless magic_ok
       result[:ok] = false
@@ -230,14 +221,6 @@ module EssenfontAudit
     entries.to_h do |e|
       [e["from"], e["to"]]
     end
-  end
-
-  def self.valid_font_magic?(path)
-    return false unless File.exist?(path) && File.size(path) > 16
-    magic = File.binread(path, 4)
-    return true if VALID_MAGIC.include?(magic)
-    return true if magic.getbyte(0) == 0x80 # PFB
-    false
   end
 
   def self.print_text(results, failures)
