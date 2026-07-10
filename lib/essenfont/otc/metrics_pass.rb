@@ -276,7 +276,9 @@ module Essenfont
     end
     private_constant :FaceMetricsPatcher
 
-    # Immutable value object: the bbox union of a face's glyphs.
+    # Mutable accumulator: the bbox union of a face's glyphs.
+    # During scanning, absorb! grows the bbox per glyph. After scanning
+    # completes, the caller reads the final values via attr_reader.
     class Extents
       attr_reader :x_min, :y_min, :x_max, :y_max
 
@@ -285,15 +287,15 @@ module Essenfont
         @y_min = y_min
         @x_max = x_max
         @y_max = y_max
-        freeze
       end
 
       def self.empty
-        new(x_min: 0, y_min: 0, x_max: 0, y_max: 0)
+        new(x_min: Float::INFINITY, y_min: Float::INFINITY,
+            x_max: -Float::INFINITY, y_max: -Float::INFINITY)
       end
 
       def empty?
-        x_min.zero? && y_min.zero? && x_max.zero? && y_max.zero?
+        x_min == Float::INFINITY
       end
 
       # Expand the bbox to include the given extents. Returns self for
