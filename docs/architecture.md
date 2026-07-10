@@ -2,7 +2,7 @@
 
 ## What this repo builds
 
-One TTC file (`Essenfont-Regular.ttc`) containing 5 OpenType faces,
+One OTC file (`Essenfont-Regular.otc`) containing 5 OpenType faces,
 one per Unicode plane that carries assigned characters:
 
 | Face | Plane  | Range             | Glyphs   | Notes                              |
