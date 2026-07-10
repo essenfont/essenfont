@@ -108,18 +108,30 @@ module ReleasePipeline
 
   def encode_woffs(out_dir:)
     puts "→ encoding per-plane WOFF + WOFF2"
+    require "digest"
+    cache = Essenfont::BuildCache.new
+
     PLANES.each do |p|
       ttf = File.join(out_dir, "Essenfont-#{p}.ttf")
       next unless File.exist?(ttf)
 
-      font = Fontisan::FontLoader.load(ttf)
+      # Cache key = sha256 of the per-plane TTF. If the TTF hasn't
+      # changed, the WOFF + WOFF2 are identical — skip re-encoding.
+      ttf_sha = Digest::SHA256.file(ttf).hexdigest[0, 16]
+      woff_path = File.join(out_dir, "Essenfont-#{p}.woff")
+      woff2_path = File.join(out_dir, "Essenfont-#{p}.woff2")
 
-      woff = Fontisan::Converters::WoffWriter.new.convert(font)
-      File.binwrite(File.join(out_dir, "Essenfont-#{p}.woff"), woff)
+      woff_cached = cache.fetch_or_build_file("ttf-#{ttf_sha}", "Essenfont-#{p}.woff", woff_path) do
+        font = Fontisan::FontLoader.load(ttf)
+        File.binwrite(woff_path, Fontisan::Converters::WoffWriter.new.convert(font))
+      end
 
-      woff2 = Fontisan::Converters::Woff2Encoder.new.convert(font)
-      File.binwrite(File.join(out_dir, "Essenfont-#{p}.woff2"), woff2[:woff2_binary])
-      puts "  #{p}: woff + woff2 encoded"
+      woff2_cached = cache.fetch_or_build_file("ttf-#{ttf_sha}", "Essenfont-#{p}.woff2", woff2_path) do
+        font = Fontisan::FontLoader.load(ttf)
+        File.binwrite(woff2_path, Fontisan::Converters::Woff2Encoder.new.convert(font)[:woff2_binary])
+      end
+
+      puts "  #{p}: #{woff_cached || woff2_cached ? 'cache' : 'encoded'}"
     end
   end
 
@@ -260,7 +272,18 @@ module ReleasePipeline
     svg_dir = File.join(out_dir, "svg-exports")
     return unless File.exist?(otc_path)
 
-    font = Fontisan::FontLoader.load(otc_path)
+    # Cache: SVGs are derived solely from the OTC binary.
+    # If the OTC sha256 matches, skip regeneration entirely.
+    require "digest"
+    otc_sha = Digest::SHA256.file(otc_path).hexdigest[0, 16]
+    cache = Essenfont::BuildCache.new
+    cached = cache.fetch_or_build_file("otc-#{otc_sha}", "svg-exports", svg_dir) do
+      _emit_svg_exports_from_otc(otc_path, svg_dir)
+    end
+    puts "  svg-exports: #{cached ? 'from cache' : 'fresh build'}"
+  end
+
+  def _emit_svg_exports_from_otc(otc_path, svg_dir)
     units_per_em = font.table("head")&.units_per_em || 1000
     svg_xml = Fontisan::Converters::SvgGenerator.new.convert(font)[:svg_xml]
 
