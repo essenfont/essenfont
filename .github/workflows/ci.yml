@@ -37,13 +37,13 @@ jobs:
               path = "#{donor_dir}/#{name}.ttf"
               next unless File.exist?(path)
               label = name.sub("-Regular", "").gsub(/([A-Z])/) { |m| "_#{m.downcase}" }.sub(/^_/, "").to_sym
-              donors[label] = { label: label, font: Fontisan::FontLoader.load(path) }
+              donors[label] = Essenfont::Donor::Info.new(label: label, font: Fontisan::FontLoader.load(path))
             end
 
             cp_map = {}
             donors.each_value do |d|
-              d[:font].table("cmap").unicode_mappings.each do |cp, gid|
-                cp_map[cp] ||= { label: d[:label], gid: gid }
+              d.font.table("cmap").unicode_mappings.each do |cp, gid|
+                cp_map[cp] ||= { label: d.label, gid: gid }
               end
             end
 
