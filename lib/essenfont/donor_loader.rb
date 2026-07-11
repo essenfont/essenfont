@@ -111,9 +111,13 @@ module Essenfont
     end
 
     # Convert font → UFO, normalize, measure UPM + scale factor.
+    # For CFF-based fonts, fills in contours that fontisan's UFO
+    # converter stubs out (extract_cff_glyphs is a TODO in 0.4.23).
     # Returns [ufo, native_upm, scale_factor].
     def convert_and_measure(font)
       ufo = convert_to_ufo(font)
+      fill_cff_outlines_if_needed(font, ufo)
+
       native_upm = read_ufo_upm(ufo)
 
       normalization = Essenfont::Ufo::Normalization.new(ufo, target_upm: target_upm)
@@ -124,6 +128,16 @@ module Essenfont
 
     def convert_to_ufo(font)
       Fontisan::Ufo::Convert::FromBinData.convert(font)
+    end
+
+    # fontisan's FromBinData.extract_cff_glyphs is a stub — it creates
+    # UFO glyphs with names + widths but zero contours. CffOutlineFiller
+    # bridges OutlineExtractor (which CAN parse CFF) into the UFO.
+    def fill_cff_outlines_if_needed(font, ufo)
+      return unless font.respond_to?(:cff?) ? font.cff? : false
+      return if ufo.glyphs.values.all? { |g| !g.contours.nil? && !g.contours.empty? }
+
+      Essenfont::Ufo::CffOutlineFiller.fill!(font, ufo)
     end
 
     def read_ufo_upm(ufo)

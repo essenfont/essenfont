@@ -13,6 +13,7 @@ module Essenfont
   # Glyph-level data mutations live in theNormalization class; table
   # reading/writing lives in fontisan; this namespace just wires them.
   module Ufo
-    autoload :Normalization, "essenfont/ufo/normalization"
+    autoload :Normalization,     "essenfont/ufo/normalization"
+    autoload :CffOutlineFiller,  "essenfont/ufo/cff_outline_filler"
   end
 end
