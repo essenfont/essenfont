@@ -10,12 +10,7 @@ module Essenfont
   #
   # Two usage patterns:
   #
-  #   1. In-memory objects (UFOs, coverage data):
-  #      ufo = cache.fetch_or_build(key, "fsung-m.marshal") do
-  #        convert_and_normalize(donor_font)   # only runs on cache miss
-  #      end
-  #
-  #   2. File/directory artifacts (SVG exports, coverage.json):
+  #   1. File/directory artifacts (SVG exports, coverage.json):
   #      cache.fetch_or_build_file(key, "coverage.json", output_path) do
   #        emit_coverage_from_otc(otc_path)    # only runs on cache miss
   #      end
@@ -31,34 +26,6 @@ module Essenfont
     def initialize(cache_dir: DEFAULT_DIR)
       @cache_dir = cache_dir.to_s
       FileUtils.mkdir_p(@cache_dir)
-    end
-
-    # Fetch an in-memory object from cache, or build it fresh.
-    # Uses Marshal for serialization (fast, Ruby-native).
-    #
-    # @param key [String] cache key (uniquely identifies the inputs)
-    # @param artifact [String] artifact name (filename in cache_dir)
-    # @yield block that builds the object on cache miss
-    # @return [Object] the cached or freshly-built object
-    def fetch_or_build(key, artifact)
-      key_path = key_file(artifact)
-      art_path = artifact_path(artifact)
-
-      if hit?(key, key_path) && File.exist?(art_path)
-        Marshal.load(File.binread(art_path))
-      else
-        result = yield
-        begin
-          File.binwrite(art_path, Marshal.dump(result))
-          File.write(key_path, key)
-        rescue TypeError, RuntimeError => e
-          # Object graph contains non-Marshal-able state (procs, Nokogiri
-          # docs, circular refs). Skip caching — the build still works,
-          # just without the cache benefit for this artifact.
-          warn "  build-cache: skip #{artifact} (not serializable: #{e.message})"
-        end
-        result
-      end
     end
 
     # Fetch a file/directory artifact from cache, or build it fresh.

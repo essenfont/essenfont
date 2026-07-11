@@ -12,10 +12,13 @@ module Essenfont
   # previously each had its own copy of the logic, and they had drifted.
   module Release
     autoload :CoverageManifest, "essenfont/release/coverage_manifest"
-    autoload :Provenance,       "essenfont/release/provenance"
     autoload :LicensePack,      "essenfont/release/license_pack"
-    autoload :SvgExports,       "essenfont/release/svg_exports"
+    autoload :ManifestWriter,   "essenfont/release/manifest_writer"
     autoload :NpmPackage,       "essenfont/release/npm_package"
+    autoload :Provenance,       "essenfont/release/provenance"
+    autoload :SriHashes,        "essenfont/release/sri_hashes"
+    autoload :SvgExports,       "essenfont/release/svg_exports"
+    autoload :WoffEncoder,      "essenfont/release/woff_encoder"
 
     PLANES = %i[BMP SMP SIP TIP SSP].freeze
     PLANE_RANGES = {

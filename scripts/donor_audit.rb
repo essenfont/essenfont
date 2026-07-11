@@ -137,7 +137,8 @@ module EssenfontAudit
 
     # 4b. Apply codepoint_remap if declared (rewrites cmap cps before
     # coverage gate so the gate sees the *target* Unicode block).
-    remap = load_remap(entry["codepoint_remap"])
+    remap = Essenfont::Remap.load(entry["codepoint_remap"],
+                                  search_dirs: [File.join(DONOR_DIR, "..", "..")])
     if remap
       original_size = cmap_info[:cps].size
       cmap_info[:cps] = cmap_info[:cps].each_with_object({}) do |cp, h|
@@ -202,25 +203,6 @@ module EssenfontAudit
     candidate = File.join(DONOR_DIR, File.basename(file))
     return candidate if File.exist?(candidate)
     nil
-  end
-
-  # Load a codepoint_remap YAML. Returns Hash<Integer, Integer>
-  # mapping source codepoint → target Unicode codepoint.
-  # @param specified [String, nil] path from manifest field
-  # @return [Hash<Integer, Integer>, nil] nil if no remap declared
-  def self.load_remap(specified)
-    return nil unless specified
-    path = File.exist?(specified) ? specified :
-           File.join(DONOR_DIR, "..", "..", specified)
-    return nil unless path && File.exist?(path)
-
-    data = YAML.safe_load_file(path)
-    entries = data["mappings"] || []
-    return nil if entries.empty?
-
-    entries.to_h do |e|
-      [e["from"], e["to"]]
-    end
   end
 
   def self.print_text(results, failures)

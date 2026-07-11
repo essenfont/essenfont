@@ -10,23 +10,26 @@ module Essenfont
     class Entry
       attr_reader :label, :family, :file, :sha256, :license, :url, :covers,
                   :codepoint_remap, :font_index, :type, :block, :enabled,
-                  :raw
+                  :version, :raw
 
       def initialize(hash)
         @raw = hash
-        @label = (hash["label"] || hash[:label])&.to_sym
-        @family = hash["family"] || hash[:family] || @label&.to_s
-        @file = hash["file"] || hash[:file]
-        @sha256 = hash["sha256"] || hash[:sha256]
-        @license = hash["license"] || hash[:license] || "OFL-1.1"
-        @url = hash["url"] || hash[:url]
-        @covers = hash["covers"] || hash[:covers] || []
-        @codepoint_remap = hash["codepoint_remap"] || hash[:codepoint_remap]
-        @font_index = hash["font_index"] || hash[:font_index] || 0
-        @type = (hash["type"] || hash[:type] || :font).to_sym
-        @block = hash["block"] || hash[:block]
-        @enabled = hash.fetch("enabled", hash.fetch(:enabled, true))
-        @restrict_to_covers = !hash["restrict_to_covers"].nil?
+        h = hash.transform_keys(&:to_sym)
+
+        @label = h[:label]&.to_sym
+        @family = h[:family] || @label&.to_s
+        @file = h[:file]
+        @sha256 = h[:sha256]
+        @license = h[:license] || "OFL-1.1"
+        @url = h[:url]
+        @covers = h[:covers] || []
+        @codepoint_remap = h[:codepoint_remap]
+        @font_index = h[:font_index] || 0
+        @type = (h[:type] || :font).to_sym
+        @block = h[:block]
+        @version = h[:version]
+        @enabled = h.fetch(:enabled, true)
+        @restrict_to_covers = !h[:restrict_to_covers].nil?
         freeze
       end
 

@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require "json"
+
 module Essenfont
   # CpMap: the per-codepoint donor assignment map.
   #
   # Owns the {cp => {label:, gid:}} shape used throughout the build.
   # Provides shape-conversion views for downstream consumers:
   #   - .donor_labels   → {cp => label}              (fontisan PartitionStrategy)
-  #   - .with_gids      → {cp => {label:, gid:}}     (Stitcher internals)
+  #   - .map            → {cp => {label:, gid:}}     (raw access)
   #   - .filter_pua     → CpMap with PUA/Surrogate/Specials removed
   #   - .backfill_cc_cf → CpMap with C0/C1/Cf codepoints mapped to .notdef
   #
@@ -69,9 +71,15 @@ module Essenfont
       @map.transform_values { |v| v[:label] }
     end
 
-    # {cp => {label:, gid:}} view (the original shape).
-    def with_gids
-      @map
+    # JSON representation of the donor-labels map. Owns the wire format
+    # so callers don't reach into donor_labels + JSON.pretty_generate.
+    def to_json(*args)
+      JSON.pretty_generate(donor_labels, *args)
+    end
+
+    # Write the donor-labels map as JSON to path.
+    def dump_json(path)
+      File.write(path, to_json)
     end
 
     def size
