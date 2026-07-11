@@ -36,7 +36,7 @@ File.open(TTC_FILE, "rb") do |io|
   puts "Union cmap across #{ttc.num_fonts} faces: #{union_cmap.size} codepoints"
 end
 
-report = Essenfont::Coverage::Report.new(union_cmap, catalog: catalog)
+report = Essenfont::CoverageReport.new(union_cmap, catalog: catalog)
 
 output = {
   generated_at: Time.now.utc.iso8601,

@@ -27,7 +27,7 @@ module EssenfontCoverage
     end
 
     cmap_cps = load_font_cmap(font_path)
-    report = Essenfont::Coverage::Report.new(cmap_cps)
+    report = Essenfont::CoverageReport.new(cmap_cps)
 
     case format
     when :json then emit_json(report)
