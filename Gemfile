@@ -3,7 +3,8 @@
 source "https://rubygems.org"
 
 # Use local source if the path env var is set AND the directory exists
-# (dev workflow). Otherwise use the published RubyGems version.
+# (dev workflow). Otherwise use the GitHub main (unreleased compound
+# glyph fix in FromBinData) until the next fontisan gem is published.
 #
 # Override locally via:
 #   export FONTISAN_PATH=/path/to/fontisan
@@ -20,7 +21,7 @@ fontisan_path = ENV.fetch("FONTISAN_PATH", nil)
 if fontisan_path && Dir.exist?(fontisan_path)
   gem "fontisan", path: fontisan_path
 else
-  gem "fontisan", "~> 0.4", ">= 0.4.23"
+  gem "fontisan", github: "fontist/fontisan"
 end
 
 ucode_path = ENV.fetch("UCODE_PATH", nil)
