@@ -38,7 +38,8 @@ module ReleasePipeline
     puts "=== Essenfont release pipeline v#{Essenfont::Otc::Version::STRING} ==="
 
     cp_map = build_fonts(out_dir: options[:out_dir], skip: options[:skip_build])
-    encode_woffs(out_dir: options[:out_dir])
+    puts "→ encoding per-plane WOFF + WOFF2"
+    Essenfont::Release::WoffEncoder.encode(out_dir: options[:out_dir])
     puts "→ emitting coverage manifest"
     Essenfont::Release::CoverageManifest.emit(out_dir: options[:out_dir])
     puts "→ emitting provenance"
@@ -48,8 +49,10 @@ module ReleasePipeline
     emit_svg_exports(out_dir: options[:out_dir])
     puts "→ building npm package"
     Essenfont::Release::NpmPackage.build(out_dir: options[:out_dir])
-    emit_sri_hashes(out_dir: options[:out_dir])
-    write_release_manifest(out_dir: options[:out_dir])
+    puts "→ emitting SRI hashes"
+    Essenfont::Release::SriHashes.emit(out_dir: options[:out_dir])
+    puts "→ writing release manifest"
+    Essenfont::Release::ManifestWriter.emit(out_dir: options[:out_dir])
 
     puts "=== Done. Artifacts in #{options[:out_dir]}/ ==="
     list_artifacts(options[:out_dir])
@@ -72,7 +75,7 @@ module ReleasePipeline
     cp_map = Essenfont::CpMap.build_from(donors)
     puts "  cp_map: #{cp_map.size} codepoints"
 
-    dump_cp_map(out_dir:, cp_map:)
+    cp_map.dump_json(File.join(out_dir, "cp_map.json"))
 
     puts "→ building OTC (CFF2 outlines)"
     result = Essenfont::Otc::Build.new(
@@ -86,42 +89,6 @@ module ReleasePipeline
     results.each { |r| puts "  #{r[:name]}: #{r[:bytes]} bytes" }
 
     cp_map
-  end
-
-  def dump_cp_map(out_dir:, cp_map:)
-    path = File.join(out_dir, "cp_map.json")
-    File.write(path, JSON.pretty_generate(cp_map.donor_labels))
-  end
-
-  # ── WOFF + WOFF2 encoding via fontisan Ruby API (no CLI) ──
-
-  def encode_woffs(out_dir:)
-    puts "→ encoding per-plane WOFF + WOFF2"
-    require "digest"
-    cache = Essenfont::BuildCache.new
-
-    PLANES.each do |p|
-      ttf = File.join(out_dir, "Essenfont-#{p}.ttf")
-      next unless File.exist?(ttf)
-
-      # Cache key = sha256 of the per-plane TTF. If the TTF hasn't
-      # changed, the WOFF + WOFF2 are identical — skip re-encoding.
-      ttf_sha = Digest::SHA256.file(ttf).hexdigest[0, 16]
-      woff_path = File.join(out_dir, "Essenfont-#{p}.woff")
-      woff2_path = File.join(out_dir, "Essenfont-#{p}.woff2")
-
-      woff_cached = cache.fetch_or_build_file("ttf-#{ttf_sha}", "Essenfont-#{p}.woff", woff_path) do
-        font = Fontisan::FontLoader.load(ttf)
-        File.binwrite(woff_path, Fontisan::Converters::WoffWriter.new.convert(font))
-      end
-
-      woff2_cached = cache.fetch_or_build_file("ttf-#{ttf_sha}", "Essenfont-#{p}.woff2", woff2_path) do
-        font = Fontisan::FontLoader.load(ttf)
-        File.binwrite(woff2_path, Fontisan::Converters::Woff2Encoder.new.convert(font)[:woff2_binary])
-      end
-
-      puts "  #{p}: #{woff_cached || woff2_cached ? 'cache' : 'encoded'}"
-    end
   end
 
   # ── Per-codepoint SVG exports (cached, delegates to library) ──
@@ -139,32 +106,6 @@ module ReleasePipeline
       Essenfont::Release::SvgExports.emit(out_dir: svg_dir, font_path: otc_path)
     end
     puts "  svg-exports: #{cached ? 'from cache' : 'fresh build'}"
-  end
-
-  # ── SRI hashes (pure Ruby) ──
-
-  def emit_sri_hashes(out_dir:)
-    puts "→ emitting SRI hashes"
-    File.open(File.join(out_dir, "sri.txt"), "w") do |f|
-      PLANES.each do |p|
-        %w[woff woff2].each do |ext|
-          file = File.join(out_dir, "Essenfont-#{p}.#{ext}")
-          next unless File.exist?(file)
-          b64 = [Digest::SHA384.file(file).digest].pack("m0")
-          f.puts "Essenfont-#{p}.#{ext}=sha384-#{b64}"
-        end
-      end
-    end
-  end
-
-  # ── Release manifest (pure Ruby) ──
-
-  def write_release_manifest(out_dir:)
-    data = { essenfont_version: Essenfont::Otc::Version::STRING,
-             ucd_version: Essenfont::UcodeRef.unicode_version,
-             generated_at: Time.now.utc.iso8601,
-             artifacts: Dir.children(out_dir).sort }
-    File.write(File.join(out_dir, "release-manifest.json"), JSON.pretty_generate(data))
   end
 
   # ── Coverage gate (shared with scripts/build.rb) ──

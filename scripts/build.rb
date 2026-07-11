@@ -151,7 +151,7 @@ module EssenfontBuild
     return unless ENV["ESSENFONT_DUMP_CP_MAP"]
 
     path = File.join(OUTPUT_DIR, "cp_map.json")
-    File.write(path, JSON.pretty_generate(cp_map.donor_labels))
+    cp_map.dump_json(path)
     puts "wrote #{path} (#{cp_map.size} cps)"
   end
 

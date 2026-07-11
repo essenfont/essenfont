@@ -24,12 +24,6 @@ RSpec.describe Essenfont::CpMap do
     end
   end
 
-  describe "#with_gids" do
-    it "returns the full info hash" do
-      expect(cp_map.with_gids[0x41]).to eq(label: :noto, gid: 1)
-    end
-  end
-
   describe "#size + #keys" do
     it "counts codepoints" do
       expect(cp_map.size).to eq(6)

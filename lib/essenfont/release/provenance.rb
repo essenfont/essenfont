@@ -44,7 +44,7 @@ module Essenfont
           [entry.label, {
             family: entry.family,
             license: entry.license,
-            version: entry.raw["version"],
+            version: entry.version,
             url: entry.url,
             sha256: entry.sha256
           }]

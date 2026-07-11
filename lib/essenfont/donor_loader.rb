@@ -205,26 +205,10 @@ module Essenfont
       mappings.select { |cp, _| ranges.any? { |from, to| cp.between?(from, to) } }
     end
 
-    # -- Remap loading -----------------------------------------------------
+    # -- Remap loading (delegates to Essenfont::Remap) --------------------
 
     def load_remap(spec)
-      path = resolve_remap_path(spec)
-      return nil unless path && File.exist?(path)
-
-      data = YAML.safe_load_file(path)
-      mappings = data.fetch("mappings", [])
-      return nil if mappings.empty?
-
-      mappings.to_h do |m|
-        [m.fetch("from"), m.fetch("to")]
-      end
-    end
-
-    def resolve_remap_path(spec)
-      return spec if File.exist?(spec)
-
-      candidate = File.join(@remap_dir, File.basename(spec))
-      File.exist?(candidate) ? candidate : nil
+      Essenfont::Remap.load(spec, search_dirs: [@remap_dir])
     end
 
     # -- Reporting ---------------------------------------------------------
