@@ -113,10 +113,13 @@ module Essenfont
     # Convert font → UFO, normalize, measure UPM + scale factor.
     # For CFF-based fonts, fills in contours that fontisan's UFO
     # converter stubs out (extract_cff_glyphs is a TODO in 0.4.23).
+    # For glyf-based fonts, fills in compound (composite) glyphs that
+    # the converter silently drops (only SimpleGlyph is handled).
     # Returns [ufo, native_upm, scale_factor].
     def convert_and_measure(font)
       ufo = convert_to_ufo(font)
       fill_cff_outlines_if_needed(font, ufo)
+      fill_compound_glyphs_if_needed(font, ufo)
 
       native_upm = read_ufo_upm(ufo)
 
@@ -138,6 +141,17 @@ module Essenfont
       return if ufo.glyphs.values.all? { |g| !g.contours.nil? && !g.contours.empty? }
 
       Essenfont::Ufo::CffOutlineFiller.fill!(font, ufo)
+    end
+
+    # fontisan's FromBinData.extract_truetype_glyphs only handles
+    # SimpleGlyph — CompoundGlyph instances get empty contours.
+    # CompoundGlyphFiller uses the Stitcher Source's own compound
+    # resolution to populate them before normalization.
+    def fill_compound_glyphs_if_needed(font, ufo)
+      return unless font.respond_to?(:has_table?) && font.has_table?("glyf")
+      return if ufo.glyphs.values.all? { |g| !g.contours.nil? && !g.contours.empty? }
+
+      Essenfont::Ufo::CompoundGlyphFiller.fill!(font, ufo)
     end
 
     def read_ufo_upm(ufo)
