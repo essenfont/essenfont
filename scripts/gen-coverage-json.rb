@@ -39,7 +39,7 @@ character_ranges.each { |r| r.each { |cp| assigned_set << cp } }
 font = Fontisan::FontLoader.load(FONT_FILE)
 cmap_cps = font.table("cmap").unicode_mappings&.keys || []
 
-report = Essenfont::Coverage::Report.new(cmap_cps, catalog: catalog, assigned_filter: assigned_set)
+report = Essenfont::CoverageReport.new(cmap_cps, catalog: catalog, assigned_filter: assigned_set)
 
 puts "=== Coverage report for #{FONT_FILE} ==="
 puts ""

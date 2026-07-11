@@ -65,14 +65,10 @@ module ReleasePipeline
 
     ENV["ESSENFONT_DUMP_CP_MAP"] = "1"
 
-    puts "→ loading manifest + donors"
-    manifest = Essenfont::Manifest.load
-    donors = Essenfont::DonorLoader.new(manifest: manifest).load_all
-    raise "no donors loaded" if donors.empty?
-
-    validate_coverage_gates(manifest:, donors:)
-
-    cp_map = Essenfont::CpMap.build_from(donors)
+    puts "→ preparing build pipeline"
+    pipeline = Essenfont::Pipeline.build
+    cp_map = pipeline.cp_map
+    donors = pipeline.donors
     puts "  cp_map: #{cp_map.size} codepoints"
 
     cp_map.dump_json(File.join(out_dir, "cp_map.json"))
@@ -106,12 +102,6 @@ module ReleasePipeline
       Essenfont::Release::SvgExports.emit(out_dir: svg_dir, font_path: otc_path)
     end
     puts "  svg-exports: #{cached ? 'from cache' : 'fresh build'}"
-  end
-
-  # ── Coverage gate (shared with scripts/build.rb) ──
-
-  def validate_coverage_gates(manifest:, donors:)
-    Essenfont::CoverageGate.new(manifest:, donors:).validate!
   end
 
   # ── Helpers ──

@@ -31,18 +31,15 @@ module EssenfontBuild
   def run(format: :otc)
     puts "=== Essenfont build (format: #{format}) ==="
 
-    manifest = Essenfont::Manifest.load
-    puts "  manifest: #{manifest.size} entries (#{manifest.active.size} active)"
+    pipeline = Essenfont::Pipeline.build
+    puts "  manifest: #{pipeline.manifest.size} entries (#{pipeline.manifest.active.size} active)"
+    puts "  cp_map: #{pipeline.cp_map.size} codepoints"
+    raise_build_error "no codepoints covered by any donor" if pipeline.cp_map.size.zero?
 
-    donors = Essenfont::DonorLoader.new(manifest: manifest).load_all
-    raise_build_error "no donor fonts loaded — check sources/manifest.yml + references/input-fonts/" if donors.empty?
+    dump_cp_map_if_requested(pipeline.cp_map)
 
-    validate_coverage_gates(manifest:, donors:)
-
-    cp_map = build_cp_map(donors)
-    raise_build_error "no codepoints covered by any donor" if cp_map.size.zero?
-
-    dump_cp_map_if_requested(cp_map)
+    cp_map = pipeline.cp_map
+    donors = pipeline.donors
 
     case format.to_sym
     when :otc
@@ -63,22 +60,6 @@ module EssenfontBuild
       raise_build_error "unknown format #{format.inspect} " \
                         "(use :otc, :otc-cff2, :ttf-per-plane, :ttf, or :otf)"
     end
-  end
-
-  # ── CpMap assembly (scan → filter → backfill in one call) ──
-  def build_cp_map(donors)
-    cp_map = Essenfont::CpMap.build_from(donors)
-    puts "  total codepoints across donors: #{cp_map.size}"
-    puts "  (after filtering PUA/Surrogate/Specials + Cc/Cf backfill)"
-    cp_map
-  end
-
-  # ── Coverage gate ──
-  # Validates that declared covers: blocks actually have cmap coverage.
-  # Delegates to Essenfont::CoverageGate — single source of truth
-  # shared with scripts/release.rb.
-  def validate_coverage_gates(manifest:, donors:)
-    Essenfont::CoverageGate.new(manifest:, donors:).validate!
   end
 
   # ── OTC (canonical) ──
@@ -159,13 +140,7 @@ module EssenfontBuild
   def raise_build_error(message)
     raise Essenfont::Otc::Errors::BuildError, message
   end
-
-  def raise_collection_validation(message)
-    raise Essenfont::Otc::Errors::CollectionValidation, message
-  end
 end
-
-require "json"
 
 if __FILE__ == $PROGRAM_NAME
   options = { format: :otc }
