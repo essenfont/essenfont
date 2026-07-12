@@ -126,6 +126,8 @@ module Essenfont
       normalization = Essenfont::Ufo::Normalization.new(ufo, target_upm: target_upm)
       normalization.apply! unless normalization.identity?
 
+      Essenfont::Ufo::CoordinateClamp.clamp!(ufo, target_upm: target_upm)
+
       [ufo, native_upm, normalization.scale_factor]
     end
 

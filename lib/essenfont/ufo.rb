@@ -16,5 +16,6 @@ module Essenfont
     autoload :Normalization,          "essenfont/ufo/normalization"
     autoload :CffOutlineFiller,       "essenfont/ufo/cff_outline_filler"
     autoload :CompoundGlyphFiller,    "essenfont/ufo/compound_glyph_filler"
+    autoload :CoordinateClamp,        "essenfont/ufo/coordinate_clamp"
   end
 end

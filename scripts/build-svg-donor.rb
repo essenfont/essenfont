@@ -76,6 +76,28 @@ blocks.each do |block|
   compiler = Fontisan::Ufo::Compile::TtfCompiler.new(font)
   compiler.compile(output_path: output_ttf)
 
+  # Post-compilation: detect extreme coordinates. fontisan's SvgToGlyf
+  # sometimes produces coordinates far outside the em-square (observed
+  # up to 11x UPM). Log a warning so the issue is visible.
+  check_ttf = Fontisan::FontLoader.load(output_ttf)
+  check_head = check_ttf.table("head")
+  check_maxp = check_ttf.table("maxp")
+  check_glyf = check_ttf.table("glyf")
+  check_loca = check_ttf.table("loca")
+  if check_glyf && check_loca && check_head
+    check_loca.parse_with_context(check_head.index_to_loc_format, check_maxp.num_glyphs)
+    max_y = 0
+    check_maxp.num_glyphs.times do |gid|
+      g = check_glyf.glyph_for(gid, check_loca, check_head) rescue nil
+      next unless g
+      max_y = [max_y, g.y_max.to_i, g.y_min.to_i.abs].max
+    end
+    if max_y > check_head.units_per_em * 2
+      warn "  WARNING: #{block} has max |y|=#{max_y} (#{(max_y.to_f / check_head.units_per_em).round(1)}x UPM)"
+      warn "    CoordinateClamp in DonorLoader will scale these during the build."
+    end
+  end
+
   # Patch the TTF's cmap to include the actual codepoints
   # (the Ufo compiler doesn't auto-generate a full cmap; we add manually)
   out = Fontisan::FontLoader.load(output_ttf)
