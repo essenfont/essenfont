@@ -18,7 +18,7 @@ module Essenfont
     # coordinates from polluting the build output.
     #
     module CoordinateClamp
-      THRESHOLD_FACTOR = 2.0
+      THRESHOLD_FACTOR = 3.0
 
       module_function
 

@@ -95,7 +95,7 @@ module Essenfont
     # -- Outline (UFO) path ------------------------------------------------
 
     def load_outline_donor(entry, font, resolved, remap)
-      ufo, native_upm, scale_factor = convert_and_measure(font)
+      ufo, native_upm, scale_factor = convert_and_measure(font, glyph_scale: entry.glyph_scale)
 
       coverage = scan_ufo_coverage(ufo, entry: entry)
       report_load(entry, coverage, remap,
@@ -116,7 +116,7 @@ module Essenfont
     # For glyf-based fonts, fills in compound (composite) glyphs that
     # the converter silently drops (only SimpleGlyph is handled).
     # Returns [ufo, native_upm, scale_factor].
-    def convert_and_measure(font)
+    def convert_and_measure(font, glyph_scale: 1.0)
       ufo = convert_to_ufo(font)
       fill_cff_outlines_if_needed(font, ufo)
       fill_compound_glyphs_if_needed(font, ufo)
@@ -128,7 +128,9 @@ module Essenfont
 
       Essenfont::Ufo::CoordinateClamp.clamp!(ufo, target_upm: target_upm)
 
-      [ufo, native_upm, normalization.scale_factor]
+      scale_glyphs(ufo, factor: glyph_scale) if glyph_scale != 1.0
+
+      [ufo, native_upm, normalization.scale_factor * glyph_scale]
     end
 
     def convert_to_ufo(font)
@@ -154,6 +156,26 @@ module Essenfont
       return if ufo.glyphs.values.all? { |g| !g.contours.nil? && !g.contours.empty? }
 
       Essenfont::Ufo::CompoundGlyphFiller.fill!(font, ufo)
+    end
+
+    # Apply a per-donor uniform scale to glyph outlines and advance
+    # widths. Used when a donor's design size doesn't match the
+    # target — e.g. UniHieroglyphica glyphs are ~19% smaller than
+    # Noto Sans, so glyph_scale: 1.187 scales them up.
+    def scale_glyphs(ufo, factor:)
+      ufo.glyphs.each_value do |glyph|
+        glyph.width = (glyph.width * factor).round if glyph.width.is_a?(Numeric)
+        glyph.contours.each do |contour|
+          contour.points = contour.points.map do |pt|
+            Fontisan::Ufo::Point.new(
+              x: (pt.x * factor).round,
+              y: (pt.y * factor).round,
+              type: pt.type,
+              smooth: pt.smooth
+            )
+          end
+        end
+      end
     end
 
     def read_ufo_upm(ufo)
