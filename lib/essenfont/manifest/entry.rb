@@ -10,7 +10,7 @@ module Essenfont
     class Entry
       attr_reader :label, :family, :file, :sha256, :license, :url, :covers,
                   :codepoint_remap, :font_index, :type, :block, :enabled,
-                  :version, :raw
+                  :version, :glyph_scale, :raw
 
       def initialize(hash)
         @raw = hash
@@ -28,6 +28,7 @@ module Essenfont
         @type = (h[:type] || :font).to_sym
         @block = h[:block]
         @version = h[:version]
+        @glyph_scale = h[:glyph_scale]&.to_f || 1.0
         @enabled = h.fetch(:enabled, true)
         @restrict_to_covers = !h[:restrict_to_covers].nil?
         freeze

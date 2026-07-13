@@ -413,7 +413,8 @@ donors:
     url: https://suignard.com/Ptolemaic/UniHieroglyphica.ttf
     author: "Michel Suignard (suignard.com)"
     covers: [Egyptian_Hieroglyphs, Egyptian_Hieroglyph_Format_Controls, Egyptian_Hieroglyphs_Extended-A]
-    notes: "Primary donor for all Egyptian Hieroglyphs blocks. By Michel Suignard (Unicode Egyptian Hieroglyphs co-editor). upm=1000 — matches Essenfont target, no scaling required. Covers core (1072/1072), Format Controls (38/48), Ext-A Extended (3995/4000)."
+    glyph_scale: 1.187
+    notes: "Primary donor for all Egyptian Hieroglyphs blocks. By Michel Suignard (Unicode Egyptian Hieroglyphs co-editor). upm=1000. glyph_scale=1.187 scales glyphs to match Noto Sans Egyptian Hieroglyphs extents (UniHieroglyphica glyphs are ~19% smaller than Noto Sans). Covers core (1072/1072), Format Controls (38/48), Ext-A Extended (3995/4000)."
 
   - label: new-gardiner
     file: references/input-fonts/NewGardiner.ttf
