@@ -127,6 +127,7 @@ module Essenfont
       normalization.apply! unless normalization.identity?
 
       Essenfont::Ufo::CoordinateClamp.clamp!(ufo, target_upm: target_upm)
+      Essenfont::Ufo::AdvanceWidthNormalizer.normalize!(ufo, target_upm: target_upm)
 
       [ufo, native_upm, normalization.scale_factor]
     end
