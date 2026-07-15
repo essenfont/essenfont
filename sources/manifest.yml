@@ -608,3 +608,1293 @@ donors:
     type: code_chart
     notes: "Synthetic donor from ucode code-chart extracted SVGs. 64/64 cps (U+1F200..U+1F2FF). 28340 bytes. See scripts/build-svg-donor.rb."
 
+
+  # ─────────── Auto-generated donors (bulk coverage expansion) ───────────
+
+  - label: noto-naskh-arabic
+    file: references/input-fonts/NotoNaskhArabic-Regular.ttf
+    family: Noto Naskh Arabic
+    style: Regular
+    license: OFL
+    sha256: "6f0a92031367b2f5a2078fe9d24f3433122b61a0bad57c423aad8f3c39aa2e6e"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Arabic_Extended-A, Arabic_Extended-B, Arabic_Extended-C, Arabic_Presentation_Forms-A, Arabic_Presentation_Forms-B, Arabic_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-adlam
+    file: references/input-fonts/NotoSansAdlam-Regular.ttf
+    family: Noto Sans Adlam
+    style: Regular
+    license: OFL
+    sha256: "4b51541536a7b28142a4571c16dc56e386c05f345ac9739ef8599d8ad4ed5e54"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Adlam, Arabic]
+    restrict_to_covers: true
+
+  - label: noto-sans-anatolian-hieroglyphs
+    file: references/input-fonts/NotoSansAnatolianHieroglyphs-Regular.ttf
+    family: Noto Sans Anatolian Hieroglyphs
+    style: Regular
+    license: OFL
+    sha256: "c7ca66d66264d27f9995a061d4045b4e4a25ea1958acae0f414d0e22992a3546"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Anatolian_Hieroglyphs]
+    restrict_to_covers: true
+
+  - label: noto-sans-balinese
+    file: references/input-fonts/NotoSansBalinese-Regular.ttf
+    family: Noto Sans Balinese
+    style: Regular
+    license: OFL
+    sha256: "cee58a184e7e00c4332087ac01870a69ac52fd5fa17ea3783ac728c945af1827"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Balinese]
+    restrict_to_covers: true
+
+  - label: noto-sans-bamum
+    file: references/input-fonts/NotoSansBamum-Regular.ttf
+    family: Noto Sans Bamum
+    style: Regular
+    license: OFL
+    sha256: "0282610e6923d06a4d120cff3824e829b4535a8c4c57c07e11dbe73475541084"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Bamum, Bamum_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-bassa-vah
+    file: references/input-fonts/NotoSansBassaVah-Regular.ttf
+    family: Noto Sans Bassa Vah
+    style: Regular
+    license: OFL
+    sha256: "8218239377452e05634a91ee8a4338daf0aa96a15673a437533a098eb9c06f53"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Bassa_Vah]
+    restrict_to_covers: true
+
+  - label: noto-sans-batak
+    file: references/input-fonts/NotoSansBatak-Regular.ttf
+    family: Noto Sans Batak
+    style: Regular
+    license: OFL
+    sha256: "fff67846a9b39bae335b3f5b8331203ffbd4ad9f5f9f3f0b57e8f48627825c12"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Batak]
+    restrict_to_covers: true
+
+  - label: noto-sans-bengali
+    file: references/input-fonts/NotoSansBengali-Regular.ttf
+    family: Noto Sans Bengali
+    style: Regular
+    license: OFL
+    sha256: "b55c62ee531e3214da6c0701daecea89a52ba42db7d8206b92e6b51f397a3193"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Bengali, Devanagari, Devanagari_Extended, Spacing_Modifier_Letters, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-bhaiksuki
+    file: references/input-fonts/NotoSansBhaiksuki-Regular.ttf
+    family: Noto Sans Bhaiksuki
+    style: Regular
+    license: OFL
+    sha256: "3a68dae9462a2b17566460f32caf91ba60a1d8678b4bb86452bb0752bbdd337c"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Bhaiksuki]
+    restrict_to_covers: true
+
+  - label: noto-sans-buginese
+    file: references/input-fonts/NotoSansBuginese-Regular.ttf
+    family: Noto Sans Buginese
+    style: Regular
+    license: OFL
+    sha256: "bc19f17d7f6e8f280c2cc95ef6d1b67fac25becfe98722f482039a4d84f3c9ba"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Buginese, Javanese]
+    restrict_to_covers: true
+
+  - label: noto-sans-canadian-aboriginal
+    file: references/input-fonts/NotoSansCanadianAboriginal-Regular.ttf
+    family: Noto Sans Canadian Aboriginal
+    style: Regular
+    license: OFL
+    sha256: "6f489ba696faff1d96f8ace395c0d22fe3b82621f69bf50b337112fb47ff1f17"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Unified_Canadian_Aboriginal_Syllabics, Unified_Canadian_Aboriginal_Syllabics_Extended, Unified_Canadian_Aboriginal_Syllabics_Extended-A]
+    restrict_to_covers: true
+
+  - label: noto-sans-carian
+    file: references/input-fonts/NotoSansCarian-Regular.ttf
+    family: Noto Sans Carian
+    style: Regular
+    license: OFL
+    sha256: "0c5ddc0892b44ae1c40fd0734eb2be5b8b73e178f16a475cf1bbb9b5d97d6f1b"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Carian]
+    restrict_to_covers: true
+
+  - label: noto-sans-chakma
+    file: references/input-fonts/NotoSansChakma-Regular.ttf
+    family: Noto Sans Chakma
+    style: Regular
+    license: OFL
+    sha256: "60ce1d029e35b432dd68cc9f6c94f69bd84d8c97f28f06130186606dd2c3325d"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Bengali, Chakma, Myanmar]
+    restrict_to_covers: true
+
+  - label: noto-sans-cham
+    file: references/input-fonts/NotoSansCham-Regular.ttf
+    family: Noto Sans Cham
+    style: Regular
+    license: OFL
+    sha256: "d48a34e02b4096eb3f2e008b74459789540598c2274d65fc53012517d0b08d92"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Cham]
+    restrict_to_covers: true
+
+  - label: noto-sans-cherokee
+    file: references/input-fonts/NotoSansCherokee-Regular.ttf
+    family: Noto Sans Cherokee
+    style: Regular
+    license: OFL
+    sha256: "c052352137ae8d283840a0e2991a675d47859d8fdbae5726d373d4f0d97a8c87"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Cherokee, Cherokee_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-chorasmian
+    file: references/input-fonts/NotoSansChorasmian-Regular.ttf
+    family: Noto Sans Chorasmian
+    style: Regular
+    license: OFL
+    sha256: "9d5a0971077f541748b88fa93f8a01c21f6089aaf7fe446b6bd9f20e5300edef"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Chorasmian]
+    restrict_to_covers: true
+
+  - label: noto-sans-coptic
+    file: references/input-fonts/NotoSansCoptic-Regular.ttf
+    family: Noto Sans Coptic
+    style: Regular
+    license: OFL
+    sha256: "e70bd535d7e6cdf2346eab36ea76441059b18ee14d3243e85240b5e65eb0ad45"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Combining_Diacritical_Marks_Supplement, Coptic, Coptic_Epact_Numbers, Greek_and_Coptic, Spacing_Modifier_Letters]
+    restrict_to_covers: true
+
+  - label: noto-sans-cypriot
+    file: references/input-fonts/NotoSansCypriot-Regular.ttf
+    family: Noto Sans Cypriot
+    style: Regular
+    license: OFL
+    sha256: "0b276172afb0624c811c62daf4b8fb6ce3fa018fef94cbae59f4bbbae367988e"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Cypriot_Syllabary]
+    restrict_to_covers: true
+
+  - label: noto-sans-cypro-minoan
+    file: references/input-fonts/NotoSansCyproMinoan-Regular.ttf
+    family: Noto Sans Cypro Minoan
+    style: Regular
+    license: OFL
+    sha256: "c21895c2edc7c89dfd02a5298539260bc2174fa6d13acb188cfc76b9f215a7cd"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Cypro-Minoan]
+    restrict_to_covers: true
+
+  - label: noto-sans-devanagari
+    file: references/input-fonts/NotoSansDevanagari-Regular.ttf
+    family: Noto Sans Devanagari
+    style: Regular
+    license: OFL
+    sha256: "306b53ecfb182a504dd8a7446093c316387d2fd8dc350d0792ed1753fe0996cd"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Combining_Diacritical_Marks_for_Symbols, Common_Indic_Number_Forms, Devanagari, Devanagari_Extended, Devanagari_Extended-A, Spacing_Modifier_Letters, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-duployan
+    file: references/input-fonts/NotoSansDuployan-Regular.ttf
+    family: Noto Sans Duployan
+    style: Regular
+    license: OFL
+    sha256: "de5ee49ff75acd2195bdb3296577d7527636520a245e9392a40bdb7ee86cdd7b"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Combining_Diacritical_Marks_for_Symbols, Dingbats, Duployan, Miscellaneous_Symbols, Miscellaneous_Technical, Shorthand_Format_Controls]
+    restrict_to_covers: true
+
+  - label: noto-sans-elymaic
+    file: references/input-fonts/NotoSansElymaic-Regular.ttf
+    family: Noto Sans Elymaic
+    style: Regular
+    license: OFL
+    sha256: "29571749fede39715b09cbadbfedcac089acf33475137a0aac7addd91d333181"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Elymaic]
+    restrict_to_covers: true
+
+  - label: noto-sans-ethiopic
+    file: references/input-fonts/NotoSansEthiopic-Regular.ttf
+    family: Noto Sans Ethiopic
+    style: Regular
+    license: OFL
+    sha256: "f6f7fc379db9438959a2b0527e7a2cf36ea9c84626d56ec444fff37fc24c3c10"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Ethiopic, Ethiopic_Extended, Ethiopic_Extended-A, Ethiopic_Extended-B, Ethiopic_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-georgian
+    file: references/input-fonts/NotoSansGeorgian-Regular.ttf
+    family: Noto Sans Georgian
+    style: Regular
+    license: OFL
+    sha256: "d3e33254b09e7bb2c5cf0f17e554b80462056c5a107097f258d495168c3a9346"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Armenian, Georgian, Georgian_Extended, Georgian_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-glagolitic
+    file: references/input-fonts/NotoSansGlagolitic-Regular.ttf
+    family: Noto Sans Glagolitic
+    style: Regular
+    license: OFL
+    sha256: "bb00b6d9cacbab378ef11b1f83250495cd7b6503d143c75d90b1efafa76c691e"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Cyrillic, Cyrillic_Extended-B, Glagolitic, Glagolitic_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-grantha
+    file: references/input-fonts/NotoSansGrantha-Regular.ttf
+    family: Noto Sans Grantha
+    style: Regular
+    license: OFL
+    sha256: "41dd39f2f16e9539751c732f8d276079b98277bec2ea5945232a7ac594198000"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Combining_Diacritical_Marks_for_Symbols, Devanagari, Grantha, Tamil, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-gujarati
+    file: references/input-fonts/NotoSansGujarati-Regular.ttf
+    family: Noto Sans Gujarati
+    style: Regular
+    license: OFL
+    sha256: "9b5a7aaeeb649a2e75a49d8b006a1f87db1b61c0df3b001609f4e0725d88dbf6"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Gujarati]
+    restrict_to_covers: true
+
+  - label: noto-sans-gunjala-gondi
+    file: references/input-fonts/NotoSansGunjalaGondi-Regular.ttf
+    family: Noto Sans Gunjala Gondi
+    style: Regular
+    license: OFL
+    sha256: "bdc8ed1739118d7c1be43cb5b435817fb7a5ae0acb32c89b2ddd66e7e9c2d1b3"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Gunjala_Gondi]
+    restrict_to_covers: true
+
+  - label: noto-sans-hanifi-rohingya
+    file: references/input-fonts/NotoSansHanifiRohingya-Regular.ttf
+    family: Noto Sans Hanifi Rohingya
+    style: Regular
+    license: OFL
+    sha256: "ce453eaf8807a9a410cdc2ebeb7ae009e90b9e611342ac239aa59b794bdcefdb"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Hanifi_Rohingya]
+    restrict_to_covers: true
+
+  - label: noto-sans-indic-siyaq-numbers
+    file: references/input-fonts/NotoSansIndicSiyaqNumbers-Regular.ttf
+    family: Noto Sans Indic Siyaq Numbers
+    style: Regular
+    license: OFL
+    sha256: "68f41d31c85653a9c45d6d7e903c4329a791aee3a8559c2d19ecc88fa28090ae"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Indic_Siyaq_Numbers]
+    restrict_to_covers: true
+
+  - label: noto-sans-inscriptional-pahlavi
+    file: references/input-fonts/NotoSansInscriptionalPahlavi-Regular.ttf
+    family: Noto Sans Inscriptional Pahlavi
+    style: Regular
+    license: OFL
+    sha256: "1776a4a688e99a5c9720058e798fb82775b5763d57553f8912ef0fed3433ccbc"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Inscriptional_Pahlavi]
+    restrict_to_covers: true
+
+  - label: noto-sans-inscriptional-parthian
+    file: references/input-fonts/NotoSansInscriptionalParthian-Regular.ttf
+    family: Noto Sans Inscriptional Parthian
+    style: Regular
+    license: OFL
+    sha256: "70c2c24e5442cf4ae70af6b8274fccedc4807317fa7c3cf78272349c35bfb506"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Inscriptional_Parthian]
+    restrict_to_covers: true
+
+  - label: noto-sans-javanese
+    file: references/input-fonts/NotoSansJavanese-Regular.ttf
+    family: Noto Sans Javanese
+    style: Regular
+    license: OFL
+    sha256: "81fdea70d379989bafea65eae5a6a96144991b437415744716a49a56f09f747a"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Javanese]
+    restrict_to_covers: true
+
+  - label: noto-sans-k-r
+    file: references/input-fonts/NotoSansKR-Regular.ttf
+    family: Noto Sans K R
+    style: Regular
+    license: OFL
+    sha256: "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Alphabetic_Presentation_Forms, Block_Elements, Bopomofo, Bopomofo_Extended, Box_Drawing, CJK_Compatibility, CJK_Compatibility_Forms, CJK_Compatibility_Ideographs, CJK_Compatibility_Ideographs_Supplement, CJK_Radicals_Supplement, CJK_Strokes, CJK_Symbols_and_Punctuation, CJK_Unified_Ideographs, CJK_Unified_Ideographs_Extension_A, CJK_Unified_Ideographs_Extension_B, CJK_Unified_Ideographs_Extension_E, CJK_Unified_Ideographs_Extension_F, CJK_Unified_Ideographs_Extension_G, Combining_Diacritical_Marks_for_Symbols, Control_Pictures, Cyrillic, Dingbats, Enclosed_Alphanumeric_Supplement, Enclosed_Alphanumerics, Enclosed_CJK_Letters_and_Months, Enclosed_Ideographic_Supplement, Greek_and_Coptic, Halfwidth_and_Fullwidth_Forms, Hangul_Compatibility_Jamo, Hangul_Jamo, Hangul_Jamo_Extended-A, Hangul_Jamo_Extended-B, Hangul_Syllables, Hiragana, IPA_Extensions, Ideographic_Description_Characters, Kanbun, Kangxi_Radicals, Katakana, Katakana_Phonetic_Extensions, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Miscellaneous_Mathematical_Symbols-B, Miscellaneous_Symbols, Miscellaneous_Symbols_and_Arrows, Miscellaneous_Technical, Small_Form_Variants, Spacing_Modifier_Letters, Supplemental_Arrows-B, Vertical_Forms]
+    restrict_to_covers: true
+
+  - label: noto-sans-kaithi
+    file: references/input-fonts/NotoSansKaithi-Regular.ttf
+    family: Noto Sans Kaithi
+    style: Regular
+    license: OFL
+    sha256: "ba33fd78d18df942260c53df4080254901aa7c3b69678c7571d680bf063a5e2d"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Kaithi]
+    restrict_to_covers: true
+
+  - label: noto-sans-kannada
+    file: references/input-fonts/NotoSansKannada-Regular.ttf
+    family: Noto Sans Kannada
+    style: Regular
+    license: OFL
+    sha256: "9ad74dc64838c6855b96f671fc08e425a58921b9d0c71712ea79c328a27e6e38"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Kannada, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-kawi
+    file: references/input-fonts/NotoSansKawi-Regular.ttf
+    family: Noto Sans Kawi
+    style: Regular
+    license: OFL
+    sha256: "61da5fcc6d5057814b7a940ec3cbe43cc24c64f8f8cd389965e4454ccc6e7a6a"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Kawi]
+    restrict_to_covers: true
+
+  - label: noto-sans-kayah-li
+    file: references/input-fonts/NotoSansKayahLi-Regular.ttf
+    family: Noto Sans Kayah Li
+    style: Regular
+    license: OFL
+    sha256: "71235e4d51c4e591b20717c525997c72ee906a9d39ce55f8f8bb8c60e96ab807"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Kayah_Li]
+    restrict_to_covers: true
+
+  - label: noto-sans-kharoshthi
+    file: references/input-fonts/NotoSansKharoshthi-Regular.ttf
+    family: Noto Sans Kharoshthi
+    style: Regular
+    license: OFL
+    sha256: "65962c55e28808d8677810f4afe9f3d7af57508a19632628376a34bb3ecfe0fb"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Kharoshthi]
+    restrict_to_covers: true
+
+  - label: noto-sans-khojki
+    file: references/input-fonts/NotoSansKhojki-Regular.ttf
+    family: Noto Sans Khojki
+    style: Regular
+    license: OFL
+    sha256: "4cdcae034430ea2b5695d39c1b1fcb8fac1d8c32ef7d66615248e72d41781367"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Gujarati, Khojki]
+    restrict_to_covers: true
+
+  - label: noto-sans-khudawadi
+    file: references/input-fonts/NotoSansKhudawadi-Regular.ttf
+    family: Noto Sans Khudawadi
+    style: Regular
+    license: OFL
+    sha256: "9efe023882dd36fbf7d838a7c5ec30e1b22a44f9733af8209dc7b8b30fdd0711"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Khudawadi]
+    restrict_to_covers: true
+
+  - label: noto-sans-lao
+    file: references/input-fonts/NotoSansLao-Regular.ttf
+    family: Noto Sans Lao
+    style: Regular
+    license: OFL
+    sha256: "0a86e5e1ccfe34ca78c43fac6829dc751b42bcc469272a9a55325aae587bfbe7"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Lao]
+    restrict_to_covers: true
+
+  - label: noto-sans-lepcha
+    file: references/input-fonts/NotoSansLepcha-Regular.ttf
+    family: Noto Sans Lepcha
+    style: Regular
+    license: OFL
+    sha256: "8dad9629d709f0dba5d769988d1466daf300751f6bba2659465aaa6214261590"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Lepcha]
+    restrict_to_covers: true
+
+  - label: noto-sans-linear-a
+    file: references/input-fonts/NotoSansLinearA-Regular.ttf
+    family: Noto Sans Linear A
+    style: Regular
+    license: OFL
+    sha256: "af2b1fecbe3e1e96cbd0e22fb514512411e57753c7fef477546d7232eb8211a4"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Linear_A]
+    restrict_to_covers: true
+
+  - label: noto-sans-linear-b
+    file: references/input-fonts/NotoSansLinearB-Regular.ttf
+    family: Noto Sans Linear B
+    style: Regular
+    license: OFL
+    sha256: "940af117332cd4ff54fbc19553399be9228aff0da370a7ed36baa18fe1a9f23f"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Aegean_Numbers, Linear_B_Ideograms, Linear_B_Syllabary]
+    restrict_to_covers: true
+
+  - label: noto-sans-lycian
+    file: references/input-fonts/NotoSansLycian-Regular.ttf
+    family: Noto Sans Lycian
+    style: Regular
+    license: OFL
+    sha256: "2c580772ad04d8ba4eb63e16432615a43762ca59d7b59b43dec25b239ca38986"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Lycian]
+    restrict_to_covers: true
+
+  - label: noto-sans-lydian
+    file: references/input-fonts/NotoSansLydian-Regular.ttf
+    family: Noto Sans Lydian
+    style: Regular
+    license: OFL
+    sha256: "6dbc48fbf04ae04021c78273492dbab284eb8ffc2cd12fd3d0b61813b123162b"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Lydian]
+    restrict_to_covers: true
+
+  - label: noto-sans-mahajani
+    file: references/input-fonts/NotoSansMahajani-Regular.ttf
+    family: Noto Sans Mahajani
+    style: Regular
+    license: OFL
+    sha256: "82116df1a82007b3a3692b9ab52683ccdc134d37d88b1e38921b07541b5afe08"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Mahajani]
+    restrict_to_covers: true
+
+  - label: noto-sans-malayalam
+    file: references/input-fonts/NotoSansMalayalam-Regular.ttf
+    family: Noto Sans Malayalam
+    style: Regular
+    license: OFL
+    sha256: "c08de7fa8d032a5d6a4d120fb82c78cec60b362a4e73fa26360d89759ff2a7f9"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Malayalam, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-mandaic
+    file: references/input-fonts/NotoSansMandaic-Regular.ttf
+    family: Noto Sans Mandaic
+    style: Regular
+    license: OFL
+    sha256: "0ecb2440205b9fe02fce714ddda98bb59892d4f7eacce2c1f12028b172a34de8"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Mandaic]
+    restrict_to_covers: true
+
+  - label: noto-sans-manichaean
+    file: references/input-fonts/NotoSansManichaean-Regular.ttf
+    family: Noto Sans Manichaean
+    style: Regular
+    license: OFL
+    sha256: "29b281b63ca0d2478017a72abcb6c0b44d36af52a0e4eec2b5622be7c3a9442f"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Manichaean]
+    restrict_to_covers: true
+
+  - label: noto-sans-marchen
+    file: references/input-fonts/NotoSansMarchen-Regular.ttf
+    family: Noto Sans Marchen
+    style: Regular
+    license: OFL
+    sha256: "fb40b1294e8f7f4e93f9276b2c3d2972a2643511394eb3db806e0e257b62b893"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Marchen]
+    restrict_to_covers: true
+
+  - label: noto-sans-masaram-gondi
+    file: references/input-fonts/NotoSansMasaramGondi-Regular.ttf
+    family: Noto Sans Masaram Gondi
+    style: Regular
+    license: OFL
+    sha256: "da26087eb956e722a316a531a42f9f1ee8f8b60bf1a313c5763d71361c729c80"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Devanagari, Masaram_Gondi]
+    restrict_to_covers: true
+
+  - label: noto-sans-medefaidrin
+    file: references/input-fonts/NotoSansMedefaidrin-Regular.ttf
+    family: Noto Sans Medefaidrin
+    style: Regular
+    license: OFL
+    sha256: "a91d91b2a94d480b6f95ebd64b66d21705f1823fd83c11a927848d979c776586"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Medefaidrin]
+    restrict_to_covers: true
+
+  - label: noto-sans-meetei-mayek
+    file: references/input-fonts/NotoSansMeeteiMayek-Regular.ttf
+    family: Noto Sans Meetei Mayek
+    style: Regular
+    license: OFL
+    sha256: "66dd434ad6211990d95ba598ad8e44dee30fb32556cb2310bc7f246e00c40990"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Meetei_Mayek, Meetei_Mayek_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-mende-kikakui
+    file: references/input-fonts/NotoSansMendeKikakui-Regular.ttf
+    family: Noto Sans Mende Kikakui
+    style: Regular
+    license: OFL
+    sha256: "89496328e57ae33930d147127caf57edb3f23defa835f73ac3f0b1856e16a073"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Mende_Kikakui]
+    restrict_to_covers: true
+
+  - label: noto-sans-meroitic
+    file: references/input-fonts/NotoSansMeroitic-Regular.ttf
+    family: Noto Sans Meroitic
+    style: Regular
+    license: OFL
+    sha256: "2baf503fa5c041fd025493de311e45b8680c9f0bb471a8a2418aa4e47a4b7edb"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Meroitic_Cursive, Meroitic_Hieroglyphs]
+    restrict_to_covers: true
+
+  - label: noto-sans-miao
+    file: references/input-fonts/NotoSansMiao-Regular.ttf
+    family: Noto Sans Miao
+    style: Regular
+    license: OFL
+    sha256: "a172b5da5bf602042cb526172ecb279085c906f23d901d882cf6938909f7e574"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Miao]
+    restrict_to_covers: true
+
+  - label: noto-sans-mro
+    file: references/input-fonts/NotoSansMro-Regular.ttf
+    family: Noto Sans Mro
+    style: Regular
+    license: OFL
+    sha256: "2ab2149be222d9671ab2edcbe8736381e2d1550662a368b5087fd9e196bc69b4"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Mro]
+    restrict_to_covers: true
+
+  - label: noto-sans-multani
+    file: references/input-fonts/NotoSansMultani-Regular.ttf
+    family: Noto Sans Multani
+    style: Regular
+    license: OFL
+    sha256: "12c2437f98173dbff98fa18bcc73c6a44896634fb6d55d8f6d028394af4fc9b9"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Gurmukhi, Multani]
+    restrict_to_covers: true
+
+  - label: noto-sans-myanmar
+    file: references/input-fonts/NotoSansMyanmar-Regular.ttf
+    family: Noto Sans Myanmar
+    style: Regular
+    license: OFL
+    sha256: "fafce4db400bc0b214907ccdbfb0ad2f18a57bfefd08c8a571830b84088cf2fc"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Kayah_Li, Myanmar, Myanmar_Extended-A, Myanmar_Extended-B]
+    restrict_to_covers: true
+
+  - label: noto-sans-n-ko
+    file: references/input-fonts/NotoSansNKo-Regular.ttf
+    family: Noto Sans N Ko
+    style: Regular
+    license: OFL
+    sha256: "c756efb2c40f754107d76fa4e401fc3b8b7edec5cc65db549d3d0236ac6d08a1"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Arabic_Presentation_Forms-A, NKo]
+    restrict_to_covers: true
+
+  - label: noto-sans-nabataean
+    file: references/input-fonts/NotoSansNabataean-Regular.ttf
+    family: Noto Sans Nabataean
+    style: Regular
+    license: OFL
+    sha256: "90e722ed5cbcb21996c73a8156d04474a8a0d465f1b90e77a2152f28cf630fd3"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Nabataean]
+    restrict_to_covers: true
+
+  - label: noto-sans-nag-mundari
+    file: references/input-fonts/NotoSansNagMundari-Regular.ttf
+    family: Noto Sans Nag Mundari
+    style: Regular
+    license: OFL
+    sha256: "e822d0cc7998d8e94f73a734016b6882d9f8d570244cba9a29a1447bda708d26"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Devanagari, Nag_Mundari]
+    restrict_to_covers: true
+
+  - label: noto-sans-nandinagari
+    file: references/input-fonts/NotoSansNandinagari-Regular.ttf
+    family: Noto Sans Nandinagari
+    style: Regular
+    license: OFL
+    sha256: "6a09072dfc8ec18e66827914768dc727d92a5d1f3873ba116c7ecc39715c0ad9"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Kannada, Nandinagari, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-new-tai-lue
+    file: references/input-fonts/NotoSansNewTaiLue-Regular.ttf
+    family: Noto Sans New Tai Lue
+    style: Regular
+    license: OFL
+    sha256: "35499f3b79c2a4683ba2784b0d4c652d58e2c28c48775b33c9e8e94f2dee965a"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [CJK_Symbols_and_Punctuation, Halfwidth_and_Fullwidth_Forms, New_Tai_Lue]
+    restrict_to_covers: true
+
+  - label: noto-sans-newa
+    file: references/input-fonts/NotoSansNewa-Regular.ttf
+    family: Noto Sans Newa
+    style: Regular
+    license: OFL
+    sha256: "3aede9a3ab5740babffe75f7c0d97e2329734b8cb470c999be1871362084a8bd"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Combining_Diacritical_Marks_Supplement, Newa]
+    restrict_to_covers: true
+
+  - label: noto-sans-nushu
+    file: references/input-fonts/NotoSansNushu-Regular.ttf
+    family: Noto Sans Nushu
+    style: Regular
+    license: OFL
+    sha256: "12f749af9fdd185ac807d325499f7c9e04896c4f8ee7ca3c96e96ed8c130b181"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Ideographic_Symbols_and_Punctuation, Nushu]
+    restrict_to_covers: true
+
+  - label: noto-sans-ol-chiki
+    file: references/input-fonts/NotoSansOlChiki-Regular.ttf
+    family: Noto Sans Ol Chiki
+    style: Regular
+    license: OFL
+    sha256: "4b1ad6ec4a30277c75fd66465b0b9ae489e19f8fdf44ef3179b6fda7f5ceb32d"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Ol_Chiki]
+    restrict_to_covers: true
+
+  - label: noto-sans-old-hungarian
+    file: references/input-fonts/NotoSansOldHungarian-Regular.ttf
+    family: Noto Sans Old Hungarian
+    style: Regular
+    license: OFL
+    sha256: "18d354e16832c85da1cfbcc2a13f95f375955fcab69428b03b566d8ab26959e9"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Old_Hungarian]
+    restrict_to_covers: true
+
+  - label: noto-sans-old-north-arabian
+    file: references/input-fonts/NotoSansOldNorthArabian-Regular.ttf
+    family: Noto Sans Old North Arabian
+    style: Regular
+    license: OFL
+    sha256: "533c06d36744a09dc1df0c7bc4f3022a839cedc354446dca203fe0895317ea3d"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Old_North_Arabian]
+    restrict_to_covers: true
+
+  - label: noto-sans-old-permic
+    file: references/input-fonts/NotoSansOldPermic-Regular.ttf
+    family: Noto Sans Old Permic
+    style: Regular
+    license: OFL
+    sha256: "ade73eb88c82cb9dbe7c86179c3f995f4fb9aa661d647c0c3677ae7b7c0d6bac"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Combining_Diacritical_Marks_for_Symbols, Cyrillic, Old_Permic]
+    restrict_to_covers: true
+
+  - label: noto-sans-old-sogdian
+    file: references/input-fonts/NotoSansOldSogdian-Regular.ttf
+    family: Noto Sans Old Sogdian
+    style: Regular
+    license: OFL
+    sha256: "a3b8c9799aab7b9b9170b6eb4955e8d8c58e52c37266faaca168d9fbaea65fec"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Old_Sogdian]
+    restrict_to_covers: true
+
+  - label: noto-sans-old-south-arabian
+    file: references/input-fonts/NotoSansOldSouthArabian-Regular.ttf
+    family: Noto Sans Old South Arabian
+    style: Regular
+    license: OFL
+    sha256: "b8e196d9c4f8b634aa599fd8914179df7a00dce5da61a69762931b0c9cbef603"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Old_South_Arabian]
+    restrict_to_covers: true
+
+  - label: noto-sans-old-turkic
+    file: references/input-fonts/NotoSansOldTurkic-Regular.ttf
+    family: Noto Sans Old Turkic
+    style: Regular
+    license: OFL
+    sha256: "2bdea6041ab232cb5d88e719dac536d387b0830b690c83d4a501d06265d89d84"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Old_Turkic]
+    restrict_to_covers: true
+
+  - label: noto-sans-oriya
+    file: references/input-fonts/NotoSansOriya-Regular.ttf
+    family: Noto Sans Oriya
+    style: Regular
+    license: OFL
+    sha256: "a16645d056017927406546aa78e4ce15e782fd8783467267b75450453d007415"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Devanagari, Oriya]
+    restrict_to_covers: true
+
+  - label: noto-sans-osage
+    file: references/input-fonts/NotoSansOsage-Regular.ttf
+    family: Noto Sans Osage
+    style: Regular
+    license: OFL
+    sha256: "7801aa3d99d9da1a8fac388104e9fff4d94ddd28a07579b13a75224660b22fbf"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Osage]
+    restrict_to_covers: true
+
+  - label: noto-sans-pahawh-hmong
+    file: references/input-fonts/NotoSansPahawhHmong-Regular.ttf
+    family: Noto Sans Pahawh Hmong
+    style: Regular
+    license: OFL
+    sha256: "93c0c23cc50e5fb1e82a0eeaa8cd2e73d80e5af07be4419b882a2b54898def41"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Pahawh_Hmong]
+    restrict_to_covers: true
+
+  - label: noto-sans-palmyrene
+    file: references/input-fonts/NotoSansPalmyrene-Regular.ttf
+    family: Noto Sans Palmyrene
+    style: Regular
+    license: OFL
+    sha256: "8085c705fedb4a01ec4b9044fcf55fa2b389aaf89ac48894f14b538381cfd7b6"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Palmyrene]
+    restrict_to_covers: true
+
+  - label: noto-sans-phags-pa
+    file: references/input-fonts/NotoSansPhagsPa-Regular.ttf
+    family: Noto Sans Phags Pa
+    style: Regular
+    license: OFL
+    sha256: "ad1d57202a3d71241822d984d53b4f458a89fa403c73e56010ea65fb367a9299"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [CJK_Symbols_and_Punctuation, Mongolian, Phags-pa]
+    restrict_to_covers: true
+
+  - label: noto-sans-psalter-pahlavi
+    file: references/input-fonts/NotoSansPsalterPahlavi-Regular.ttf
+    family: Noto Sans Psalter Pahlavi
+    style: Regular
+    license: OFL
+    sha256: "9760443febd572a8f98cafc0af252ff64a06793d9dc14a9fea225339aaea9e57"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Psalter_Pahlavi]
+    restrict_to_covers: true
+
+  - label: noto-sans-rejang
+    file: references/input-fonts/NotoSansRejang-Regular.ttf
+    family: Noto Sans Rejang
+    style: Regular
+    license: OFL
+    sha256: "ac84f549caba39e85d0d22a62f4fcf7dcacdf263d01527eb44388e96ce58d785"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Rejang]
+    restrict_to_covers: true
+
+  - label: noto-sans-runic
+    file: references/input-fonts/NotoSansRunic-Regular.ttf
+    family: Noto Sans Runic
+    style: Regular
+    license: OFL
+    sha256: "c43f941ef6c8a4f8217e7ffb332fce74f760140a7fd5919f86347e5e2a10b5c9"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Runic]
+    restrict_to_covers: true
+
+  - label: noto-sans-samaritan
+    file: references/input-fonts/NotoSansSamaritan-Regular.ttf
+    family: Noto Sans Samaritan
+    style: Regular
+    license: OFL
+    sha256: "430aa9e70b6c500c4267e9ecc5165d15bfefc761d86650101deeb7e07260d5ed"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Samaritan]
+    restrict_to_covers: true
+
+  - label: noto-sans-saurashtra
+    file: references/input-fonts/NotoSansSaurashtra-Regular.ttf
+    family: Noto Sans Saurashtra
+    style: Regular
+    license: OFL
+    sha256: "8ebdec75287c63310a1aff3660d0fa5b3dd027606c17f69217a5a5a5142f6e63"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Saurashtra]
+    restrict_to_covers: true
+
+  - label: noto-sans-siddham
+    file: references/input-fonts/NotoSansSiddham-Regular.ttf
+    family: Noto Sans Siddham
+    style: Regular
+    license: OFL
+    sha256: "a384592b36df5a2f283610c93703bcfb72e6fd86bd2e0a699da1eff91b247e88"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Siddham]
+    restrict_to_covers: true
+
+  - label: noto-sans-sign-writing
+    file: references/input-fonts/NotoSansSignWriting-Regular.ttf
+    family: Noto Sans Sign Writing
+    style: Regular
+    license: OFL
+    sha256: "3c18f0954681566082860d468c1232dacbdf59d22f061a019095772e3d7cfdd2"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Sutton_SignWriting]
+    restrict_to_covers: true
+
+  - label: noto-sans-sinhala
+    file: references/input-fonts/NotoSansSinhala-Regular.ttf
+    family: Noto Sans Sinhala
+    style: Regular
+    license: OFL
+    sha256: "9e32612d47004552f3125e78648a9e2e7899a216ccd3cefbb93a9b5f4c809feb"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Sinhala, Sinhala_Archaic_Numbers]
+    restrict_to_covers: true
+
+  - label: noto-sans-sogdian
+    file: references/input-fonts/NotoSansSogdian-Regular.ttf
+    family: Noto Sans Sogdian
+    style: Regular
+    license: OFL
+    sha256: "5941add28bf1ecd63ad663cd2116948ee11d48687cd196c20eeeb0913267a026"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Sogdian]
+    restrict_to_covers: true
+
+  - label: noto-sans-sora-sompeng
+    file: references/input-fonts/NotoSansSoraSompeng-Regular.ttf
+    family: Noto Sans Sora Sompeng
+    style: Regular
+    license: OFL
+    sha256: "3499f8e787031f75771e481a53ca41f6c0b65dbdf149dac3cb319c29c53c28c2"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Sora_Sompeng]
+    restrict_to_covers: true
+
+  - label: noto-sans-soyombo
+    file: references/input-fonts/NotoSansSoyombo-Regular.ttf
+    family: Noto Sans Soyombo
+    style: Regular
+    license: OFL
+    sha256: "31a5e5997360e6d1d574af04da3eefaeb3db18831df795c145634e517e554e1b"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Soyombo]
+    restrict_to_covers: true
+
+  - label: noto-sans-sundanese
+    file: references/input-fonts/NotoSansSundanese-Regular.ttf
+    family: Noto Sans Sundanese
+    style: Regular
+    license: OFL
+    sha256: "6cf8ae0d063b8af8ab1bc1b8c7041ac92104e74989dcc1217763723ca6a50c9e"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Sundanese, Sundanese_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-syloti-nagri
+    file: references/input-fonts/NotoSansSylotiNagri-Regular.ttf
+    family: Noto Sans Syloti Nagri
+    style: Regular
+    license: OFL
+    sha256: "b3bb806a5fe533e550a27b51b28961cb09522f2a700c2c858169d9c8ed6573c4"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Bengali, Devanagari, Syloti_Nagri]
+    restrict_to_covers: true
+
+  - label: noto-sans-syriac
+    file: references/input-fonts/NotoSansSyriac-Regular.ttf
+    family: Noto Sans Syriac
+    style: Regular
+    license: OFL
+    sha256: "4440929bf1a47bb50179e8d8495641d208c63d607355e451f29ea2d3e5343290"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Miscellaneous_Symbols, Syriac]
+    restrict_to_covers: true
+
+  - label: noto-sans-tagalog
+    file: references/input-fonts/NotoSansTagalog-Regular.ttf
+    family: Noto Sans Tagalog
+    style: Regular
+    license: OFL
+    sha256: "8fdf54f14d3869e5bfabb7c552e32ac39a2f7609cc6e857a2e8480da2ad9031f"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Hanunoo, Tagalog]
+    restrict_to_covers: true
+
+  - label: noto-sans-tai-tham
+    file: references/input-fonts/NotoSansTaiTham-Regular.ttf
+    family: Noto Sans Tai Tham
+    style: Regular
+    license: OFL
+    sha256: "b94134811a2f8c26631a728837bb72f74dad87402810fc46b34c310312a6b369"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Tai_Tham]
+    restrict_to_covers: true
+
+  - label: noto-sans-tai-viet
+    file: references/input-fonts/NotoSansTaiViet-Regular.ttf
+    family: Noto Sans Tai Viet
+    style: Regular
+    license: OFL
+    sha256: "5f7e2a8d5cca567620d101534fc34b432e1577ff01f3f1752750050c90b1ca7f"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Tai_Viet]
+    restrict_to_covers: true
+
+  - label: noto-sans-takri
+    file: references/input-fonts/NotoSansTakri-Regular.ttf
+    family: Noto Sans Takri
+    style: Regular
+    license: OFL
+    sha256: "c14fb3d442ee9330d54d22aed37a9ee78ec4038055faa195d62661e4bb9988f9"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Common_Indic_Number_Forms, Devanagari, Takri]
+    restrict_to_covers: true
+
+  - label: noto-sans-tamil-supplement
+    file: references/input-fonts/NotoSansTamilSupplement-Regular.ttf
+    family: Noto Sans Tamil Supplement
+    style: Regular
+    license: OFL
+    sha256: "bf332a302459232a2106fbdb72bab4fb096d164dd124c22bb990c67b90efc348"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Tamil_Supplement]
+    restrict_to_covers: true
+
+  - label: noto-sans-tangsa
+    file: references/input-fonts/NotoSansTangsa-Regular.ttf
+    family: Noto Sans Tangsa
+    style: Regular
+    license: OFL
+    sha256: "38d92ec4dbba7a23966c2de72736224f94d02e5fb2b4d839344e732cdf3a4cad"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Tangsa]
+    restrict_to_covers: true
+
+  - label: noto-sans-telugu
+    file: references/input-fonts/NotoSansTelugu-Regular.ttf
+    family: Noto Sans Telugu
+    style: Regular
+    license: OFL
+    sha256: "b274780b69d1d23fe84b55e809a152cb2ac5306d33864b1f87622f6971871aae"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Devanagari, Telugu, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-tirhuta
+    file: references/input-fonts/NotoSansTirhuta-Regular.ttf
+    family: Noto Sans Tirhuta
+    style: Regular
+    license: OFL
+    sha256: "f7a0d9fa2557ebebbacdc8888556e217c298eb049db6ff6dc210e916a1d9e860"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Bengali, Common_Indic_Number_Forms, Devanagari, Tirhuta, Vedic_Extensions]
+    restrict_to_covers: true
+
+  - label: noto-sans-vai
+    file: references/input-fonts/NotoSansVai-Regular.ttf
+    family: Noto Sans Vai
+    style: Regular
+    license: OFL
+    sha256: "3b454157b5fc64cc21fb9c76cc86390997b1540499906179a1d1375e59d1bf33"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Vai]
+    restrict_to_covers: true
+
+  - label: noto-sans-wancho
+    file: references/input-fonts/NotoSansWancho-Regular.ttf
+    family: Noto Sans Wancho
+    style: Regular
+    license: OFL
+    sha256: "fb2e48d59128cdea1cee0ba24373bd5ff085a72cf98e53bc1674770c8ac67d9a"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Wancho]
+    restrict_to_covers: true
+
+  - label: noto-sans-warang-citi
+    file: references/input-fonts/NotoSansWarangCiti-Regular.ttf
+    family: Noto Sans Warang Citi
+    style: Regular
+    license: OFL
+    sha256: "f992ab2ede41083879ac42480d360807106afcd060f5df77ae73f79a26067fa5"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Warang_Citi]
+    restrict_to_covers: true
+
+  - label: noto-sans-zanabazar-square
+    file: references/input-fonts/NotoSansZanabazarSquare-Regular.ttf
+    family: Noto Sans Zanabazar Square
+    style: Regular
+    license: OFL
+    sha256: "4a42d77e15f8f6a295a682369fb941afca2c494bd4f4341882d5562f1ed5ed23"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Zanabazar_Square]
+    restrict_to_covers: true
+
+  - label: noto-serif-ahom
+    file: references/input-fonts/NotoSerifAhom-Regular.ttf
+    family: Noto Serif Ahom
+    style: Regular
+    license: OFL
+    sha256: "8153650d7fc1362a40b6cb355291e1d2718d82835790cd542a2521cba53c8fd4"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Ahom]
+    restrict_to_covers: true
+
+  - label: noto-serif-dives-akuru
+    file: references/input-fonts/NotoSerifDivesAkuru-Regular.ttf
+    family: Noto Serif Dives Akuru
+    style: Regular
+    license: OFL
+    sha256: "330cbe918a0cf52cc3e1eaa27114a077466d680af7819867b85cb27b64a2b07d"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Dives_Akuru]
+    restrict_to_covers: true
+
+  - label: noto-serif-dogra
+    file: references/input-fonts/NotoSerifDogra-Regular.ttf
+    family: Noto Serif Dogra
+    style: Regular
+    license: OFL
+    sha256: "f2a5287a3b9d0a9a833c80b6c037fc998bc70544ee5f91f0245869013e171ae3"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Devanagari, Dogra]
+    restrict_to_covers: true
+
+  - label: noto-serif-makasar
+    file: references/input-fonts/NotoSerifMakasar-Regular.ttf
+    family: Noto Serif Makasar
+    style: Regular
+    license: OFL
+    sha256: "eadde425bf710f2df6c3ad195e143372a178f05839bf742c3997beb7e85ad1c8"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Makasar]
+    restrict_to_covers: true
+
+  - label: noto-serif-old-uyghur
+    file: references/input-fonts/NotoSerifOldUyghur-Regular.ttf
+    family: Noto Serif Old Uyghur
+    style: Regular
+    license: OFL
+    sha256: "c38515e1174b069b5ddf4d4b1a813b44a6bb697bc380a174931024984efece31"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Manichaean, Old_Uyghur]
+    restrict_to_covers: true
+
+  - label: noto-serif-tibetan
+    file: references/input-fonts/NotoSerifTibetan-Regular.ttf
+    family: Noto Serif Tibetan
+    style: Regular
+    license: OFL
+    sha256: "ee97bf3dc56e813651db734c9f35f8f1d41e7e31acf5f7d893e64ad22b292446"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Miscellaneous_Symbols, Tibetan]
+    restrict_to_covers: true
+
+  - label: noto-serif-todhri
+    file: references/input-fonts/NotoSerifTodhri-Regular.ttf
+    family: Noto Serif Todhri
+    style: Regular
+    license: OFL
+    sha256: "4ded6e98752b13363cf01dad267efdd9481d556b9f2d5291ddcbda7fc7342727"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Spacing_Modifier_Letters, Todhri]
+    restrict_to_covers: true
+
+  - label: noto-serif-toto
+    file: references/input-fonts/NotoSerifToto-Regular.ttf
+    family: Noto Serif Toto
+    style: Regular
+    license: OFL
+    sha256: "882a1aebfc4f1824a413628859bdabb1e3a49ba90c2e023b0dd6bbe550c7332c"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Toto]
+    restrict_to_covers: true
+
+  - label: noto-serif-yezidi
+    file: references/input-fonts/NotoSerifYezidi-Regular.ttf
+    family: Noto Serif Yezidi
+    style: Regular
+    license: OFL
+    sha256: "fb30c28d72e2dd2468a848a2cb282b2781c9ae9b84a9e2e070673edcc4438f7d"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Yezidi]
+    restrict_to_covers: true
+
+  - label: noto-znamenny-musical-notation
+    file: references/input-fonts/NotoZnamennyMusicalNotation-Regular.ttf
+    family: Noto Znamenny Musical Notation
+    style: Regular
+    license: OFL
+    sha256: "b6ed2a11d2a653e14137a35e4c6fdaf5093434ac12964791ee195270828e7508"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Znamenny_Musical_Notation]
+    restrict_to_covers: true
+
+  - label: fsung-p-bmp
+    file: references/input-fonts/FSung-p.ttf
+    family: FSung (BMP scripts)
+    style: Regular
+    license: FSung-NC
+    sha256: "2fc8c55e861f82ee951dec9630ec5251115cb7967b3503edcaa3bdd0c0ab0175"
+    url: https://fgwang.blogspot.com/
+    author: "F.G. Wang"
+    covers: [Braille_Patterns, Buhid, Cyrillic_Supplement, Greek_Extended, Hebrew, Khmer, Khmer_Symbols, Latin_Extended-C, Latin_Extended-D, Latin_Extended-E, Limbu, Lisu, Modifier_Tone_Letters, Ogham, Optical_Character_Recognition, Phonetic_Extensions, Phonetic_Extensions_Supplement, Supplemental_Arrows-A, Tagbanwa, Tai_Le, Thaana, Thai, Tifinagh, Yi_Radicals, Yi_Syllables, Yijing_Hexagram_Symbols]
+    restrict_to_covers: true
+
