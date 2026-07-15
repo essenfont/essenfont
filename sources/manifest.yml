@@ -156,7 +156,7 @@ donors:
     sha256: "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
     url: https://github.com/notofonts/notofonts.github.io
     author: "Google + Monotype + Adobe"
-    covers: [Basic_Latin, Latin-1_Supplement, Latin_Extended-A, Latin_Extended-B, IPA_Extensions, Spacing_Modifier_Letters, Combining_Diacritical_Marks, Greek_and_Coptic, Cyrillic]
+    covers: [Basic_Latin, Latin-1_Supplement, Latin_Extended-A, Latin_Extended-B, IPA_Extensions, Spacing_Modifier_Letters, Combining_Diacritical_Marks, Greek_and_Coptic, Cyrillic, Cyrillic_Supplement, Greek_Extended, Latin_Extended-C, Latin_Extended-D, Latin_Extended-E, Modifier_Tone_Letters, Phonetic_Extensions, Phonetic_Extensions_Supplement]
     notes: "Universal fallback for Latin/Cyrillic/Greek/symbols and any block without a specialist entry."
 
   # ─────────── Noto specialists ───────────
@@ -214,7 +214,7 @@ donors:
     sha256: "d51afd5739c7ba6c44fcab35a88160e25dfb69a2d4ad0bd99533f8d894af1f96"
     url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansMath
     author: "Google (Noto Project)"
-    covers: [Mathematical_Operators, Supplemental_Mathematical_Operators, Mathematical_Alphanumeric_Symbols, Miscellaneous_Mathematical_Symbols-A, Miscellaneous_Mathematical_Symbols-B]
+    covers: [Mathematical_Operators, Supplemental_Mathematical_Operators, Mathematical_Alphanumeric_Symbols, Miscellaneous_Mathematical_Symbols-A, Miscellaneous_Mathematical_Symbols-B, Supplemental_Arrows-A]
 
   - label: noto-music
     file: references/input-fonts/NotoMusic-Regular.ttf
@@ -244,7 +244,7 @@ donors:
     sha256: "c4a0a80f0041ce4be81e2478faad22776d23edb98ae3f0d19bd37044820ecf9d"
     url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansSymbols2
     author: "Google (Noto Project)"
-    covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing]
+    covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing, Braille_Patterns, Yijing_Hexagram_Symbols, Optical_Character_Recognition]
 
   # ─────────── Historic Near-Eastern / Indic specialists ───────────
 
@@ -1887,14 +1887,137 @@ donors:
     covers: [Znamenny_Musical_Notation]
     restrict_to_covers: true
 
-  - label: fsung-p-bmp
-    file: references/input-fonts/FSung-p.ttf
-    family: FSung (BMP scripts)
+  # ─────────── Additional Noto donors (FSung-p replacements) ───────────
+
+  - label: noto-sans-hebrew
+    file: references/input-fonts/NotoSansHebrew-Regular.ttf
+    family: Noto Sans Hebrew
     style: Regular
-    license: FSung-NC
-    sha256: "2fc8c55e861f82ee951dec9630ec5251115cb7967b3503edcaa3bdd0c0ab0175"
-    url: https://fgwang.blogspot.com/
-    author: "F.G. Wang"
-    covers: [Braille_Patterns, Buhid, Cyrillic_Supplement, Greek_Extended, Hebrew, Khmer, Khmer_Symbols, Latin_Extended-C, Latin_Extended-D, Latin_Extended-E, Limbu, Lisu, Modifier_Tone_Letters, Ogham, Optical_Character_Recognition, Phonetic_Extensions, Phonetic_Extensions_Supplement, Supplemental_Arrows-A, Tagbanwa, Tai_Le, Thaana, Thai, Tifinagh, Yi_Radicals, Yi_Syllables, Yijing_Hexagram_Symbols]
+    license: OFL
+    sha256: "6b76713a79e59fb5fd578e6cbcfe0956f9122767c2dffc9026fefb8cf62916c5"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Alphabetic_Presentation_Forms, Hebrew, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters]
+    restrict_to_covers: true
+
+  - label: noto-sans-thai
+    file: references/input-fonts/NotoSansThai-Regular.ttf
+    family: Noto Sans Thai
+    style: Regular
+    license: OFL
+    sha256: "57f54f86b7666273ca83a4785f73c53c57cce3b27c778a1f7cea01f41bac00ed"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters, Thai]
+    restrict_to_covers: true
+
+  - label: noto-sans-khmer
+    file: references/input-fonts/NotoSansKhmer-Regular.ttf
+    family: Noto Sans Khmer
+    style: Regular
+    license: OFL
+    sha256: "46c7ff60e5b04929d3c56858a1ac85b3419330d1148f554c744f918ea61b500f"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Khmer, Khmer_Symbols, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters]
+    restrict_to_covers: true
+
+  - label: noto-sans-limbu
+    file: references/input-fonts/NotoSansLimbu-Regular.ttf
+    family: Noto Sans Limbu
+    style: Regular
+    license: OFL
+    sha256: "a04b2cc6751e3232bc1ca569b43d46638073bfec731026554baaebc55c340dc1"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Devanagari, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Limbu, Spacing_Modifier_Letters]
+    restrict_to_covers: true
+
+  - label: noto-sans-lisu
+    file: references/input-fonts/NotoSansLisu-Regular.ttf
+    family: Noto Sans Lisu
+    style: Regular
+    license: OFL
+    sha256: "f3ce8f9d6361ee0892ff95ace9262e7ed9ed161441101f4f1420bc9a68ee9d82"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [CJK_Symbols_and_Punctuation, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Lisu, Lisu_Supplement, Spacing_Modifier_Letters]
+    restrict_to_covers: true
+
+  - label: noto-sans-tifinagh
+    file: references/input-fonts/NotoSansTifinagh-Regular.ttf
+    family: Noto Sans Tifinagh
+    style: Regular
+    license: OFL
+    sha256: "27ac1790abeb4cfbb3ecd4906860629130a00a31508c1697dd333e8a99bfbc86"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters, Tifinagh]
+    restrict_to_covers: true
+
+  - label: noto-sans-thaana
+    file: references/input-fonts/NotoSansThaana-Regular.ttf
+    family: Noto Sans Thaana
+    style: Regular
+    license: OFL
+    sha256: "b5f97386b90ecca2f655507014cb5a233a371d704966d4ee8233f416d97ab2ee"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Arabic, Arabic_Presentation_Forms-A, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters, Thaana]
+    restrict_to_covers: true
+
+  - label: noto-sans-tagbanwa
+    file: references/input-fonts/NotoSansTagbanwa-Regular.ttf
+    family: Noto Sans Tagbanwa
+    style: Regular
+    license: OFL
+    sha256: "bdaf5dd85ec5b23eb811c9648a6c0a80fee42678da930b5e4548349d826bb1c4"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Hanunoo, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters, Tagbanwa]
+    restrict_to_covers: true
+
+  - label: noto-sans-yi
+    file: references/input-fonts/NotoSansYi-Regular.ttf
+    family: Noto Sans Yi
+    style: Regular
+    license: OFL
+    sha256: "d0d9832de7aaecec0bb6853d037849e3b1235a9edfba464e3d0afbadd6f5aa1b"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [CJK_Symbols_and_Punctuation, Halfwidth_and_Fullwidth_Forms, Katakana, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters, Yi_Radicals, Yi_Syllables]
+    restrict_to_covers: true
+
+  - label: noto-sans-ogham
+    file: references/input-fonts/NotoSansOgham-Regular.ttf
+    family: Noto Sans Ogham
+    style: Regular
+    license: OFL
+    sha256: "5eb96352a785e07b1ace661f9af438509eb7b8b60096801f3ee25cd81f134a0d"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Ogham, Spacing_Modifier_Letters]
+    restrict_to_covers: true
+
+  - label: noto-sans-tai-le
+    file: references/input-fonts/NotoSansTaiLe-Regular.ttf
+    family: Noto Sans Tai Le
+    style: Regular
+    license: OFL
+    sha256: "797491c208e7ccd8d42587302e8441710b6baa3ff3f8badb69733672b3cfc229"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [CJK_Symbols_and_Punctuation, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Myanmar, Spacing_Modifier_Letters, Tai_Le]
+    restrict_to_covers: true
+
+  - label: noto-sans-buhid
+    file: references/input-fonts/NotoSansBuhid-Regular.ttf
+    family: Noto Sans Buhid
+    style: Regular
+    license: OFL
+    sha256: "64318068a7a6a903b1b9ca6423e88b75a3b629abc0ea5d106c0c1c9257b1cee4"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Buhid, Hanunoo, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters]
     restrict_to_covers: true
 
