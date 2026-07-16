@@ -156,7 +156,7 @@ donors:
     sha256: "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
     url: https://github.com/notofonts/notofonts.github.io
     author: "Google + Monotype + Adobe"
-    covers: [Basic_Latin, Latin-1_Supplement, Latin_Extended-A, Latin_Extended-B, IPA_Extensions, Spacing_Modifier_Letters, Combining_Diacritical_Marks, Greek_and_Coptic, Cyrillic, Cyrillic_Supplement, Greek_Extended, Latin_Extended-C, Latin_Extended-D, Latin_Extended-E, Modifier_Tone_Letters, Phonetic_Extensions, Phonetic_Extensions_Supplement]
+    covers: [Basic_Latin, Latin-1_Supplement, Latin_Extended-A, Latin_Extended-B, IPA_Extensions, Spacing_Modifier_Letters, Combining_Diacritical_Marks, Greek_and_Coptic, Cyrillic, Cyrillic_Supplement, Greek_Extended, Latin_Extended-C, Latin_Extended-D, Latin_Extended-E, Modifier_Tone_Letters, Phonetic_Extensions, Phonetic_Extensions_Supplement, Combining_Diacritical_Marks_Extended, Combining_Half_Marks, Currency_Symbols, Cyrillic_Extended-A, Cyrillic_Extended-C, General_Punctuation, Geometric_Shapes, Latin_Extended-F, Latin_Extended-G, Number_Forms, Superscripts_and_Subscripts, Supplemental_Punctuation, Variation_Selectors]
     notes: "Universal fallback for Latin/Cyrillic/Greek/symbols and any block without a specialist entry."
 
   # ─────────── Noto specialists ───────────
@@ -214,7 +214,7 @@ donors:
     sha256: "d51afd5739c7ba6c44fcab35a88160e25dfb69a2d4ad0bd99533f8d894af1f96"
     url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansMath
     author: "Google (Noto Project)"
-    covers: [Mathematical_Operators, Supplemental_Mathematical_Operators, Mathematical_Alphanumeric_Symbols, Miscellaneous_Mathematical_Symbols-A, Miscellaneous_Mathematical_Symbols-B, Supplemental_Arrows-A]
+    covers: [Mathematical_Operators, Supplemental_Mathematical_Operators, Mathematical_Alphanumeric_Symbols, Miscellaneous_Mathematical_Symbols-A, Miscellaneous_Mathematical_Symbols-B, Supplemental_Arrows-A, Arrows]
 
   - label: noto-music
     file: references/input-fonts/NotoMusic-Regular.ttf
@@ -244,7 +244,7 @@ donors:
     sha256: "c4a0a80f0041ce4be81e2478faad22776d23edb98ae3f0d19bd37044820ecf9d"
     url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansSymbols2
     author: "Google (Noto Project)"
-    covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing, Braille_Patterns, Yijing_Hexagram_Symbols, Optical_Character_Recognition]
+    covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing, Braille_Patterns, Yijing_Hexagram_Symbols, Optical_Character_Recognition, Kaktovik_Numerals]
 
   # ─────────── Historic Near-Eastern / Indic specialists ───────────
 
@@ -383,7 +383,7 @@ donors:
     author: "Bryndan W. Meyerholt (Bry10022)"
     url_extract: https://codeload.github.com/Bry10022/Lentariso/zip/refs/heads/master
     url_extract_member: Lentariso-master/TTFs/Lentariso-Regular.ttf
-    covers: [Imperial_Aramaic, Phoenician, Sidetic]
+    covers: [Imperial_Aramaic, Phoenician, Sidetic, Vithkuqi, Symbols_for_Legacy_Computing_Supplement, Miscellaneous_Symbols_Supplement, Cyrillic_Extended-D]
     notes: "Covers Imperial Aramaic (U+10840..U+1085F) 31/32, Phoenician (U+10900..U+1091F) 29/32, and partial Sidetic (U+10940..U+1095F) 26/32 — all Unicode 5.1/17 additions. Does NOT cover Beria Erfe (U+16EA0..U+16EDF; Unicode 17, 0/64 — no OFL donor exists). The 6 missing Sidetic codepoints need code-chart extraction in v0.2.0."
 
   # ─────────── Egyptian Text (Microsoft font-tools) ───────────
@@ -2020,4 +2020,140 @@ donors:
     author: "Google (Noto Project)"
     covers: [Buhid, Hanunoo, Latin_Extended-A, Latin_Extended-B, Latin_Extended_Additional, Letterlike_Symbols, Spacing_Modifier_Letters]
     restrict_to_covers: true
+
+
+  # Final gap-fill donors
+
+  - label: noto-sans-old-italic
+    file: references/input-fonts/NotoSansOldItalic-Regular.ttf
+    family: Noto Sans Old Italic
+    style: Regular
+    license: OFL
+    sha256: "0425fab4a73acba40abc825f56e278fb1d3e721132cf302bb746b3d493706906"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Old_Italic]
+    restrict_to_covers: true
+
+  - label: noto-sans-gothic
+    file: references/input-fonts/NotoSansGothic-Regular.ttf
+    family: Noto Sans Gothic
+    style: Regular
+    license: OFL
+    sha256: "6f7260a33ac2f39bd75305de73e4e8663b0084b6865562ca09798ee64abd6401"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Gothic]
+    restrict_to_covers: true
+
+  - label: noto-sans-deseret
+    file: references/input-fonts/NotoSansDeseret-Regular.ttf
+    family: Noto Sans Deseret
+    style: Regular
+    license: OFL
+    sha256: "eb48fcfd3ca13c50906258b5a1bd1775b5260f00e5490cee31b18de11efa6265"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Deseret]
+    restrict_to_covers: true
+
+  - label: noto-sans-shavian
+    file: references/input-fonts/NotoSansShavian-Regular.ttf
+    family: Noto Sans Shavian
+    style: Regular
+    license: OFL
+    sha256: "221665b2aff2670a55e4eb573e68bc4ecebf2e64225c1dd6c6f62db2041c3b76"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Shavian]
+    restrict_to_covers: true
+
+  - label: noto-sans-osmanya
+    file: references/input-fonts/NotoSansOsmanya-Regular.ttf
+    family: Noto Sans Osmanya
+    style: Regular
+    license: OFL
+    sha256: "b4bf50e1eb8078ffbdb570983811e9c3d558ecbebee9419a4c5056d8ca778d2e"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Osmanya]
+    restrict_to_covers: true
+
+  - label: noto-sans-elbasan
+    file: references/input-fonts/NotoSansElbasan-Regular.ttf
+    family: Noto Sans Elbasan
+    style: Regular
+    license: OFL
+    sha256: "1d1909ba2b79be2dc01b10fb1dcc9d3db6ca399158c08b490bce829865b4e8fa"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Elbasan]
+    restrict_to_covers: true
+
+  - label: noto-sans-caucasian-albanian
+    file: references/input-fonts/NotoSansCaucasianAlbanian-Regular.ttf
+    family: Noto Sans Caucasian Albanian
+    style: Regular
+    license: OFL
+    sha256: "8d06965f605cdd641b17e7aed5498117c3ab5c6792bc28641a6b6c9d53559f3a"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Caucasian_Albanian]
+    restrict_to_covers: true
+
+  - label: noto-sans-hatran
+    file: references/input-fonts/NotoSansHatran-Regular.ttf
+    family: Noto Sans Hatran
+    style: Regular
+    license: OFL
+    sha256: "d6d7d780f1b32621bc05d2026f34fabcaa854e01ecdf3af102e204c55e542bf4"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Hatran]
+    restrict_to_covers: true
+
+  - label: noto-sans-pau-cin-hau
+    file: references/input-fonts/NotoSansPauCinHau-Regular.ttf
+    family: Noto Sans Pau Cin Hau
+    style: Regular
+    license: OFL
+    sha256: "e4b6eb939a0033f8b5d0fa0bd7141ff8a30533b86b1594bbbdf9b26f5e0f8b44"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Pau_Cin_Hau]
+    restrict_to_covers: true
+
+  - label: noto-sans-sunuwar
+    file: references/input-fonts/NotoSansSunuwar-Regular.ttf
+    family: Noto Sans Sunuwar
+    style: Regular
+    license: OFL
+    sha256: "85c10610ce480239a0518f3d4df090d82eaf57a18298c93610fbb9d75cca8c03"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Sunuwar]
+    restrict_to_covers: true
+
+  - label: noto-sans-mayan-numerals
+    file: references/input-fonts/NotoSansMayanNumerals-Regular.ttf
+    family: Noto Sans Mayan Numerals
+    style: Regular
+    license: OFL
+    sha256: "a4a2549db7db47405667fcd3ae05d0d20ebf3296fb246ba971f38aefeab4ac9a"
+    url: https://fonts.google.com/noto
+    author: "Google (Noto Project)"
+    covers: [Mayan_Numerals]
+    restrict_to_covers: true
+
+  - label: fsung-1-gapfill
+    file: references/input-fonts/FSung-1.ttf
+    family: FSung (rare script gapfill)
+    style: Regular
+    license: FSung-NC
+    sha256: "b7447da6263246511751b7ecbe7e12ab8831810af7fc5526b381ec9f9b38e262"
+    url: https://fgwang.blogspot.com/
+    author: "F.G. Wang"
+    covers: [Ancient_Greek_Musical_Notation, Ancient_Greek_Numbers, Ancient_Symbols, Arabic_Mathematical_Alphabetic_Symbols, Byzantine_Musical_Symbols, Counting_Rod_Numerals, Domino_Tiles, Geometric_Shapes_Extended, Kana_Supplement, Mahjong_Tiles, Ornamental_Dingbats, Phaistos_Disc, Playing_Cards, Rumi_Numeral_Symbols, Supplemental_Arrows-C, Tai_Xuan_Jing_Symbols]
+    restrict_to_covers: true
+    notes: "Blocks with no OFL-licensed donor. All are rare historical/symbol blocks."
 
