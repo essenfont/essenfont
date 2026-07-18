@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni06EC" format="2">
+  <unicode hex="06EC"/>
+  <outline>
+    <contour>
+      <point x="6" y="61" type="line"/>
+      <point x="4" y="61"/>
+      <point x="0" y="65"/>
+      <point x="0" y="68" type="line"/>
+      <point x="0" y="70"/>
+      <point x="4" y="74"/>
+      <point x="6" y="74" type="line"/>
+      <point x="8" y="74"/>
+      <point x="12" y="70"/>
+      <point x="12" y="68" type="line"/>
+      <point x="12" y="65"/>
+      <point x="8" y="61"/>
+    </contour>
+  </outline>
+</glyph>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni06DB" format="2">
+  <unicode hex="06DB"/>
+  <outline>
+    <contour>
+      <point x="8" y="93" type="line"/>
+      <point x="7" y="93"/>
+      <point x="5" y="95"/>
+      <point x="4" y="96" type="line"/>
+      <point x="6" y="97"/>
+      <point x="8" y="99" type="line"/>
+      <point x="11" y="96" type="line"/>
+      <point x="10" y="94"/>
+      <point x="8" y="93"/>
+    </contour>
+    <contour>
+      <point x="12" y="87" type="line"/>
+      <point x="10" y="89"/>
+      <point x="9" y="90" type="line"/>
+      <point x="11" y="92" type="line"/>
+      <point x="12" y="94" type="line"/>
+      <point x="15" y="90" type="line"/>
+      <point x="14" y="88"/>
+    </contour>
+    <contour>
+      <point x="4" y="86" type="line"/>
+      <point x="3" y="87"/>
+      <point x="1" y="89"/>
+      <point x="0" y="89" type="line"/>
+      <point x="0" y="90"/>
+      <point x="2" y="91"/>
+      <point x="4" y="93" type="line"/>
+      <point x="7" y="90" type="line"/>
+      <point x="5" y="88"/>
+    </contour>
+  </outline>
+</glyph>

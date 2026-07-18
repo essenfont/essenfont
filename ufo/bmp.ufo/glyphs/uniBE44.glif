@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniBE44" format="2">
+  <advance width="920.0"/>
+  <unicode hex="BE44"/>
+  <outline>
+    <contour>
+      <point x="738.0" y="816.0" type="line"/>
+      <point x="770.0" y="816.0" type="line"/>
+      <point x="770.0" y="-67.0" type="line"/>
+      <point x="738.0" y="-67.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="116.0" y="736.0" type="line"/>
+      <point x="149.0" y="736.0" type="line"/>
+      <point x="149.0" y="484.0" type="line"/>
+      <point x="480.0" y="484.0" type="line"/>
+      <point x="480.0" y="736.0" type="line"/>
+      <point x="513.0" y="736.0" type="line"/>
+      <point x="513.0" y="153.0" type="line"/>
+      <point x="116.0" y="153.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="149.0" y="455.0" type="line"/>
+      <point x="149.0" y="183.0" type="line"/>
+      <point x="480.0" y="183.0" type="line"/>
+      <point x="480.0" y="455.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

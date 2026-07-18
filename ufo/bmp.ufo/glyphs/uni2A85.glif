@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2A85" format="2">
+  <advance width="143"/>
+  <unicode hex="2A85"/>
+  <outline>
+    <contour>
+      <point x="130" y="58" type="line"/>
+      <point x="13" y="100" type="line"/>
+      <point x="13" y="113" type="line"/>
+      <point x="130" y="155" type="line"/>
+      <point x="130" y="137" type="line"/>
+      <point x="40" y="106" type="line"/>
+      <point x="130" y="76" type="line"/>
+    </contour>
+    <contour>
+      <point x="13" y="14" type="line"/>
+      <point x="13" y="33" type="line"/>
+      <point x="19" y="40"/>
+      <point x="34" y="47"/>
+      <point x="43" y="47" type="line"/>
+      <point x="57" y="47"/>
+      <point x="74" y="39" type="line"/>
+      <point x="83" y="36"/>
+      <point x="96" y="32"/>
+      <point x="102" y="32" type="line"/>
+      <point x="108" y="32"/>
+      <point x="124" y="40"/>
+      <point x="130" y="47" type="line"/>
+      <point x="130" y="27" type="line"/>
+      <point x="118" y="14"/>
+      <point x="100" y="14" type="line"/>
+      <point x="93" y="14"/>
+      <point x="78" y="18"/>
+      <point x="69" y="21" type="line"/>
+      <point x="52" y="29"/>
+      <point x="41" y="29" type="line"/>
+      <point x="35" y="29"/>
+      <point x="20" y="21"/>
+    </contour>
+    <contour>
+      <point x="13" y="-26" type="line"/>
+      <point x="13" y="-7" type="line"/>
+      <point x="25" y="7"/>
+      <point x="43" y="7" type="line"/>
+      <point x="57" y="7"/>
+      <point x="74" y="-1" type="line"/>
+      <point x="90" y="-8"/>
+      <point x="102" y="-8" type="line"/>
+      <point x="108" y="-8"/>
+      <point x="124" y="-1"/>
+      <point x="130" y="7" type="line"/>
+      <point x="130" y="-13" type="line"/>
+      <point x="118" y="-26"/>
+      <point x="100" y="-26" type="line"/>
+      <point x="85" y="-26"/>
+      <point x="69" y="-19" type="line"/>
+      <point x="52" y="-12"/>
+      <point x="41" y="-12" type="line"/>
+      <point x="35" y="-12"/>
+      <point x="20" y="-19"/>
+    </contour>
+  </outline>
+</glyph>

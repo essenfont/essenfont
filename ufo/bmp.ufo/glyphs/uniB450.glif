@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniB450" format="2">
+  <advance width="920.0"/>
+  <unicode hex="B450"/>
+  <outline>
+    <contour>
+      <point x="178.0" y="471.0" type="line"/>
+      <point x="750.0" y="471.0" type="line"/>
+      <point x="750.0" y="441.0" type="line"/>
+      <point x="178.0" y="441.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="58.0" y="297.0" type="line"/>
+      <point x="859.0" y="297.0" type="line"/>
+      <point x="859.0" y="267.0" type="line"/>
+      <point x="58.0" y="267.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="441.0" y="283.0" type="line"/>
+      <point x="473.0" y="283.0" type="line"/>
+      <point x="473.0" y="-62.0" type="line"/>
+      <point x="441.0" y="-62.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="178.0" y="759.0" type="line"/>
+      <point x="735.0" y="759.0" type="line"/>
+      <point x="735.0" y="729.0" type="line"/>
+      <point x="210.0" y="729.0" type="line"/>
+      <point x="210.0" y="456.0" type="line"/>
+      <point x="178.0" y="456.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

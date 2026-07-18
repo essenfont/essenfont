@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFE43" format="2">
+  <advance width="1000.0"/>
+  <unicode hex="FE43"/>
+  <outline>
+    <contour>
+      <point x="816.0" y="131.0" type="line"/>
+      <point x="296.0" y="131.0" type="line"/>
+      <point x="296.0" y="265.0" type="line"/>
+      <point x="960.0" y="265.0" type="line"/>
+      <point x="960.0" y="-80.0" type="line"/>
+      <point x="816.0" y="-80.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="938.0" y="243.0" type="line"/>
+      <point x="318.0" y="243.0" type="line"/>
+      <point x="318.0" y="153.0" type="line"/>
+      <point x="838.0" y="153.0" type="line"/>
+      <point x="838.0" y="-58.0" type="line"/>
+      <point x="938.0" y="-58.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

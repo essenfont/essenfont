@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFB24" format="2">
+  <advance width="679.0"/>
+  <unicode hex="FB24"/>
+  <outline>
+    <contour>
+      <point x="29.0" y="0.0" type="line"/>
+      <point x="29.0" y="76.0" type="line"/>
+      <point x="383.0" y="76.0" type="line"/>
+      <point x="466.0" y="76.0"/>
+      <point x="550.0" y="188.0"/>
+      <point x="550.0" y="294.0" type="line"/>
+      <point x="550.0" y="403.0"/>
+      <point x="466.0" y="517.0"/>
+      <point x="383.0" y="517.0" type="line"/>
+      <point x="29.0" y="517.0" type="line"/>
+      <point x="40.0" y="593.0" type="line"/>
+      <point x="383.0" y="593.0" type="line"/>
+      <point x="511.0" y="593.0"/>
+      <point x="644.0" y="439.0"/>
+      <point x="644.0" y="294.0" type="line"/>
+      <point x="644.0" y="151.0"/>
+      <point x="511.0" y="0.0"/>
+      <point x="383.0" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

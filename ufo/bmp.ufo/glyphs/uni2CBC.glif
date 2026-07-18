@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2CBC" format="2">
+  <advance width="788.0"/>
+  <unicode hex="2CBC"/>
+  <outline>
+    <contour>
+      <point x="353.0" y="0.0" type="line"/>
+      <point x="353.0" y="714.0" type="line"/>
+      <point x="433.0" y="714.0" type="line"/>
+      <point x="433.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="97.0" y="0.0" type="line"/>
+      <point x="97.0" y="714.0" type="line"/>
+      <point x="176.0" y="714.0" type="line"/>
+      <point x="176.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="612.0" y="0.0" type="line"/>
+      <point x="612.0" y="714.0" type="line"/>
+      <point x="691.0" y="714.0" type="line"/>
+      <point x="691.0" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

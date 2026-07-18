@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0FAD" format="2">
+  <unicode hex="0FAD"/>
+  <outline>
+    <contour>
+      <point x="304.0" y="286.0" type="line"/>
+      <point x="304.0" y="-261.0" type="line"/>
+      <point x="258.0" y="-251.0" type="line"/>
+      <point x="211.0" y="-206.0"/>
+      <point x="97.0" y="-129.0"/>
+      <point x="40.0" y="-101.0" type="line"/>
+      <point x="40.0" y="-60.0" type="line"/>
+      <point x="63.0" y="-39.0"/>
+      <point x="137.0" y="7.0"/>
+      <point x="221.0" y="46.0"/>
+      <point x="258.0" y="57.0" type="line"/>
+      <point x="258.0" y="286.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="129.0" y="-54.0" type="line"/>
+      <point x="158.0" y="-76.0"/>
+      <point x="230.0" y="-147.0"/>
+      <point x="258.0" y="-183.0" type="line"/>
+      <point x="258.0" y="8.0" type="line"/>
+      <point x="227.0" y="-1.0"/>
+      <point x="159.0" y="-35.0"/>
+    </contour>
+  </outline>
+</glyph>

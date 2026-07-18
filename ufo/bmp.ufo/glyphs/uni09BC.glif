@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni09BC" format="2">
+  <unicode hex="09BC"/>
+  <outline>
+    <contour>
+      <point x="0.0" y="-140.0" type="line"/>
+      <point x="-25.0" y="-140.0"/>
+      <point x="-60.0" y="-106.0"/>
+      <point x="-60.0" y="-80.0" type="line"/>
+      <point x="-60.0" y="-54.0"/>
+      <point x="-25.0" y="-20.0"/>
+      <point x="0.0" y="-20.0" type="line"/>
+      <point x="25.0" y="-20.0"/>
+      <point x="60.0" y="-54.0"/>
+      <point x="60.0" y="-80.0" type="line"/>
+      <point x="60.0" y="-106.0"/>
+      <point x="25.0" y="-140.0"/>
+    </contour>
+  </outline>
+</glyph>

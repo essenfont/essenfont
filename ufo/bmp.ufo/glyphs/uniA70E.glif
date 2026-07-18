@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniA70E" format="2">
+  <advance width="418.0"/>
+  <unicode hex="A70E"/>
+  <outline>
+    <contour>
+      <point x="78.0" y="0.0" type="line"/>
+      <point x="78.0" y="688.0" type="line"/>
+      <point x="144.0" y="688.0" type="line"/>
+      <point x="144.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="288.0" y="432.0" type="line"/>
+      <point x="267.0" y="432.0"/>
+      <point x="236.0" y="459.0"/>
+      <point x="236.0" y="488.0" type="line"/>
+      <point x="236.0" y="517.0"/>
+      <point x="267.0" y="544.0"/>
+      <point x="288.0" y="544.0" type="line"/>
+      <point x="310.0" y="544.0"/>
+      <point x="340.0" y="517.0"/>
+      <point x="340.0" y="488.0" type="line"/>
+      <point x="340.0" y="459.0"/>
+      <point x="310.0" y="432.0"/>
+    </contour>
+  </outline>
+</glyph>

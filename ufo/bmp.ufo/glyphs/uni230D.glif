@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni230D" format="2">
+  <advance width="482.0"/>
+  <unicode hex="230D"/>
+  <outline>
+    <contour>
+      <point x="71.0" y="0.0" type="line"/>
+      <point x="71.0" y="71.0" type="line"/>
+      <point x="320.0" y="71.0" type="line"/>
+      <point x="320.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="340.0" y="-297.0" type="line"/>
+      <point x="340.0" y="-48.0" type="line"/>
+      <point x="411.0" y="-48.0" type="line"/>
+      <point x="411.0" y="-297.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniABED" format="2">
+  <unicode hex="ABED"/>
+  <outline>
+    <contour>
+      <point x="-512.0" y="-180.0" type="line"/>
+      <point x="-512.0" y="-109.0" type="line"/>
+      <point x="513.0" y="-109.0" type="line"/>
+      <point x="513.0" y="-180.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

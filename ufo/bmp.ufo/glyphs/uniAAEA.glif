@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniAAEA" format="2">
+  <advance width="691.0"/>
+  <unicode hex="AAEA"/>
+  <outline>
+    <contour>
+      <point x="80.0" y="0.0" type="line"/>
+      <point x="80.0" y="386.0" type="line"/>
+      <point x="80.0" y="464.0"/>
+      <point x="138.0" y="590.0"/>
+      <point x="255.0" y="665.0"/>
+      <point x="344.0" y="665.0" type="line"/>
+      <point x="436.0" y="665.0"/>
+      <point x="554.0" y="590.0"/>
+      <point x="611.0" y="464.0"/>
+      <point x="611.0" y="386.0" type="line"/>
+      <point x="611.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="529.0" y="399.0" type="line"/>
+      <point x="529.0" y="492.0"/>
+      <point x="432.0" y="592.0"/>
+      <point x="345.0" y="592.0" type="line"/>
+      <point x="258.0" y="592.0"/>
+      <point x="162.0" y="491.0"/>
+      <point x="162.0" y="399.0" type="line"/>
+      <point x="162.0" y="354.0" type="line"/>
+      <point x="529.0" y="354.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="162.0" y="72.0" type="line"/>
+      <point x="529.0" y="72.0" type="line"/>
+      <point x="529.0" y="282.0" type="line"/>
+      <point x="162.0" y="282.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

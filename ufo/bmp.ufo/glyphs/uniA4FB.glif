@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniA4FB" format="2">
+  <advance width="333"/>
+  <unicode hex="A4FB"/>
+  <outline>
+    <contour>
+      <point x="42" y="0.0" type="line"/>
+      <point x="42" y="83" type="line"/>
+      <point x="125" y="83" type="line"/>
+      <point x="125" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="208" y="0.0" type="line"/>
+      <point x="208" y="83" type="line"/>
+      <point x="292" y="83" type="line"/>
+      <point x="292" y="0.0" type="line"/>
+      <point x="271" y="-83" type="line"/>
+      <point x="208" y="-83" type="line"/>
+      <point x="229" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

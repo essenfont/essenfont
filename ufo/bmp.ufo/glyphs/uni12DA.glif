@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni12DA" format="2">
+  <advance width="677.0"/>
+  <unicode hex="12DA"/>
+  <outline>
+    <contour>
+      <point x="90.0" y="0.0" type="line"/>
+      <point x="90.0" y="714.0" type="line"/>
+      <point x="181.0" y="714.0" type="line"/>
+      <point x="181.0" y="412.0" type="line"/>
+      <point x="368.0" y="412.0" type="line"/>
+      <point x="368.0" y="714.0" type="line"/>
+      <point x="459.0" y="714.0" type="line"/>
+      <point x="459.0" y="73.0" type="line"/>
+      <point x="554.0" y="73.0" type="line"/>
+      <point x="562.0" y="101.0"/>
+      <point x="607.0" y="154.0"/>
+      <point x="638.0" y="154.0" type="line"/>
+      <point x="662.0" y="154.0" type="line"/>
+      <point x="636.0" y="36.0" type="line"/>
+      <point x="662.0" y="-82.0" type="line"/>
+      <point x="638.0" y="-82.0" type="line"/>
+      <point x="607.0" y="-82.0"/>
+      <point x="562.0" y="-28.0"/>
+      <point x="554.0" y="0.0" type="line"/>
+      <point x="368.0" y="0.0" type="line"/>
+      <point x="368.0" y="333.0" type="line"/>
+      <point x="181.0" y="333.0" type="line"/>
+      <point x="181.0" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

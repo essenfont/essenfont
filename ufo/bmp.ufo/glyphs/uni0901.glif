@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0901" format="2">
+  <unicode hex="0901"/>
+  <outline>
+    <contour>
+      <point x="-192.0" y="847.0" type="line"/>
+      <point x="-192.0" y="868.0"/>
+      <point x="-163.0" y="896.0"/>
+      <point x="-143.0" y="896.0" type="line"/>
+      <point x="-123.0" y="896.0"/>
+      <point x="-94.0" y="868.0"/>
+      <point x="-94.0" y="847.0" type="line"/>
+      <point x="-94.0" y="826.0"/>
+      <point x="-123.0" y="797.0"/>
+      <point x="-143.0" y="797.0" type="line"/>
+      <point x="-163.0" y="797.0"/>
+      <point x="-192.0" y="826.0"/>
+    </contour>
+    <contour>
+      <point x="45.0" y="848.0" type="line"/>
+      <point x="27.0" y="754.0"/>
+      <point x="-70.0" y="678.0"/>
+      <point x="-143.0" y="678.0" type="line"/>
+      <point x="-216.0" y="678.0"/>
+      <point x="-313.0" y="754.0"/>
+      <point x="-331.0" y="848.0" type="line"/>
+      <point x="-262.0" y="870.0" type="line"/>
+      <point x="-251.0" y="797.0"/>
+      <point x="-190.0" y="742.0"/>
+      <point x="-143.0" y="742.0" type="line"/>
+      <point x="-96.0" y="742.0"/>
+      <point x="-34.0" y="797.0"/>
+      <point x="-24.0" y="870.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

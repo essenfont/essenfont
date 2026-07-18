@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniBBDA" format="2">
+  <advance width="920.0"/>
+  <unicode hex="BBDA"/>
+  <outline>
+    <contour>
+      <point x="154.0" y="790.0" type="line"/>
+      <point x="743.0" y="790.0" type="line"/>
+      <point x="743.0" y="494.0" type="line"/>
+      <point x="154.0" y="494.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="712.0" y="759.0" type="line"/>
+      <point x="185.0" y="759.0" type="line"/>
+      <point x="185.0" y="525.0" type="line"/>
+      <point x="712.0" y="525.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="47.0" y="378.0" type="line"/>
+      <point x="848.0" y="378.0" type="line"/>
+      <point x="848.0" y="349.0" type="line"/>
+      <point x="47.0" y="349.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="151.0" y="230.0" type="line"/>
+      <point x="760.0" y="230.0" type="line"/>
+      <point x="760.0" y="199.0" type="line"/>
+      <point x="151.0" y="199.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="143.0" y="-22.0" type="line"/>
+      <point x="766.0" y="-22.0" type="line"/>
+      <point x="766.0" y="-53.0" type="line"/>
+      <point x="143.0" y="-53.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="307.0" y="223.0" type="line"/>
+      <point x="340.0" y="223.0" type="line"/>
+      <point x="340.0" y="-39.0" type="line"/>
+      <point x="307.0" y="-39.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="574.0" y="223.0" type="line"/>
+      <point x="607.0" y="223.0" type="line"/>
+      <point x="607.0" y="-39.0" type="line"/>
+      <point x="574.0" y="-39.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni13EC" format="2">
+  <advance width="1062.0"/>
+  <unicode hex="13EC"/>
+  <outline>
+    <contour>
+      <point x="526.0" y="-8.0" type="line"/>
+      <point x="423.0" y="-8.0"/>
+      <point x="254.0" y="57.0"/>
+      <point x="132.0" y="177.0"/>
+      <point x="66.0" y="343.0"/>
+      <point x="66.0" y="443.0" type="line"/>
+      <point x="66.0" y="583.0"/>
+      <point x="186.0" y="725.0"/>
+      <point x="283.0" y="725.0" type="line"/>
+      <point x="370.0" y="725.0"/>
+      <point x="473.0" y="599.0"/>
+      <point x="473.0" y="492.0" type="line"/>
+      <point x="473.0" y="377.0"/>
+      <point x="377.0" y="198.0"/>
+      <point x="292.0" y="136.0" type="line"/>
+      <point x="396.0" y="62.0"/>
+      <point x="527.0" y="62.0" type="line"/>
+      <point x="646.0" y="62.0"/>
+      <point x="823.0" y="154.0"/>
+      <point x="920.0" y="325.0"/>
+      <point x="920.0" y="443.0" type="line"/>
+      <point x="920.0" y="648.0"/>
+      <point x="791.0" y="648.0" type="line"/>
+      <point x="743.0" y="648.0"/>
+      <point x="683.0" y="590.0"/>
+      <point x="683.0" y="543.0" type="line"/>
+      <point x="683.0" y="500.0"/>
+      <point x="723.0" y="450.0"/>
+      <point x="760.0" y="445.0" type="line"/>
+      <point x="760.0" y="377.0" type="line"/>
+      <point x="690.0" y="380.0"/>
+      <point x="611.0" y="466.0"/>
+      <point x="611.0" y="538.0" type="line"/>
+      <point x="611.0" y="590.0"/>
+      <point x="657.0" y="669.0"/>
+      <point x="738.0" y="714.0"/>
+      <point x="790.0" y="714.0" type="line"/>
+      <point x="863.0" y="714.0"/>
+      <point x="955.0" y="644.0"/>
+      <point x="1000.0" y="524.0"/>
+      <point x="1000.0" y="448.0" type="line"/>
+      <point x="1000.0" y="364.0"/>
+      <point x="947.0" y="202.0"/>
+      <point x="833.0" y="71.0"/>
+      <point x="653.0" y="-8.0"/>
+    </contour>
+    <contour>
+      <point x="244.0" y="179.0" type="line"/>
+      <point x="321.0" y="244.0"/>
+      <point x="389.0" y="394.0"/>
+      <point x="389.0" y="491.0" type="line"/>
+      <point x="389.0" y="573.0"/>
+      <point x="334.0" y="660.0"/>
+      <point x="281.0" y="660.0" type="line"/>
+      <point x="218.0" y="660.0"/>
+      <point x="153.0" y="553.0"/>
+      <point x="153.0" y="449.0" type="line"/>
+      <point x="153.0" y="285.0"/>
+    </contour>
+  </outline>
+</glyph>

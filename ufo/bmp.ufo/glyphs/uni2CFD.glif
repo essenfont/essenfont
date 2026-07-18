@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2CFD" format="2">
+  <advance width="346.0"/>
+  <unicode hex="2CFD"/>
+  <outline>
+    <contour>
+      <point x="30.0" y="16.0" type="line"/>
+      <point x="30.0" y="91.0" type="line"/>
+      <point x="112.0" y="91.0"/>
+      <point x="169.0" y="134.0"/>
+      <point x="169.0" y="168.0" type="line"/>
+      <point x="169.0" y="198.0"/>
+      <point x="148.0" y="241.0"/>
+      <point x="120.0" y="281.0"/>
+      <point x="99.0" y="329.0"/>
+      <point x="99.0" y="363.0" type="line"/>
+      <point x="99.0" y="407.0"/>
+      <point x="144.0" y="478.0"/>
+      <point x="240.0" y="521.0"/>
+      <point x="316.0" y="521.0" type="line"/>
+      <point x="316.0" y="448.0" type="line"/>
+      <point x="255.0" y="448.0"/>
+      <point x="185.0" y="412.0"/>
+      <point x="185.0" y="366.0" type="line"/>
+      <point x="185.0" y="340.0"/>
+      <point x="206.0" y="300.0"/>
+      <point x="234.0" y="260.0"/>
+      <point x="255.0" y="209.0"/>
+      <point x="255.0" y="172.0" type="line"/>
+      <point x="255.0" y="128.0"/>
+      <point x="211.0" y="57.0"/>
+      <point x="113.0" y="16.0"/>
+    </contour>
+  </outline>
+</glyph>

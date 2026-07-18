@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniBAA8" format="2">
+  <advance width="920.0"/>
+  <unicode hex="BAA8"/>
+  <outline>
+    <contour>
+      <point x="59.0" y="87.0" type="line"/>
+      <point x="860.0" y="87.0" type="line"/>
+      <point x="860.0" y="57.0" type="line"/>
+      <point x="59.0" y="57.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="441.0" y="350.0" type="line"/>
+      <point x="473.0" y="350.0" type="line"/>
+      <point x="473.0" y="74.0" type="line"/>
+      <point x="441.0" y="74.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="163.0" y="734.0" type="line"/>
+      <point x="752.0" y="734.0" type="line"/>
+      <point x="752.0" y="337.0" type="line"/>
+      <point x="163.0" y="337.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="721.0" y="706.0" type="line"/>
+      <point x="194.0" y="706.0" type="line"/>
+      <point x="194.0" y="365.0" type="line"/>
+      <point x="721.0" y="365.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

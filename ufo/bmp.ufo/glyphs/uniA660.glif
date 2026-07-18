@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniA660" format="2">
+  <advance width="740.0"/>
+  <unicode hex="A660"/>
+  <outline>
+    <contour>
+      <point x="96.0" y="-158.0" type="line"/>
+      <point x="10.0" y="-158.0" type="line"/>
+      <point x="10.0" y="79.0" type="line"/>
+      <point x="107.0" y="79.0" type="line"/>
+      <point x="107.0" y="714.0" type="line"/>
+      <point x="196.0" y="714.0" type="line"/>
+      <point x="196.0" y="79.0" type="line"/>
+      <point x="553.0" y="79.0" type="line"/>
+      <point x="553.0" y="714.0" type="line"/>
+      <point x="643.0" y="714.0" type="line"/>
+      <point x="643.0" y="0.0" type="line"/>
+      <point x="96.0" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

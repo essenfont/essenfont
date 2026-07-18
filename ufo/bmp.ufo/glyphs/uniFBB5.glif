@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFBB5" format="2">
+  <advance width="18"/>
+  <unicode hex="FBB5"/>
+  <outline>
+    <contour>
+      <point x="16" y="-14" type="line"/>
+      <point x="14" y="-12"/>
+      <point x="11" y="-10"/>
+      <point x="10" y="-9" type="line"/>
+      <point x="11" y="-8"/>
+      <point x="13" y="-5"/>
+      <point x="15" y="-3" type="line"/>
+      <point x="16" y="-4"/>
+      <point x="18" y="-6"/>
+      <point x="20" y="-8" type="line"/>
+      <point x="19" y="-10"/>
+    </contour>
+    <contour>
+      <point x="3" y="-15" type="line"/>
+      <point x="1" y="-13"/>
+      <point x="-1" y="-11"/>
+      <point x="-2" y="-10" type="line"/>
+      <point x="0" y="-8"/>
+      <point x="3" y="-4" type="line"/>
+      <point x="4" y="-5"/>
+      <point x="6" y="-7"/>
+      <point x="8" y="-9" type="line"/>
+      <point x="7" y="-10"/>
+      <point x="5" y="-13"/>
+    </contour>
+  </outline>
+</glyph>

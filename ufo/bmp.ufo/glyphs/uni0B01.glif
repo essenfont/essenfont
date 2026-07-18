@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0B01" format="2">
+  <unicode hex="0B01"/>
+  <outline>
+    <contour>
+      <point x="399.0" y="695.0" type="line"/>
+      <point x="320.0" y="695.0"/>
+      <point x="217.0" y="794.0"/>
+      <point x="207.0" y="888.0" type="line"/>
+      <point x="270.0" y="895.0" type="line"/>
+      <point x="277.0" y="823.0"/>
+      <point x="344.0" y="748.0"/>
+      <point x="399.0" y="748.0" type="line"/>
+      <point x="455.0" y="748.0"/>
+      <point x="523.0" y="823.0"/>
+      <point x="530.0" y="895.0" type="line"/>
+      <point x="593.0" y="888.0" type="line"/>
+      <point x="583.0" y="794.0"/>
+      <point x="480.0" y="695.0"/>
+    </contour>
+    <contour>
+      <point x="399.0" y="813.0" type="line"/>
+      <point x="381.0" y="813.0"/>
+      <point x="359.0" y="835.0"/>
+      <point x="359.0" y="854.0" type="line"/>
+      <point x="359.0" y="873.0"/>
+      <point x="382.0" y="894.0"/>
+      <point x="399.0" y="894.0" type="line"/>
+      <point x="417.0" y="894.0"/>
+      <point x="439.0" y="873.0"/>
+      <point x="439.0" y="854.0" type="line"/>
+      <point x="439.0" y="835.0"/>
+      <point x="417.0" y="813.0"/>
+    </contour>
+  </outline>
+</glyph>

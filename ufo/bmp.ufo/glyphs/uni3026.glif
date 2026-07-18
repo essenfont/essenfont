@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni3026" format="2">
+  <advance width="1000"/>
+  <unicode hex="3026"/>
+  <outline>
+    <contour>
+      <point x="468" y="579" type="line"/>
+      <point x="524" y="572"/>
+      <point x="561" y="558" type="line"/>
+      <point x="574" y="552"/>
+      <point x="574" y="544" type="line"/>
+      <point x="574" y="535"/>
+      <point x="561" y="531" type="line"/>
+      <point x="543" y="521"/>
+      <point x="519" y="520" type="line"/>
+      <point x="519" y="359" type="line"/>
+      <point x="828" y="359" type="line"/>
+      <point x="879" y="419" type="line"/>
+      <point x="918" y="389"/>
+      <point x="952" y="360" type="line"/>
+      <point x="961" y="354"/>
+      <point x="961" y="348" type="line"/>
+      <point x="961" y="333"/>
+      <point x="945" y="333" type="line"/>
+      <point x="152" y="333" type="line"/>
+      <point x="83" y="332"/>
+      <point x="58" y="329" type="line"/>
+      <point x="39" y="372" type="line"/>
+      <point x="81" y="359"/>
+      <point x="152" y="359" type="line"/>
+      <point x="472" y="359" type="line"/>
+      <point x="472" y="501" type="line"/>
+      <point x="472" y="553"/>
+    </contour>
+  </outline>
+</glyph>
