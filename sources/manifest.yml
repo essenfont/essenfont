@@ -2157,3 +2157,92 @@ donors:
     restrict_to_covers: true
     notes: "Blocks with no OFL-licensed donor. All are rare historical/symbol blocks."
 
+  # ─────────── Code-chart donors (Unicode 17 blocks without OFL donor) ───────────
+  # Extracted via `ucode code_chart extract` from the Unicode Code Charts PDFs,
+  # then converted to synthetic TTF via `scripts/build-svg-donor.rb`. Glyphs were
+  # merged into the committed per-plane UFOs via `scripts/merge-chart-glyphs.rb`.
+
+  - label: garay--chart
+    file: references/input-fonts/.generated/svg-donors/Garay.ttf
+    family: Garay (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "b1cf7fd214fe2dbf4815684fc712cc604a3018605f6500973bf2e66086dcc277"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Garay]
+    block: Garay
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 69/80 cps (U+10D40..U+10D8F). 14864 bytes. See scripts/build-svg-donor.rb."
+
+  - label: mongolian--supplement--chart
+    file: references/input-fonts/.generated/svg-donors/Mongolian_Supplement.ttf
+    family: Mongolian Supplement (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "89a4d7f355f51b79645349332d56a4f41d0989bd3c4124ecdeb2bb5295f0553c"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Mongolian_Supplement]
+    block: Mongolian_Supplement
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 12/32 cps (U+11660..U+1167F). 7116 bytes. See scripts/build-svg-donor.rb."
+
+  - label: myanmar--extended-c--chart
+    file: references/input-fonts/.generated/svg-donors/Myanmar_Extended_C.ttf
+    family: Myanmar Extended-C (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "852522e05fcc2f32a19bee2941d398e9e1a055989f352e499f0dc422352a8db2"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Myanmar_Extended-C]
+    block: Myanmar_Extended-C
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 19/48 cps (U+116D0..U+116FF). 3752 bytes. See scripts/build-svg-donor.rb."
+
+  - label: kana--extended-b--chart
+    file: references/input-fonts/.generated/svg-donors/Kana_Extended_B.ttf
+    family: Kana Extended-B (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "2ad6b0dc16e237192e97e4dc094948f5c3415dd85b90bfbc6cc810764e4e31e1"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Kana_Extended-B]
+    block: Kana_Extended-B
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 13/16 cps (U+1AFF0..U+1AFFF). 2640 bytes. See scripts/build-svg-donor.rb."
+
+  - label: kana--extended-a--chart
+    file: references/input-fonts/.generated/svg-donors/Kana_Extended_A.ttf
+    family: Kana Extended-A (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "fc080b2d7f970cae146520e379ba6bec8e7c3ff7250c525f111ee8490c7e44be"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Kana_Extended-A]
+    block: Kana_Extended-A
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 35/48 cps (U+1B100..U+1B12F). 31116 bytes. See scripts/build-svg-donor.rb."
+
+  - label: small--kana--extension--chart
+    file: references/input-fonts/.generated/svg-donors/Small_Kana_Extension.ttf
+    family: Small Kana Extension (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "00ccece008cb547be93e884d7ef9a6f349a31d55e5894fdea46f18d118e25f46"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Small_Kana_Extension]
+    block: Small_Kana_Extension
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 9/64 cps (U+1B130..U+1B16F). 5336 bytes. See scripts/build-svg-donor.rb."
+
+  - label: ol--onal--chart
+    file: references/input-fonts/.generated/svg-donors/Ol_Onal.ttf
+    family: Ol Onal (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "33957780be743a7742a23f59a33fb3c7eff9f1ba246241f81f464be32fc03d15"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Ol_Onal]
+    block: Ol_Onal
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 44/48 cps (U+1E5D0..U+1E5FF). 8608 bytes. See scripts/build-svg-donor.rb."
+
