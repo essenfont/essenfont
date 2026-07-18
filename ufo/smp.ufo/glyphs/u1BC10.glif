@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1BC10" format="2">
+  <advance width="1739.0"/>
+  <unicode hex="1BC10"/>
+  <outline>
+    <contour>
+      <point x="145" y="10" type="move"/>
+      <point x="1645" y="1510" type="line"/>
+      <point x="1677" y="1542"/>
+      <point x="1626" y="1591"/>
+      <point x="1595" y="1560" type="curve"/>
+      <point x="95" y="60" type="line"/>
+      <point x="62" y="27"/>
+      <point x="113" y="-21"/>
+      <point x="145" y="10" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

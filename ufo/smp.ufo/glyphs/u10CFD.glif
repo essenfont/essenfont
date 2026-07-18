@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u10CFD" format="2">
+  <advance width="566.0"/>
+  <unicode hex="10CFD"/>
+  <outline>
+    <contour>
+      <point x="237.0" y="0.0" type="line"/>
+      <point x="2.0" y="600.0" type="line"/>
+      <point x="94.0" y="600.0" type="line"/>
+      <point x="215.0" y="265.0" type="line"/>
+      <point x="223.0" y="243.0"/>
+      <point x="237.0" y="202.0"/>
+      <point x="243.0" y="183.0" type="line"/>
+      <point x="240.0" y="600.0" type="line"/>
+      <point x="327.0" y="600.0" type="line"/>
+      <point x="324.0" y="182.0" type="line"/>
+      <point x="330.0" y="200.0"/>
+      <point x="344.0" y="242.0"/>
+      <point x="352.0" y="265.0" type="line"/>
+      <point x="474.0" y="600.0" type="line"/>
+      <point x="564.0" y="600.0" type="line"/>
+      <point x="330.0" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

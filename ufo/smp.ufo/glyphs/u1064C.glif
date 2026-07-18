@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1064C" format="2">
+  <advance width="700.0"/>
+  <unicode hex="1064C"/>
+  <outline>
+    <contour>
+      <point x="180.0" y="0.0" type="line"/>
+      <point x="180.0" y="234.0" type="line"/>
+      <point x="154.0" y="217.0"/>
+      <point x="123.0" y="217.0" type="line"/>
+      <point x="81.0" y="217.0"/>
+      <point x="20.0" y="278.0"/>
+      <point x="20.0" y="320.0" type="line"/>
+      <point x="20.0" y="362.0"/>
+      <point x="81.0" y="423.0"/>
+      <point x="123.0" y="423.0" type="line"/>
+      <point x="139.0" y="423.0"/>
+      <point x="167.0" y="413.0"/>
+      <point x="180.0" y="405.0" type="line"/>
+      <point x="180.0" y="557.0" type="line"/>
+      <point x="360.0" y="815.0" type="line"/>
+      <point x="440.0" y="815.0" type="line"/>
+      <point x="620.0" y="557.0" type="line"/>
+      <point x="620.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="259.0" y="560.0" type="line"/>
+      <point x="541.0" y="560.0" type="line"/>
+      <point x="400.0" y="765.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="250.0" y="223.0" type="line"/>
+      <point x="550.0" y="223.0" type="line"/>
+      <point x="550.0" y="497.0" type="line"/>
+      <point x="250.0" y="497.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="123.0" y="263.0" type="line"/>
+      <point x="146.0" y="263.0"/>
+      <point x="179.0" y="295.0"/>
+      <point x="179.0" y="319.0" type="line"/>
+      <point x="179.0" y="343.0"/>
+      <point x="146.0" y="377.0"/>
+      <point x="123.0" y="377.0" type="line"/>
+      <point x="100.0" y="377.0"/>
+      <point x="68.0" y="343.0"/>
+      <point x="68.0" y="319.0" type="line"/>
+      <point x="68.0" y="295.0"/>
+      <point x="100.0" y="263.0"/>
+    </contour>
+    <contour>
+      <point x="250.0" y="63.0" type="line"/>
+      <point x="550.0" y="63.0" type="line"/>
+      <point x="550.0" y="160.0" type="line"/>
+      <point x="250.0" y="160.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

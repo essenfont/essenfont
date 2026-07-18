@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1D40E" format="2">
+  <advance width="199"/>
+  <unicode hex="1D40E"/>
+  <unicode hex="1D5E2"/>
+  <outline>
+    <contour>
+      <point x="100" y="-3" type="line"/>
+      <point x="71" y="-3"/>
+      <point x="33" y="21"/>
+      <point x="15" y="62"/>
+      <point x="15" y="90" type="line"/>
+      <point x="15" y="118"/>
+      <point x="33" y="159"/>
+      <point x="71" y="181"/>
+      <point x="100" y="181" type="line"/>
+      <point x="129" y="181"/>
+      <point x="166" y="159"/>
+      <point x="185" y="117"/>
+      <point x="185" y="90" type="line"/>
+      <point x="185" y="62"/>
+      <point x="166" y="21"/>
+      <point x="129" y="-3"/>
+    </contour>
+    <contour>
+      <point x="100" y="29" type="line"/>
+      <point x="124" y="29"/>
+      <point x="145" y="62"/>
+      <point x="145" y="90" type="line"/>
+      <point x="145" y="118"/>
+      <point x="124" y="150"/>
+      <point x="100" y="150" type="line"/>
+      <point x="76" y="150"/>
+      <point x="54" y="118"/>
+      <point x="54" y="90" type="line"/>
+      <point x="54" y="62"/>
+      <point x="76" y="29"/>
+    </contour>
+  </outline>
+</glyph>

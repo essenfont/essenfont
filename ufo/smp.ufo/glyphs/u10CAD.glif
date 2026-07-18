@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u10CAD" format="2">
+  <advance width="788.0"/>
+  <unicode hex="10CAD"/>
+  <outline>
+    <contour>
+      <point x="567.0" y="-136.0" type="line"/>
+      <point x="567.0" y="383.0" type="line"/>
+      <point x="220.0" y="127.0" type="line"/>
+      <point x="130.0" y="127.0" type="line"/>
+      <point x="130.0" y="714.0" type="line"/>
+      <point x="220.0" y="714.0" type="line"/>
+      <point x="220.0" y="231.0" type="line"/>
+      <point x="567.0" y="492.0" type="line"/>
+      <point x="657.0" y="492.0" type="line"/>
+      <point x="657.0" y="-136.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

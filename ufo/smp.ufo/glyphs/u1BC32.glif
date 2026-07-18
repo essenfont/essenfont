@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1BC32" format="2">
+  <advance width="640.0"/>
+  <unicode hex="1BC32"/>
+  <outline>
+    <contour>
+      <point x="85" y="435" type="move"/>
+      <point x="85" y="195"/>
+      <point x="280" y="0"/>
+      <point x="520" y="0" type="curve"/>
+      <point x="539" y="0"/>
+      <point x="555" y="16"/>
+      <point x="555" y="35" type="curve"/>
+      <point x="555" y="54"/>
+      <point x="539" y="70"/>
+      <point x="520" y="70" type="curve"/>
+      <point x="318" y="70"/>
+      <point x="155" y="233"/>
+      <point x="155" y="435" type="curve"/>
+      <point x="155" y="454"/>
+      <point x="139" y="470"/>
+      <point x="120" y="470" type="curve"/>
+      <point x="101" y="470"/>
+      <point x="85" y="454"/>
+      <point x="85" y="435" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

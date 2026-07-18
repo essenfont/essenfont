@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1015A" format="2">
+  <advance width="680.0"/>
+  <unicode hex="1015A"/>
+  <outline>
+    <contour>
+      <point x="97.0" y="0.0" type="line"/>
+      <point x="97.0" y="714.0" type="line"/>
+      <point x="670.0" y="714.0" type="line"/>
+      <point x="670.0" y="640.0" type="line"/>
+      <point x="187.0" y="315.0" type="line"/>
+      <point x="187.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="187.0" y="411.0" type="line"/>
+      <point x="519.0" y="635.0" type="line"/>
+      <point x="187.0" y="635.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

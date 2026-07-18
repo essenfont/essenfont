@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u10CAB" format="2">
+  <advance width="953.0"/>
+  <unicode hex="10CAB"/>
+  <outline>
+    <contour>
+      <point x="122.0" y="-135.0" type="line"/>
+      <point x="122.0" y="714.0" type="line"/>
+      <point x="204.0" y="714.0" type="line"/>
+      <point x="478.0" y="358.0" type="line"/>
+      <point x="755.0" y="714.0" type="line"/>
+      <point x="837.0" y="714.0" type="line"/>
+      <point x="837.0" y="-135.0" type="line"/>
+      <point x="755.0" y="-135.0" type="line"/>
+      <point x="478.0" y="223.0" type="line"/>
+      <point x="204.0" y="-135.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="744.0" y="11.0" type="line"/>
+      <point x="748.0" y="11.0" type="line"/>
+      <point x="748.0" y="569.0" type="line"/>
+      <point x="744.0" y="569.0" type="line"/>
+      <point x="528.0" y="289.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="211.0" y="19.0" type="line"/>
+      <point x="215.0" y="19.0" type="line"/>
+      <point x="426.0" y="289.0" type="line"/>
+      <point x="215.0" y="561.0" type="line"/>
+      <point x="211.0" y="561.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

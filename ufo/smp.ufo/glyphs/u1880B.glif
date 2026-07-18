@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1880B" format="2">
+  <advance width="1000.0"/>
+  <unicode hex="1880B"/>
+  <outline>
+    <contour>
+      <point x="745" y="830" type="move"/>
+      <point x="698" y="772" type="line"/>
+      <point x="297" y="772" type="line"/>
+      <point x="221" y="807" type="line"/>
+      <point x="221" y="523" type="line"/>
+      <point x="221" y="480"/>
+      <point x="220" y="442"/>
+      <point x="219" y="409" type="curve"/>
+      <point x="213" y="206"/>
+      <point x="177" y="48"/>
+      <point x="113" y="-67" type="curve"/>
+      <point x="129" y="-77" type="line"/>
+      <point x="176" y="-21"/>
+      <point x="212" y="46"/>
+      <point x="237" y="125" type="curve"/>
+      <point x="268" y="223"/>
+      <point x="284" y="356"/>
+      <point x="284" y="524" type="curve"/>
+      <point x="284" y="742" type="line"/>
+      <point x="804" y="742" type="line"/>
+      <point x="818" y="742"/>
+      <point x="827" y="748"/>
+      <point x="831" y="758" type="curve"/>
+      <point x="816" y="772"/>
+      <point x="787" y="796"/>
+      <point x="745" y="830" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

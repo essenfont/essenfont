@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1BC05" format="2">
+  <advance width="527.0"/>
+  <unicode hex="1BC05"/>
+  <outline>
+    <contour>
+      <point x="90" y="52" type="move"/>
+      <point x="67" y="12"/>
+      <point x="127" y="-21"/>
+      <point x="150" y="17" type="curve"/>
+      <point x="438" y="517" type="line"/>
+      <point x="460" y="555"/>
+      <point x="401" y="591"/>
+      <point x="378" y="552" type="curve"/>
+    </contour>
+  </outline>
+</glyph>
