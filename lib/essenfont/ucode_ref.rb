@@ -26,6 +26,29 @@ module Essenfont
       Ucode::Unicode.assigned_count
     end
 
+    # Set of all assigned codepoints in this Unicode version, loaded
+    # from UCD's UnicodeData.txt (cached under ucode's cache dir).
+    # Used to avoid counting reserved/unassigned codepoints as "missing"
+    # in coverage reports.
+    # @return [Set<Integer>]
+    def assigned_codepoints
+      @assigned_codepoints ||= begin
+        ucd_dir = Ucode::Cache.ucd_dir(unicode_version)
+        ucd_path = ucd_dir.join("UnicodeData.txt")
+        Set.new.tap do |set|
+          File.foreach(ucd_path) do |line|
+            cp_hex = line.split(";", 2).first
+            set << cp_hex.to_i(16) unless cp_hex.nil? || cp_hex.empty?
+          end
+        end
+      end
+    end
+
+    # Whether a specific codepoint is assigned in this Unicode version.
+    def assigned?(cp)
+      assigned_codepoints.include?(cp)
+    end
+
     # The catalog (one per Unicode version).
     def catalog
       Ucode::Unicode.for_version

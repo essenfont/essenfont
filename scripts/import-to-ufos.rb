@@ -174,6 +174,7 @@ module ImportToUfos
   def print_coverage(donors, cp_map)
     catalog = Essenfont::UcodeRef.catalog
     assigned = Essenfont::UcodeRef.assigned_count
+    assigned_set = Essenfont::UcodeRef.assigned_codepoints
 
     puts "=== Coverage ==="
     puts "  assigned codepoints: #{assigned}"
@@ -183,12 +184,15 @@ module ImportToUfos
     uncovered = []
     catalog.all_blocks.each do |block|
       block_cps = (block.first_cp..block.last_cp).to_a
-      missing = block_cps.reject { |cp| cp_map.donor_labels.key?(cp) }
+      assigned_in_block = block_cps & assigned_set
+      next if assigned_in_block.empty?
+
+      missing = assigned_in_block.reject { |cp| cp_map.donor_labels.key?(cp) }
       next if missing.empty?
 
-      covered_count = block_cps.size - missing.size
-      pct = (covered_count.to_f / block_cps.size * 100).round(1)
-      uncovered << "#{block.id}: #{covered_count}/#{block_cps.size} (#{pct}%)"
+      covered_count = assigned_in_block.size - missing.size
+      pct = (covered_count.to_f / assigned_in_block.size * 100).round(1)
+      uncovered << "#{block.id}: #{covered_count}/#{assigned_in_block.size} (#{pct}%)"
     end
 
     if uncovered.any?
