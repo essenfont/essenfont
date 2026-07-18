@@ -9,15 +9,17 @@ source "https://rubygems.org"
 #   export FONTISAN_PATH=/path/to/fontisan
 #   export UCODE_PATH=/path/to/ucode
 #
-# Version floor 0.4.41: compound glyph decomposition in FromBinData
-# (fontisan PR #129) and CFF charstring extraction (no longer a stub).
+# Version floor 0.4.43: SvgToGlyf viewBox parsing preserves min_x/min_y
+# (fontisan 0.4.43) so SVG code-chart glyphs normalize correctly.
+# 0.4.41: compound glyph decomposition in FromBinData (PR #129) and
+# CFF charstring extraction (no longer a stub).
 # Earlier versions silently dropped compound glyphs and stubbed CFF
 # extraction, producing empty/phantom outlines for affected donors.
 fontisan_path = ENV.fetch("FONTISAN_PATH", nil)
 if fontisan_path && Dir.exist?(fontisan_path)
   gem "fontisan", path: fontisan_path
 else
-  gem "fontisan", "~> 0.4", ">= 0.4.41"
+  gem "fontisan", "~> 0.4", ">= 0.4.43"
 end
 
 ucode_path = ENV.fetch("UCODE_PATH", nil)
