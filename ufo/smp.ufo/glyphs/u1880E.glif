@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1880E" format="2">
+  <advance width="1000.0"/>
+  <unicode hex="1880E"/>
+  <outline>
+    <contour>
+      <point x="678" y="533" type="move"/>
+      <point x="628" y="468" type="line"/>
+      <point x="539" y="468" type="line"/>
+      <point x="539" y="785" type="line"/>
+      <point x="559" y="789"/>
+      <point x="571" y="798"/>
+      <point x="575" y="813" type="curve"/>
+      <point x="474" y="824" type="line"/>
+      <point x="474" y="468" type="line"/>
+      <point x="281" y="468" type="line"/>
+      <point x="290" y="438" type="line"/>
+      <point x="474" y="438" type="line"/>
+      <point x="474" y="-74" type="line"/>
+      <point x="484" y="-74" type="line"/>
+      <point x="490" y="-74"/>
+      <point x="497" y="-73"/>
+      <point x="506" y="-70" type="curve"/>
+      <point x="527" y="-64"/>
+      <point x="538" y="-58"/>
+      <point x="539" y="-53" type="curve"/>
+      <point x="539" y="438" type="line"/>
+      <point x="744" y="438" type="line"/>
+      <point x="758" y="438"/>
+      <point x="767" y="444"/>
+      <point x="771" y="454" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

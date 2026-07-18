@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u11CA5" format="2">
+  <unicode hex="11CA5"/>
+  <outline>
+    <contour>
+      <point x="-99.0" y="180.0" type="line"/>
+      <point x="-3.0" y="180.0" type="line"/>
+      <point x="-3.0" y="-160.0" type="line"/>
+      <point x="-440.0" y="-160.0" type="line"/>
+      <point x="-440.0" y="55.0" type="line"/>
+      <point x="-99.0" y="55.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="-390.0" y="-74.0" type="line"/>
+      <point x="-99.0" y="-74.0" type="line"/>
+      <point x="-99.0" y="-31.0" type="line"/>
+      <point x="-390.0" y="-31.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

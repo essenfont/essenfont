@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1BC30" format="2">
+  <advance width="840.0"/>
+  <unicode hex="1BC30"/>
+  <outline>
+    <contour>
+      <point x="85" y="455" type="move"/>
+      <point x="85" y="436"/>
+      <point x="101" y="420"/>
+      <point x="120" y="420" type="curve"/>
+      <point x="139" y="420"/>
+      <point x="155" y="436"/>
+      <point x="155" y="455" type="curve"/>
+      <point x="155" y="601"/>
+      <point x="274" y="720"/>
+      <point x="420" y="720" type="curve"/>
+      <point x="561" y="720"/>
+      <point x="685" y="580"/>
+      <point x="685" y="395" type="curve"/>
+      <point x="685" y="210"/>
+      <point x="561" y="70"/>
+      <point x="420" y="70" type="curve"/>
+      <point x="401" y="70"/>
+      <point x="385" y="54"/>
+      <point x="385" y="35" type="curve"/>
+      <point x="385" y="16"/>
+      <point x="401" y="0"/>
+      <point x="420" y="0" type="curve"/>
+      <point x="610" y="0"/>
+      <point x="755" y="182"/>
+      <point x="755" y="395" type="curve"/>
+      <point x="755" y="608"/>
+      <point x="610" y="790"/>
+      <point x="420" y="790" type="curve"/>
+      <point x="235" y="790"/>
+      <point x="85" y="640"/>
+      <point x="85" y="455" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

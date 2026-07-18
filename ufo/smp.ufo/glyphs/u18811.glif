@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u18811" format="2">
+  <advance width="1000.0"/>
+  <unicode hex="18811"/>
+  <outline>
+    <contour>
+      <point x="632" y="545" type="move"/>
+      <point x="596" y="504" type="line"/>
+      <point x="399" y="504" type="line"/>
+      <point x="399" y="785" type="line"/>
+      <point x="419" y="789"/>
+      <point x="431" y="798"/>
+      <point x="435" y="813" type="curve"/>
+      <point x="334" y="824" type="line"/>
+      <point x="334" y="-74" type="line"/>
+      <point x="344" y="-74" type="line"/>
+      <point x="350" y="-74"/>
+      <point x="357" y="-73"/>
+      <point x="366" y="-70" type="curve"/>
+      <point x="387" y="-64"/>
+      <point x="398" y="-58"/>
+      <point x="399" y="-53" type="curve"/>
+      <point x="399" y="476" type="line"/>
+      <point x="606" y="476" type="line"/>
+      <point x="606" y="-67" type="line"/>
+      <point x="616" y="-67" type="line"/>
+      <point x="639" y="-65"/>
+      <point x="657" y="-58"/>
+      <point x="671" y="-46" type="curve"/>
+      <point x="671" y="463" type="line"/>
+      <point x="691" y="467"/>
+      <point x="705" y="474"/>
+      <point x="714" y="483" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

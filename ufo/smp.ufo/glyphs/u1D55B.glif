@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u1D55B" format="2">
+  <advance width="89"/>
+  <unicode hex="1D55B"/>
+  <outline>
+    <contour>
+      <point x="49" y="146" type="line"/>
+      <point x="39" y="146"/>
+      <point x="27" y="159"/>
+      <point x="27" y="168" type="line"/>
+      <point x="27" y="177"/>
+      <point x="39" y="190"/>
+      <point x="49" y="190" type="line"/>
+      <point x="58" y="190"/>
+      <point x="71" y="177"/>
+      <point x="71" y="168" type="line"/>
+      <point x="71" y="159"/>
+      <point x="58" y="146"/>
+    </contour>
+    <contour>
+      <point x="49" y="159" type="line"/>
+      <point x="53" y="159"/>
+      <point x="58" y="164"/>
+      <point x="58" y="168" type="line"/>
+      <point x="58" y="172"/>
+      <point x="53" y="178"/>
+      <point x="49" y="178" type="line"/>
+      <point x="45" y="178"/>
+      <point x="39" y="172"/>
+      <point x="39" y="168" type="line"/>
+      <point x="39" y="164"/>
+      <point x="45" y="159"/>
+    </contour>
+    <contour>
+      <point x="23" y="-60" type="line"/>
+      <point x="12" y="-60"/>
+      <point x="5" y="-58" type="line"/>
+      <point x="5" y="-45" type="line"/>
+      <point x="9" y="-46"/>
+      <point x="18" y="-47"/>
+      <point x="23" y="-47" type="line"/>
+      <point x="24" y="-47"/>
+      <point x="26" y="-47"/>
+      <point x="27" y="-47" type="line"/>
+      <point x="27" y="134" type="line"/>
+      <point x="70" y="134" type="line"/>
+      <point x="70" y="-14" type="line"/>
+      <point x="70" y="-35"/>
+      <point x="47" y="-60"/>
+    </contour>
+    <contour>
+      <point x="40" y="-44" type="line"/>
+      <point x="49" y="-41"/>
+      <point x="57" y="-23"/>
+      <point x="57" y="-11" type="line"/>
+      <point x="57" y="121" type="line"/>
+      <point x="40" y="121" type="line"/>
+    </contour>
+  </outline>
+</glyph>

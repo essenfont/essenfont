@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u10B20" format="2">
+  <advance width="280.0"/>
+  <unicode hex="10B20"/>
+  <outline>
+    <contour>
+      <point x="-740.0" y="-240.0" type="line"/>
+      <point x="-740.0" y="-167.0" type="line"/>
+      <point x="-100.0" y="-167.0" type="line"/>
+      <point x="17.0" y="-167.0"/>
+      <point x="128.0" y="-88.0"/>
+      <point x="128.0" y="-6.0" type="line"/>
+      <point x="128.0" y="31.0"/>
+      <point x="110.0" y="106.0"/>
+      <point x="92.0" y="200.0"/>
+      <point x="92.0" y="263.0" type="line"/>
+      <point x="92.0" y="305.0"/>
+      <point x="109.0" y="382.0"/>
+      <point x="125.0" y="428.0" type="line"/>
+      <point x="210.0" y="428.0" type="line"/>
+      <point x="200.0" y="395.0"/>
+      <point x="187.0" y="345.0"/>
+      <point x="181.0" y="294.0"/>
+      <point x="181.0" y="260.0" type="line"/>
+      <point x="181.0" y="202.0"/>
+      <point x="201.0" y="113.0"/>
+      <point x="220.0" y="33.0"/>
+      <point x="220.0" y="-15.0" type="line"/>
+      <point x="220.0" y="-124.0"/>
+      <point x="70.0" y="-240.0"/>
+      <point x="-84.0" y="-240.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

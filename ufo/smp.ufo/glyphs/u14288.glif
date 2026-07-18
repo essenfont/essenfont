@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u14288" format="2">
+  <advance width="1389"/>
+  <unicode hex="14288"/>
+  <unicode hex="F3CB7"/>
+  <outline>
+    <contour>
+      <point x="1135" y="271" type="line"/>
+      <point x="1137" y="271"/>
+      <point x="1142" y="266"/>
+      <point x="1142" y="264" type="line"/>
+      <point x="1223" y="15" type="line"/>
+      <point x="1237" y="21" type="line"/>
+      <point x="1159" y="281" type="line"/>
+      <point x="1159" y="284"/>
+      <point x="1160" y="291"/>
+      <point x="1161" y="292" type="line"/>
+      <point x="1243" y="405" type="line"/>
+      <point x="1232" y="414" type="line"/>
+      <point x="1147" y="300" type="line"/>
+      <point x="1142" y="294"/>
+      <point x="1134" y="297" type="line"/>
+      <point x="150" y="626" type="line"/>
+      <point x="145" y="609" type="line"/>
+    </contour>
+    <contour>
+      <point x="127" y="591" type="line"/>
+      <point x="120" y="594"/>
+      <point x="119" y="615"/>
+      <point x="126" y="637"/>
+      <point x="139" y="654"/>
+      <point x="146" y="652" type="line"/>
+      <point x="1132" y="322" type="line"/>
+      <point x="1221" y="438" type="line"/>
+      <point x="1226" y="444"/>
+      <point x="1245" y="438"/>
+      <point x="1263" y="424"/>
+      <point x="1272" y="406"/>
+      <point x="1269" y="400" type="line"/>
+      <point x="1183" y="283" type="line"/>
+      <point x="1262" y="18" type="line"/>
+      <point x="1264" y="11"/>
+      <point x="1249" y="-2"/>
+      <point x="1227" y="-12"/>
+      <point x="1206" y="-11"/>
+      <point x="1204" y="-4" type="line"/>
+      <point x="1122" y="250" type="line"/>
+    </contour>
+  </outline>
+</glyph>
