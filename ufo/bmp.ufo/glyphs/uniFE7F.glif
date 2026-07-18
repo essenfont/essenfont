@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFE7F" format="2">
+  <advance width="17"/>
+  <unicode hex="FE7F"/>
+  <outline>
+    <contour>
+      <point x="0" y="0" type="line"/>
+      <point x="-1" y="0"/>
+      <point x="-1" y="1" type="line"/>
+      <point x="-1" y="6" type="line"/>
+      <point x="-1" y="6"/>
+      <point x="0" y="6" type="line"/>
+      <point x="17" y="6" type="line"/>
+      <point x="18" y="6"/>
+      <point x="18" y="6" type="line"/>
+      <point x="18" y="1" type="line"/>
+      <point x="18" y="0"/>
+      <point x="17" y="0" type="line"/>
+    </contour>
+    <contour>
+      <point x="9" y="17" type="line"/>
+      <point x="7" y="17"/>
+      <point x="4" y="21"/>
+      <point x="4" y="23" type="line"/>
+      <point x="4" y="26"/>
+      <point x="7" y="30"/>
+      <point x="9" y="30" type="line"/>
+      <point x="12" y="30"/>
+      <point x="15" y="26"/>
+      <point x="15" y="23" type="line"/>
+      <point x="15" y="21"/>
+      <point x="11" y="17"/>
+    </contour>
+    <contour>
+      <point x="9" y="21" type="line"/>
+      <point x="11" y="21"/>
+      <point x="13" y="23"/>
+      <point x="13" y="23" type="line"/>
+      <point x="13" y="24"/>
+      <point x="10" y="27"/>
+      <point x="9" y="27" type="line"/>
+      <point x="8" y="27"/>
+      <point x="6" y="25"/>
+      <point x="6" y="24" type="line"/>
+      <point x="6" y="23"/>
+      <point x="8" y="21"/>
+    </contour>
+  </outline>
+</glyph>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni21DB" format="2">
+  <advance width="253"/>
+  <unicode hex="21DB"/>
+  <outline>
+    <contour>
+      <point x="169" y="-27" type="line"/>
+      <point x="154" y="-27" type="line"/>
+      <point x="157" y="-19"/>
+      <point x="168" y="4"/>
+      <point x="174" y="16" type="line"/>
+      <point x="13" y="16" type="line"/>
+      <point x="13" y="34" type="line"/>
+      <point x="184" y="34" type="line"/>
+      <point x="192" y="49"/>
+      <point x="200" y="61" type="line"/>
+      <point x="13" y="61" type="line"/>
+      <point x="13" y="79" type="line"/>
+      <point x="200" y="79" type="line"/>
+      <point x="192" y="91"/>
+      <point x="184" y="105" type="line"/>
+      <point x="13" y="105" type="line"/>
+      <point x="13" y="123" type="line"/>
+      <point x="174" y="123" type="line"/>
+      <point x="168" y="135"/>
+      <point x="157" y="158"/>
+      <point x="154" y="166" type="line"/>
+      <point x="169" y="166" type="line"/>
+      <point x="186" y="142"/>
+      <point x="222" y="95"/>
+      <point x="240" y="73" type="line"/>
+      <point x="240" y="66" type="line"/>
+      <point x="222" y="44"/>
+      <point x="186" y="-3"/>
+    </contour>
+  </outline>
+</glyph>

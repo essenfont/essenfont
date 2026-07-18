@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniABDB" format="2">
+  <advance width="896.0"/>
+  <unicode hex="ABDB"/>
+  <outline>
+    <contour>
+      <point x="55.0" y="585.0" type="line"/>
+      <point x="55.0" y="659.0" type="line"/>
+      <point x="856.0" y="659.0" type="line"/>
+      <point x="856.0" y="585.0" type="line"/>
+      <point x="806.0" y="585.0" type="line"/>
+      <point x="806.0" y="359.0" type="line"/>
+      <point x="725.0" y="359.0" type="line"/>
+      <point x="725.0" y="585.0" type="line"/>
+      <point x="601.0" y="585.0" type="line"/>
+      <point x="601.0" y="0.0" type="line"/>
+      <point x="105.0" y="0.0" type="line"/>
+      <point x="105.0" y="585.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="187.0" y="72.0" type="line"/>
+      <point x="314.0" y="72.0" type="line"/>
+      <point x="314.0" y="585.0" type="line"/>
+      <point x="187.0" y="585.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="394.0" y="72.0" type="line"/>
+      <point x="520.0" y="72.0" type="line"/>
+      <point x="520.0" y="585.0" type="line"/>
+      <point x="394.0" y="585.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

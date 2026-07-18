@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFE72" format="2">
+  <advance width="18"/>
+  <unicode hex="FE72"/>
+  <outline>
+    <contour>
+      <point x="7" y="61" type="line"/>
+      <point x="7" y="61"/>
+      <point x="6" y="62"/>
+      <point x="5" y="63"/>
+      <point x="5" y="63" type="line"/>
+      <point x="5" y="66" type="line"/>
+      <point x="5" y="67"/>
+      <point x="4" y="67" type="line"/>
+      <point x="3" y="67"/>
+      <point x="1" y="66" type="line"/>
+      <point x="0" y="67" type="line"/>
+      <point x="3" y="70"/>
+      <point x="5" y="70" type="line"/>
+      <point x="7" y="70"/>
+      <point x="7" y="67" type="line"/>
+      <point x="7" y="66"/>
+      <point x="7" y="65"/>
+      <point x="7" y="65" type="line"/>
+      <point x="10" y="65"/>
+      <point x="13" y="67" type="line"/>
+      <point x="9" y="69"/>
+      <point x="9" y="72" type="line"/>
+      <point x="9" y="73"/>
+      <point x="11" y="76"/>
+      <point x="13" y="77"/>
+      <point x="15" y="77" type="line"/>
+      <point x="16" y="77"/>
+      <point x="17" y="76" type="line"/>
+      <point x="17" y="75"/>
+      <point x="18" y="73"/>
+      <point x="18" y="71" type="line"/>
+      <point x="18" y="70"/>
+      <point x="17" y="69" type="line"/>
+      <point x="18" y="69"/>
+      <point x="20" y="69"/>
+      <point x="20" y="69" type="line"/>
+      <point x="20" y="66"/>
+      <point x="17" y="66" type="line"/>
+      <point x="15" y="66" type="line"/>
+      <point x="14" y="65"/>
+      <point x="11" y="63"/>
+      <point x="8" y="61"/>
+    </contour>
+    <contour>
+      <point x="15" y="70" type="line"/>
+      <point x="16" y="70"/>
+      <point x="16" y="71"/>
+      <point x="16" y="71" type="line"/>
+      <point x="16" y="72"/>
+      <point x="15" y="74"/>
+      <point x="14" y="74" type="line"/>
+      <point x="13" y="74"/>
+      <point x="11" y="73"/>
+      <point x="11" y="73" type="line"/>
+      <point x="11" y="71"/>
+      <point x="15" y="69" type="line"/>
+    </contour>
+  </outline>
+</glyph>

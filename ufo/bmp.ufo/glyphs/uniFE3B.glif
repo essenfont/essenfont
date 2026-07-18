@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFE3B" format="2">
+  <advance width="1000.0"/>
+  <unicode hex="FE3B"/>
+  <outline>
+    <contour>
+      <point x="955.0" y="-80.0" type="line"/>
+      <point x="910.0" y="-25.0"/>
+      <point x="773.0" y="64.0"/>
+      <point x="600.0" y="118.0"/>
+      <point x="500.0" y="118.0" type="line"/>
+      <point x="400.0" y="118.0"/>
+      <point x="227.0" y="64.0"/>
+      <point x="91.0" y="-25.0"/>
+      <point x="45.0" y="-80.0" type="line"/>
+      <point x="40.0" y="-80.0" type="line"/>
+      <point x="40.0" y="208.0" type="line"/>
+      <point x="960.0" y="208.0" type="line"/>
+      <point x="960.0" y="-80.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

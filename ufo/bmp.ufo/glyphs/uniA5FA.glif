@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniA5FA" format="2">
+  <advance width="610.0"/>
+  <unicode hex="A5FA"/>
+  <outline>
+    <contour>
+      <point x="266.0" y="430.0" type="line"/>
+      <point x="266.0" y="714.0" type="line"/>
+      <point x="344.0" y="714.0" type="line"/>
+      <point x="344.0" y="430.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="66.0" y="227.0" type="line"/>
+      <point x="66.0" y="509.0" type="line"/>
+      <point x="144.0" y="509.0" type="line"/>
+      <point x="144.0" y="227.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="466.0" y="227.0" type="line"/>
+      <point x="466.0" y="509.0" type="line"/>
+      <point x="544.0" y="509.0" type="line"/>
+      <point x="544.0" y="227.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="266.0" y="0.0" type="line"/>
+      <point x="266.0" y="284.0" type="line"/>
+      <point x="344.0" y="284.0" type="line"/>
+      <point x="344.0" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

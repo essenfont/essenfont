@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFBBE" format="2">
+  <advance width="18"/>
+  <unicode hex="FBBE"/>
+  <outline>
+    <contour>
+      <point x="9" y="-12" type="line"/>
+      <point x="7" y="-11"/>
+      <point x="5" y="-9"/>
+      <point x="4" y="-8" type="line"/>
+      <point x="5" y="-7"/>
+      <point x="7" y="-5"/>
+      <point x="9" y="-3" type="line"/>
+      <point x="9" y="-4"/>
+      <point x="11" y="-6"/>
+      <point x="13" y="-7" type="line"/>
+      <point x="12" y="-9"/>
+      <point x="10" y="-11"/>
+    </contour>
+    <contour>
+      <point x="10" y="-23" type="line"/>
+      <point x="8" y="-22"/>
+      <point x="6" y="-19"/>
+      <point x="5" y="-18" type="line"/>
+      <point x="6" y="-18"/>
+      <point x="8" y="-15"/>
+      <point x="10" y="-13" type="line"/>
+      <point x="11" y="-14"/>
+      <point x="14" y="-18" type="line"/>
+      <point x="13" y="-20"/>
+    </contour>
+  </outline>
+</glyph>

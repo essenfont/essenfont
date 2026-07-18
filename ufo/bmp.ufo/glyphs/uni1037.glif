@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni1037" format="2">
+  <unicode hex="1037"/>
+  <outline>
+    <contour>
+      <point x="-324.0" y="-322.0" type="line"/>
+      <point x="-373.0" y="-322.0"/>
+      <point x="-433.0" y="-267.0"/>
+      <point x="-433.0" y="-216.0" type="line"/>
+      <point x="-433.0" y="-166.0"/>
+      <point x="-373.0" y="-110.0"/>
+      <point x="-324.0" y="-110.0" type="line"/>
+      <point x="-276.0" y="-110.0"/>
+      <point x="-213.0" y="-166.0"/>
+      <point x="-213.0" y="-215.0" type="line"/>
+      <point x="-213.0" y="-266.0"/>
+      <point x="-276.0" y="-322.0"/>
+    </contour>
+    <contour>
+      <point x="-323.0" y="-269.0" type="line"/>
+      <point x="-300.0" y="-269.0"/>
+      <point x="-270.0" y="-241.0"/>
+      <point x="-270.0" y="-216.0" type="line"/>
+      <point x="-270.0" y="-191.0"/>
+      <point x="-300.0" y="-163.0"/>
+      <point x="-323.0" y="-163.0" type="line"/>
+      <point x="-346.0" y="-163.0"/>
+      <point x="-376.0" y="-191.0"/>
+      <point x="-376.0" y="-216.0" type="line"/>
+      <point x="-376.0" y="-269.0"/>
+    </contour>
+  </outline>
+</glyph>

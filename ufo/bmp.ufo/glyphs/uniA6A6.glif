@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniA6A6" format="2">
+  <advance width="578.0"/>
+  <unicode hex="A6A6"/>
+  <outline>
+    <contour>
+      <point x="231.0" y="602.0" type="line"/>
+      <point x="209.0" y="602.0"/>
+      <point x="179.0" y="630.0"/>
+      <point x="179.0" y="658.0" type="line"/>
+      <point x="179.0" y="687.0"/>
+      <point x="209.0" y="714.0"/>
+      <point x="231.0" y="714.0" type="line"/>
+      <point x="251.0" y="714.0"/>
+      <point x="282.0" y="687.0"/>
+      <point x="282.0" y="658.0" type="line"/>
+      <point x="282.0" y="630.0"/>
+      <point x="251.0" y="602.0"/>
+    </contour>
+    <contour>
+      <point x="79.0" y="197.0" type="line"/>
+      <point x="79.0" y="276.0" type="line"/>
+      <point x="285.0" y="276.0" type="line"/>
+      <point x="370.0" y="276.0"/>
+      <point x="442.0" y="317.0"/>
+      <point x="442.0" y="357.0" type="line"/>
+      <point x="442.0" y="397.0"/>
+      <point x="374.0" y="437.0"/>
+      <point x="285.0" y="437.0" type="line"/>
+      <point x="79.0" y="437.0" type="line"/>
+      <point x="79.0" y="516.0" type="line"/>
+      <point x="285.0" y="516.0" type="line"/>
+      <point x="382.0" y="516.0"/>
+      <point x="490.0" y="474.0"/>
+      <point x="533.0" y="402.0"/>
+      <point x="533.0" y="357.0" type="line"/>
+      <point x="533.0" y="328.0"/>
+      <point x="511.0" y="271.0"/>
+      <point x="457.0" y="225.0"/>
+      <point x="360.0" y="197.0"/>
+      <point x="285.0" y="197.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="231.0" y="0.0" type="line"/>
+      <point x="209.0" y="0.0"/>
+      <point x="179.0" y="28.0"/>
+      <point x="179.0" y="56.0" type="line"/>
+      <point x="179.0" y="85.0"/>
+      <point x="209.0" y="112.0"/>
+      <point x="231.0" y="112.0" type="line"/>
+      <point x="251.0" y="112.0"/>
+      <point x="282.0" y="85.0"/>
+      <point x="282.0" y="56.0" type="line"/>
+      <point x="282.0" y="28.0"/>
+      <point x="251.0" y="0.0"/>
+    </contour>
+  </outline>
+</glyph>

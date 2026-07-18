@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniA554" format="2">
+  <advance width="682.0"/>
+  <unicode hex="A554"/>
+  <outline>
+    <contour>
+      <point x="22.0" y="0.0" type="line"/>
+      <point x="314.0" y="714.0" type="line"/>
+      <point x="371.0" y="714.0" type="line"/>
+      <point x="660.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="131.0" y="73.0" type="line"/>
+      <point x="542.0" y="73.0" type="line"/>
+      <point x="337.0" y="594.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

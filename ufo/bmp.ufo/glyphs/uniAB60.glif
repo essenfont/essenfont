@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniAB60" format="2">
+  <advance width="933.0"/>
+  <unicode hex="AB60"/>
+  <outline>
+    <contour>
+      <point x="85.0" y="0.0" type="line"/>
+      <point x="85.0" y="536.0" type="line"/>
+      <point x="538.0" y="537.0" type="line"/>
+      <point x="538.0" y="320.0" type="line"/>
+      <point x="684.0" y="320.0" type="line"/>
+      <point x="788.0" y="320.0"/>
+      <point x="880.0" y="239.0"/>
+      <point x="880.0" y="166.0" type="line"/>
+      <point x="880.0" y="87.0"/>
+      <point x="778.0" y="0.0"/>
+      <point x="668.0" y="0.0" type="line"/>
+      <point x="450.0" y="0.0" type="line"/>
+      <point x="450.0" y="461.0" type="line"/>
+      <point x="173.0" y="461.0" type="line"/>
+      <point x="173.0" y="0.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="538.0" y="68.0" type="line"/>
+      <point x="670.0" y="68.0" type="line"/>
+      <point x="790.0" y="68.0"/>
+      <point x="790.0" y="163.0" type="line"/>
+      <point x="790.0" y="213.0"/>
+      <point x="729.0" y="252.0"/>
+      <point x="671.0" y="252.0" type="line"/>
+      <point x="538.0" y="252.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

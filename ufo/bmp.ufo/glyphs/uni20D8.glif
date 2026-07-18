@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni20D8" format="2">
+  <unicode hex="20D8"/>
+  <outline>
+    <contour>
+      <point x="0" y="10" type="line"/>
+      <point x="-16" y="10"/>
+      <point x="-42" y="26"/>
+      <point x="-57" y="52"/>
+      <point x="-57" y="67" type="line"/>
+      <point x="-57" y="83"/>
+      <point x="-42" y="109"/>
+      <point x="-16" y="124"/>
+      <point x="0" y="124" type="line"/>
+      <point x="16" y="124"/>
+      <point x="42" y="109"/>
+      <point x="57" y="83"/>
+      <point x="57" y="67" type="line"/>
+      <point x="57" y="52"/>
+      <point x="42" y="26"/>
+      <point x="16" y="10"/>
+    </contour>
+    <contour>
+      <point x="0" y="25" type="line"/>
+      <point x="12" y="25"/>
+      <point x="31" y="37"/>
+      <point x="42" y="56"/>
+      <point x="42" y="67" type="line"/>
+      <point x="42" y="79"/>
+      <point x="31" y="98"/>
+      <point x="12" y="109"/>
+      <point x="0" y="109" type="line"/>
+      <point x="-11" y="109"/>
+      <point x="-31" y="98"/>
+      <point x="-42" y="79"/>
+      <point x="-42" y="67" type="line"/>
+      <point x="-42" y="56"/>
+      <point x="-31" y="37"/>
+      <point x="-11" y="25"/>
+    </contour>
+  </outline>
+</glyph>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2CFA" format="2">
+  <advance width="554.0"/>
+  <unicode hex="2CFA"/>
+  <outline>
+    <contour>
+      <point x="86.0" y="40.0" type="line"/>
+      <point x="25.0" y="90.0" type="line"/>
+      <point x="378.0" y="520.0" type="line"/>
+      <point x="413.0" y="562.0"/>
+      <point x="460.0" y="562.0" type="line"/>
+      <point x="491.0" y="562.0"/>
+      <point x="530.0" y="526.0"/>
+      <point x="530.0" y="494.0" type="line"/>
+      <point x="530.0" y="466.0"/>
+      <point x="495.0" y="425.0"/>
+      <point x="461.0" y="425.0" type="line"/>
+      <point x="434.0" y="425.0"/>
+      <point x="414.0" y="440.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="312.0" y="45.0" type="line"/>
+      <point x="287.0" y="45.0"/>
+      <point x="251.0" y="77.0"/>
+      <point x="251.0" y="113.0" type="line"/>
+      <point x="251.0" y="150.0"/>
+      <point x="287.0" y="180.0"/>
+      <point x="312.0" y="180.0" type="line"/>
+      <point x="338.0" y="180.0"/>
+      <point x="375.0" y="150.0"/>
+      <point x="375.0" y="113.0" type="line"/>
+      <point x="375.0" y="77.0"/>
+      <point x="338.0" y="45.0"/>
+    </contour>
+  </outline>
+</glyph>

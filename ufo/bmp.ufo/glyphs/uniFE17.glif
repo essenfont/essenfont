@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFE17" format="2">
+  <advance width="1000.0"/>
+  <unicode hex="FE17"/>
+  <outline>
+    <contour>
+      <point x="40.0" y="-80.0" type="line"/>
+      <point x="40.0" y="263.0" type="line"/>
+      <point x="960.0" y="263.0" type="line"/>
+      <point x="960.0" y="-80.0" type="line"/>
+      <point x="943.0" y="-80.0" type="line"/>
+      <point x="908.0" y="-1.0"/>
+      <point x="783.0" y="117.0"/>
+      <point x="610.0" y="183.0"/>
+      <point x="500.0" y="183.0" type="line"/>
+      <point x="391.0" y="183.0"/>
+      <point x="217.0" y="117.0"/>
+      <point x="93.0" y="-1.0"/>
+      <point x="57.0" y="-80.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="62.0" y="-21.0" type="line"/>
+      <point x="84.0" y="15.0"/>
+      <point x="157.0" y="94.0"/>
+      <point x="263.0" y="162.0"/>
+      <point x="407.0" y="205.0"/>
+      <point x="500.0" y="205.0" type="line"/>
+      <point x="593.0" y="205.0"/>
+      <point x="737.0" y="162.0"/>
+      <point x="843.0" y="94.0"/>
+      <point x="916.0" y="15.0"/>
+      <point x="938.0" y="-21.0" type="line"/>
+      <point x="938.0" y="241.0" type="line"/>
+      <point x="62.0" y="241.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

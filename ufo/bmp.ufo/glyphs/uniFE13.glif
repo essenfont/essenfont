@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFE13" format="2">
+  <advance width="1000.0"/>
+  <unicode hex="FE13"/>
+  <outline>
+    <contour>
+      <point x="724.0" y="646.0" type="line"/>
+      <point x="703.0" y="646.0"/>
+      <point x="668.0" y="674.0"/>
+      <point x="668.0" y="702.0" type="line"/>
+      <point x="668.0" y="730.0"/>
+      <point x="703.0" y="758.0"/>
+      <point x="724.0" y="758.0" type="line"/>
+      <point x="745.0" y="758.0"/>
+      <point x="780.0" y="730.0"/>
+      <point x="780.0" y="702.0" type="line"/>
+      <point x="780.0" y="674.0"/>
+      <point x="745.0" y="646.0"/>
+    </contour>
+    <contour>
+      <point x="724.0" y="144.0" type="line"/>
+      <point x="703.0" y="144.0"/>
+      <point x="668.0" y="172.0"/>
+      <point x="668.0" y="200.0" type="line"/>
+      <point x="668.0" y="228.0"/>
+      <point x="703.0" y="256.0"/>
+      <point x="724.0" y="256.0" type="line"/>
+      <point x="745.0" y="256.0"/>
+      <point x="780.0" y="228.0"/>
+      <point x="780.0" y="200.0" type="line"/>
+      <point x="780.0" y="172.0"/>
+      <point x="745.0" y="144.0"/>
+    </contour>
+  </outline>
+</glyph>

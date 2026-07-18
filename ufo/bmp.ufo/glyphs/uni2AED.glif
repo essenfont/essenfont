@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2AED" format="2">
+  <advance width="143"/>
+  <unicode hex="2AED"/>
+  <outline>
+    <contour>
+      <point x="13" y="45" type="line"/>
+      <point x="13" y="110" type="line"/>
+      <point x="130" y="110" type="line"/>
+      <point x="130" y="93" type="line"/>
+      <point x="31" y="93" type="line"/>
+      <point x="31" y="80" type="line"/>
+      <point x="130" y="80" type="line"/>
+      <point x="130" y="62" type="line"/>
+      <point x="31" y="62" type="line"/>
+      <point x="31" y="45" type="line"/>
+    </contour>
+  </outline>
+</glyph>

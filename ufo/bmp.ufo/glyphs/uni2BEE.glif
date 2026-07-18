@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni2BEE" format="2">
+  <advance width="886.0"/>
+  <unicode hex="2BEE"/>
+  <outline>
+    <contour>
+      <point x="511.0" y="78.0" type="line"/>
+      <point x="511.0" y="664.0" type="line"/>
+      <point x="835.0" y="371.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="186.0" y="78.0" type="line"/>
+      <point x="186.0" y="332.0" type="line"/>
+      <point x="24.0" y="332.0" type="line"/>
+      <point x="24.0" y="410.0" type="line"/>
+      <point x="186.0" y="410.0" type="line"/>
+      <point x="186.0" y="664.0" type="line"/>
+      <point x="510.0" y="371.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

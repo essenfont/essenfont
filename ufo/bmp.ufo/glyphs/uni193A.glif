@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni193A" format="2">
+  <unicode hex="193A"/>
+  <outline>
+    <contour>
+      <point x="-54.0" y="732.0" type="line"/>
+      <point x="-76.0" y="732.0"/>
+      <point x="-108.0" y="765.0"/>
+      <point x="-108.0" y="787.0" type="line"/>
+      <point x="-108.0" y="809.0"/>
+      <point x="-76.0" y="841.0"/>
+      <point x="-54.0" y="841.0" type="line"/>
+      <point x="-31.0" y="841.0"/>
+      <point x="0.0" y="809.0"/>
+      <point x="0.0" y="787.0" type="line"/>
+      <point x="0.0" y="765.0"/>
+      <point x="-31.0" y="732.0"/>
+    </contour>
+    <contour>
+      <point x="-232.0" y="732.0" type="line"/>
+      <point x="-254.0" y="732.0"/>
+      <point x="-286.0" y="765.0"/>
+      <point x="-286.0" y="787.0" type="line"/>
+      <point x="-286.0" y="809.0"/>
+      <point x="-254.0" y="841.0"/>
+      <point x="-232.0" y="841.0" type="line"/>
+      <point x="-209.0" y="841.0"/>
+      <point x="-178.0" y="809.0"/>
+      <point x="-178.0" y="787.0" type="line"/>
+      <point x="-178.0" y="765.0"/>
+      <point x="-209.0" y="732.0"/>
+    </contour>
+  </outline>
+</glyph>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniABDC" format="2">
+  <advance width="576.0"/>
+  <unicode hex="ABDC"/>
+  <outline>
+    <contour>
+      <point x="40.0" y="586.0" type="line"/>
+      <point x="40.0" y="659.0" type="line"/>
+      <point x="521.0" y="659.0" type="line"/>
+      <point x="521.0" y="586.0" type="line"/>
+      <point x="471.0" y="586.0" type="line"/>
+      <point x="471.0" y="0.0" type="line"/>
+      <point x="389.0" y="0.0" type="line"/>
+      <point x="389.0" y="39.0" type="line"/>
+      <point x="389.0" y="154.0"/>
+      <point x="320.0" y="296.0"/>
+      <point x="194.0" y="362.0"/>
+      <point x="108.0" y="362.0" type="line"/>
+      <point x="73.0" y="362.0" type="line"/>
+      <point x="73.0" y="435.0" type="line"/>
+      <point x="108.0" y="435.0" type="line"/>
+      <point x="158.0" y="435.0"/>
+      <point x="262.0" y="418.0"/>
+      <point x="353.0" y="362.0"/>
+      <point x="385.0" y="302.0" type="line"/>
+      <point x="389.0" y="302.0" type="line"/>
+      <point x="389.0" y="586.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

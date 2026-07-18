@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniA700" format="2">
+  <advance width="346.0"/>
+  <unicode hex="A700"/>
+  <outline>
+    <contour>
+      <point x="180.0" y="-98.0" type="line"/>
+      <point x="113.0" y="-98.0"/>
+      <point x="40.0" y="-29.0"/>
+      <point x="40.0" y="35.0" type="line"/>
+      <point x="40.0" y="100.0"/>
+      <point x="112.0" y="167.0"/>
+      <point x="180.0" y="167.0" type="line"/>
+      <point x="306.0" y="167.0" type="line"/>
+      <point x="306.0" y="125.0" type="line"/>
+      <point x="180.0" y="125.0" type="line"/>
+      <point x="85.0" y="125.0"/>
+      <point x="85.0" y="35.0" type="line"/>
+      <point x="85.0" y="-56.0"/>
+      <point x="180.0" y="-56.0" type="line"/>
+      <point x="306.0" y="-56.0" type="line"/>
+      <point x="306.0" y="-98.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

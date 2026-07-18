@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni20DB" format="2">
+  <unicode hex="20DB"/>
+  <outline>
+    <contour>
+      <point x="109" y="156" type="line"/>
+      <point x="103" y="156"/>
+      <point x="96" y="163"/>
+      <point x="96" y="170" type="line"/>
+      <point x="96" y="178"/>
+      <point x="103" y="184"/>
+      <point x="109" y="184" type="line"/>
+      <point x="114" y="184"/>
+      <point x="121" y="178"/>
+      <point x="121" y="170" type="line"/>
+      <point x="121" y="163"/>
+      <point x="114" y="156"/>
+    </contour>
+    <contour>
+      <point x="13" y="156" type="line"/>
+      <point x="8" y="156"/>
+      <point x="0" y="163"/>
+      <point x="0" y="170" type="line"/>
+      <point x="0" y="178"/>
+      <point x="8" y="184"/>
+      <point x="13" y="184" type="line"/>
+      <point x="18" y="184"/>
+      <point x="26" y="178"/>
+      <point x="26" y="170" type="line"/>
+      <point x="26" y="163"/>
+      <point x="18" y="156"/>
+    </contour>
+    <contour>
+      <point x="61" y="156" type="line"/>
+      <point x="55" y="156"/>
+      <point x="48" y="163"/>
+      <point x="48" y="170" type="line"/>
+      <point x="48" y="178"/>
+      <point x="55" y="184"/>
+      <point x="61" y="184" type="line"/>
+      <point x="66" y="184"/>
+      <point x="74" y="178"/>
+      <point x="74" y="170" type="line"/>
+      <point x="74" y="163"/>
+      <point x="66" y="156"/>
+    </contour>
+  </outline>
+</glyph>

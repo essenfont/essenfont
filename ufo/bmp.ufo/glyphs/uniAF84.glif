@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniAF84" format="2">
+  <advance width="920.0"/>
+  <unicode hex="AF84"/>
+  <outline>
+    <contour>
+      <point x="354.0" y="523.0" type="line"/>
+      <point x="387.0" y="523.0" type="line"/>
+      <point x="387.0" y="324.0" type="line"/>
+      <point x="354.0" y="324.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="63.0" y="301.0" type="line"/>
+      <point x="59.0" y="333.0" type="line"/>
+      <point x="149.0" y="334.0"/>
+      <point x="354.0" y="339.0"/>
+      <point x="564.0" y="352.0"/>
+      <point x="661.0" y="364.0" type="line"/>
+      <point x="664.0" y="337.0" type="line"/>
+      <point x="566.0" y="324.0"/>
+      <point x="355.0" y="308.0"/>
+      <point x="151.0" y="302.0"/>
+    </contour>
+    <contour>
+      <point x="736.0" y="816.0" type="line"/>
+      <point x="768.0" y="816.0" type="line"/>
+      <point x="768.0" y="157.0" type="line"/>
+      <point x="736.0" y="157.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="211.0" y="-13.0" type="line"/>
+      <point x="798.0" y="-13.0" type="line"/>
+      <point x="798.0" y="-43.0" type="line"/>
+      <point x="211.0" y="-43.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="211.0" y="201.0" type="line"/>
+      <point x="244.0" y="201.0" type="line"/>
+      <point x="244.0" y="-20.0" type="line"/>
+      <point x="211.0" y="-20.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="101.0" y="731.0" type="line"/>
+      <point x="286.0" y="731.0" type="line"/>
+      <point x="286.0" y="701.0" type="line"/>
+      <point x="101.0" y="701.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="269.0" y="731.0" type="line"/>
+      <point x="301.0" y="731.0" type="line"/>
+      <point x="301.0" y="720.0" type="line"/>
+      <point x="301.0" y="690.0"/>
+      <point x="292.0" y="541.0"/>
+      <point x="265.0" y="432.0" type="line"/>
+      <point x="231.0" y="436.0" type="line"/>
+      <point x="250.0" y="508.0"/>
+      <point x="266.0" y="620.0"/>
+      <point x="269.0" y="699.0"/>
+      <point x="269.0" y="720.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="565.0" y="731.0" type="line"/>
+      <point x="596.0" y="731.0" type="line"/>
+      <point x="596.0" y="692.0" type="line"/>
+      <point x="596.0" y="652.0"/>
+      <point x="589.0" y="520.0"/>
+      <point x="569.0" y="428.0" type="line"/>
+      <point x="536.0" y="432.0" type="line"/>
+      <point x="558.0" y="524.0"/>
+      <point x="565.0" y="652.0"/>
+      <point x="565.0" y="692.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="362.0" y="731.0" type="line"/>
+      <point x="574.0" y="731.0" type="line"/>
+      <point x="574.0" y="701.0" type="line"/>
+      <point x="362.0" y="701.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>

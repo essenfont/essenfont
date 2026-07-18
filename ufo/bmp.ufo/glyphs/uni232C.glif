@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni232C" format="2">
+  <advance width="197"/>
+  <unicode hex="232C"/>
+  <outline>
+    <contour>
+      <point x="99" y="0" type="line"/>
+      <point x="13" y="42" type="line"/>
+      <point x="13" y="153" type="line"/>
+      <point x="99" y="195" type="line"/>
+      <point x="184" y="153" type="line"/>
+      <point x="184" y="42" type="line"/>
+    </contour>
+    <contour>
+      <point x="99" y="19" type="line"/>
+      <point x="167" y="52" type="line"/>
+      <point x="167" y="143" type="line"/>
+      <point x="99" y="176" type="line"/>
+      <point x="30" y="143" type="line"/>
+      <point x="30" y="52" type="line"/>
+    </contour>
+    <contour>
+      <point x="151" y="123" type="line"/>
+      <point x="96" y="150" type="line"/>
+      <point x="101" y="160" type="line"/>
+      <point x="156" y="133" type="line"/>
+    </contour>
+    <contour>
+      <point x="43" y="59" type="line"/>
+      <point x="43" y="136" type="line"/>
+      <point x="54" y="136" type="line"/>
+      <point x="54" y="59" type="line"/>
+    </contour>
+    <contour>
+      <point x="101" y="35" type="line"/>
+      <point x="96" y="44" type="line"/>
+      <point x="151" y="71" type="line"/>
+      <point x="156" y="62" type="line"/>
+    </contour>
+  </outline>
+</glyph>

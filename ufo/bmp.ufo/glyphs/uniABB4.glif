@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniABB4" format="2">
+  <advance width="659.0"/>
+  <unicode hex="ABB4"/>
+  <outline>
+    <contour>
+      <point x="231.0" y="0.0" type="line"/>
+      <point x="231.0" y="478.0" type="line"/>
+      <point x="92.0" y="478.0" type="line"/>
+      <point x="85.0" y="392.0" type="line"/>
+      <point x="33.0" y="392.0" type="line"/>
+      <point x="33.0" y="535.0" type="line"/>
+      <point x="402.0" y="535.0" type="line"/>
+      <point x="402.0" y="478.0" type="line"/>
+      <point x="309.0" y="478.0" type="line"/>
+      <point x="309.0" y="244.0" type="line"/>
+      <point x="309.0" y="197.0"/>
+      <point x="307.0" y="104.0"/>
+      <point x="305.0" y="72.0" type="line"/>
+      <point x="308.0" y="72.0" type="line"/>
+      <point x="319.0" y="98.0"/>
+      <point x="345.0" y="151.0"/>
+      <point x="365.0" y="188.0" type="line"/>
+      <point x="550.0" y="535.0" type="line"/>
+      <point x="637.0" y="535.0" type="line"/>
+      <point x="337.0" y="0.0" type="line"/>
+    </contour>
+  </outline>
+</glyph>
