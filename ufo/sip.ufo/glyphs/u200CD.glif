@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="u200CD" format="2">
+  <advance width="1000"/>
+  <unicode hex="200CD"/>
+  <outline>
+    <contour>
+      <point x="121" y="700" type="line"/>
+      <point x="159" y="691"/>
+      <point x="230" y="691" type="line"/>
+      <point x="789" y="691" type="line"/>
+      <point x="820" y="734" type="line"/>
+      <point x="855" y="714"/>
+      <point x="871" y="693" type="line"/>
+      <point x="878" y="686"/>
+      <point x="878" y="680" type="line"/>
+      <point x="878" y="671"/>
+      <point x="843" y="648" type="line"/>
+      <point x="843" y="44" type="line"/>
+      <point x="843" y="-29"/>
+      <point x="846" y="-52" type="line"/>
+      <point x="847" y="-80"/>
+      <point x="847" y="-98" type="line"/>
+      <point x="847" y="-111"/>
+      <point x="837" y="-119" type="line"/>
+      <point x="824" y="-124"/>
+      <point x="816" y="-124" type="line"/>
+      <point x="796" y="-124"/>
+      <point x="796" y="-113" type="line"/>
+      <point x="796" y="665" type="line"/>
+      <point x="230" y="665" type="line"/>
+      <point x="152" y="665"/>
+      <point x="136" y="661" type="line"/>
+    </contour>
+  </outline>
+</glyph>
