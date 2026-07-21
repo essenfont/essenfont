@@ -2246,3 +2246,15 @@ donors:
     type: code_chart
     notes: "Synthetic donor from ucode code-chart extracted SVGs. 44/48 cps (U+1E5D0..U+1E5FF). 8608 bytes. See scripts/build-svg-donor.rb."
 
+  - label: syriac--supplement--chart
+    file: references/input-fonts/.generated/svg-donors/Syriac_Supplement.ttf
+    family: Syriac Supplement (synthetic)
+    style: Regular
+    license: OFL
+    sha256: "50631c14ab8e634ad913ecc6b14cea24ac47b80aced56514c45793106b5db838"
+    author: "Unicode Consortium (synthetic from code charts)"
+    covers: [Syriac_Supplement]
+    block: Syriac_Supplement
+    type: code_chart
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 11/11 cps (U+0860..U+086A). 4580 bytes. Requires ucode 0.5.0+ for CID-keyed font extraction."
+
