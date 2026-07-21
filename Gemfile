@@ -22,11 +22,15 @@ else
   gem "fontisan", "~> 0.4", ">= 0.4.43"
 end
 
+# Version floor 0.5.0: code_chart extract now handles CID-keyed fonts
+# via the new positional-correlation tier, so Syriac Supplement (and
+# other CID-keyed PDF fonts) extract correctly. Earlier versions
+# silently returned 0 SVGs for CID-keyed PDFs without /ToUnicode.
 ucode_path = ENV.fetch("UCODE_PATH", nil)
 if ucode_path && Dir.exist?(ucode_path)
   gem "ucode", path: ucode_path
 else
-  gem "ucode", "~> 0.3", ">= 0.3.3"
+  gem "ucode", "~> 0.5", ">= 0.5.0"
 end
 
 gem "rake"
