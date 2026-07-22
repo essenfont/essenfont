@@ -83,15 +83,22 @@ module Essenfont
 
     # Codepoint ranges Unicode reserves for non-character use and that
     # essenfont excludes from the build: PUA (user-defined), Supplementary
-    # PUA-A/B, Surrogates, Specials, and the last two codepoints of every
-    # plane (the XFFFE/XFFFF non-characters). Single source of truth —
+    # PUA-A/B, Surrogates, and the last two codepoints of every plane
+    # (the XFFFE/XFFFF non-characters). Single source of truth —
     # CpMap and any other consumer delegates here.
+    #
+    # Note: the Specials block (U+FFF0..U+FFFF) is NOT excluded here
+    # in its entirety — only the noncharacter slots U+FFFE/U+FFFF,
+    # which the per-plane XFFFE/XFFFF ranges already cover. The 5
+    # assigned codepoints (U+FFF9..U+FFFD) are real characters:
+    # interlinear annotation controls (Cf) and the object replacement
+    # / replacement characters (So).
     RESERVED_RANGES = [
       (0xE000..0xF8FF),     # Private Use Area
       (0xF0000..0xFFFFD),   # Supplementary Private Use Area-A
       (0x100000..0x10FFFD), # Supplementary Private Use Area-B
       (0xD800..0xDFFF),     # Surrogates
-      (0xFFF0..0xFFFF),     # Specials
+      (0xFFFE..0xFFFF),     # BMP noncharacters
       (0x1FFFE..0x1FFFF), (0x2FFFE..0x2FFFF), (0x3FFFE..0x3FFFF),
       (0x4FFFE..0x4FFFF), (0x5FFFE..0x5FFFF), (0x6FFFE..0x6FFFF),
       (0x7FFFE..0x7FFFF), (0x8FFFE..0x8FFFF), (0x9FFFE..0x9FFFF),
