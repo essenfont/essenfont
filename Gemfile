@@ -22,15 +22,18 @@ else
   gem "fontisan", "~> 0.4", ">= 0.4.43"
 end
 
-# Version floor 0.5.0: code_chart extract now handles CID-keyed fonts
-# via the new positional-correlation tier, so Syriac Supplement (and
-# other CID-keyed PDF fonts) extract correctly. Earlier versions
-# silently returned 0 SVGs for CID-keyed PDFs without /ToUnicode.
+# Version floor 0.5.2: code_chart extract handles orphan glyphs omitted
+# from a PDF font's /ToUnicode CMap (positional correlator with name
+# truncation for mutool's 31-char limit). Fixes U+1166C (Mongolian
+# Supp) and U+116DA (Myanmar Ext-C).
+# 0.5.0: CID-keyed font extraction (Syriac Supplement).
+# Earlier versions silently returned incomplete or 0 SVGs for these
+# PDFs.
 ucode_path = ENV.fetch("UCODE_PATH", nil)
 if ucode_path && Dir.exist?(ucode_path)
   gem "ucode", path: ucode_path
 else
-  gem "ucode", "~> 0.5", ">= 0.5.0"
+  gem "ucode", "~> 0.5", ">= 0.5.2"
 end
 
 gem "rake"

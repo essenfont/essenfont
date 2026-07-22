@@ -2179,24 +2179,24 @@ donors:
     family: Mongolian Supplement (synthetic)
     style: Regular
     license: OFL
-    sha256: "6445b32f93d40fde1afc071504c5e5868e13916691fc9bfb8108af1b7d28620f"
+    sha256: "94491fa9ec8b593f03d13f8868911411936cc1e80d3fd77adcbc4f28935992b8"
     author: "Unicode Consortium (synthetic from code charts)"
     covers: [Mongolian_Supplement]
     block: Mongolian_Supplement
     type: code_chart
-    notes: "Synthetic donor from ucode code-chart extracted SVGs. 12/32 cps (U+11660..U+1167F). 7116 bytes. See scripts/build-svg-donor.rb."
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 13/13 cps (U+11660..U+1167F). 7740 bytes. Requires ucode 0.5.2+ for orphan-glyph positional extraction."
 
   - label: myanmar--extended-c--chart
     file: references/input-fonts/.generated/svg-donors/Myanmar_Extended_C.ttf
     family: Myanmar Extended-C (synthetic)
     style: Regular
     license: OFL
-    sha256: "1af99c31f402c7d59e6a7e31777b3ea12b09d1194654f61063da42d4c2047856"
+    sha256: "c903ebbb859865da72b768a28ac5839df3097c1fd05ce3623939fba121325ec0"
     author: "Unicode Consortium (synthetic from code charts)"
     covers: [Myanmar_Extended-C]
     block: Myanmar_Extended-C
     type: code_chart
-    notes: "Synthetic donor from ucode code-chart extracted SVGs. 19/48 cps (U+116D0..U+116FF). 3752 bytes. See scripts/build-svg-donor.rb."
+    notes: "Synthetic donor from ucode code-chart extracted SVGs. 20/20 cps (U+116D0..U+116FF). 3936 bytes. Requires ucode 0.5.2+ for orphan-glyph positional extraction."
 
   - label: kana--extended-b--chart
     file: references/input-fonts/.generated/svg-donors/Kana_Extended_B.ttf
