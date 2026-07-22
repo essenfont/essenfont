@@ -44,8 +44,16 @@ RSpec.describe Essenfont::UcodeRef do
       expect(described_class.reserved?(0xDFFF)).to be true
     end
 
-    it "flags BMP specials" do
-      expect(described_class.reserved?(0xFFF0)).to be true
+    it "flags BMP noncharacters but not the assigned Specials codepoints" do
+      # Assigned Specials codepoints (visible symbols + interlinear
+      # annotation controls) must NOT be reserved — they're real
+      # characters that essenfont should cover.
+      expect(described_class.reserved?(0xFFF9)).to be false # INTERLINEAR ANNOTATION ANCHOR
+      expect(described_class.reserved?(0xFFFB)).to be false # INTERLINEAR ANNOTATION TERMINATOR
+      expect(described_class.reserved?(0xFFFC)).to be false # OBJECT REPLACEMENT CHARACTER
+      expect(described_class.reserved?(0xFFFD)).to be false # REPLACEMENT CHARACTER
+      # Noncharacter slots at the end of the BMP ARE reserved.
+      expect(described_class.reserved?(0xFFFE)).to be true
       expect(described_class.reserved?(0xFFFF)).to be true
     end
 

@@ -161,7 +161,9 @@ module ImportToUfos
       next unless File.directory?(path)
 
       begin
-        ufo = Fontisan::Ufo::Reader.read(path)
+        ufo = Fontisan::Ufo::Font.new
+        ufo.path = path
+        Fontisan::Ufo::Reader.new(ufo).read
         existing[plane] = ufo.glyphs.keys.to_set
         puts "  loaded existing #{plane}.ufo: #{existing[plane].size} glyphs"
       rescue StandardError => e
@@ -184,7 +186,7 @@ module ImportToUfos
     uncovered = []
     catalog.all_blocks.each do |block|
       block_cps = (block.first_cp..block.last_cp).to_a
-      assigned_in_block = block_cps & assigned_set
+      assigned_in_block = block_cps.select { |cp| assigned_set.include?(cp) }
       next if assigned_in_block.empty?
 
       missing = assigned_in_block.reject { |cp| cp_map.donor_labels.key?(cp) }

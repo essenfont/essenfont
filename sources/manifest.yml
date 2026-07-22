@@ -156,8 +156,8 @@ donors:
     sha256: "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
     url: https://github.com/notofonts/notofonts.github.io
     author: "Google + Monotype + Adobe"
-    covers: [Basic_Latin, Latin-1_Supplement, Latin_Extended-A, Latin_Extended-B, IPA_Extensions, Spacing_Modifier_Letters, Combining_Diacritical_Marks, Greek_and_Coptic, Cyrillic, Cyrillic_Supplement, Greek_Extended, Latin_Extended-C, Latin_Extended-D, Latin_Extended-E, Modifier_Tone_Letters, Phonetic_Extensions, Phonetic_Extensions_Supplement, Combining_Diacritical_Marks_Extended, Combining_Half_Marks, Currency_Symbols, Cyrillic_Extended-A, Cyrillic_Extended-C, General_Punctuation, Geometric_Shapes, Latin_Extended-F, Latin_Extended-G, Number_Forms, Superscripts_and_Subscripts, Supplemental_Punctuation, Variation_Selectors]
-    notes: "Universal fallback for Latin/Cyrillic/Greek/symbols and any block without a specialist entry."
+    covers: [Basic_Latin, Latin-1_Supplement, Latin_Extended-A, Latin_Extended-B, IPA_Extensions, Spacing_Modifier_Letters, Combining_Diacritical_Marks, Greek_and_Coptic, Cyrillic, Cyrillic_Supplement, Greek_Extended, Latin_Extended-C, Latin_Extended-D, Latin_Extended-E, Modifier_Tone_Letters, Phonetic_Extensions, Phonetic_Extensions_Supplement, Combining_Diacritical_Marks_Extended, Combining_Half_Marks, Currency_Symbols, Cyrillic_Extended-A, Cyrillic_Extended-C, General_Punctuation, Geometric_Shapes, Latin_Extended-F, Latin_Extended-G, Number_Forms, Superscripts_and_Subscripts, Supplemental_Punctuation, Variation_Selectors, Specials]
+    notes: "Universal fallback for Latin/Cyrillic/Greek/symbols and any block without a specialist entry. Also covers U+FFFC (OBJECT REPLACEMENT CHARACTER) and U+FFFD (REPLACEMENT CHARACTER) in Specials — visible symbols every font should have."
 
   # ─────────── Noto specialists ───────────
 
@@ -244,7 +244,8 @@ donors:
     sha256: "c4a0a80f0041ce4be81e2478faad22776d23edb98ae3f0d19bd37044820ecf9d"
     url: https://github.com/notofonts/notofonts.github.io/tree/main/fonts/NotoSansSymbols2
     author: "Google (Noto Project)"
-    covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing, Braille_Patterns, Yijing_Hexagram_Symbols, Optical_Character_Recognition, Kaktovik_Numerals]
+    covers: [Miscellaneous_Symbols_and_Pictographs, Supplemental_Symbols_and_Pictographs, Transport_and_Map_Symbols, Chess_Symbols, Symbols_and_Pictographs_Extended-A, Symbols_for_Legacy_Computing, Braille_Patterns, Yijing_Hexagram_Symbols, Optical_Character_Recognition, Kaktovik_Numerals, Specials]
+    notes: "Also covers U+FFF9..U+FFFB (interlinear annotation controls) in Specials — zero-width format characters."
 
   # ─────────── Historic Near-Eastern / Indic specialists ───────────
 
