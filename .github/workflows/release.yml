@@ -83,6 +83,18 @@ jobs:
             release/*
             release/npm/*.tgz
 
+      - name: Notify essenfont.github.io to refresh release data
+        # Fires repository_dispatch on the website repo so it picks up
+        # the new release immediately, instead of waiting for cron polling.
+        # Requires secret WEBSITE_DISPATCH_TOKEN: a fine-grained PAT with
+        # Actions: write on essenfont/essenfont.github.io.
+        env:
+          GH_TOKEN: ${{ secrets.WEBSITE_DISPATCH_TOKEN }}
+        run: |
+          gh api -X POST /repos/essenfont/essenfont.github.io/dispatches \
+            -f event_type=essenfont-release \
+            -f client_payload[tag]="${{ github.ref_name }}"
+
       - name: Publish to npm (trusted publishing — best-effort after GH Release ships)
         continue-on-error: true
         run: bundle exec ruby scripts/release.rb publish
